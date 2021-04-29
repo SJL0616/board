@@ -3,7 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jmp.spring.mapper.ReplyMapper">
 
+<update id="updateReplyCnt">
+<!-- update tbl_board set replycnt = (select count(*) from tbl_reply where bno= #{bno}) where bno= #{bno}
 
+ -->
+update tbl_board 
+	set replycnt = 
+	            (select count(*) from tbl_reply where bno = #{bno})
+	where bno = #{bno}
+</update>
 
 
 <insert id="insert" >

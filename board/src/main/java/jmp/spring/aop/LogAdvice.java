@@ -22,13 +22,13 @@ public class LogAdvice {
 		
 	}
 	
-	@Around("execution(* jmp.spring.service.BoardService.*(..))")
+	@Around("execution(* jmp.spring.service.BoardService*.*(..))")
 	public Object logTiome(ProceedingJoinPoint pjp) {
 		Object result= null;
 		long start = System.currentTimeMillis();
 		
 		log.info(pjp.getTarget());
-		log.info(Arrays.toString(pjp.getArgs()));
+		/* log.info(Arrays.toString(pjp.getArgs())); */
 		
 		try {
 			result = pjp.proceed();

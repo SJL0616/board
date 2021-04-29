@@ -16,4 +16,5 @@ public interface ReplyService {
 	public int delete(int rno);
 
  public int getTotal(int bno);
+
 }

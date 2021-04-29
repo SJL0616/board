@@ -20,11 +20,13 @@ public class ReplyServiceimpl implements ReplyService {
 		// TODO Auto-generated method stub
 		
 		int res= mapper.insert(vo);
+	
 		
 		//대글의 갯수는 댓글을 입력할 때, 삭제할때 변경됩니다.
 		//댓글을 입력, 삭제할때 변경됨.
 		//댓글의 갯수를 카운트해서 테이블의 replycnt 컴럼에 업데이트
-		return mapper.insert(vo);
+		 mapper.updateReplyCnt(vo.getBno()); 
+		return res;
 	}
 
 	@Override
@@ -62,6 +64,7 @@ public class ReplyServiceimpl implements ReplyService {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(bno);
 	}
+
 
 
 

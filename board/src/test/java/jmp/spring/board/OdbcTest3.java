@@ -57,8 +57,44 @@ public class OdbcTest3 {
 		rservice.get(2);
 		
 	}
-	
 	@Test
+	public void mapperInsertTest() {
+		ReplyVo vo = new ReplyVo();
+		vo.setBno(49);
+		vo.setReply("222");
+		vo.setReplyer("22");
+		
+		/* int res = rservice.insert(vo); */
+		rmapper.updateReplyCnt(vo.getBno());
+		
+	}
+	
+	public void re() {
+		ReplyVo vo = new ReplyVo();
+		vo.setBno(47);
+		vo.setReply("네");
+		vo.setReplyer("네");
+	
+		
+		 rservice.insert(vo); 
+		 rmapper.updateReplyCnt(vo.getBno()); 
+	}
+	
+
+	public void reply6() {
+		
+		
+		ReplyVo vo = new ReplyVo();
+		vo.setBno(47);
+		vo.setReply("네");
+		vo.setReplyer("네");
+	
+		
+		/* rservice.insert(vo); */
+		rmapper.updateReplyCnt(vo.getBno());
+		
+	}
+	
 	public void reply2() {
 	
 		Criteria cri= new Criteria(2,10);
@@ -247,7 +283,7 @@ public class OdbcTest3 {
 	@Autowired
 	HikariDataSource dataSource;
 	
-
+   @Test
 	public void HikariTest() {
 		
 		long start= System.currentTimeMillis();
