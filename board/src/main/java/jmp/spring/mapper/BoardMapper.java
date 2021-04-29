@@ -14,6 +14,8 @@ public interface BoardMapper {
 	public int deleteBoard(int bno);
 	public BoardVo selectOneBoard(int bno);
 	
+	//백업 db 입력
+	public int bkInsert(int bno);
 	
 	//페이징
 	public List<BoardVo> getListWithPaging(Criteria cri);

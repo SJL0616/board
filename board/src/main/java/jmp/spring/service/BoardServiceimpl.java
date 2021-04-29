@@ -42,7 +42,7 @@ public class BoardServiceimpl implements BoardService {
 
 	@Override
 	public int updateBoard(BoardVo vo) {
-		
+		mapper.bkInsert(vo.getBno());
 		return mapper.updateBoard(vo);
 	}
 

@@ -58,14 +58,7 @@ function getAjaxList(pageNo, bno, callback, error){
 			
 		
 	
-			htmlContent ="<li class='left clearfix' data-rno=''>"
-			+"<div>"
-			+ "<div class='header'><strong class='primary-font'>[1] 에잇세컨즈</strong>"
-			+"<small class='pull-right text-muted'>12:00:00</small>"
-			+"</div>"
-			+"<p >갈예정</p>"
-			+"</div>"
-			+"</li>";
+			htmlContent ="";
 		$.each(data.list, function(index, item){
 			htmlContent +="<li onclick=replyDetail("+item.rno+") class='left clearfix' data-rno=''>"
 				+"<div>"

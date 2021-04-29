@@ -57,16 +57,25 @@ public class OdbcTest3 {
 		rservice.get(2);
 		
 	}
+	
+	public void bkin() {
+		BoardVo vo = new BoardVo();
+		vo.setBno(54);
+		
+		mapper.bkInsert(vo.getBno());
+	}
+	
 	@Test
 	public void mapperInsertTest() {
 		ReplyVo vo = new ReplyVo();
 		vo.setBno(49);
-		vo.setReply("222");
-		vo.setReplyer("22");
+		vo.setReply("ㅇㅇ	");
+		vo.setReplyer("ㅇㅇ");
 		
-		/* int res = rservice.insert(vo); */
-		rmapper.updateReplyCnt(vo.getBno());
-		
+		int res = rservice.insert(vo);
+		/*
+		 * rmapper.updateReplyCnt(vo.getBno());
+		 */	
 	}
 	
 	public void re() {

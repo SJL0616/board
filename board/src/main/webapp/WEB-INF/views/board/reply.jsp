@@ -119,14 +119,14 @@ function showPage(startPage) {
 							      <div class="panel-body">        
 							      
 							        <ul class="chat" id="repleTbl">
-										<li class='left clearfix' data-rno='"+list.rno+"'>
+										<!-- <li class='left clearfix' data-rno='"+list.rno+"'>
 										<div>
 											<div class='header'><strong class='primary-font' id="replyer">[1] 홍길동</strong>
 				    						<small class='pull-right text-muted' id="date">12:00:00</small>
 				    						</div>
 				     						<p id="commment">수고가 많으십니다!</p>
 				     					</div>
-				     					</li>
+				     					</li> -->
 							        </ul>
 							        <!-- ./ end ul -->
 							      </div>

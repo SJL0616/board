@@ -87,7 +87,17 @@ function detail(bno) {
                                 <tbody>
                                 <c:forEach items="${list}" var="list" >
                                     <tr class="odd gradeX">
-                                    <td >${list.bno }</td><td onclick=detail(${list.bno})><a href="#">${list.title }</a></td><td>${list.writer }</td><td>${list.regdate }</td><td>${list.updatedate}</td>
+                                    <td >${list.bno }</td>
+                                  <td onclick=detail(${list.bno})><a href="#">${list.title} 
+                                 <script type="text/javascript">
+                                 console.log(${list.replycnt })
+                                 </script>
+                               <c:if test='${list.replycnt>0}'>
+                                    [${list.replycnt }]
+                               </c:if>
+                                    </a></td>
+                                    
+                                 <td>${list.writer }</td><td>${list.regdate }</td><td>${list.updatedate}</td>
                                     </tr>
                                 </c:forEach>
                                        <!--  <td>Trident</td>

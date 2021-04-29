@@ -1,15 +1,21 @@
 package jmp.spring.service;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import jdk.internal.org.jline.utils.Log;
 import jmp.spring.mapper.ReplyMapper;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
+import lombok.extern.log4j.Log4j;
 
 @Service
+@Transactional
+@Log4j
 public class ReplyServiceimpl implements ReplyService {
 
 	@Autowired
@@ -37,13 +43,16 @@ public class ReplyServiceimpl implements ReplyService {
 
 	@Override
 	public int update(ReplyVo vo) {
-		// TODO Auto-generated method stub
+		
+		mapper.updateReplyCnt(vo.getBno());
 		return mapper.update(vo);
 	}
 
 	@Override
 	public int delete(int rno) {
-		// TODO Auto-generated method stub
+		//댓글 삭제시 줄어디는 댓글 수를 다시 갱신하기 위해서 rno로 get쿼리를 사용- bno값을 가져와 갱신값 반영.
+		ReplyVo vo= mapper.get(rno);
+		mapper.updateReplyCnt(vo.getBno());
 		return mapper.delete(rno);
 	}
 
@@ -55,8 +64,12 @@ public class ReplyServiceimpl implements ReplyService {
 
 	@Override
 	public int remove(int rno) {
-		// TODO Auto-generated method stub
-		return mapper.remove(rno);
+		ReplyVo vo= mapper.get(rno);
+		int res =mapper.remove(rno);
+		mapper.updateReplyCnt(vo.getBno());
+	
+		log.info(res);
+		return res;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ public class BoardVo {
 	private String regdate;  //작성일시
 	private String updatedate; //수정일시
 	private int row_num; //수정일시
+	private int replycnt; //수정일시
 	
 	
 }
