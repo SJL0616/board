@@ -20,12 +20,12 @@ public class LogAdvice {
 
 	@Autowired
 	BoardMapper mapper;
-	
+	  /*
 	  @Before("execution(* jmp.spring.service.BoardService.*(..))") public void
 	  logBefore() { log.info("AOP=====================");
 	  
 	  }
-	  /*
+	
 	  @Around("execution(* jmp.spring.service.BoardService*.*(..))") public Object
 	  logTiome(ProceedingJoinPoint pjp) { Object result= null; long start =
 	  System.currentTimeMillis();
@@ -36,7 +36,7 @@ public class LogAdvice {
 	  catch (Throwable e)
 	  { e.printStackTrace(); } long end = System.currentTimeMillis();
 	  log.info("실행시간 :"+(end-start)/1000.0+"초"); return result; }
-	  */
+	 
 	  
 	  @Around("execution(* jmp.spring.service.*.*(..))")
 	  public Object logTime(ProceedingJoinPoint pjp){
@@ -57,6 +57,6 @@ public class LogAdvice {
 		  return res;
 		  
 	  }
-	
+	 */
 
 }

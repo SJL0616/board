@@ -14,7 +14,7 @@ import jmp.spring.vo.ReplyVo;
 import lombok.extern.log4j.Log4j;
 
 @Service
-@Transactional
+
 @Log4j
 public class ReplyServiceimpl implements ReplyService {
 
@@ -22,6 +22,7 @@ public class ReplyServiceimpl implements ReplyService {
 	ReplyMapper mapper;
 	
 	@Override
+	@Transactional 
 	public int insert(ReplyVo vo) {
 		// TODO Auto-generated method stub
 		
@@ -43,9 +44,9 @@ public class ReplyServiceimpl implements ReplyService {
 
 	@Override
 	public int update(ReplyVo vo) {
-		
+		int res =mapper.update(vo);
 		mapper.updateReplyCnt(vo.getBno());
-		return mapper.update(vo);
+		return res;
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class ReplyServiceimpl implements ReplyService {
 	}
 
 	@Override
+	@Transactional 
 	public int remove(int rno) {
 		ReplyVo vo= mapper.get(rno);
 		int res =mapper.remove(rno);

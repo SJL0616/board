@@ -12,8 +12,8 @@ update tbl_board set replycnt = (select count(*) from tbl_reply where bno = #{bn
 <insert id="insert" >
 insert into tbl_reply values
 (seq_tbl_reply.nextval, #{bno}, #{reply}, #{replyer}, sysdate, sysdate)
-
 </insert>
+
 <select id="get" resultType="jmp.spring.vo.ReplyVo">
 select 
  rno, bno, reply, replyer, replydate, updatedate,

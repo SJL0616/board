@@ -156,8 +156,8 @@ public class BoardController {
 	   log.info(vo);
 	   
 		int result =service.insertBoard(vo);
-		System.out.println("占쏙옙臼狗占�");
-		rttr.addFlashAttribute("resMsg", vo.getBno()+"�옉�꽦�씠 �셿猷뚮릺�뿀�뒿�땲�떎.");
+		System.out.println("입력");
+		rttr.addFlashAttribute("resMsg", vo.getBno()+"가 등록되었습니다/");
 		
 		return "redirect:/board/list";
 	
