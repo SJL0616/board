@@ -16,19 +16,19 @@ function sendFile() {
 	
 
 		var formData = new FormData(document.fileUploadForm);
-		console.log("formData.get",formData.get("uploadFile"));
+		console.log("attachNo",formData.get("attachno"));
 		
 		$.ajax({
 			
 			url: '/fileUploadAjax',
 			method: 'post',
-			
+			dataType : 'json',
 			processData: false,
 			contentType: false,
 			data: formData,
 			
-			success: function() {
-				console.log("success");
+			success: function(result) {
+				console.log("callBack result :",result);
 			},
 			error : function() {
 				console.log("error");
@@ -49,7 +49,7 @@ function sendFile() {
 <body>
 
   <form name="fileUploadForm" action="/uploadFormAction" method="post" enctype="multipart/form-data">
-  
+  <input type="text" name="attachno" value="0">
     <input type="file" name="uploadFile">
     <input type="button" value="º¸³»±â" id="sendBtn" onclick="sendFile()" >
   

@@ -3,16 +3,46 @@ package jmp.spring.board;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import jmp.spring.mapper.FileUploadMapper;
+
+import jmp.spring.service.AttachFileServiceimpl;
+import jmp.spring.vo.AttachFileVo;
 import jmp.spring.vo.BoardVo;
 import jmp.spring.vo.ReplyVo;
 import lombok.extern.log4j.Log4j;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class mapTest {
 
-
+	@Autowired
+FileUploadMapper mapper;
+	
+	@Autowired
+	AttachFileServiceimpl service;
+	
 	@Test
+	public void getTest() {
+		AttachFileVo vo = new AttachFileVo();
+		vo.setAttachno(1);
+		vo.setUuid("4");
+		vo.setFilename("fileNmae=");
+		vo.setUploadpath("uploadpath");
+		vo.setFiletype("N");
+		
+		service.insert(vo);
+		service.getList(1);
+		service.getSeq();
+	}
+	
+	
 public void maptest() {
 		BoardVo bvo= new BoardVo();
 		bvo.setBno(50);
