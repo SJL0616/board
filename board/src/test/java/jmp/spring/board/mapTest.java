@@ -30,16 +30,7 @@ FileUploadMapper mapper;
 	
 	@Test
 	public void getTest() {
-		AttachFileVo vo = new AttachFileVo();
-		vo.setAttachno(1);
-		vo.setUuid("4");
-		vo.setFilename("fileNmae=");
-		vo.setUploadpath("uploadpath");
-		vo.setFiletype("N");
-		
-		service.insert(vo);
-		service.getList(1);
-		service.getSeq();
+	
 	}
 	
 	

@@ -1,16 +1,25 @@
 package jmp.spring.control;
 
-import java.awt.List;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.swing.plaf.multi.MultiFileChooserUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,26 +39,66 @@ public class FileUploadAjaxController {
 	
 	private static final String ROOT_DIR = "C:\\upload\\";
 	
-	@PostMapping("/fileUploadAjax")
-	public java.util.List<AttachFileVo> fileUpload(MultipartFile[] uploadFile, int attachno) {
+	
+	//이미지 파일 경로를 받아서 이미지를 반환
+	//이미지 파일 반환합니다.
+	@GetMapping("/display")
+	public ResponseEntity<byte[]> displayFile(String filename) {
+		log.info("/display=================fileName:"+ filename);
+		//filename :uploadpath + uuid + '_'+ filename
+		File file = new File(ROOT_DIR + filename);
+		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+				
+		if(file.exists()) {
+			try {
+				headers.add("Content-Type", Files.probeContentType(file.toPath()));
+				return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
+				
+				
+			} catch (IOException e) {
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
+			}
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		
+	} 
+	
+	@GetMapping("/getFileList/{attachno}")
+	public java.util.List<AttachFileVo> getlist(@PathVariable("attachno") int attachno){
+		
+		List<AttachFileVo> list= service.getList(attachno); 
+		
+		return list;
+	}
+	
+	@PostMapping("/fileUploadAjax")
+	public Map<String, Object> fileUpload(MultipartFile[] uploadFile, int attachno){
+		
+		Map<String, Object> map =new HashMap<String, Object>();
+		int res=0;
 		//신규생성 파일의 경우 attachNo를 가져옴.
 		if(attachno== 0) {
 			attachno= service.getSeq();
 		}
 		
 		for(MultipartFile multipartFile : uploadFile) {
-			
-			AttachFileVo vo= new AttachFileVo();
+			String uploadPath = getFolder();
+			AttachFileVo vo= new AttachFileVo(attachno, uploadPath, multipartFile.getOriginalFilename());
 			
 			
 			//중복방지를 위해 UUID를 생성해서 파일명 앞에 붙여준다.
 			//uuid: 식별자 표준으로 uuid 표준에 따라 36개 문자 (8-4-4-4-12)를 생성
-			UUID uuid = UUID.randomUUID();
-			String uploadPath = getFolder();
+			 UUID uuid = UUID.randomUUID(); 
 			
-			String uploadFileName= uuid.toString()+"_"+multipartFile.getOriginalFilename();
-			File saveFile = new File(ROOT_DIR+uploadPath+uploadFileName);
+			
+			/*
+			 * String uploadFileName=
+			 * uuid.toString()+"_"+multipartFile.getOriginalFilename();
+			 */
+			/* File saveFile = new File(ROOT_DIR+uploadPath+uploadFileName); */
+			File saveFile = new File(ROOT_DIR+vo.getSavepath());
 		
 			
 			try {
@@ -62,9 +111,10 @@ public class FileUploadAjaxController {
 						String contentType = Files.probeContentType(saveFile.toPath());
 						
 						//이미지 파일인 경우 썸네일을 생성해줍니다.
-						if(contentType.startsWith("image")) {
+						if(contentType.startsWith("image")&& contentType!=null) {
 							//썸네일을 생성할 경로를 지정
-							String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName;
+					/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; */
+							String thmnail = ROOT_DIR+vo.getS_savepath();
 							//썸네일 이미지 생성
 							Thumbnails.of(saveFile).size(100, 100).toFile(thmnail);
 						}
@@ -74,7 +124,9 @@ public class FileUploadAjaxController {
 					vo.setFiletype(contentType.startsWith("image")?"Y":"N");
 					vo.setUploadpath(uploadPath);
 					
-					service.insert(vo);
+					if(service.insert(vo)>0) {
+						res++;
+					}
 					} catch (IllegalStateException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -92,8 +144,12 @@ public class FileUploadAjaxController {
 		}
 		
 		//ATTATCNO에 해당하는 파일리스트을 조회하여 파일 리스트를 조회하여 화면에 출력
- java.util.List<AttachFileVo> list=  service.getList(attachno);
-  return list;
+		/*
+		 * java.util.List<AttachFileVo> list= service.getList(attachno); return list;
+		 */
+		map.put("attachno", attachno+"");
+		map.put("result", res+"건 저장되었습니다");
+		return map;
 	}
 	
 	// 중복 방지용 업로드 날짜를 업로드 경로로 지정.
@@ -103,18 +159,19 @@ public class FileUploadAjaxController {
 		
 		//오늘 날짜를 yyyy-mm-dd 포맷에 맞게 String 형태로 가지고 옵니다.
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//년-월-날짜 순의 String 생성
 		String str = sdf.format(new Date());
 		
-		//file.sepearator : 플랫폼에서 사용하는 구분자를 리턴
+		//file.sepearator : 플랫폼에서 사용하는 구분자를 리턴 - 를 /로 바꿔줌.(운영체제에 때라서 \)
 		uploadPath = str.replace("-", File.separator) + File.separator;
 		
 		
-		File saveFile = new File( ROOT_DIR+uploadPath);
 		
-		if(!saveFile.exists()) {
-			saveFile.mkdirs();
-		}
-		
+		 File saveFile = new File( ROOT_DIR+uploadPath); log.info(saveFile);
+		 
+		//디렉토리 생성.
+		 if(!saveFile.exists()) { saveFile.mkdirs(); }
+		 
 		
 		return uploadPath;
 	}
