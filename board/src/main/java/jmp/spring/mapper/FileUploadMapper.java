@@ -14,5 +14,6 @@ public interface FileUploadMapper {
 	public int getSeq();
 	public int insert(AttachFileVo vo);
 	
-	
+	public int delete(@Param("uuid") String uuid, @Param("attachno") int attachno);
+	public AttachFileVo get(@Param("uuid") String uuid, @Param("attachno") int attachno);
 }

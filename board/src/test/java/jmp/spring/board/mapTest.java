@@ -30,6 +30,9 @@ FileUploadMapper mapper;
 	
 	@Test
 	public void getTest() {
+		AttachFileVo vo = new AttachFileVo(5, "1111", "ÆÄÀÏ");
+		service.get("41850b5c-8cd7-415d-bf21-e8edb07e3521",  5);
+		
 	
 	}
 	

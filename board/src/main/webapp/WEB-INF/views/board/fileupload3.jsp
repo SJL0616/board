@@ -66,9 +66,25 @@ function showList(attachno) {
 		$("#text2").text(data);
 		var htmlContent ="";
 		$.each(data, function(index, item){
+			console.log("==========아이템:"+item.filename);
+			console.log("==========인코딩전:"+item.s_savepath);
+			var s_savePath = encodeURIComponent(item.s_savepath);
+			var savePath = encodeURIComponent(item.savepath);
 			
-				console.log("==========아이템:"+item.filename);
 			 htmlContent +="<li>"+item.filename+"</li>"; 
+			 if(item.filetype = "Y"){
+				
+					console.log("==========인코딩후:"+savePath);
+				 htmlContent  +="<li><a href=/download?filename="+savePath+">"
+				          +"<img src=/display?filename="+s_savePath+">"
+				          +item.filename+"</a>"
+				         +"<span onclick=attachFileDelete('"+item.uuid+"','"+item.attachno+"') data-type='image'>X</span></li>";
+						
+			 }else{
+				 htmlContent +="<li>"+item.filename
+				 +"<a href=/download?filename="+savePath+"></li>"; 
+						 //파일네임에는 파라메터로 넘길수없는 데이터가 있어서 인코딩이 필요.
+			 }
 		
 		});
 		console.log($(".fileListView").html(htmlContent));
@@ -85,6 +101,26 @@ function showList(attachno) {
 	
 
 }
+
+function attachFileDelete(uuid,attachno) {
+	console.log("attachFileDelete===============uuid",uuid);
+	console.log("attachFileDelete===============attachno",attachno);
+	$.ajax({
+		
+		url: '/attachFileDelete/'+uuid+'/'+attachno,
+		method: 'get',
+		
+		success: function(res) {
+			console.log(res);
+		},
+	    error:function(error) {
+			console.log("error");
+		}
+		
+		
+	});
+	
+}
 </script>
 
 <body>
@@ -95,6 +131,7 @@ function showList(attachno) {
     <input type="file" name="uploadFile" id="uploadFileElement">
     <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
     <input type="button" value="보내기" id="showBtn" onclick="showList()" >
+
   
   </form>
 <p id="text"><br>

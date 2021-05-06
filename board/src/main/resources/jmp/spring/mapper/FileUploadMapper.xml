@@ -20,4 +20,17 @@ insert into tbl_attach values (#{attachno}, #{uuid}, #{uploadpath}, #{filename},
 </insert>
 
 
+<delete id="delete">
+delete tbl_attach where attachno= #{attachno} and uuid = #{uuid} 
+
+</delete>
+
+<select id="get" resultType="jmp.spring.vo.AttachFileVo" >
+select attachNo, uuid, uploadPath, fileName, fileType, 
+uploadPath || uuid ||'_' || fileName as savePath,
+uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach
+where attachno= #{attachno} and uuid = #{uuid}
+</select>
+
+
 </mapper>

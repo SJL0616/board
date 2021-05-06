@@ -3,7 +3,7 @@ package jmp.spring.control;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +15,9 @@ import java.util.UUID;
 import javax.swing.plaf.multi.MultiFileChooserUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,20 +40,86 @@ public class FileUploadAjaxController {
 	public AttachFileService service;
 	
 	private static final String ROOT_DIR = "C:\\upload\\";
-	
+
+	@GetMapping("/attachFileDelete/{uuid}/{attachno}")
+	public String deleteFile (@PathVariable("uuid") String uuid, 
+			@PathVariable("attachno") int attachno	) {
+		log.info("/deleteFile===========uuid :" +  uuid);
+		log.info("/deleteFile===========attachno :" + attachno);
+		
+		AttachFileVo vo =service.get(uuid, attachno);
+		log.info("/deleteFile===========vo :" + vo);
+		log.info("/deleteFile===========vo :" + vo.getSavepath());
+		log.info("/deleteFile===========vo :" + vo.getS_savepath());
+		log.info("/deleteFile===========vo :" + vo.getFiletype());
+		File file  = new File(ROOT_DIR+vo.getSavepath());
+		if(file.exists()) {
+		file.delete();
+		}
+		if(vo.getFiletype().equals("Y")) {
+			File sfile  = new File(ROOT_DIR+vo.getS_savepath());
+			log.info("/deleteFile===========s_savepath :" +ROOT_DIR+vo.getS_savepath());
+			log.info("/deleteFile===========sfile :" +sfile);
+			if(sfile.exists()) {
+			sfile.delete();
+			}
+		}
+		int res = service.delete(uuid, attachno);
+		
+		return res>0?"success":"error";
+	}
+	//file 경로 : urlPath + uuid + _ + 파일이름
+	@GetMapping("/download")
+	public ResponseEntity<byte[]> downloafFile (String filename) {
+		log.info("/display===========filename :" + filename);
+		File file = new File(ROOT_DIR+ filename);
+		
+		if(file.exists()) {
+			//파일을 ResponseEnity에 담아서 반환
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
+			try {// \"" <- ""를 문자처럼 쓰고싶을 때 쓰는 거.
+				headers.add("Content-Disposition", "attachment;filename=\""+ new String(filename.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			
+					return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file),
+							headers,
+							HttpStatus.OK);
+			
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return  new ResponseEntity<>(
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return  new ResponseEntity<>(
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+		}else {
+			return  new ResponseEntity<>(
+					HttpStatus.NOT_FOUND);
+		}
+		
+	}
 	
 	//이미지 파일 경로를 받아서 이미지를 반환
 	//이미지 파일 반환합니다.
 	@GetMapping("/display")
-	public ResponseEntity<byte[]> displayFile(String filename) {
+	public  ResponseEntity<byte[]> displayFile(String filename) {
 		log.info("/display=================fileName:"+ filename);
 		//filename :uploadpath + uuid + '_'+ filename
+	
 		File file = new File(ROOT_DIR + filename);
-		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+		HttpHeaders headers = new HttpHeaders();
 				
+		//파일이 있는지 확인
 		if(file.exists()) {
 			try {
+				//header에 content-type을 지정: img파일의 경로를 넣어 myme타입을 알 수 있슴.
 				headers.add("Content-Type", Files.probeContentType(file.toPath()));
+				//responseEntity 파일의 바이트 정보, 헤더, 결과코드값을 넣어줌.
 				return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
 				
 				
@@ -60,9 +128,10 @@ public class FileUploadAjaxController {
 			
 			}
 		}else {
+			log.info("/실패 :display=================fileName:"+ filename);
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
+	
 	} 
 	
 	@GetMapping("/getFileList/{attachno}")
@@ -84,8 +153,8 @@ public class FileUploadAjaxController {
 		}
 		
 		for(MultipartFile multipartFile : uploadFile) {
-			String uploadPath = getFolder();
-			AttachFileVo vo= new AttachFileVo(attachno, uploadPath, multipartFile.getOriginalFilename());
+			String uploadpath = getFolder();
+			AttachFileVo vo= new AttachFileVo(attachno, uploadpath, multipartFile.getOriginalFilename());
 			
 			
 			//중복방지를 위해 UUID를 생성해서 파일명 앞에 붙여준다.
@@ -118,11 +187,12 @@ public class FileUploadAjaxController {
 							//썸네일 이미지 생성
 							Thumbnails.of(saveFile).size(100, 100).toFile(thmnail);
 						}
-					vo.setUuid(uuid.toString());
-					vo.setAttachno(attachno);
-					vo.setFilename(multipartFile.getOriginalFilename());
+				/*
+				 * vo.setUuid(uuid.toString()); vo.setAttachno(attachno);
+				 * vo.setFilename(multipartFile.getOriginalFilename());
+				 */
 					vo.setFiletype(contentType.startsWith("image")?"Y":"N");
-					vo.setUploadpath(uploadPath);
+				/* vo.setUploadpath(uploadpath); */
 					
 					if(service.insert(vo)>0) {
 						res++;

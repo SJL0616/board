@@ -22,10 +22,11 @@ public class AttachFileVo {
 			
 			public AttachFileVo(int attachno, String uploadpath, String filename) {
 				UUID uuid = UUID.randomUUID();
-				this.uuid=uuid.toString();
+				
 				this.attachno = attachno;
+				this.uuid=uuid.toString();
 				this.uploadpath = uploadpath;
-				this.filename = filename;
+				this.filename= filename;
 				
 				this.savepath= uploadpath+uuid+"_"+ filename;
 				this.s_savepath=  uploadpath+"s_"+uuid+"_"+ filename;

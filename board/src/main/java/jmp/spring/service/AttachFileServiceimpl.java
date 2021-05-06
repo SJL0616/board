@@ -32,4 +32,16 @@ public class AttachFileServiceimpl implements AttachFileService {
 		return mapper.insert(vo);
 	}
 
+	@Override
+	public int delete(String uuid, int attachno) {
+		// TODO Auto-generated method stub
+		return mapper.delete(uuid, attachno);
+	}
+
+	@Override
+	public AttachFileVo get(String uuid, int attachno) {
+		// TODO Auto-generated method stub
+		return mapper.get(uuid, attachno);
+	}
+
 }
