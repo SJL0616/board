@@ -79,6 +79,7 @@ public class FileUploadAjaxController {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
 			try {// \"" <- ""를 문자처럼 쓰고싶을 때 쓰는 거.
+				//컨텐츠의 부가설명.
 				headers.add("Content-Disposition", "attachment;filename=\""+ new String(filename.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 			
 					return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file),

@@ -6,10 +6,8 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -112,6 +110,8 @@ function attachFileDelete(uuid,attachno) {
 		
 		success: function(res) {
 			console.log(res);
+			showList(attachno);
+		
 		},
 	    error:function(error) {
 			console.log("error");
@@ -122,6 +122,31 @@ function attachFileDelete(uuid,attachno) {
 	
 }
 </script>
+<style>
+#uploadResult {
+	width: 100%;
+	background-color: gray;
+}
+
+#uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+#uploadResult ul li img {
+	width: 100px;
+}
+</style>
+
+
+
 
 <body>
 
@@ -130,15 +155,17 @@ function attachFileDelete(uuid,attachno) {
   <label id="uploadFileLable"></label>
     <input type="file" name="uploadFile" id="uploadFileElement">
     <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
-    <input type="button" value="보내기" id="showBtn" onclick="showList()" >
+<!--     <input type="button" value="보내기" id="showBtn" onclick="showList()" > -->
 
   
   </form>
 <p id="text"><br>
 <p id="text2"><br>
-
-<ul class="fileListView">
+<div class="uploadResult">
+	<ul class="fileListView" id="uploadResult">
 </ul>
+</div>
+
 
 </body>
 </html>

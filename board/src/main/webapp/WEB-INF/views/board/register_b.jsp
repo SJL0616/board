@@ -36,11 +36,12 @@
                                 <input class="form-control"  type="text"  name="writer" value="${vo.writer}" >
                               
                          </div>
-                        
+              
                         
                                   <input class="btn btn-default" type="submit" value="보내기"/>
        
                                  </form>
+                                           <jsp:include page="fileupload3.jsp"></jsp:include>
                                 </tbody>
                           
                             <!-- /.table-responsive -->
@@ -59,3 +60,4 @@
 <jsp:include page="/resources/startbootstrap-sb-admin-2-gh-pages/header/bottom.jsp"></jsp:include>
 
 </html>
+
