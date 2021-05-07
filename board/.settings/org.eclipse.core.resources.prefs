@@ -4,6 +4,7 @@ encoding//src/main/java/jmp/spring/control/ReplyController.java=UTF-8
 encoding//src/main/java/jmp/spring/control/ReplyController2.java=UTF-8
 encoding//src/main/java/jmp/spring/mapper/BoardMapper.java=UTF-8
 encoding//src/main/java/jmp/spring/vo/PageNavi.java=UTF-8
+encoding//src/main/resources/config.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/views/board/restTest.jsp=UTF-8
 encoding//src/main/webapp/resources/startbootstrap-sb-admin-2-gh-pages/header/list_b.jsp=UTF-8
 encoding//src/test/java/jmp/spring/board/OdbcTest.java=UTF-8
