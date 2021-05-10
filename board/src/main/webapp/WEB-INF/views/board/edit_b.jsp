@@ -2,7 +2,19 @@
 
 <jsp:include page="/resources/startbootstrap-sb-admin-2-gh-pages/header/header.jsp"></jsp:include>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+ 
+ $(document).ready(function() {
+	
+	 showList('${vo.attachno}');
+	 $("input[name=attachno]").val('${vo.attachno}');
+	
 
+	 
+});
+  
+</script>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -42,8 +54,13 @@
                         	  <label>등록시간</label>
                                 <input class="form-control"  value="${vo.regdate }">
                              
-                         </div>
-                      
+                     </div> 
+                                               <div class="form-group">
+                        	  <label>이미지 번호</label>
+                                <input class="form-control"  name= attachno value="" readonly="readonly">
+                             
+                         </div> 
+                       
                        
                                
                                     <!-- <tr class="odd gradeX"> -->
@@ -51,6 +68,13 @@
                                   <input class="btn btn-default" type="submit" value="수정하기"/></a>
        
                                  </form>
+                                   <div class="form-group">
+                        	  <label>이미지</label>
+                            
+                              
+                          
+                            <jsp:include page="fileupload3.jsp"></jsp:include>
+                             </div>
                                 </tbody>
                           
                             <!-- /.table-responsive -->

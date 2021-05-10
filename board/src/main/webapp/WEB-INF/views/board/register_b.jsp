@@ -2,7 +2,17 @@
 
 <jsp:include page="/resources/startbootstrap-sb-admin-2-gh-pages/header/header.jsp"></jsp:include>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
 
+/* $(submitBtn).on("click" ,function(){
+	$("#attachNum").on("change", function(){
+		showList($("#attachno").val());	
+	});
+
+}); */
+
+</script>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -36,9 +46,10 @@
                                 <input class="form-control"  type="text"  name="writer" value="${vo.writer}" >
                               
                          </div>
-              
+                         <label>이미지 번호</label>
+                                <input class="form-control"  type="text"  id="attachNum"   name="attachno" value="" >
                         
-                                  <input class="btn btn-default" type="submit" value="보내기"/>
+                                  <input class="btn btn-default" id="submitBtn" type="submit" value="보내기"/>
        
                                  </form>
                                            <jsp:include page="fileupload3.jsp"></jsp:include>

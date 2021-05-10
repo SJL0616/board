@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jmp.spring.mapper.FileUploadMapper;
-
+import jmp.spring.mapper.UserMapper;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.vo.AttachFileVo;
 import jmp.spring.vo.BoardVo;
@@ -24,11 +24,19 @@ public class mapTest {
 
 	@Autowired
 FileUploadMapper mapper;
+	@Autowired
+	UserMapper umapper;
 	
 	@Autowired
 	AttachFileServiceimpl service;
 	
 	@Test
+	public void getTest2() {
+	
+		umapper.login("user01", "1234");
+		
+	
+	}
 	public void getTest() {
 		AttachFileVo vo = new AttachFileVo(5, "1111", "ÆÄÀÏ");
 		service.get("41850b5c-8cd7-415d-bf21-e8edb07e3521",  5);

@@ -1,5 +1,7 @@
 package jmp.spring.control;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jdk.internal.org.jline.utils.Log;
+import jmp.spring.service.AttachFileService;
 import jmp.spring.service.BoardService;
+import jmp.spring.vo.AttachFileVo;
 import jmp.spring.vo.BoardVo;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.PageNavi;
@@ -22,6 +26,9 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
+	
+	@Autowired
+	AttachFileService aservice;
 	   //�닔�젙
 	
 	@GetMapping("/board/restTest")
@@ -55,9 +62,15 @@ public class BoardController {
 	@GetMapping("/board/get")
 	public String get(Criteria cri, BoardVo vo, Model model) {
 		//�긽�꽭�젙蹂� 議고쉶
+		BoardVo list =service.get(vo.getBno());
+	
+		model.addAttribute("vo", list);
 		
-		
-		model.addAttribute("vo", service.get(vo.getBno()));
+		/*
+		 * List<AttachFileVo> avo= aservice.getList(list.getAttachno());
+		 * model.addAttribute("avo", avo); log.info("=============="+avo);
+		 */
+		log.info(list);
 		/* model.addAttribute("cri",cri); */
 		return "/board/get_b";
 	}

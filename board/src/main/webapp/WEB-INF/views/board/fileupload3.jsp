@@ -36,7 +36,11 @@ function sendFile() {
 			success: function(data,result, textStatus, jqXHR) {
 				console.log("callBack result :",result);
 				$("#text").text(data.result);
-				$("#attachno").val(data.attachno);
+				//name속성이 attachno인 input에 attachno을 넣어줌.
+				
+				/* $("#attachno").val(data.attachno);
+				$("#attachNum").val(data.attachno); */
+				$("#attachno").val(data.attachno); 
 				$("#uploadFileElement").val("");
 				showList(data.attachno);
 				/* $("#uploadFileElement").remove();
@@ -69,7 +73,7 @@ function showList(attachno) {
 			var s_savePath = encodeURIComponent(item.s_savepath);
 			var savePath = encodeURIComponent(item.savepath);
 			
-			 htmlContent +="<li>"+item.filename+"</li>"; 
+			 htmlContent ; 
 			 if(item.filetype = "Y"){
 				
 					console.log("==========인코딩후:"+savePath);
