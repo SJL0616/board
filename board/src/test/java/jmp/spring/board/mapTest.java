@@ -33,7 +33,7 @@ FileUploadMapper mapper;
 	@Test
 	public void getTest2() {
 	
-		umapper.login("user01", "1234");
+		umapper.userRole("user01");
 		
 	
 	}

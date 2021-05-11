@@ -35,19 +35,8 @@
 </head>
 
 <script type="text/javascript">
-/* if('${msg }' !=""){
-	
-	alert('${msg}');
-}else{
-	
-} */
 
-$(document).ready(function() {
-	
-	$("#errorMsg").text('${msg}');
-	
-});
-</script>
+</script> 
 <body>
 
     <div class="container">
@@ -55,27 +44,25 @@ $(document).ready(function() {
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
+                        <h3 class="panel-title">Welcome</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="loginAction" method="post">
+                        <!-- <form action="loginAction" method="post" > -->
                             <fieldset>
-                                <div class="form-group">
-                                    <p id="errorMsg"></p>
-                                    <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
+                                <div class="form-group"> 
+                                    <input class="form-control" placeholder="ID" name="id" type="text" value="${msg }" readonly="readonly">
                                 </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="pwd" type="text" >
-                                </div>
+                            
                               <!--   <div class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
                                 </div> -->
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">
+                                <a href="/board/list"><input type="button" class="btn btn-lg btn-success btn-block" value="다음으로 이동"></a>
+                                <a href="/board/logout"><input type="button" class="btn btn-lg btn-success btn-block" value="로그아웃"></a>
                             </fieldset>
-                        </form>
+                      <!--   </form> -->
                     </div>
                 </div>
             </div>

@@ -63,11 +63,11 @@
                                 <input class="form-control"  value="${vo.regdate }" readonly="readonly">
                              
                          </div>
-                        <%--  <div class="form-group">
+                         <div class="form-group">
                         	  <label>이미지 번호</label>
-                                <input class="form-control" id="attachno" value="${vo.attachno }" readonly="readonly">
+                                <input class="form-control" name="attachno" id="attachno" value="${vo.attachno }" readonly="readonly">
                              
-                         </div> --%>
+                         </div> 
                          <div class="form-group">
                         	  <label>이미지</label>
                                 <%-- <img src="/display?filename=${img.s_savePath}"> --%>

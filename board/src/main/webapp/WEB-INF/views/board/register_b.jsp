@@ -5,12 +5,12 @@
  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
-/* $(submitBtn).on("click" ,function(){
+ $(submitBtn).on("click" ,function(){
 	$("#attachNum").on("change", function(){
 		showList($("#attachno").val());	
 	});
 
-}); */
+}); 
 
 </script>
         <div id="page-wrapper">
@@ -48,11 +48,11 @@
                          </div>
                          <label>이미지 번호</label>
                                 <input class="form-control"  type="text"  id="attachNum"   name="attachno" value="" >
-                        
+                       
                                   <input class="btn btn-default" id="submitBtn" type="submit" value="보내기"/>
        
                                  </form>
-                                           <jsp:include page="fileupload3.jsp"></jsp:include>
+                                         <jsp:include page="fileupload3.jsp"></jsp:include>   
                                 </tbody>
                           
                             <!-- /.table-responsive -->

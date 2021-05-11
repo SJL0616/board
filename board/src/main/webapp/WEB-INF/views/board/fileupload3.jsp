@@ -40,7 +40,8 @@ function sendFile() {
 				
 				/* $("#attachno").val(data.attachno);
 				$("#attachNum").val(data.attachno); */
-				$("#attachno").val(data.attachno); 
+				/* $("#attachno").val(data.attachno);  */
+				 $("input[name=attachno]").val(data.attachno);
 				$("#uploadFileElement").val("");
 				showList(data.attachno);
 				/* $("#uploadFileElement").remove();
