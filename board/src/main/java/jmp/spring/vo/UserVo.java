@@ -1,5 +1,6 @@
 package jmp.spring.vo;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -14,6 +15,11 @@ public class UserVo {
  String name;
  String email;
 List<String> role;
+
+//자동로그인에 필요한 키값
+String sessionkey;
+//
+Date sessionlimit;
 
 public boolean hasRole(List<String> role_id) {
 	return role.contains("ROLE_ADMIN");

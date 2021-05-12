@@ -67,11 +67,11 @@ $(document).ready(function() {
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="pwd" type="text" >
                                 </div>
-                              <!--   <div class="checkbox">
+                               <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="useCokkie" type="checkbox" value="Remember Me">Remember Me
                                     </label>
-                                </div> -->
+                                </div> 
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">
                             </fieldset>

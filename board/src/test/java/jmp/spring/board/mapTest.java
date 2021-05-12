@@ -16,6 +16,7 @@ import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.vo.AttachFileVo;
 import jmp.spring.vo.BoardVo;
 import jmp.spring.vo.ReplyVo;
+import jmp.spring.vo.UserVo;
 import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -33,7 +34,10 @@ FileUploadMapper mapper;
 	@Test
 	public void getTest2() {
 	
-		umapper.userRole("user01");
+		UserVo user= new UserVo();
+		user.setSessionkey("7A6D203F153D5F2F0D24E45D012AA7F6");
+		
+		umapper.loginSessionkey(user.getSessionkey());
 		
 	
 	}

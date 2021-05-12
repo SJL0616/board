@@ -22,7 +22,23 @@ public class UserServiceimpl implements UserService {
 	@Override
 	public List<String> userRole(String id) {
 		// TODO Auto-generated method stub
+		
 		return mapper.userRole(id);
+	}
+
+	@Override
+	public int updateSessionkey(UserVo user) {
+		// TODO Auto-generated method stub
+		return mapper.updateSessionkey(user);
+	}
+
+	@Override
+	public UserVo loginSessionkey(String sessionkey) {
+		// TODO Auto-generated method stub
+		
+		UserVo user= mapper.loginSessionkey(sessionkey);
+		  user.setRole(mapper.userRole(user.getId()));
+		return user;
 	}
 
 }

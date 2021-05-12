@@ -10,4 +10,16 @@ select * from users where id= #{id} and pwd = #{pwd}
 <select id="userRole" resultType="String">
 select role_id from users_role where id= #{id}
 </select>
+
+<!-- 자동로그인시 필요한 sessionkey값고 유효기간을을 유저 테이블에 저장 -->
+<update id="updateSessionkey">
+
+update users set sessionkey = #{sessionkey}, sessionlimit= sysdate+7 where id = #{id} 
+</update>
+
+<select id="loginSessionkey" resultType="jmp.spring.vo.UserVo">
+
+select * from users where sessionkey = #{sessionkey} and sessionlimit>sysdate
+</select>
+
 </mapper>

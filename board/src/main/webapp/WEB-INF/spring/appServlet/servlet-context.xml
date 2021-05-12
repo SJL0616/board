@@ -26,6 +26,7 @@
 	
 	<beans:bean id="sampleInterceptor" class="jmp.spring.interceptor.Sampleinterceptor"></beans:bean>
 	<beans:bean id="authInterceptor" class="jmp.spring.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="jmp.spring.interceptor.LoginInterceptor"></beans:bean>
 	
  	<interceptors>
 	<!-- <interceptor>
@@ -33,8 +34,13 @@
 	   <beans:ref bean="sampleInterceptor"/>
 	</interceptor> -->
 	   <interceptor>
-	     <mapping path="/board/*"/>
+	     <mapping path="/board/list"/>
 	     <beans:ref bean= "authInterceptor"/>
+	   </interceptor>
+	   
+	   <interceptor>
+	     <mapping path="/board/loginAction"/>
+	     <beans:ref bean= "loginInterceptor"/>
 	   </interceptor>
 	</interceptors> 
 	

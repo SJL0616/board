@@ -10,4 +10,6 @@ public interface UserMapper {
 
 	public UserVo login(@Param("id") String id, @Param("pwd") String pwd);
 	public List<String> userRole(String id);
+	public int updateSessionkey(UserVo user);
+	public UserVo loginSessionkey(String sessionkey);
 }

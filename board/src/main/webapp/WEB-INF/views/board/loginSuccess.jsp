@@ -35,8 +35,10 @@
 </head>
 
 <script type="text/javascript">
+<%=session.getAttribute("user") %>
 
 </script> 
+${sessionScope.user }
 <body>
 
     <div class="container">
