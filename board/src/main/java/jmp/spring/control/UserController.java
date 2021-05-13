@@ -28,6 +28,14 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
+	@GetMapping("/board/member")
+	public void showMemberPage() {
+		
+	}
+	@PostMapping("/board/registerMember")
+	public void registerMember() {
+		
+	}
 	@GetMapping("/board/login")
 	public void showLogin() {
 		
@@ -74,14 +82,26 @@ public class UserController {
 		HttpSession session =request.getSession();
 		session.invalidate();
 		
+		
+		Cookie cookie = WebUtils.getCookie(request, "loginCookie");
+		if(cookie!=null) {
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+		}
+		
+		
+		/*연습
 		//자동로그인 쿠키제거.
-		//로그아웃을 하게 되면 더이상 자동로그인을 할 수가 없습니다.
+		//로그아웃을 하게 되면 더이상 자동로그인을 할 수가 없습니다.loginCookie
 		Cookie cookie= WebUtils.getCookie(request, "loginCookie");
 		if(cookie!=null) {
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		}
+		*/
+		
 		model.addAttribute("msg", "정상적으로 로그아웃되었습니다.");
 		return "/board/login";
 	}

@@ -21,8 +21,8 @@ String sessionkey;
 //
 Date sessionlimit;
 
-public boolean hasRole(List<String> role_id) {
-	return role.contains("ROLE_ADMIN");
+public boolean hasRole(String role_id) {
+	return role.contains(role);
 	
 };
 }

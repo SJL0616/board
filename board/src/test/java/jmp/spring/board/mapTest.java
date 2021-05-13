@@ -1,6 +1,7 @@
 package jmp.spring.board;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.fileupload.FileUpload;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import jmp.spring.mapper.FileUploadMapper;
 import jmp.spring.mapper.UserMapper;
 import jmp.spring.service.AttachFileServiceimpl;
+import jmp.spring.service.UserService;
 import jmp.spring.vo.AttachFileVo;
 import jmp.spring.vo.BoardVo;
 import jmp.spring.vo.ReplyVo;
@@ -29,15 +31,25 @@ FileUploadMapper mapper;
 	UserMapper umapper;
 	
 	@Autowired
+	UserService uservice;
+	
+	@Autowired
 	AttachFileServiceimpl service;
 	
 	@Test
 	public void getTest2() {
 	
 		UserVo user= new UserVo();
-		user.setSessionkey("7A6D203F153D5F2F0D24E45D012AA7F6");
+		user.setId("user06");
+		user.setPwd("1234");
+		user.setName("lee");
+		user.setEmail("6@gamil.com");
+
+
+		uservice.insertUser(user);
+		uservice.insertUserRole("user06","ROLE_USER");
 		
-		umapper.loginSessionkey(user.getSessionkey());
+	
 		
 	
 	}

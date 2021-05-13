@@ -58,24 +58,31 @@ $(document).ready(function() {
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="loginAction" method="post">
+                        <form action="registerMember" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <p id="errorMsg"></p>
+                                    <label> ID</label>
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="pwd" type="text" >
+                                    <label> 비밀번호</label>
+                                    <input class="form-control" placeholder="Password" name="pwd" type="password">
                                 </div>
-                               <div class="checkbox">
-                                    <label>
-                                        <input name="useCookie" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
+                                <div class="form-group">
+                                    <label> 이름</label>
+                                    <input class="form-control" placeholder="name" name="Name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label> 이메일</label>
+                                    <input class="form-control" placeholder="email" name="E-mail" type="email">
+                                </div>
+                                <div class="checkbox">
+                                  
                                 </div> 
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인"><br>
-                                <a href="/board/member"><input type="button" class="btn btn btn-success btn-block" value="회원가입"></a><br>
-                                <a href="/board/findPwd"><input type="button" class="btn btn btn-warn btn-block" value="비밀번호 찾기"></a>
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="회원가입">
+                                <input type="reset" class="btn btn-lg btn-warn btn-block" value="전체삭제">
                             </fieldset>
                         </form>
                     </div>

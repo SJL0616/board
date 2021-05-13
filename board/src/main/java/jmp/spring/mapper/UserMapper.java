@@ -12,4 +12,7 @@ public interface UserMapper {
 	public List<String> userRole(String id);
 	public int updateSessionkey(UserVo user);
 	public UserVo loginSessionkey(String sessionkey);
+	public int insertUser(UserVo user); 
+	public int insertUserRole(@Param("id") String id, @Param("role") String role);
+
 }

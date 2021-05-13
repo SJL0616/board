@@ -2,6 +2,7 @@ package jmp.spring.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,20 @@ public class UserServiceimpl implements UserService {
 		  user.setRole(mapper.userRole(user.getId()));
 		return user;
 	}
+
+	@Override
+	public int insertUser(UserVo user) {
+		// TODO Auto-generated method stub
+		return mapper.insertUser(user); 
+	}
+
+	@Override
+	public int insertUserRole(String id,String role) {
+		// TODO Auto-generated method stub
+		return mapper.insertUserRole(id, role);
+	}
+
+	
+	
 
 }
