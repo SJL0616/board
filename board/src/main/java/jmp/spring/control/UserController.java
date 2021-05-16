@@ -1,6 +1,7 @@
 package jmp.spring.control;
 
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import jmp.spring.mapper.UserMapper;
+import jmp.spring.service.MailService;
 import jmp.spring.service.UserService;
 import jmp.spring.vo.UserVo;
 import lombok.extern.java.Log;
@@ -28,12 +30,44 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
+	@Autowired MailService ms;
+	 @Autowired Properties props;
+	 
 	@GetMapping("/board/member")
 	public void showMemberPage() {
 		
 	}
+	@GetMapping("/board/findPwd")
+	public void showMember() {
+		
+	}
+	
+	@PostMapping("/board/sendEmail")
+	public String registerMember(UserVo user, Model model) {
+		
+		String tpwd= service.sendMail(user);
+		
+		log.info("===================임시 비밀번호"+tpwd);	
+		log.info("실행");
+		ms.welcomeMailSend(tpwd);
+		  log.info("실행 성공");
+		
+		return "/board/login";
+	}
 	@PostMapping("/board/registerMember")
-	public void registerMember() {
+	public String registerMember(UserVo user, Model model, HttpServletRequest request) {
+		try {
+	 	int res =service.insertUser(user);
+		if(res>0)
+		{return "forward:/board/loginAction";
+			
+		}else {
+			return "/board/error";
+		}
+		
+		}catch (Exception e) {
+			return "/board/error";
+		}
 		
 	}
 	@GetMapping("/board/login")
@@ -43,7 +77,7 @@ public class UserController {
 	@PostMapping("/board/loginAction")
 	public String LoginProcess(UserVo vo, Model model, HttpServletRequest request) {
 			
-	 UserVo uvo=service.login(vo.getId(), vo.getPwd());
+	 UserVo uvo=service.login(vo);
 		if(uvo==null) {
 		    model.addAttribute("msg", "로그인이 실패했습니다.");
 		    return "/board/login";

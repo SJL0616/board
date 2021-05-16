@@ -22,7 +22,7 @@ String sessionkey;
 Date sessionlimit;
 
 public boolean hasRole(String role_id) {
-	return role.contains(role);
+	return role.contains(role_id);
 	
 };
 }

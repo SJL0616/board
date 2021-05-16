@@ -3,7 +3,6 @@ package jmp.spring.board;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.fileupload.FileUpload;
 import org.junit.Test;
@@ -25,59 +24,17 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class mapTest {
+public class PasswordEncode {
 
-	@Autowired
-FileUploadMapper mapper;
-	@Autowired
-	UserMapper umapper;
-	
-	@Autowired
-	UserService uservice;
-	
-	@Autowired
-	AttachFileServiceimpl service;
-	
-
+	@Test
 	public void getTest2() {
 	
-		UserVo user= new UserVo();
-		user.setId("user06");
-		user.setPwd("1234");
-		user.setName("lee");
-		user.setEmail("6@gamil.com");
-
-
-		uservice.insertUser(user);
-		uservice.insertUserRole("user06","ROLE_USER");
-		
-	
-		
-	
-	}
-	@Test
-	public void getTest() {
-	System.out.println("===========uuid"+UUID.randomUUID().toString().substring(0, 7));
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	String encod = encoder.encode(UUID.randomUUID().toString().substring(0, 7));
-	System.out.println("===========encod"+encod);
-	}
+	System.out.println("===============1234의 암호화된 문자열"+ encoder.encode("1234"));
+	System.out.println("===============1234의 암호화된 문자열"+ encoder.encode("1234"));
+	System.out.println("===============1234의 암호화된 문자열"+ encoder.encode("1234"));
+	System.out.println("===============1234의 암호화된 문자열"+ encoder.encode("1234"));
+		
 	
-	
-public void maptest() {
-		BoardVo bvo= new BoardVo();
-		bvo.setBno(50);
-		ReplyVo rvo= new ReplyVo();
-		rvo.setRno(123);
-		
-		
-		Map<String, Object> map = new HashMap<String ,Object>();
-		map.put("boardVo", bvo);
-		map.put("ReplyVo", rvo);
-		log.info(map);
-		log.info(map.get("boardVo"));
-		log.info(map.get("ReplyVo"));
-		
-		
 	}
 }

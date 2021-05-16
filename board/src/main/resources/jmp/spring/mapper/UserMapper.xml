@@ -5,7 +5,7 @@
 
 
 <select id="login" resultType="jmp.spring.vo.UserVo">
-select * from users where id= #{id} and pwd = #{pwd}
+select * from users where id= #{id} 
 </select>
 <select id="userRole" resultType="String">
 select role_id from users_role where id= #{id}
@@ -15,6 +15,11 @@ select role_id from users_role where id= #{id}
 <update id="updateSessionkey">
 
 update users set sessionkey = #{sessionkey}, sessionlimit= sysdate+7 where id = #{id} 
+</update>
+
+<update id="updatePwd">
+
+update users set pwd = #{pwd} where id = #{id} 
 </update>
 
 <select id="loginSessionkey" resultType="jmp.spring.vo.UserVo">

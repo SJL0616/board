@@ -37,7 +37,7 @@ public class mailServiceTest {
 		/* MailService ms = new MailService(); */
 		
 		log.info("실행");
-		ms.welcomeMailSend();
+		ms.welcomeMailSend("22");
 		  log.info("실행 성공");
 		 
 		

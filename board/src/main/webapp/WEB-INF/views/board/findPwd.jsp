@@ -37,19 +37,6 @@
 </head>
 
 <script type="text/javascript">
-/* if('${msg }' !=""){
-	
-	alert('${msg}');
-}else{
-	
-} */
-
-$(document).ready(function() {
-	
-	$("#errorMsg").text('${msg}');
-	
-});
-
 
 </script>
 <body>
@@ -59,27 +46,21 @@ $(document).ready(function() {
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
+                        <h3 class="panel-title">비밀번호 찾기</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="loginAction" method="post" name="loginForm">
+                        <form action="sendEmail" method="post" name="loginForm">
                             <fieldset>
                                 <div class="form-group">
-                                    <p id="errorMsg"></p>
+                                    <p id="Msg">찾으실 계정의 아이디를 입력하세요. 이메일로 비밀번호를 보내드립니다.</p>
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
                                 </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="pwd" type="text" >
-                                </div>
-                               <div class="checkbox">
-                                    <label>
-                                        <input name="useCookie" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
-                                </div> 
+                            
+                                
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인"><br>
-                                <a href="/board/member"><input type="button" class="btn btn btn-success btn-block" value="회원가입" onclick="memeberCheck"></a><br>
-                                <a href="/board/findPwd"><input type="button" class="btn btn btn-warn btn-block" value="비밀번호 찾기"></a>
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="임시 비밀번호 보내기"><br>
+                                <a href="/board/login"><input type="button" class="btn btn btn-success btn-block" value="뒤로가기"></a><br>
+                          
                             </fieldset>
                         </form>
                     </div>

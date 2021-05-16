@@ -25,7 +25,7 @@ public class MailService {
 	  @Autowired Properties props;
 	 
 	
-	public void welcomeMailSend() {
+	public void welcomeMailSend(String tpwd) {
 		// 메일 설정 정보
 		/*
 		Properties prop = System.getProperties();
@@ -60,13 +60,13 @@ public class MailService {
 			msg.setFrom(new InternetAddress("ehfcmtorl3@gmail.com", "sangjun"));
              // 수신자 설정 
 			// Message.RecipientType.TO : 받는 사람 
-			InternetAddress to = new InternetAddress("ehfcmtorl3@gmail.com");
+			InternetAddress to = new InternetAddress("nasajang2020@gmail.com");
 			msg.setRecipient(Message.RecipientType.TO, to);
 			
             // 메일 제목
-			msg.setSubject("환영합니다.", "UTF-8");
+			msg.setSubject("이상준 과제 임시 비밀번호 메일.", "UTF-8");
 			// 메일 내용
-			msg.setText("가입을 축하드립니다.\n인증번호는 1234 입니다.", "UTF-8");
+			msg.setText("가입을 축하드립니다.\n임시 비밀번호는 "+tpwd+"입니다.", "UTF-8");
 			System.out.println("===============================");
             // 메일 발송
 			Transport.send(msg);
