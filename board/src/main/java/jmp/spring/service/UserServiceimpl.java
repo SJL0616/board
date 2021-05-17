@@ -98,6 +98,18 @@ public class UserServiceimpl implements UserService {
 		return mapper.updatePwd(user);
 	}
 
+	@Override
+	public UserVo findId(UserVo user) {
+		// TODO Auto-generated method stub
+		return mapper.findId(user);
+	}
+
+	@Override
+	public UserVo findId2(UserVo user) {
+		// TODO Auto-generated method stub
+		return mapper.findId2(user);
+	}
+
 	
 	
 

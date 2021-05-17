@@ -37,6 +37,16 @@
 </head>
 
 <script type="text/javascript">
+$(document).ready(function() {
+if('${msg }' !=""){
+	
+	alert('${msg}');
+}else{
+	
+} 
+	
+
+});
 
 </script>
 <body>
@@ -46,7 +56,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">비밀번호 찾기</h3>
+                        <h3 class="panel-title">임시 비밀번호 발급</h3>
                     </div>
                     <div class="panel-body">
                         <form action="sendEmail" method="post" name="loginForm">
@@ -59,6 +69,26 @@
                                 
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="임시 비밀번호 보내기"><br>
+                               
+                          
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">아이디 찾기</h3>
+                    </div>
+                      <div class="panel-body">
+                        <form action="showid" method="post" name="loginForm">
+                            <fieldset>
+                                <div class="form-group">
+                                <!--  <p id="errorMsg"></p> -->
+                                    <p id="Msg">찾으실 계정의 이메일을 입력하세요. 아이디를 보여드립니다.</p>
+                                    <input class="form-control" placeholder="ID" name="email" type="text" autofocus>
+                                </div>
+                            
+                                
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="보내기"><br>
                                 <a href="/board/login"><input type="button" class="btn btn btn-success btn-block" value="뒤로가기"></a><br>
                           
                             </fieldset>

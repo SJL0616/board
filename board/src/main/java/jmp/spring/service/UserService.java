@@ -10,6 +10,8 @@ import jmp.spring.vo.UserVo;
 
 public interface UserService {
 	public UserVo login(UserVo user);
+	public UserVo findId(UserVo user);
+	public UserVo findId2(UserVo user);
 	public List<String> userRole(String id);
 	public int updateSessionkey(UserVo user);
 	

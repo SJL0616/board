@@ -42,17 +42,41 @@ public class UserController {
 		
 	}
 	
+	
+	@PostMapping("/board/showid")
+	public String showMember(UserVo user, Model model) {
+		
+		UserVo uvo= service.findId(user);
+		
+		log.info("===================uvo"+uvo);	
+		log.info("실행");
+		if(uvo==null) {
+			model.addAttribute("msg", "이메일을 확인해주세요.");
+			return "/board/findPwd";
+		}else {
+		model.addAttribute("uvo", uvo);
+		  log.info("실행 성공");
+		
+		return "/board/login";
+		}
+	}
+	
 	@PostMapping("/board/sendEmail")
 	public String registerMember(UserVo user, Model model) {
 		
-		String tpwd= service.sendMail(user);
-		
+	UserVo uvo =service.findId2(user);
+		if(uvo==null) {
+			model.addAttribute("msg", "아이디를 확인해주세요.");
+			return "/board/findPwd";
+		}else {
+			String tpwd= service.sendMail(user);
 		log.info("===================임시 비밀번호"+tpwd);	
 		log.info("실행");
 		ms.welcomeMailSend(tpwd);
 		  log.info("실행 성공");
-		
+		model.addAttribute("msg", "이메일에 임시 비밀번호가 발급되었습니다.");
 		return "/board/login";
+		}
 	}
 	@PostMapping("/board/registerMember")
 	public String registerMember(UserVo user, Model model, HttpServletRequest request) {

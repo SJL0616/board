@@ -60,7 +60,7 @@ public class MailService {
 			msg.setFrom(new InternetAddress("ehfcmtorl3@gmail.com", "sangjun"));
              // 수신자 설정 
 			// Message.RecipientType.TO : 받는 사람 
-			InternetAddress to = new InternetAddress("nasajang2020@gmail.com");
+			InternetAddress to = new InternetAddress("ehfcmtorl@gmail.com");
 			msg.setRecipient(Message.RecipientType.TO, to);
 			
             // 메일 제목

@@ -47,7 +47,9 @@
 $(document).ready(function() {
 	
 	$("#errorMsg").text('${msg}');
-	
+	if('${uvo}'!=""){
+	$("#errorMsg").text("아이디는"+'${uvo.id}'+"입니다");
+	}
 });
 
 
@@ -79,7 +81,7 @@ $(document).ready(function() {
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인"><br>
                                 <a href="/board/member"><input type="button" class="btn btn btn-success btn-block" value="회원가입" onclick="memeberCheck"></a><br>
-                                <a href="/board/findPwd"><input type="button" class="btn btn btn-warn btn-block" value="비밀번호 찾기"></a>
+                                <a href="/board/findPwd"><input type="button" class="btn btn btn-warn btn-block" value="아이디 / 비밀번호 찾기"></a>
                             </fieldset>
                         </form>
                     </div>

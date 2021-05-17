@@ -10,6 +10,7 @@ public interface UserMapper {
 
 	/* public UserVo login(@Param("id") String id, @Param("pwd") String pwd); */
 	public UserVo login(UserVo user);
+	public UserVo findId2(UserVo user);
 	public List<String> userRole(String id);
 	public int updateSessionkey(UserVo user);
 	public UserVo loginSessionkey(String sessionkey);
@@ -17,4 +18,5 @@ public interface UserMapper {
 	public int insertUserRole(@Param("id") String id, @Param("role") String role);
 	public String  sendMail(UserVo user); 
 	public int updatePwd(UserVo user); 
+	public UserVo findId(UserVo user);
 }
