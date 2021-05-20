@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
@@ -80,6 +82,14 @@ public class UserController {
 	}
 	@PostMapping("/board/registerMember")
 	public String registerMember(UserVo user, Model model, HttpServletRequest request) {
+		
+		UserVo uvo= service.findId2(user);
+		if(uvo !=null) {
+			model.addAttribute("msg", "아이디가 중복됩니다.");
+			return "/board/member";
+		
+		}
+		
 		try {
 	 	int res =service.insertUser(user);
 		if(res>0)
@@ -163,6 +173,23 @@ public class UserController {
 		model.addAttribute("msg", "정상적으로 로그아웃되었습니다.");
 		return "/board/login";
 	}
+	
+	//
+	@GetMapping("/idCheckAjax/{id}")
+	@ResponseBody
+	public boolean getlist(@PathVariable("id") String id){
+		
+		UserVo list= service.findId3(id);
+		log.info("====================list:"+list);
+		if(list !=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
 	
 	
 }

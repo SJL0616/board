@@ -11,6 +11,7 @@ public interface UserMapper {
 	/* public UserVo login(@Param("id") String id, @Param("pwd") String pwd); */
 	public UserVo login(UserVo user);
 	public UserVo findId2(UserVo user);
+	public UserVo findId3(String id);
 	public List<String> userRole(String id);
 	public int updateSessionkey(UserVo user);
 	public UserVo loginSessionkey(String sessionkey);

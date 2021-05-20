@@ -28,7 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
+import jmp.spring.service.UserService;
 import jmp.spring.vo.AttachFileVo;
+import jmp.spring.vo.UserVo;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -38,6 +40,9 @@ public class FileUploadAjaxController {
 
 	@Autowired
 	public AttachFileService service;
+	
+	@Autowired
+	public UserService uservice;
 	
 	private static final String ROOT_DIR = "C:\\upload\\";
 
@@ -134,7 +139,7 @@ public class FileUploadAjaxController {
 		}
 	
 	} 
-	
+
 	@GetMapping("/getFileList/{attachno}")
 	public java.util.List<AttachFileVo> getlist(@PathVariable("attachno") int attachno){
 		

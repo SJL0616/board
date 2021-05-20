@@ -110,6 +110,12 @@ public class UserServiceimpl implements UserService {
 		return mapper.findId2(user);
 	}
 
+	@Override
+	public UserVo findId3(String id) {
+		// TODO Auto-generated method stub
+		return mapper.findId3(id);
+	}
+
 	
 	
 

@@ -35,28 +35,86 @@
 </head>
 
 <script type="text/javascript">
-/* if('${msg }' !=""){
+ if('${msg }' !=""){
 	
 	alert('${msg}');
 }else{
 	
-} */
+} 
 
 $(document).ready(function() {
 	
 	$("#errorMsg").text('${msg}');
-	
+	$("input[name=id]").prop("dataValue",false);
+	console.log("id.prop :",$("input[name=id]").prop("dataValue"));
+	$("#id").on("change",function(){
+		$("input[name=id]").prop("dataValue",false);	
+		console.log("id.prop :",$("input[name=id]").prop("dataValue"));
+	});
 });
+
+
+ 
+
+
+function idCheck() {
+	var id = $("#id").val();
+	var id_prop =$("input[name=id]").prop("dataValue");
+	console.log("id :",id);
+	console.log("id.prop :",id_prop);
+
+	$.ajax({
+		
+		url: '/idCheckAjax/'+id,
+		method: 'get',
+		dataType : 'json',
+		
+		success: function(data,result, textStatus, jqXHR) {
+			console.log("callBack result :",result);
+				if(data){
+					  console.log("결과 : 중복");
+						console.log("id.prop :",id_prop);
+						alert("중복입니다.");
+				}else{
+					console.log("결과 : 사용가능");
+					  /* $("#checkIdResult").val("1"); */
+					  $("input[name=id]").prop("dataValue",true);
+						console.log("id.prop :",$("input[name=id]").prop("dataValue"));
+					alert("사용가능합니다.");
+				}
+			  
+				
+		},
+		error : function() {
+			console.log("error");
+		}
+		
+	});
+}
+
 function check() {
 	
-	
+	var checkResult =document.getElementById("checkIdResult").value;
 	var id =document.getElementById("id").value;
 	var pwd =document.getElementById("pwd").value;
 	console.log(id);
+	console.log(checkIdResult);
+	
+	/* if(checkResult=="0"){
+		alert("중복체크를 진행하십시오");
+		   return false
+
+	} */
+	if(!$("input[name=id]").prop("dataValue")){
+		alert("중복체크를 진행하십시오");
+		   return false
+
+	} 
 	if(id==""){
 		alert("공백은 안됩니다");
 	   return false
 	}
+	
 	var regExId = /^[a-z0-9]{4,12}$/;
 	var pwReg = /^[a-zA-Z0-9]{7,20}$/;
 	 if(!regExId.test(id)){
@@ -88,13 +146,16 @@ function check() {
                     <div class="panel-heading">
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
+               
                     <div class="panel-body">
-                        <form action="/board/sendEmail" method="post" name="memberForm">
+                        <form action="registerMember" method="post" name="memberForm">
+                             <input type="text" id="checkIdResult" value="0" hidden="" >
                             <fieldset>
                                 <div class="form-group">
                                     <p id="errorMsg"></p>
                                     <label> ID</label>
                                     <input class="form-control" name="id" id="id" type="text" autofocus>
+                                    <input class="btn btn-lg btn btn-block"   value="중복체크" name="idcheck" id="idcheck" type="button" onclick="idCheck()">
                                 </div>
                                 <div class="form-group">
                                     <label> 비밀번호</label>
