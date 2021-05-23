@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jmp.spring.mapper.FileUploadMapper;
+import jmp.spring.mapper.ManuMapper;
 import jmp.spring.mapper.UserMapper;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.service.UserService;
@@ -36,8 +37,16 @@ FileUploadMapper mapper;
 	UserService uservice;
 	
 	@Autowired
+	ManuMapper mmapper;
+	
+	
+	@Autowired
 	AttachFileServiceimpl service;
 	
+	@Test
+	public void getMenu() {
+		mmapper.createMenu();
+	}
 
 	public void getTest2() {
 	
@@ -55,7 +64,7 @@ FileUploadMapper mapper;
 		
 	
 	}
-	@Test
+	
 	public void getTest() {
 	System.out.println("===========uuid"+UUID.randomUUID().toString().substring(0, 7));
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

@@ -8,13 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import jmp.spring.mapper.ManuMapper;
 import jmp.spring.mapper.UserMapper;
+import jmp.spring.vo.ManuVo;
 import jmp.spring.vo.UserVo;
 @Service
 public class UserServiceimpl implements UserService {
 
 	@Autowired
 	UserMapper mapper;
+	
+	@Autowired
+	ManuMapper mmapper;
+	
 	
 	@Override
 	public UserVo login(UserVo user) {
@@ -114,6 +120,12 @@ public class UserServiceimpl implements UserService {
 	public UserVo findId3(String id) {
 		// TODO Auto-generated method stub
 		return mapper.findId3(id);
+	}
+
+	@Override
+	public List<ManuVo> createMenu() {
+		// TODO Auto-generated method stub
+		return mmapper.createMenu();
 	}
 
 	

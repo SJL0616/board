@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import jmp.spring.vo.ManuVo;
 import jmp.spring.vo.UserVo;
 
 public interface UserService {
@@ -21,4 +22,5 @@ public interface UserService {
 	public int insertUserRole(String id, String role); 
 	public String  sendMail(UserVo user); 
 	public int updatePwd(UserVo user); 
+	public List<ManuVo> createMenu();
 }

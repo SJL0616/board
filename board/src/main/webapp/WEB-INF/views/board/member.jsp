@@ -47,7 +47,9 @@ $(document).ready(function() {
 	$("#errorMsg").text('${msg}');
 	$("input[name=id]").prop("dataValue",false);
 	console.log("id.prop :",$("input[name=id]").prop("dataValue"));
+	
 	$("#id").on("change",function(){
+		//id값 변경되면 value값 초기화
 		$("input[name=id]").prop("dataValue",false);	
 		console.log("id.prop :",$("input[name=id]").prop("dataValue"));
 	});
