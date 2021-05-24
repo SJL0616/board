@@ -28,11 +28,11 @@ public class UserServiceimpl implements UserService {
 		if(loginUser !=null) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
-			encoder.matches(user.getPwd(),loginUser.getPwd());
+			if(encoder.matches(user.getPwd(),loginUser.getPwd())){
 			
 			String encod = encoder.encode(user.getPwd()); //비밀번호 암호화
 			user.setPwd(encod);//암호화된 비밀번호를 user객체에 넣어줌
-			
+			}
 		}
 		List<String> role = mapper.userRole(loginUser.getId());
 		loginUser.setRole(role);

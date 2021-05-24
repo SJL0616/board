@@ -75,7 +75,7 @@ function showList(attachno) {
 			var savePath = encodeURIComponent(item.savepath);
 			
 			 htmlContent ; 
-			 if(item.filetype = "Y"){
+			 if(item.filetype == "Y"){
 				
 					console.log("==========인코딩후:"+savePath);
 				 htmlContent  +="<li><a href=/download?filename="+savePath+">"

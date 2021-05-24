@@ -23,13 +23,17 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.service.UserService;
+import jmp.spring.service.addContentsService;
 import jmp.spring.vo.AttachFileVo;
+import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.UserVo;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -42,10 +46,30 @@ public class FileUploadAjaxController {
 	public AttachFileService service;
 	
 	@Autowired
+	public addContentsService cservice;
+	
+	@Autowired
 	public UserService uservice;
 	
 	private static final String ROOT_DIR = "C:\\upload\\";
 
+	@PostMapping("/contents/addContent")
+	public Map<String, Object>  addContents(@RequestBody ContentsVo cvo) {
+		log.info("/addContent===========cvo :" +  cvo);
+		int res =cservice.addcontents(cvo);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(res>0) {
+			map.put("result", "success");
+		map.put("cname", cvo.getCname());}
+		else {
+			map.put("result", "fail");}
+		return map;
+	}
+	
+	
+	
+	
 	@GetMapping("/attachFileDelete/{uuid}/{attachno}")
 	public String deleteFile (@PathVariable("uuid") String uuid, 
 			@PathVariable("attachno") int attachno	) {

@@ -45,7 +45,7 @@ FileUploadMapper mapper;
 	
 	@Test
 	public void getMenu() {
-		mmapper.createMenu();
+	 uservice.createMenu();
 	}
 
 	public void getTest2() {
