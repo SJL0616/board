@@ -173,18 +173,19 @@ public class FileUploadAjaxController {
 	}
 	
 	@PostMapping("/fileUploadAjax")
-	public Map<String, Object> fileUpload(MultipartFile[] uploadFile, int attachno){
+	public Map<String, Object> fileUpload(MultipartFile[] uploadFile, String cname){
 		
 		Map<String, Object> map =new HashMap<String, Object>();
 		int res=0;
 		//신규생성 파일의 경우 attachNo를 가져옴.
-		if(attachno== 0) {
+		/*f(attachno== 0) {
 			attachno= service.getSeq();
-		}
+		}*/
 		
 		for(MultipartFile multipartFile : uploadFile) {
-			String uploadpath = getFolder();
-			AttachFileVo vo= new AttachFileVo(attachno, uploadpath, multipartFile.getOriginalFilename());
+			String uploadpath =ROOT_DIR;
+			/* String uploadpath = getFolder(); */
+			AttachFileVo vo= new AttachFileVo(cname, uploadpath, multipartFile.getOriginalFilename());
 			
 			
 			//중복방지를 위해 UUID를 생성해서 파일명 앞에 붙여준다.
@@ -196,8 +197,9 @@ public class FileUploadAjaxController {
 			 * String uploadFileName=
 			 * uuid.toString()+"_"+multipartFile.getOriginalFilename();
 			 */
-			/* File saveFile = new File(ROOT_DIR+uploadPath+uploadFileName); */
-			File saveFile = new File(ROOT_DIR+vo.getSavepath());
+			/* File saveFile = new File(ROOT_DIR+uploadPath+uploadFileName);
+			File saveFile = new File(ROOT_DIR+vo.getSavepath()); */
+			File saveFile = new File(vo.getSavepath());
 		
 			
 			try {
@@ -212,19 +214,20 @@ public class FileUploadAjaxController {
 						//이미지 파일인 경우 썸네일을 생성해줍니다.
 						if(contentType.startsWith("image")&& contentType!=null) {
 							//썸네일을 생성할 경로를 지정
-					/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; */
-							String thmnail = ROOT_DIR+vo.getS_savepath();
+					/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
+							String thmnail = ROOT_DIR+vo.getS_savepath();*/
+							String thmnail = vo.getS_savepath();
 							//썸네일 이미지 생성
-							Thumbnails.of(saveFile).size(100, 100).toFile(thmnail);
+							Thumbnails.of(saveFile).size(500, 200).toFile(thmnail);
 						}
 				/*
 				 * vo.setUuid(uuid.toString()); vo.setAttachno(attachno);
 				 * vo.setFilename(multipartFile.getOriginalFilename());
 				 */
-					vo.setFiletype(contentType.startsWith("image")?"Y":"N");
+				/* vo.setFiletype(contentType.startsWith("image")?"Y":"N"); */
 				/* vo.setUploadpath(uploadpath); */
 					
-					if(service.insert(vo)>0) {
+					if(service.updatePoster(vo)>0) {
 						res++;
 					}
 					} catch (IllegalStateException e) {
@@ -247,7 +250,7 @@ public class FileUploadAjaxController {
 		/*
 		 * java.util.List<AttachFileVo> list= service.getList(attachno); return list;
 		 */
-		map.put("attachno", attachno+"");
+		map.put("cname", cname+"");
 		map.put("result", res+"건 저장되었습니다");
 		return map;
 	}

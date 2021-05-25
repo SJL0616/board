@@ -12,24 +12,25 @@ public class AttachFileVo {
 			//중복처리를 위한 램덤값 uuid
 			private  String uuid;
 			//
-			private  String uploadpath;
-			private  String filename; 
+			private  String puploadpath;
+			private  String pfilename; 
+			private  String cname; //contents 이름
 			private  String filetype; 
 			private  String regdate ;
 			 
 			private  String savepath;
 			private  String s_savepath;
 			
-			public AttachFileVo(int attachno, String uploadpath, String filename) {
-				UUID uuid = UUID.randomUUID();
+			public AttachFileVo(String cname, String uploadpath, String filename) {
+		/* UUID uuid = UUID.randomUUID(); */
 				
-				this.attachno = attachno;
-				this.uuid=uuid.toString();
-				this.uploadpath = uploadpath;
-				this.filename= filename;
+				this.cname = cname;
+		/* this.uuid=uuid.toString(); */
+				this.puploadpath = uploadpath;
+				this.pfilename= filename;
 				
-				this.savepath= uploadpath+uuid+"_"+ filename;
-				this.s_savepath=  uploadpath+"s_"+uuid+"_"+ filename;
+				this.savepath= uploadpath+ filename;
+				this.s_savepath=  uploadpath+"s_"+ filename;
 			}
 			 
 			 

@@ -29,6 +29,11 @@ select seq_attach.nextval from dual
 insert into tbl_attach values (#{attachno}, #{uuid}, #{uploadpath}, #{filename}, #{filetype}, sysdate)
 </insert>
 
+<update id="updatePoster">
+
+update t_contents set puploadpath = #{puploadpath}, pfilename = #{pfilename} where cname = #{cname}
+</update>
+
 
 <delete id="delete">
 delete tbl_attach where attachno= #{attachno} and uuid = #{uuid} 

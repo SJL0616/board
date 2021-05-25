@@ -24,6 +24,29 @@
 	<context:component-scan base-package="jmp.spring.exer" />
 	<context:component-scan base-package="jmp.spring.control" />
 	
+	<beans:bean id="sampleInterceptor" class="jmp.spring.interceptor.Sampleinterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="jmp.spring.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="jmp.spring.interceptor.LoginInterceptor"></beans:bean>
+
+	<!-- <beans:bean id="memberInterceptor" class="jmp.spring.interceptor.MemberInterceptor"></beans:bean>
+ -->
+ 	<interceptors>
+	<!-- <interceptor>
+	<mapping path="/board/list"/>
+	   <beans:ref bean="sampleInterceptor"/>
+	</interceptor> -->
+	 
+	   <interceptor>
+	     <mapping path="/contentsList"/>
+	     <beans:ref bean= "authInterceptor"/>
+	   </interceptor>
+	   
+<!-- 	   <interceptor>
+	     <mapping path="/board/loginAction"/>
+	     <beans:ref bean= "loginInterceptor"/>
+	   </interceptor> -->
+	 </interceptors>  
+	   
 	 <beans:bean id="multipartResolver"
 class="org.springframework.web.multipart.support.StandardServletMultipartResolver"> 
   </beans:bean>

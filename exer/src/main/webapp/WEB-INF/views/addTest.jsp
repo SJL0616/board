@@ -61,7 +61,45 @@ function ajaxContentsInsert() {
 };
 
 
+function sendFile() {
+	
 
+	var formData = new FormData(document.fileUploadForm);
+	console.log("cname",formData.get("cname"));
+	
+	
+	$.ajax({
+		
+		url: '/fileUploadAjax',
+		method: 'post',
+		dataType : 'json',
+		processData: false,
+		contentType: false,
+		data: formData,
+		
+		success: function(data,result, textStatus, jqXHR) {
+			console.log("callBack result :",result);
+			$("#result2").text(data.result);
+			//name속성이 attachno인 input에 attachno을 넣어줌.
+			
+			/* $("#attachno").val(data.attachno);
+			$("#attachNum").val(data.attachno); 
+			/* $("#attachno").val(data.attachno);  */
+			 $("input[name=cname]").val(data.cname);
+			$("#uploadFileElement").val("");
+			showList(data.attachno);
+			/* $("#uploadFileElement").remove();
+			$("#uploadFileLable").append("<input type='file' name='uploadFile' id='uploadFileElement'>"); */
+			
+		},
+		error : function() {
+			console.log("error");
+		}
+		
+	});
+	
+
+}
 
 </script>
 
@@ -71,10 +109,10 @@ function ajaxContentsInsert() {
 </head>
 <body>
 <h1>
-	Hello world!  
+ Contents Upload page
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<h4>  작품 text 업로드 </h4>
 <!-- <form action="#" method="post"> -->
 <!-- 번호<input type="text" id="cnum" ><br> -->
 작품이름<input type="text" id="cname" ><br>
@@ -87,13 +125,14 @@ function ajaxContentsInsert() {
 <button type="button" id="addcontents"  onclick="ajaxContentsInsert()">입력</button>
 
 <!-- </form> -->
-<p id="result"></p>
+<p id="result"></p><br>
 
-<form action="addContentsPhoto" method="post" enctype="multipart/form-data">
-<input type="text" id="showcname" >
-<input type="file" name="uploadFile">
-<input type="submit" value="입력">
+<h4>  작품 포스터 이미지 업로드 </h4>
+<form action="addContentsPhoto" method="post" name="fileUploadForm" enctype="multipart/form-data">
+<input type="text" name="cname" id="showcname" >
+<input type="file" name="uploadFile" id="uploadFileElement">
+  <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
 </form>
-
+<p id="result2"></p>
 </body>
 </html>

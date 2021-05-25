@@ -44,4 +44,10 @@ public class AttachFileServiceimpl implements AttachFileService {
 		return mapper.get(uuid, attachno);
 	}
 
+	@Override
+	public int updatePoster(AttachFileVo vo) {
+		// TODO Auto-generated method stub
+		return mapper.updatePoster(vo);
+	}
+
 }

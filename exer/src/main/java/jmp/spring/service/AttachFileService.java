@@ -11,6 +11,8 @@ public interface AttachFileService {
 	public List<AttachFileVo> getList(int attachno);
 	public int getSeq();
 	public int insert(AttachFileVo vo);
+	public int updatePoster(AttachFileVo vo);
+	
 	public int delete(String uuid, int attachno);
 	public AttachFileVo get(@Param("uuid") String uuid, @Param("attachno") int attachno);
 }
