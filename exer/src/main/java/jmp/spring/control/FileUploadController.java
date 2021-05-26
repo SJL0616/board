@@ -47,6 +47,10 @@ public class FileUploadController {
 	public void showcontentsList() {
 		
 	}
+	@GetMapping("/showcontents")
+	public void contentsList() {
+		
+	}
 	@PostMapping("/uploadFormAction")
 	public void fileUpload(MultipartFile[] uploadFile, Model model) {
 		
