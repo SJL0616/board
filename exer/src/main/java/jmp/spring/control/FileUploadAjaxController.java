@@ -67,7 +67,13 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
-	
+	@GetMapping("/getAllFileList/")
+	public java.util.List<AttachFileVo> getalllist(){
+	List<AttachFileVo> list=	cservice.getAllList();
+
+		
+		return list;
+	}
 	
 	
 	@GetMapping("/attachFileDelete/{uuid}/{attachno}")

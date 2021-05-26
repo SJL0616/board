@@ -1,5 +1,7 @@
 package jmp.spring.exer;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jmp.spring.service.addContentsService;
+import jmp.spring.vo.AttachFileVo;
 import jmp.spring.vo.ContentsVo;
 import lombok.extern.log4j.Log4j;
 
@@ -19,6 +22,13 @@ public class addTests {
 	addContentsService service;
 	
 	@Test
+	public void get() {
+		List<AttachFileVo> avo=service.getAllList();
+		log.info("=================="+avo);
+		
+	}
+	
+	
 	public void insert() {
 		ContentsVo cvo = new ContentsVo();
 		cvo.setCname("죠죠의기묘한모험");

@@ -4,10 +4,18 @@
 <head>
 	<title>error 500</title>
 </head>
+<script type="text/javascript">
+alert("error 500");
+
+</script>
+
+
 <body>
 <h1>
-	error 500
+
+	
 </h1>
+
 
 </body>
 </html>

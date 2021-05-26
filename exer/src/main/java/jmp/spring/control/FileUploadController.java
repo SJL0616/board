@@ -44,7 +44,7 @@ public class FileUploadController {
 	}
 	
 	@GetMapping("/contentsList")
-	public void showcontentsList(ContentsVo contents) {
+	public void showcontentsList() {
 		
 	}
 	@PostMapping("/uploadFormAction")

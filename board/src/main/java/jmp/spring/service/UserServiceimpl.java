@@ -12,7 +12,9 @@ import jmp.spring.mapper.ManuMapper;
 import jmp.spring.mapper.UserMapper;
 import jmp.spring.vo.ManuVo;
 import jmp.spring.vo.UserVo;
+import lombok.extern.log4j.Log4j;
 @Service
+@Log4j
 public class UserServiceimpl implements UserService {
 
 	@Autowired
@@ -28,14 +30,21 @@ public class UserServiceimpl implements UserService {
 		if(loginUser !=null) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
-			if(encoder.matches(user.getPwd(),loginUser.getPwd())){
-			
+			log.info("==============비밀번호일치 확인:"+encoder.matches(user.getPwd(),loginUser.getPwd()));
+			if(encoder.matches(user.getPwd(),loginUser.getPwd()) != false){
+				log.info("==============비밀번호 인코딩 작업 시작");
 			String encod = encoder.encode(user.getPwd()); //비밀번호 암호화
 			user.setPwd(encod);//암호화된 비밀번호를 user객체에 넣어줌
+			
+			List<String> role = mapper.userRole(loginUser.getId());
+			loginUser.setRole(role);
+			
+			
+			}else {
+				return null;
 			}
 		}
-		List<String> role = mapper.userRole(loginUser.getId());
-		loginUser.setRole(role);
+	
 		return loginUser;
 	}
 
@@ -126,6 +135,18 @@ public class UserServiceimpl implements UserService {
 	public List<ManuVo> createMenu() {
 		// TODO Auto-generated method stub
 		return mmapper.createMenu();
+	}
+
+	@Override
+	public UserVo findIdByNameEmail(UserVo user) {
+		// TODO Auto-generated method stub
+		return mapper.findIdByNameEmail(user);
+	}
+
+	@Override
+	public UserVo findIdByIdEmail(UserVo user) {
+		// TODO Auto-generated method stub
+		return mapper.findIdByIdEmail(user);
 	}
 
 	

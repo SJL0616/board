@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import jmp.spring.mapper.FileUploadMapper;
 import jmp.spring.mapper.ManuMapper;
 import jmp.spring.mapper.UserMapper;
+import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.service.UserService;
 import jmp.spring.vo.AttachFileVo;
@@ -30,8 +31,15 @@ public class mapTest {
 
 	@Autowired
 FileUploadMapper mapper;
+	
+	@Autowired
+	AttachFileService amapper;
+	
 	@Autowired
 	UserMapper umapper;
+
+	
+	
 	
 	@Autowired
 	UserService uservice;
@@ -44,6 +52,23 @@ FileUploadMapper mapper;
 	AttachFileServiceimpl service;
 	
 	@Test
+	public void getALllist() {
+	
+	}
+	
+	
+	public void finfId4() {
+		UserVo user = new UserVo();
+		
+		user.setId("user01");
+		user.setEmail("1@naver.com");
+		
+		uservice.findIdByNameEmail(user);
+		
+		
+	}
+	
+	
 	public void getMenu() {
 	 uservice.createMenu();
 	}

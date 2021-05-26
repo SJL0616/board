@@ -50,4 +50,5 @@ public class AttachFileServiceimpl implements AttachFileService {
 		return mapper.updatePoster(vo);
 	}
 
+
 }

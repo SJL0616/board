@@ -9,44 +9,44 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#attachno").on("change", function(){
-		showList($("#attachno").val());	
-	});
+
+		showAllList();	
+
 
 });
 
-function showList(attachno) {
+function showAllList() {
 
 	$.ajax({
-		url: '/getFileList/'+attachno,
+		url: '/getAllFileList/',
 		method: 'get',
 		dataType : 'json',
 		
 	success: function(data) {
 		console.log("callBack result :",data);
 		
-		$("#text2").text(data);
+		
 		var htmlContent ="";
 		$.each(data, function(index, item){
-			console.log("==========아이템:"+item.filename);
+			console.log("==========아이템:"+item.pfilename);
 			console.log("==========인코딩전:"+item.s_savepath);
 			var s_savePath = encodeURIComponent(item.s_savepath);
 			var savePath = encodeURIComponent(item.savepath);
 			
 			 htmlContent ; 
-			 if(item.filetype == "Y"){
+			/*  if(item.filetype == "Y"){ */
 				
 					console.log("==========인코딩후:"+savePath);
-				 htmlContent  +="<li><a href=/download?filename="+savePath+">"
-				          +"<img src=/display?filename="+s_savePath+">"
-				          +item.filename+"</a>"
-				         +"<span onclick=attachFileDelete('"+item.uuid+"','"+item.attachno+"') data-type='image'>X</span></li>";
+				 htmlContent  +="<li><a href=/showcontents?filename="+item.pfilename+">"
+				          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
+				          +item.cname+"</a>";
+				        
 						
-			 }else{
+			/*  }else{
 				 htmlContent +="<li>"+item.filename
 				 +"<a href=/download?filename="+savePath+"></li>"; 
 						 //파일네임에는 파라메터로 넘길수없는 데이터가 있어서 인코딩이 필요.
-			 }
+			 } */
 		
 		});
 		console.log($(".fileListView").html(htmlContent));
@@ -73,7 +73,16 @@ function showList(attachno) {
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-  <div >
+
+<div>
+ <ul class="fileListView">
+ 
+ 
+ </ul>
+
+</div>
+
+<!--   <div >
                             <table width="100%" class="table table-striped table-bordered table-hover" >
                                 <thead>
                                     <tr>
@@ -89,6 +98,6 @@ function showList(attachno) {
                                     </tr>
                                     </thead>
                                     </table>
-                                    </div>
+                                    </div> -->
 </body>
 </html>

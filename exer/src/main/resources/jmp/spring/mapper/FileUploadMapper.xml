@@ -21,6 +21,11 @@ uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach
 where attachno= #{attachno}
 </select>
 
+<select id="getAllList" resultType="jmp.spring.vo.AttachFileVo">
+SELECT * FROM T_CONTENTS ORDER BY CNO
+
+</select>
+
 <select id="getSeq" resultType="int">
 select seq_attach.nextval from dual
 </select>

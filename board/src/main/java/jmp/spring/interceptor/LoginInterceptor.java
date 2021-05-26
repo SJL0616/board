@@ -41,17 +41,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		UserVo user= (UserVo) session.getAttribute("user");
 		
 		
-		 StringUtils.isEmpty(request.getAttribute("useCokkie"));
+		/* StringUtils.isEmpty(request.getAttribute("useCokkie")); */
+	
+		log.info("=================COOKIE 존재 확인=:"+user);
+	
 		
-		log.info("=================COOKIE 확인=:"+user);
-		log.info("=================useCokkie 확인=:");
+		log.info("================쿠키 사용 체크확인  ="+request.getParameter("useCookie"));
 		
-		log.info(request.getParameter("useCookie"));
 		
+		if(!StringUtils.isEmpty(request.getAttribute("useCokkie"))){
 		user.setSessionkey(session.getId());
 		
 		service.updateSessionkey(user);
-		
+		}
 		
 		if(user!=null &&request.getParameter("useCookie")!=null) {
 			Cookie loginCookie= new Cookie("loginCookie", session.getId());
@@ -61,6 +63,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			response.addCookie(loginCookie);
 			
 		}
+		
 		
 		String tmpUri =(String) session.getAttribute("tmpUri");
 		log.info("loginIT=================tmpURi:"+tmpUri);

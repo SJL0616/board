@@ -40,7 +40,7 @@ public class LoginInterceptor2 extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		UserVo user= (UserVo) session.getAttribute("user");
 		
-		
+	
 		 StringUtils.isEmpty(request.getAttribute("useCokkie"));
 		
 		log.info("=================COOKIE »Æ¿Œ=:"+user);

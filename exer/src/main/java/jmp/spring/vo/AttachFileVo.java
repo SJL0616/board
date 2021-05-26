@@ -17,7 +17,16 @@ public class AttachFileVo {
 			private  String cname; //contents ¿Ã∏ß
 			private  String filetype; 
 			private  String regdate ;
-			 
+			
+			private  int cno; 
+			
+			private  String story ; 
+			private  String cast ; 
+			private  String tags ; 
+			private  String bc ; 
+			private  String agelimit ; 
+			private  String end ;
+			
 			private  String savepath;
 			private  String s_savepath;
 			

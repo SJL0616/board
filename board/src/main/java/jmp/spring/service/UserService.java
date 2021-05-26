@@ -14,6 +14,8 @@ public interface UserService {
 	public UserVo findId(UserVo user);
 	public UserVo findId2(UserVo user);
 	public UserVo findId3(String id);
+	public UserVo findIdByNameEmail(UserVo user);
+	public UserVo findIdByIdEmail(UserVo user);
 	public List<String> userRole(String id);
 	public int updateSessionkey(UserVo user);
 	

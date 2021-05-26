@@ -31,10 +31,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-
-</head>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"/>
 
 <script type="text/javascript">
 /* if('${msg }' !=""){
@@ -54,6 +51,9 @@ $(document).ready(function() {
 
 
 </script>
+</head>
+
+
 <body>
 
     <div class="container">
@@ -68,10 +68,11 @@ $(document).ready(function() {
                             <fieldset>
                                 <div class="form-group">
                                     <p id="errorMsg"></p>
+                                    <input type="text" value="${msg}">
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="pwd" type="text" >
+                                    <input class="form-control" placeholder="text" name="pwd" type="text" >
                                 </div>
                                <div class="checkbox">
                                     <label>

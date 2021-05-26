@@ -9,6 +9,7 @@ import jmp.spring.vo.ReplyVo;
 
 public interface AttachFileService {
 	public List<AttachFileVo> getList(int attachno);
+
 	public int getSeq();
 	public int insert(AttachFileVo vo);
 	public int updatePoster(AttachFileVo vo);

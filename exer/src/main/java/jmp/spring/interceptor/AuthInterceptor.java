@@ -30,7 +30,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		log.info("/sampleInterceptor=====================================");
 		
 
-				return false;
+				return true;
 	}
 
 	/**

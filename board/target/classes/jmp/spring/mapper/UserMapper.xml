@@ -7,6 +7,12 @@
 <select id="login" resultType="jmp.spring.vo.UserVo">
 select * from users where id= #{id} 
 </select>
+<select id="findIdByNameEmail" resultType="jmp.spring.vo.UserVo">
+select * from users where name= #{name} and email = #{email}
+</select>
+<select id="findIdByIdEmail" resultType="jmp.spring.vo.UserVo">
+select * from users where id= #{id} and email = #{email}
+</select>
 <select id="findId3" resultType="jmp.spring.vo.UserVo">
 select * from users where id= #{id} 
 </select>

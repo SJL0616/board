@@ -87,7 +87,7 @@ function sendFile() {
 			/* $("#attachno").val(data.attachno);  */
 			 $("input[name=cname]").val(data.cname);
 			$("#uploadFileElement").val("");
-			showList(data.attachno);
+		
 			/* $("#uploadFileElement").remove();
 			$("#uploadFileLable").append("<input type='file' name='uploadFile' id='uploadFileElement'>"); */
 			

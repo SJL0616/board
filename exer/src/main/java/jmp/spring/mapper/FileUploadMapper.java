@@ -13,9 +13,10 @@ public interface FileUploadMapper {
 
 	
 	public int addcontents(ContentsVo cvo);
-	
+	public List<AttachFileVo> getAllList();
 	
 	public List<AttachFileVo> getList(int attachno);
+	
 	public int getSeq();
 	public int insert(AttachFileVo vo);
 	public int updatePoster(AttachFileVo vo);

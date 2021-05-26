@@ -44,9 +44,104 @@ if('${msg }' !=""){
 }else{
 	
 } 
+	$("#searchId").hide();
+	$("#searchPwd").hide();
+	$("#searchPwd2").hide();
 	
+	$("#searchPwdHead").on("click",function(){
+		$("#searchPwd").show();
+		$("#searchId").hide();
+		$("#searchPwd2").hide();
+	});
 
+	$("#searchIdHead").on("click",function(){
+		$("#searchPwd").hide();
+		$("#searchPwd2").hide();
+		$("#searchId").show();
+	});
+	
+	$("#searchIdPwd2").on("click",function(){
+		$("#searchPwd").hide();
+		$("#searchId").hide();
+		$("#searchPwd2").show();
+	});
 });
+
+
+function sendText() {
+	
+	var contentdate = {
+			email : $("#email").val(),
+			 name : $("#name").val()
+	};
+	console.log("===================contentdate",contentdate);
+	$.ajax({
+		
+		url: '/findIdProcess',
+		method: 'post',
+		dataType: 'json',
+		
+		data: JSON.stringify(contentdate),
+		contentType:'application/json; charset=UTF-8',
+		
+		success: function (data, status) {
+			console.log(data);
+			if(data.result == "error"){
+				$("#errorMsg").text("이름 혹은 이메일을 확인해주세요.");
+				alert("입력중 오류가 발생했습니다.");
+		
+			}else{
+				$("#errorMsg").text("정상적으로 완료되었습니다.");
+				$("#showId").text("아이디는 :"+data.result.id+" 입니다.");
+				$("#Msgid").hide();
+				
+		}
+		},
+		error : function(xhr, status, error) {
+			console.log(error);
+		}
+		
+	});
+	
+}
+
+function sendText2() {
+	
+	var contentdate = {
+			email : $("#email2").val(),
+			id : $("#id").val()
+	};
+	console.log("===================contentdate",contentdate);
+	$.ajax({
+		
+		url: '/findIdProcess',
+		method: 'post',
+		dataType: 'json',
+		
+		data: JSON.stringify(contentdate),
+		contentType:'application/json; charset=UTF-8',
+		
+		success: function (data, status) {
+			console.log(data);
+			if(data.result == "error"){
+				$("#errorMsg2").text("아이디 혹은 이메일을 확인해주세요.");
+				alert("입력중 오류가 발생했습니다.");
+		
+			}else{
+				$("#errorMsg2").text("정상적으로 완료되었습니다.");
+				$("#showPwd").text("비밀번호는 :"+data.tpwd+" 입니다.");
+				$("#MsgPwd").hide();
+				
+		}
+		},
+		error : function(xhr, status, error) {
+			console.log(error);
+		}
+		
+	});
+	
+}
+
 
 </script>
 <body>
@@ -55,12 +150,12 @@ if('${msg }' !=""){
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="searchPwdHead">
                         <h3 class="panel-title">임시 비밀번호 발급</h3>
                     </div>
                     <div class="panel-body">
                         <form action="sendEmail" method="post" name="loginForm">
-                            <fieldset>
+                            <fieldset id="searchPwd">
                                 <div class="form-group">
                                     <p id="Msg">찾으실 계정의 아이디를 입력하세요. 이메일로 비밀번호를 보내드립니다.</p>
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
@@ -74,26 +169,51 @@ if('${msg }' !=""){
                             </fieldset>
                         </form>
                     </div>
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="searchIdHead">
                         <h3 class="panel-title">아이디 찾기</h3>
                     </div>
                       <div class="panel-body">
                         <form action="showid" method="post" name="loginForm">
-                            <fieldset>
+                            <fieldset id="searchId">
                                 <div class="form-group">
-                                <!--  <p id="errorMsg"></p> -->
-                                    <p id="Msg">찾으실 계정의 이메일을 입력하세요. 아이디를 보여드립니다.</p>
-                                    <input class="form-control" placeholder="ID" name="email" type="text" autofocus>
+                                <p id="errorMsg"></p> 
+                                <p id="showId"></p> 
+                                    <p id="Msgid">찾으실 계정의 이름과 이메일을 입력하세요. 아이디를 보여드립니다.</p>
+                                    <input class="form-control" placeholder="Name" name="name" id="name" type="text" autofocus>
+                                    <input class="form-control" placeholder="ID" name="email" id="email" type="text" >
                                 </div>
                             
                                 
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="보내기"><br>
+                                <input type="button" class="btn btn-lg btn-success btn-block" id="sendTextBtn" onclick="sendText()" value="보내기"><br>
                                 <a href="/board/login"><input type="button" class="btn btn btn-success btn-block" value="뒤로가기"></a><br>
                           
                             </fieldset>
                         </form>
                     </div>
+                     <div class="panel-heading" id="searchIdPwd2">
+                        <h3 class="panel-title">비밀번호 찾기(byAjax)</h3>
+                    </div>
+                      <div class="panel-body">
+                        <form action="showid" method="post" name="loginForm2">
+                            <fieldset id="searchPwd2">
+                                <div class="form-group">
+                                <p id="errorMsg2"></p> 
+                                <p id="showPwd"></p> 
+                                    <p id="MsgPwd">찾으실 계정의 아이디과 이메일을 입력하세요. 비밀번호를 보여드립니다.</p>
+                                    <input class="form-control" placeholder="id" name="id" id="id" type="text" autofocus>
+                                    <input class="form-control" placeholder="email" name="email2" id="email2" type="text" >
+                                </div>
+                            
+                                
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="button" class="btn btn-lg btn-success btn-block" id="sendTextBtn" onclick="sendText2()" value="보내기"><br>
+                                <a href="/board/login"><input type="button" class="btn btn btn-success btn-block" value="뒤로가기"></a><br>
+                          
+                            </fieldset>
+                        </form>
+                    </div>
+                   
                 </div>
             </div>
         </div>

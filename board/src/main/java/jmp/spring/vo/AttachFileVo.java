@@ -14,6 +14,10 @@ public class AttachFileVo {
 			//
 			private  String uploadpath;
 			private  String filename; 
+		 
+			
+			
+			
 			private  String filetype; 
 			private  String regdate ;
 			 

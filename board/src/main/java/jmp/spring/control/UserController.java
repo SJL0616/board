@@ -69,6 +69,7 @@ public class UserController {
 	UserVo uvo =service.findId2(user);
 		if(uvo==null) {
 			model.addAttribute("msg", "아이디를 확인해주세요.");
+			
 			return "/board/findPwd";
 		}else {
 			String tpwd= service.sendMail(user);
@@ -111,17 +112,25 @@ public class UserController {
 	@PostMapping("/board/loginAction")
 	public String LoginProcess(UserVo vo, Model model, HttpServletRequest request) {
 			
-	 UserVo uvo=service.login(vo);
-		if(uvo==null) {
-		    model.addAttribute("msg", "로그인이 실패했습니다.");
+	
+		log.info("==================="+vo);	
+		if(vo.getId()== "" || vo.getPwd()=="") {
+		    model.addAttribute("msg", "아이디와 비밀번호를  입력해주세요.");
+		    log.info("===================model.msg"+model);	
 		    return "/board/login";
 		}else {
+			 UserVo uvo=service.login(vo);
+			 if (uvo==null) {
+				 model.addAttribute("msg", "아이디와 비밀번호를 확인하세요.");
+				    return "/board/login";
+			 }
+			 log.info("==================="+uvo);	
 			HttpSession session = request.getSession();
 			model.addAttribute("msg", uvo.getName()+"님 어서오십시오.");
-		  
+		  /*
 			List<String> role = service.userRole(vo.getId());
-			uvo.setRole(role);//유저 role vo에 저장.
-			  log.info("==================="+uvo);	
+			uvo.setRole(role);//유저 role vo에 저장.*/
+			 
 			  /*
 			Boolean hasRole= uvo.hasRole(role);  
 			 log.info("==================="+hasRole);	
