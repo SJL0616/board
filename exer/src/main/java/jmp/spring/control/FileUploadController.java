@@ -26,6 +26,10 @@ public class FileUploadController {
 	
 	
 	
+	@GetMapping("/index2-1")
+	public void Page() {
+		
+	}
 	@GetMapping("/board/fileupload")
 	public void showPage() {
 		
