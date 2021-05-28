@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jmp.spring.service.addContentsService;
-import jmp.spring.vo.AttachFileVo;
+import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import lombok.extern.log4j.Log4j;
 
@@ -23,7 +23,7 @@ public class addTests {
 	
 	@Test
 	public void get() {
-		List<AttachFileVo> avo=service.getAllList();
+		List<ContentVo> avo=service.getAllList();
 		log.info("=================="+avo);
 		
 	}

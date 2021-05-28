@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jmp.spring.mapper.FileUploadMapper;
-import jmp.spring.vo.AttachFileVo;
+import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ReplyVo;
 @Service
 public class AttachFileServiceimpl implements AttachFileService {
@@ -15,7 +15,7 @@ public class AttachFileServiceimpl implements AttachFileService {
 	FileUploadMapper mapper;
 	
 	@Override
-	public List<AttachFileVo> getList(int attachno) {
+	public List<ContentVo> getList(int attachno) {
 		// TODO Auto-generated method stub
 		return mapper.getList(attachno);
 	}
@@ -27,25 +27,24 @@ public class AttachFileServiceimpl implements AttachFileService {
 	}
 
 	@Override
-	public int insert(AttachFileVo vo) {
+	public int insert(ContentVo vo) {
 		// TODO Auto-generated method stub
 		return mapper.insert(vo);
 	}
 
+	/*
+	 * @Override public int delete(String uuid, int attachno) { // TODO
+	 * Auto-generated method stub return mapper.delete(uuid, attachno); }
+	 */
+
 	@Override
-	public int delete(String uuid, int attachno) {
+	public ContentVo get(int cno) {
 		// TODO Auto-generated method stub
-		return mapper.delete(uuid, attachno);
+		return mapper.get(cno);
 	}
 
 	@Override
-	public AttachFileVo get(String uuid, int attachno) {
-		// TODO Auto-generated method stub
-		return mapper.get(uuid, attachno);
-	}
-
-	@Override
-	public int updatePoster(AttachFileVo vo) {
+	public int updatePoster(ContentVo vo) {
 		// TODO Auto-generated method stub
 		return mapper.updatePoster(vo);
 	}

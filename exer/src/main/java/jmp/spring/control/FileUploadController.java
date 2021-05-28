@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jmp.spring.service.AttachFileService;
 import jmp.spring.service.addContentsService;
+import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import lombok.extern.log4j.Log4j;
 
@@ -21,6 +22,9 @@ public class FileUploadController {
 
 	@Autowired
 	public addContentsService service;
+	
+	@Autowired
+	public AttachFileService aservice;
 	
 	
 	
@@ -52,7 +56,12 @@ public class FileUploadController {
 		
 	}
 	@GetMapping("/showcontents")
-	public void contentsList() {
+	public void contentsList(int cno, Model model) {
+		
+	ContentVo cvo= aservice.get(cno);
+	
+	model.addAttribute("cvo", cvo);
+
 		
 	}
 	@PostMapping("/uploadFormAction")

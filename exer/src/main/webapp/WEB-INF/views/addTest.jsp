@@ -133,6 +133,10 @@ function sendFile() {
 <input type="file" name="uploadFile" id="uploadFileElement">
   <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
 </form>
+
+<h4>  작품 동영상  업로드 </h4>
+<input type="file" name="uploadFile" id="uploadFileElement">
+ <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
 <p id="result2"></p>
 </body>
 </html>

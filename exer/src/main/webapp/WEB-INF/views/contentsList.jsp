@@ -37,7 +37,7 @@ function showAllList() {
 			/*  if(item.filetype == "Y"){ */
 				
 					console.log("==========인코딩후:"+savePath);
-				 htmlContent  +="<li><a href=/showcontents?filename="+item.pfilename+">"
+				 htmlContent  +="<li><a href=/showcontents?cno="+item.cno+">"
 				          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
 				          +item.cname+"</a>";
 				        

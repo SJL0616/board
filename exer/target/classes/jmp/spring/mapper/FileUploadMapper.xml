@@ -14,17 +14,18 @@ SEQ_T_CONTENTS.nextval,#{cname},#{story},#{cast},#{tags},#{bc},#{agelimit},#{end
 
 
 
-<select id="getList" resultType="jmp.spring.vo.AttachFileVo">
+<select id="getList" resultType="jmp.spring.vo.ContentVo">
 select attachNo, uuid, uploadPath, fileName, fileType, 
 uploadPath || uuid ||'_' || fileName as savePath,
 uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach
 where attachno= #{attachno}
 </select>
 
-<select id="getAllList" resultType="jmp.spring.vo.AttachFileVo">
+<select id="getAllList" resultType="jmp.spring.vo.ContentVo">
 SELECT * FROM T_CONTENTS ORDER BY CNO
 
 </select>
+
 
 <select id="getSeq" resultType="int">
 select seq_attach.nextval from dual
@@ -45,11 +46,11 @@ delete tbl_attach where attachno= #{attachno} and uuid = #{uuid}
 
 </delete>
 
-<select id="get" resultType="jmp.spring.vo.AttachFileVo" >
-select attachNo, uuid, uploadPath, fileName, fileType, 
-uploadPath || uuid ||'_' || fileName as savePath,
-uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach
-where attachno= #{attachno} and uuid = #{uuid}
+<select id="get" resultType="jmp.spring.vo.ContentVo" >
+select * from t_contents
+<!-- uploadPath || uuid ||'_' || fileName as savePath,
+uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach -->
+where cno= #{cno}
 </select>
 
 

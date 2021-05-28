@@ -5,14 +5,11 @@ import java.util.UUID;
 import lombok.Data;
 
 @Data
-public class AttachFileVo {
+public class ContentVo {
 	
-	        //첨부파일 번호
-			private int attachno;
-			//중복처리를 위한 램덤값 uuid
-			private  String uuid;
-			//
-			private  String puploadpath;
+	/*
+	 * //첨부파일 번호 private int attachno; //중복처리를 위한 램덤값 uuid private String uuid; //
+	 */			private  String puploadpath;
 			private  String pfilename; 
 			private  String cname; //contents 이름
 			private  String filetype; 
@@ -30,7 +27,7 @@ public class AttachFileVo {
 			private  String savepath;
 			private  String s_savepath;
 			
-			public AttachFileVo(String cname, String uploadpath, String filename) {
+			public ContentVo(String cname, String uploadpath, String filename) {
 		/* UUID uuid = UUID.randomUUID(); */
 				
 				this.cname = cname;

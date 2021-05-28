@@ -32,7 +32,7 @@ import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.service.UserService;
 import jmp.spring.service.addContentsService;
-import jmp.spring.vo.AttachFileVo;
+import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.UserVo;
 import lombok.extern.log4j.Log4j;
@@ -68,21 +68,21 @@ public class FileUploadAjaxController {
 	}
 	
 	@GetMapping("/getAllFileList/")
-	public java.util.List<AttachFileVo> getalllist(){
-	List<AttachFileVo> list=	cservice.getAllList();
+	public java.util.List<ContentVo> getalllist(){
+	List<ContentVo> list=	cservice.getAllList();
 
 		
 		return list;
 	}
 	
-	
+	/*
 	@GetMapping("/attachFileDelete/{uuid}/{attachno}")
 	public String deleteFile (@PathVariable("uuid") String uuid, 
 			@PathVariable("attachno") int attachno	) {
 		log.info("/deleteFile===========uuid :" +  uuid);
 		log.info("/deleteFile===========attachno :" + attachno);
 		
-		AttachFileVo vo =service.get(uuid, attachno);
+		ContentVo vo =service.get(cno);
 		log.info("/deleteFile===========vo :" + vo);
 		log.info("/deleteFile===========vo :" + vo.getSavepath());
 		log.info("/deleteFile===========vo :" + vo.getS_savepath());
@@ -102,7 +102,7 @@ public class FileUploadAjaxController {
 		int res = service.delete(uuid, attachno);
 		
 		return res>0?"success":"error";
-	}
+	}*/
 	//file 경로 : urlPath + uuid + _ + 파일이름
 	@GetMapping("/download")
 	public ResponseEntity<byte[]> downloafFile (String filename) {
@@ -171,9 +171,9 @@ public class FileUploadAjaxController {
 	} 
 
 	@GetMapping("/getFileList/{attachno}")
-	public java.util.List<AttachFileVo> getlist(@PathVariable("attachno") int attachno){
+	public java.util.List<ContentVo> getlist(@PathVariable("attachno") int attachno){
 		
-		List<AttachFileVo> list= service.getList(attachno); 
+		List<ContentVo> list= service.getList(attachno); 
 		
 		return list;
 	}
@@ -191,7 +191,7 @@ public class FileUploadAjaxController {
 		for(MultipartFile multipartFile : uploadFile) {
 			String uploadpath =ROOT_DIR;
 			/* String uploadpath = getFolder(); */
-			AttachFileVo vo= new AttachFileVo(cname, uploadpath, multipartFile.getOriginalFilename());
+			ContentVo vo= new ContentVo(cname, uploadpath, multipartFile.getOriginalFilename());
 			
 			
 			//중복방지를 위해 UUID를 생성해서 파일명 앞에 붙여준다.

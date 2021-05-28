@@ -8,117 +8,110 @@
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$(".start").addClass('active')
+    $(this).removeClass('start')
+	/* showAllList();	 */
+	$(".btn").on("click", function () {
+		
+		
 
+		/*   if ($(this).hasClass("active") ) {
+		        $(this).removeClass('active')
+		          $(this).addClass('btn')
+		     }else{   */ 
+		    	 
+		    	 $(this).removeClass('btn')
+		    	
+		    	  $('.active').addClass('btn')
+		    	    $('.active').removeClass('active')
+		    	    $('.active').removeClass('start')
+		    	 $(this).addClass('active') 
+		     
+		
+
+	});
+
+});
+
+
+
+
+ 
+	
+	
+function showAllList(cno) {
+
+$.ajax({
+	url: '/getAllFileList/',
+	method: 'get',
+	dataType : 'json',
+	
+success: function(data) {
+	console.log("callBack result :",data);
+	
+	
+	var htmlContent ="";
+	$.each(data, function(index, item){
+		console.log("==========아이템:"+item.pfilename);
+		console.log("==========인코딩전:"+item.s_savepath);
+		var s_savePath = encodeURIComponent(item.s_savepath);
+		var savePath = encodeURIComponent(item.savepath);
+		
+		 htmlContent ; 
+		/*  if(item.filetype == "Y"){ */
+			
+				console.log("==========인코딩후:"+savePath);
+			 htmlContent  +="<li><a href=/showcontents?filename="+item.pfilename+">"
+			          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
+			          +item.cname+"</a>";
+			        
+					
+		/*  }else{
+			 htmlContent +="<li>"+item.filename
+			 +"<a href=/download?filename="+savePath+"></li>"; 
+					 //파일네임에는 파라메터로 넘길수없는 데이터가 있어서 인코딩이 필요.
+		 } */
+	
+	});
+	console.log($(".fileListView").html(htmlContent));
+	
+	$(".fileListView").html(htmlContent);
+/* 		var file ="<img alt='immage' src='C:\upload\'"+data.savepath+">";
+	$("#text2").html(file);  */
+},
+error : function() {
+	console.log("error"); 
+}
+
+});
+
+
+}
 </script>
 
-<style type="text/css" >
 
-
-#container{
-background-color: rgb(25, 25, 25);
-	 box-sizing: border-box;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    margin: 0 auto;
-    background-color: 
-  
-}
-
-header{ position: relative;
-    border: 2px solid white;
-      margin: 0 auto;
-    width: 1200px;
-    height: 545px;
-   
-}
-#thumbnail_group{
-position: absolute;
- left:20px;
- top: 100px;
-width:  800px;
-height: 400px;
-border: 2px solid white;
-}
-
-header img{  
-float:left; 
-}
-
-#info{
-
-float:left; 
-width: 460px;
-height: 340px;
-border: 2px solid white;
-color: white;
-
-}
-#info ul li{
-font-size: 120%;
-list-style: none
-}
-
-
-#poster{position:relative;
- background: linear-gradient(0deg,rgb(25, 25, 25), white);
-/*  background-image: url("/resources/StarCraft.png"); */
- background-size: contain;
-
-}
-#posterbox{
-
-}
-#posterImg{position: absolute;
-opacity: 0.4; 
-
-}
-
-#contents{
-background-color: rgb(25, 25, 25);
-border: 2px solid white;   
-      margin: 0 auto;
-    text-align: center;
-   width: 1200px;
-    height: 100%;
- 
-}
-#List{   margin: 0 auto;
-   border: 2px solid white;
-background-color: rgb(53, 53, 53);
-    border:1px solid rgb(53, 53, 53);
-    width: 700PX;
-     overflow: hidden;
-    margin-right: 15PX;
-    float: left;
-}
-#story{   margin: 0 auto;
-background-color: rgb(73, 73, 73);
- width: 360PX;
- overflow: hidden;
-
-}
-
-</style>
+<link rel="stylesheet" href="/resources/css/contentList.css" >
 
 
 <head>
 	<title>Home</title>
 </head>
 <body>
+${cvo }
 <div id="container">
    <div id="poster">
    <div id="posterbox">
-    <img src="/resources/StarCraft.png"  alt="backimg" id="posterImg"  height="100%" width="100%" >
+    <img src=/display?filename=${cvo.pfilename } alt="backimg" id="posterImg"  height="100%" width="100%" >
     </div> 
         <header>
         <div id="thumbnail_group">
-           <img src="/resources/s_StarCraft_Remastered.png" alt="sns" class="sns" width="265" height="360"> 
+           <img src=/display?filename=s_${cvo.pfilename } alt="sns" class="sns" width="235" height="350"> 
            
                 <div id="info">
                 <ul>
-                   <li>BC/AGELIMIT/END</li> 
-                   <li id="li2"><h1>CNAME</h1></li> 
+                   <li>${cvo.bc}/${cvo.agelimit }/${cvo.end }</li> 
+                   <li id="li2"><h1>${cvo.cname}</h1></li> 
                    <br>
                    <li>+장르</li> 
                    <li>+평점</li> 
@@ -131,42 +124,62 @@ background-color: rgb(73, 73, 73);
         </header>
   </div>    
   <div id="contents"> 
+  <input type="text" value="${cvo.cno}">
         <section id="List">
             
-            <div class="buttons">
-            <button>에피소드</button>
-            <button>리뷰</button>
-            <button>프로그램 소개</button>
-            <button>공식이미지</button>
-            
-                <p style="color:rgb(141, 141, 141)">─────────────────────</p>
-                <P>컨텐츠리스트</P>
-
+            <div class="buttons" id="buttons">
+            <button class="btn start">에피소드</button>
+            <button class="btn">리뷰</button>
+            <button class="btn">프로그램 소개</button>
+            <button class="btn">공식이미지</button>
+             </div>
+             
+             <!--에피소드 리스트 --> 
+            <div class="selectOreder">
+            <P class="result" >총 ~개의 에피소드</P>
+            <div class="selectOrderBtn">
+            <button type="button" class="active">첫회부터</button>
+            <button class="end" type="button" class="">최신회부터</button>
             </div>
+            </div>
+            
+            
+            
+            <div class="episodes">
+            <img alt="thumbnail" class="thumbnail" src="/resources/디지몬썸네일.png">
+            <div class="episodesText">
+            <div id="text1"><p>디지몬 어드벤처 <br>예고편<br><span class="text2" >2021/05/28</span></p></div>
+            </div>
+            </div>
+           
             <div class="thumbs">
              
             </div>
+            
         </section>
-        <section id="story">
-            <div class="photo">
-               
+        
+        
+        
+        
+        
+        <section class="infocol">
+            <div class="story">
+               <h2>줄거리</h2>
+                <P>${cvo.story}</P> 
             </div>
-            <div class="text">
-                <h2>줄거리</h2>
-                <p style="color:rgb(107, 107, 107)">─────────────────────</p>
-                <P>cast</P>
+            <div class="cast">
+                <h2>제작정보</h2>
+                <P>${cvo.cast}</P>
             </div>
-		        <section id="tag">
-		            <div class="photo">
-		                <img src="images/GOMCAM 20210204_1309580093.png" id="myphoto3">
-		            </div>
+            <div class="tags">
 		            <div class="text">
 		                <h2>태그</h2>
-		                <p style="color:rgb(141, 141, 141)">─────────────────────</p>
+		                <p class="sharp">${cvo.tags}</p>
 		             
 		
 		            </div>
-		        </section>
+		    </div>
+		   
         </section>
    
    </div> 
