@@ -24,6 +24,10 @@ select * from  t_cast where castname= #{castname}
 <!--               -->
 
 
+<!-- 동영상 쿼리 -->
+<insert id="addVideo">
+insert into t_video (vno, )
+</insert>
 
 <select id="getList" resultType="jmp.spring.vo.ContentVo">
 select attachNo, uuid, uploadPath, fileName, fileType, 

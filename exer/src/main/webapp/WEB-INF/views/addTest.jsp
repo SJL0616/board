@@ -154,10 +154,12 @@ function sendFile() {
 	
 
 	var formData = new FormData(document.fileUploadForm);
+
 	console.log("cname",formData.get("cname"));
+
 	
 	
-	$.ajax({
+	/* $.ajax({
 		
 		url: '/fileUploadAjax',
 		method: 'post',
@@ -174,19 +176,39 @@ function sendFile() {
 			/* $("#attachno").val(data.attachno);
 			$("#attachNum").val(data.attachno); 
 			/* $("#attachno").val(data.attachno);  */
-			 $("input[name=cname]").val(data.cname);
+		/*	 $("input[name=cname]").val(data.cname);
 			$("#uploadFileElement").val("");
 		
 			/* $("#uploadFileElement").remove();
 			$("#uploadFileLable").append("<input type='file' name='uploadFile' id='uploadFileElement'>"); */
 			
-		},
+			/*	},
 		error : function() {
 			console.log("error");
 		}
 		
-	});
+	}); */
 	
+
+}
+
+function moreInputBar() {
+	 var strInput = "";
+	/*  var strBtn =""; */
+	/*  for(int i=0; i<n;i++){ */
+		 strInput += "<input type=\"file\" name=\"uploadFile\" id=\"uploadFileElement1\"><br/>"
+		 +"<textarea rows=\"4\"  cols=\"30\" name=\"story\" id=\"story\" ></textarea><br>"
+		 +"<input type=\"text\" name=\"regdate\" id=\"regdate\"><br>";
+	/*  } */
+	 $("#more").after(strInput);
+}
+
+function sendVFile() {
+	formData = new FormData(document.VfileUploadForm);
+
+console.log("cname",formData.get("cname"));
+console.log("story",formData.get("story"));
+console.log("regdate",formData.get("regdate"));
 
 }
 
@@ -245,10 +267,20 @@ function sendFile() {
 </form>
 
 <h4>  작품 동영상  업로드 </h4>
-<input type="text" name="cno" id="showcno" >
-<input type="file" name="uploadFile" id="uploadFileElement1">
- <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
- <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" >
+
+<form action="addContentsPhoto" method="post" name="VfileUploadForm" enctype="multipart/form-data">
+cno<input type="text" name="cno" id="showcno" ><br>
+
+영상 파일<input type="file" name="uploadFile" id="uploadFileElement1">
+동영상스토리<textarea rows="4"  cols="30" name="story" id="story" ></textarea><br>
+regdate<input type="text" name="regdate" id="regdate"><br>
+<div id="more"></div>
+ <input type="button" value="입력 동영상 추가" id="sendBtn" onclick="moreInputBar()" >
+ 
+ <input type="button" value="보내기" id="sendBtn" onclick="sendVFile()" >
+ 
+ <!-- 각자 form을 만들어서 업로드하던지, 전체를 배열? 로 묶어서 보내던지 해야함/ 썸내일 img 파일도 업로드 해야함 -->
+ </form>
 <p id="result2"></p>
 </body>
 </html>
