@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import jmp.spring.mapper.FileUploadMapper;
 import jmp.spring.service.addContentsService;
+import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import lombok.extern.log4j.Log4j;
@@ -20,8 +22,21 @@ public class addTests {
 
 	@Autowired
 	addContentsService service;
-	
+	@Autowired
+	FileUploadMapper umapper;
 	@Test
+	public void getCastByname() {
+		umapper.getcastByName("나루토");
+		
+	}
+	
+	/*
+	 * public void addcast(){ CastVo castvo= new CastVo(); castvo.setCastno(1);
+	 * castvo.setCast("조연"); service.addcast_match(2, castvo.getCast(),
+	 * castvo.getCastno()); }
+	 */
+	
+	
 	public void get() {
 		List<ContentVo> avo=service.getAllList();
 		log.info("=================="+avo);

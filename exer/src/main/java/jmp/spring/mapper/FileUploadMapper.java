@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
@@ -12,14 +13,20 @@ import jmp.spring.vo.ReplyVo;
 public interface FileUploadMapper {
 
 	
-	public int addcontents(ContentsVo cvo);
+	public int addcontents(ContentsVo cvo); //ÄÜÅÙÃ÷ text¾÷·Îµå
+	
+	public int addcast(CastVo cvo); //ÄÜÅÙÃ÷ text¾÷·Îµå
+	public int addcast_match(@Param("cno") int cno,@Param("cast") String cast,@Param("castno") int castno); //ÄÜÅÙÃ÷ text¾÷·Îµå
+	public CastVo getcastByName(String castname);
+	
+	
 	public List<ContentVo> getAllList();
 	
 	public List<ContentVo> getList(int attachno);
 	
 	public int getSeq();
 	public int insert(ContentVo vo);
-	public int updatePoster(ContentVo vo);
+	public int updatePoster(ContentVo vo);//ÄÜÅÙÃ÷ Æ÷½ºÅÍÀÌ¹ÌÁö ¾÷·Îµå
 	
 	
 	/*
@@ -28,4 +35,5 @@ public interface FileUploadMapper {
 	 */
 	 
 	public ContentVo get(int cno);
+	public ContentVo getBycname (String cname);
 }

@@ -16,4 +16,5 @@ public interface AttachFileService {
 	
 	/* public int delete(String uuid, int attachno); */
 	public ContentVo get(int cno);
+	public ContentVo getBycname (String cname);
 }

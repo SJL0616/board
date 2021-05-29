@@ -32,6 +32,7 @@ import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.service.UserService;
 import jmp.spring.service.addContentsService;
+import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.UserVo;
@@ -57,11 +58,14 @@ public class FileUploadAjaxController {
 	public Map<String, Object>  addContents(@RequestBody ContentsVo cvo) {
 		log.info("/addContent===========cvo :" +  cvo);
 		int res =cservice.addcontents(cvo);
+		ContentVo list= service.getBycname(cvo.getCname());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(res>0) {
 			map.put("result", "success");
-		map.put("cname", cvo.getCname());}
+		map.put("cname", cvo.getCname());
+		map.put("list", list);
+		}
 		else {
 			map.put("result", "fail");}
 		return map;
@@ -74,6 +78,117 @@ public class FileUploadAjaxController {
 		
 		return list;
 	}
+	
+	@PostMapping("/addCast") //배우 정보입력
+	public Map<String, Object>  addcast(MultipartFile[] uploadFile,
+			 String castname, String cast ) {
+		log.info("/addCast===========uploadFile :" + uploadFile);
+		log.info("/addCast===========castname :" + castname);
+		log.info("/addCast===========cast :" + cast);
+		log.info("/addCast=========== uploadFileName:" + uploadFile.length);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+	
+			
+		/*	cvo.setCastname(castname);
+			cvo.setProfileUploadPath(ROOT_DIR+"CAST\\");*/
+			
+			for(MultipartFile multipartFile : uploadFile) {
+				
+				CastVo cvo= new CastVo(castname, ROOT_DIR+"CAST\\", multipartFile.getOriginalFilename());
+				log.info("/addCast=========== SAVEPATH:" + cvo.getSavepath());
+				log.info("/addCast=========== SAVEPATH:" + cvo.getSavepath());
+				File saveFile = new File(cvo.getSavepath());
+				try {
+					
+				
+				multipartFile.transferTo(saveFile);
+				
+				//확장자를 이용하여  MimeType를 결정합니다.
+				//마임타입을 확인하지 못하면 null을 확인합니다.
+				String contentType = Files.probeContentType(saveFile.toPath());
+				log.info("=============contentType :"+contentType );
+				//이미지 파일인 경우 썸네일을 생성해줍니다.
+				if(contentType.startsWith("image")&& contentType!=null) {
+					//썸네일을 생성할 경로를 지정
+			/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
+					String thmnail = ROOT_DIR+vo.getS_savepath();*/
+					String thmnail = cvo.getS_savepath();
+					//썸네일 이미지 생성
+					Thumbnails.of(saveFile).size(200, 200).toFile(thmnail);
+				cvo.setProfileImgName(multipartFile.getOriginalFilename());
+				
+				
+			}
+			}catch(IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+			int res= cservice.addcast(cvo);	
+			if(res>0) {
+				map.put("result", "success");
+			    map.put("castname", castname);
+			   
+			}
+			else {	
+				map.put("result", "error");
+				
+			}
+	
+		}
+			 return map;	
+	
+	}
+		
+	
+			
+		/* CastVo cvo =cservice.getcastByName(castname); */
+		/*
+		int res=cservice.addcast_match(cno, cast, castvo.getCastno());
+		
+	
+
+	}*/
+	
+	
+	
+
+	@GetMapping("/addCastMatch/{cno}/{castname}/{cast}")
+	public Map<String, Object>  addcast(@PathVariable("cno") int cno, 
+			@PathVariable("castname") String castname, @PathVariable("cast") String cast ) {
+		log.info("/addCast===========cno :" + cno);
+		log.info("/addCast===========castname :" + castname);
+		log.info("/addCast===========cast :" + cast);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		CastVo castvo =cservice.getcastByName(castname);
+		if(castvo==null) {
+			map.put("result", "배우 정보를 등록하세요 ");
+			return map;
+		}
+			
+		CastVo cvo =cservice.getcastByName(castname);
+		
+		int res=cservice.addcast_match(cno, cast, cvo.getCastno());
+		
+		if(res>0) {
+			map.put("result", "success");
+		    map.put("castname", castname);
+		    return map;
+		}
+		else {	
+			map.put("result", "error");
+			return map;
+		}
+		
+
+	}
+	
 	
 	/*
 	@GetMapping("/attachFileDelete/{uuid}/{attachno}")
@@ -216,7 +331,7 @@ public class FileUploadAjaxController {
 						//확장자를 이용하여  MimeType를 결정합니다.
 						//마임타입을 확인하지 못하면 null을 확인합니다.
 						String contentType = Files.probeContentType(saveFile.toPath());
-						
+						log.info("=============contentType :"+contentType );
 						//이미지 파일인 경우 썸네일을 생성해줍니다.
 						if(contentType.startsWith("image")&& contentType!=null) {
 							//썸네일을 생성할 경로를 지정

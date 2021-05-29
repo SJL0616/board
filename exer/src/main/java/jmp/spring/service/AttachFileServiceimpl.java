@@ -49,5 +49,11 @@ public class AttachFileServiceimpl implements AttachFileService {
 		return mapper.updatePoster(vo);
 	}
 
+	@Override
+	public ContentVo getBycname(String cname) {
+		// TODO Auto-generated method stub
+		return mapper.getBycname(cname);
+	}
+
 
 }
