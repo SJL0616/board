@@ -26,9 +26,12 @@
 		
 		 <multipart-config>
 		  	<location>C:\\upload</location>
-		  	<max-file-size>20971520</max-file-size> <!--1MB * 20 -->
-		  	<max-request-size>41943040</max-request-size><!-- 40MB -->
-		  	<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
+		  	<max-file-size>429916160</max-file-size> <!--1MB * 20 -->
+		  	<max-request-size>429916160</max-request-size><!-- 40MB -->
+		  	<file-size-threshold>429916160</file-size-threshold> <!-- 20MB -->
+		  	  	<!-- <max-file-size>20971520</max-file-size> 1MB * 20
+		  	<max-request-size>41943040</max-request-size>40MB
+		  	<file-size-threshold>20971520</file-size-threshold> 20MB -->
 		</multipart-config>	
 		
 		

@@ -9,6 +9,7 @@ import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
+import jmp.spring.vo.VideoVo;
 
 public interface FileUploadMapper {
 
@@ -18,6 +19,8 @@ public interface FileUploadMapper {
 	public int addcast(CastVo cvo); //ÄÜÅÙÃ÷ text¾÷·Îµå
 	public int addcast_match(@Param("cno") int cno,@Param("cast") String cast,@Param("castno") int castno); //ÄÜÅÙÃ÷ text¾÷·Îµå
 	public CastVo getcastByName(String castname);
+	
+	public int addVideo(VideoVo vvo);
 	
 	
 	public List<ContentVo> getAllList();

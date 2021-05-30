@@ -159,7 +159,7 @@ function sendFile() {
 
 	
 	
-	/* $.ajax({
+	 $.ajax({
 		
 		url: '/fileUploadAjax',
 		method: 'post',
@@ -176,39 +176,77 @@ function sendFile() {
 			/* $("#attachno").val(data.attachno);
 			$("#attachNum").val(data.attachno); 
 			/* $("#attachno").val(data.attachno);  */
-		/*	 $("input[name=cname]").val(data.cname);
+		 $("input[name=cname]").val(data.cname);
 			$("#uploadFileElement").val("");
 		
 			/* $("#uploadFileElement").remove();
 			$("#uploadFileLable").append("<input type='file' name='uploadFile' id='uploadFileElement'>"); */
 			
-			/*	},
+			/* */	},
 		error : function() {
 			console.log("error");
 		}
 		
-	}); */
+	}); 
 	
 
 }
 
-function moreInputBar() {
+function moreInputBar(n) {
 	 var strInput = "";
+	 var strBtn = "";
 	/*  var strBtn =""; */
 	/*  for(int i=0; i<n;i++){ */
-		 strInput += "<input type=\"file\" name=\"uploadFile\" id=\"uploadFileElement1\"><br/>"
+		 strInput +="<form action=\"addContentsPhoto\" method=\"post\" name=VfileUploadForm"+(n+1)+" id=VfileUploadForm"+(n+1)+" enctype=\"multipart/form-data\"><br/>"
+			 +"<input type=\"file\" name=\"uploadFile\" id=\"uploadFileElement1\"><br/>"
 		 +"<textarea rows=\"4\"  cols=\"30\" name=\"story\" id=\"story\" ></textarea><br>"
-		 +"<input type=\"text\" name=\"regdate\" id=\"regdate\"><br>";
+		 +"<input type=\"text\" name=\"regdate\" id=\"regdate\"><br>"
+		 +"<input type=\"button\" value=\"보내기\" id=\"sendBtn\" onclick=sendVFile("+(n+1)+")><br/>";
+		 strBtn +="<input type=\"button\" value=\"입력 동영상 추가\" id=\"moreInputBtn\" onclick=moreInputBar("+(n+1)+")><br/>";
 	/*  } */
 	 $("#more").after(strInput);
+	 document.getElementById("moreBtn").innerHTML =  strBtn;
+	
 }
 
-function sendVFile() {
-	formData = new FormData(document.VfileUploadForm);
+function sendVFile(n) {
+	formData = new FormData( document.getElementById("VfileUploadForm"+n+""));
+	
 
-console.log("cname",formData.get("cname"));
+
 console.log("story",formData.get("story"));
 console.log("regdate",formData.get("regdate"));
+console.log("formData",formData.get("uploadFile"));
+formData.set('cno', $("#showcno").val());
+console.log("cno",formData.get("cno"));
+
+$.ajax({
+	
+	url: '/VfileUploadAjax',
+	method: 'post',
+	dataType : 'json',
+	processData: false,
+	contentType: false,
+	data: formData,
+	
+	success: function(data,result, textStatus, jqXHR) {
+		console.log("callBack result :",result);
+		$("#result4").text(data.vname+"파일 입력완료");
+		//name속성이 attachno인 input에 attachno을 넣어줌.
+		
+		/* $("#attachno").val(data.attachno);
+		$("#attachNum").val(data.attachno); 
+		/* $("#attachno").val(data.attachno);  */
+	 
+		/* $("#uploadFileElement").remove();
+		$("#uploadFileLable").append("<input type='file' name='uploadFile' id='uploadFileElement'>"); */
+		
+		/* */	},
+	error : function() {
+		console.log("error");
+	}
+	
+}); 
 
 }
 
@@ -229,7 +267,7 @@ console.log("regdate",formData.get("regdate"));
 <form action=# method="post" name="addcastForm" enctype="multipart/form-data" >
 
 배우이름<input type="text"  name="castname" id="castname" /><br/>
-프로필사진<input type="file" name="uploadFile" id="uploadFileElement"><br/>	          
+프로필사진<input type="file" name="uploadFile" id="uploadFileElement3"><br/>	          
 <input type="button" value="보내기" id="addcastBtn" onclick=sendCastFile() ></form><br/>
 
 <p id="result"></p><br>
@@ -267,20 +305,27 @@ console.log("regdate",formData.get("regdate"));
 </form>
 
 <h4>  작품 동영상  업로드 </h4>
+<p id="result4"></p><BR>
 
-<form action="addContentsPhoto" method="post" name="VfileUploadForm" enctype="multipart/form-data">
+<form action="addContentsPhoto" method="post" name="VfileUploadForm0" id="VfileUploadForm0" enctype="multipart/form-data">
 cno<input type="text" name="cno" id="showcno" ><br>
 
 영상 파일<input type="file" name="uploadFile" id="uploadFileElement1">
-동영상스토리<textarea rows="4"  cols="30" name="story" id="story" ></textarea><br>
+동영상스토리<textarea rows="4"  cols="30"  name="story" id="story" ></textarea><br>
 regdate<input type="text" name="regdate" id="regdate"><br>
-<div id="more"></div>
- <input type="button" value="입력 동영상 추가" id="sendBtn" onclick="moreInputBar()" >
- 
- <input type="button" value="보내기" id="sendBtn" onclick="sendVFile()" >
+ <input type="button" value="보내기" id="VsendBtn" onclick="sendVFile(0)" >
+</form>
+<div id="more">
+
+</div>
+<div id="moreBtn">
+  <input type="button" value="입력 동영상 추가" id="moreInputBtn" onclick="moreInputBar(1)" >
+</div>
+
+
  
  <!-- 각자 form을 만들어서 업로드하던지, 전체를 배열? 로 묶어서 보내던지 해야함/ 썸내일 img 파일도 업로드 해야함 -->
- </form>
+
 <p id="result2"></p>
 </body>
 </html>

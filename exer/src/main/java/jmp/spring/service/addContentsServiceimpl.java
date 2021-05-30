@@ -9,6 +9,7 @@ import jmp.spring.mapper.FileUploadMapper;
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
+import jmp.spring.vo.VideoVo;
 @Service
 public class addContentsServiceimpl implements addContentsService {
 
@@ -40,6 +41,11 @@ public class addContentsServiceimpl implements addContentsService {
 	public int addcast(CastVo cvo) {
 		// TODO Auto-generated method stub
 		return mapper.addcast(cvo);
+	}
+	@Override
+	public int addVideo(VideoVo vvo) {
+		// TODO Auto-generated method stub
+		return mapper.addVideo(vvo);
 	}
 
 }

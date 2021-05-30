@@ -32,10 +32,12 @@ import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
 import jmp.spring.service.UserService;
 import jmp.spring.service.addContentsService;
+import jmp.spring.service.generateThumnail;
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.UserVo;
+import jmp.spring.vo.VideoVo;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -399,5 +401,80 @@ public class FileUploadAjaxController {
 		
 		return uploadPath;
 	}
+	
+	@Autowired
+	generateThumnail gt;
+	
+	@PostMapping("/VfileUploadAjax") //배우 정보입력
+	public Map<String, Object>  addcast(MultipartFile[] uploadFile,
+			 String story, String regdate,int cno ) {
+		log.info("/addCast===========uploadFile :" + uploadFile);
+		log.info("/addCast===========castname :" + story);
+		log.info("/addCast===========cast :" +  cno );
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+	
+			
+		/*	cvo.setCastname(castname);
+			cvo.setProfileUploadPath(ROOT_DIR+"CAST\\");*/
+			
+			for(MultipartFile multipartFile : uploadFile) {
+				
+				VideoVo vvo= new VideoVo(story, regdate, cno, ROOT_DIR+"VIDEO\\", multipartFile.getOriginalFilename());
+						
+				log.info("/addCast=========== SAVEPATH:" + vvo.getSavepath());
+				
+				File saveFile = new File(vvo.getSavepath());
+				try {
+					
+				
+				multipartFile.transferTo(saveFile);
+				gt.generate(saveFile);//썸네일 생성
+				
+				//확장자를 이용하여  MimeType를 결정합니다.
+				//마임타입을 확인하지 못하면 null을 확인합니다.
+				String contentType = Files.probeContentType(saveFile.toPath());
+				log.info("=============contentType :"+contentType );
+				//이미지 파일인 경우 썸네일을 생성해줍니다.
+				
+					//썸네일을 생성할 경로를 지정
+			/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
+					String thmnail = ROOT_DIR+vo.getS_savepath();*/
+				/*
+				 * String thmnail = vvo.getS_savepath(); //썸네일 이미지 생성
+				 * Thumbnails.of(saveFile).size(200, 200).toFile(thmnail);
+				 */
+				
+				
+			
+			}catch(IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+				int res= cservice.addVideo(vvo);
+	
+			 /* = cservice.addcast(cvo); */
+			if(res>0) {
+				map.put("result", "success");
+				map.put("vname", multipartFile.getOriginalFilename());
+			   
+			}
+			else {	
+				map.put("result", "error");
+				
+			}
+	
+		}
+			 return map;	
+	
+	}
+	
+	
+	
 	
 }

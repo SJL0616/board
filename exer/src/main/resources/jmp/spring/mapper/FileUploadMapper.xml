@@ -26,7 +26,8 @@ select * from  t_cast where castname= #{castname}
 
 <!-- 동영상 쿼리 -->
 <insert id="addVideo">
-insert into t_video (vno, )
+insert into t_video(vno,vUploadPath,vfileName, regdate,story,cno) values(
+SEQ_T_VIDEO.nextval,#{vUploadPath},#{vfileName},#{ regdate},#{story},#{cno})
 </insert>
 
 <select id="getList" resultType="jmp.spring.vo.ContentVo">
