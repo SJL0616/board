@@ -12,7 +12,10 @@ public interface addContentsService {
 	public int addcontents(ContentsVo cvo);
 	
 	public int addcast(CastVo cvo);
+	
 	public int addVideo(VideoVo vvo);
+	public List<VideoVo> getAllVideo(int cno);
+	
 	
 	public int addcast_match(int cno, String cast, int castno); 
 	public CastVo getcastByName(String castname);

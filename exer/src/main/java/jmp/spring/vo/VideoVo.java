@@ -7,25 +7,27 @@ public class VideoVo {
 
 int vno;
 int cno;
-String vUploadPath;
-String vfileName;
+String vuploadpath;
+
+String vfilename;
 String regdate;
 String story;
 
 
 private  String savepath;
 private  String s_savepath;
-public VideoVo(String story, String regdate,int cno, String vUploadPath, String vfileName) {
+public VideoVo() {};
+public VideoVo(String regdate,String vfilename, String vuploadpath,String story,int cno)  {
 	/* UUID uuid = UUID.randomUUID(); */
 			
 			this.story = story;
 			this.regdate = regdate;
 			this.cno= cno;
 	/* this.uuid=uuid.toString(); */
-			this.vUploadPath = vUploadPath;
-			this.vfileName= vfileName;
+			this.vuploadpath = vuploadpath;
+			this.vfilename= vfilename;
 			
-			this.savepath= vUploadPath+ vfileName;
-			this.s_savepath= vUploadPath+"s_"+ vfileName;
+			this.savepath=vuploadpath+ vfilename;
+			this.s_savepath=vuploadpath+"s_"+ vfilename;
 		}
 }

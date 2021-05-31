@@ -26,9 +26,15 @@ select * from  t_cast where castname= #{castname}
 
 <!-- 동영상 쿼리 -->
 <insert id="addVideo">
-insert into t_video(vno,vUploadPath,vfileName, regdate,story,cno) values(
-SEQ_T_VIDEO.nextval,#{vUploadPath},#{vfileName},#{ regdate},#{story},#{cno})
+insert into t_video(vno,vuploadpath,vfilename, regdate,story,cno) values(
+SEQ_T_VIDEO.nextval,#{vuploadpath},#{vfilename},#{ regdate},#{story},#{cno})
 </insert>
+
+<select id="getAllVideo" resultType="jmp.spring.vo.VideoVo">
+select * from t_video where cno= #{cno}
+</select>
+
+<!-- 끝 -->
 
 <select id="getList" resultType="jmp.spring.vo.ContentVo">
 select attachNo, uuid, uploadPath, fileName, fileType, 

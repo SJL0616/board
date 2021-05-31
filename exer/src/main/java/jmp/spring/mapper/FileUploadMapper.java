@@ -21,7 +21,7 @@ public interface FileUploadMapper {
 	public CastVo getcastByName(String castname);
 	
 	public int addVideo(VideoVo vvo);
-	
+	public List<VideoVo> getAllVideo(int cno);
 	
 	public List<ContentVo> getAllList();
 	

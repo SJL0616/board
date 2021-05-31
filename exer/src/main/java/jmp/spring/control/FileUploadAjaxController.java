@@ -263,8 +263,13 @@ public class FileUploadAjaxController {
 	public  ResponseEntity<byte[]> displayFile(String filename) {
 		log.info("/display=================fileName:"+ filename);
 		//filename :uploadpath + uuid + '_'+ filename
+		File file ;
+		log.info("/display=================filename.contains(\"-thumb\"):"+filename.contains("-thumb"));
+	if(filename.contains("-thumb")) {
+		 file = new File(ROOT_DIR+"VIDEO\\"+filename);
+	}else {
+		file = new File(ROOT_DIR + filename);}
 	
-		File file = new File(ROOT_DIR + filename);
 		HttpHeaders headers = new HttpHeaders();
 				
 		//파일이 있는지 확인
@@ -421,7 +426,7 @@ public class FileUploadAjaxController {
 			
 			for(MultipartFile multipartFile : uploadFile) {
 				
-				VideoVo vvo= new VideoVo(story, regdate, cno, ROOT_DIR+"VIDEO\\", multipartFile.getOriginalFilename());
+				VideoVo vvo= new VideoVo( regdate, multipartFile.getOriginalFilename(), ROOT_DIR+"VIDEO\\",story,cno );
 						
 				log.info("/addCast=========== SAVEPATH:" + vvo.getSavepath());
 				

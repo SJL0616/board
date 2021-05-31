@@ -24,9 +24,16 @@ public class addTests {
 	addContentsService service;
 	@Autowired
 	FileUploadMapper umapper;
+	
+	
+	@Test
+	public void getVideo() {
+		service.getAllVideo(20);
+		
+	}
 	@Test
 	public void getCastByname() {
-		umapper.getcastByName("나루토");
+		umapper.getcastByName("기무");
 		
 	}
 	

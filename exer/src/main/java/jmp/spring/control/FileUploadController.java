@@ -2,6 +2,7 @@ package jmp.spring.control;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import jmp.spring.service.AttachFileService;
 import jmp.spring.service.addContentsService;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
+import jmp.spring.vo.VideoVo;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -59,8 +61,10 @@ public class FileUploadController {
 	public void contentsList(int cno, Model model) {
 		
 	ContentVo cvo= aservice.get(cno);
+	List<VideoVo> vvo= service.getAllVideo(cno);
 	
 	model.addAttribute("cvo", cvo);
+	model.addAttribute("vvo", vvo);
 
 		
 	}

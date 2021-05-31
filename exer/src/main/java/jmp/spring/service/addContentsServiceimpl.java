@@ -47,5 +47,10 @@ public class addContentsServiceimpl implements addContentsService {
 		// TODO Auto-generated method stub
 		return mapper.addVideo(vvo);
 	}
+	@Override
+	public List<VideoVo> getAllVideo(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.getAllVideo(cno);
+	}
 
 }

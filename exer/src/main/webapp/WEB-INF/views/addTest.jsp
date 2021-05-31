@@ -306,7 +306,7 @@ $.ajax({
 
 <h4>  작품 동영상  업로드 </h4>
 <p id="result4"></p><BR>
-
+<p>파일 이름 띄어쓰기 안됨.</p>
 <form action="addContentsPhoto" method="post" name="VfileUploadForm0" id="VfileUploadForm0" enctype="multipart/form-data">
 cno<input type="text" name="cno" id="showcno" ><br>
 

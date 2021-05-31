@@ -99,6 +99,7 @@ error : function() {
 </head>
 <body>
 ${cvo }
+${vvo }
 <div id="container">
    <div id="poster">
    <div id="posterbox">
@@ -142,19 +143,22 @@ ${cvo }
             <button class="end" type="button" class="">최신회부터</button>
             </div>
             </div>
-            
-            
-            
-            <div class="episodes">
-            <img alt="thumbnail" class="thumbnail" src="/resources/디지몬썸네일.png">
-            <div class="episodesText">
-            <div id="text1"><p>디지몬 어드벤처 <br>예고편<br><span class="text2" >2021/05/28</span></p></div>
-            </div>
-            </div>
            
-            <div class="thumbs">
-             
+            
+             <c:forEach items="${vvo}" var="vvo">
+             <div class="episodes">
+            <img alt="thumbnail" class="thumbnail" src=/display?filename=${vvo.vfilename}-thumb.png width="120" height="67">
+            <div class="episodesText">
+            <div class="text1"><p>${cvo.cname}<br>${vvo.vfilename}<br><span class="text2" >2021/05/28</span></p></div>
             </div>
+            </div>
+            </c:forEach>
+        
+           
+           
+            <!-- <div class="thumbs">
+             
+            </div> -->
             
         </section>
         
