@@ -64,10 +64,24 @@ public class FileUploadController {
 	List<VideoVo> vvo= service.getAllVideo(cno);
 	
 	model.addAttribute("cvo", cvo);
+	
+	int vSize= vvo.size();
+	
 	model.addAttribute("vvo", vvo);
+	model.addAttribute("vSize", vSize);
 
 		
 	}
+	@GetMapping("/Watch")
+	public void WatchPage(int vno, int cno,Model model) {
+	VideoVo vvo= service.getOneVideo(vno);
+	ContentVo cvo= aservice.get(cno);
+		
+		model.addAttribute("vvo", vvo);
+		model.addAttribute("cvo", cvo);
+	}
+	
+	
 	@PostMapping("/uploadFormAction")
 	public void fileUpload(MultipartFile[] uploadFile, Model model) {
 		

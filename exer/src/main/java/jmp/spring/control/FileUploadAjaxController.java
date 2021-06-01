@@ -73,6 +73,22 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
+	
+	@GetMapping("/showVList/{cno}/{sort}")
+	public List<VideoVo> showVList(@PathVariable("cno") int cno,@PathVariable("sort") String sort){
+		List<VideoVo> vvo= null;
+		if(sort.equals("DESC")) {
+			vvo=	cservice.getAllVideoD(cno);
+		}else {
+			vvo=	cservice.getAllVideo(cno);
+	         
+		}
+
+		
+		return vvo;
+	}
+	
+
 	@GetMapping("/getAllFileList/")
 	public java.util.List<ContentVo> getalllist(){
 	List<ContentVo> list=	cservice.getAllList();
@@ -265,7 +281,12 @@ public class FileUploadAjaxController {
 		//filename :uploadpath + uuid + '_'+ filename
 		File file ;
 		log.info("/display=================filename.contains(\"-thumb\"):"+filename.contains("-thumb"));
-	if(filename.contains("-thumb")) {
+	if( filename.contains("mp4")) {
+			/*
+			 * if(filename.contains("-thumb")) {
+			 * 
+			 * }
+			 */
 		 file = new File(ROOT_DIR+"VIDEO\\"+filename);
 	}else {
 		file = new File(ROOT_DIR + filename);}

@@ -22,6 +22,8 @@ public interface FileUploadMapper {
 	
 	public int addVideo(VideoVo vvo);
 	public List<VideoVo> getAllVideo(int cno);
+	public List<VideoVo> getAllVideoD(int cno);
+	public VideoVo getOneVideo(int vno);
 	
 	public List<ContentVo> getAllList();
 	

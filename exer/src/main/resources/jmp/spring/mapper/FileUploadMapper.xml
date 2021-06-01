@@ -34,6 +34,14 @@ SEQ_T_VIDEO.nextval,#{vuploadpath},#{vfilename},#{ regdate},#{story},#{cno})
 select * from t_video where cno= #{cno}
 </select>
 
+<select id="getAllVideoD" resultType="jmp.spring.vo.VideoVo">
+select * from t_video where cno= #{cno} ORDER BY VNO DESC
+</select>
+
+<select id="getOneVideo" resultType="jmp.spring.vo.VideoVo">
+select * from t_video where vno= #{vno}
+</select>
+
 <!-- 끝 -->
 
 <select id="getList" resultType="jmp.spring.vo.ContentVo">

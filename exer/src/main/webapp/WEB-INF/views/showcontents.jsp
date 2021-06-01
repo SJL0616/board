@@ -7,43 +7,84 @@
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
+
+
+ <script type="text/javascript" src="/resources/js/contentList.js"></script>
+ 
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".start").addClass('active')
     $(this).removeClass('start')
 	/* showAllList();	 */
-	$(".btn").on("click", function () {
-		
-		
+	
+	$(".btn").on("click", function (){
 
-		/*   if ($(this).hasClass("active") ) {
-		        $(this).removeClass('active')
-		          $(this).addClass('btn')
-		     }else{   */ 
-		    	 
 		    	 $(this).removeClass('btn')
-		    	
 		    	  $('.active').addClass('btn')
-		    	    $('.active').removeClass('active')
+		    	    $('.active').removeClass('active')//다른 active 클래스 가지고 있는 클래스 삭제.
 		    	    $('.active').removeClass('start')
 		    	 $(this).addClass('active') 
-		     
-		
-
 	});
+	
+	
+	$(".orderStart").addClass('orderActive')//첫회부터, 최신회부터 class 처리 
+ 
+    
+		$(".orderBtn").on("click", function (){
+  
+		    	 $(this).removeClass('orderBtn')
+		    	  $('.orderActive').addClass('orderBtn')
+		    	    $('.orderActive').removeClass('orderActive')
+		    	      $(this).addClass('orderActive')    	
+	});
+	
 
+ $("#episodeListBtn").on("click", function () {
+	
+	var cno = $("#cno").val();
+	$("#reviewBox").hide();
+	$("#episodeList").show();
+	
+	/* showVList(cno); */
+
+})
+
+$("#reviewListBtn").on("click", function () {
+	
+ 	var cno = $("#cno").val();
+	$("#reviewBox").show();
+	$("#episodeList").hide();
+
+
+})
+	
+          $("#OrderByVno").on("click", function () {
+        	  var cno = $("#cno").val(); 
+        	 var sort = "ASC";
+        	showVList(cno, sort);	
+
+	            });         
+	     $("#OrderByDESC").on("click", function () {
+	    	 var cno = $("#cno").val();
+             var sort = "DESC";
+            
+             showVList(cno, sort);
+	            });            
+	
+
+	
+	
 });
 
-
-
+	
 
  
+
 	
-	
-function showAllList(cno) {
+function showVList(cno, sort) {//안씀
 
 $.ajax({
-	url: '/getAllFileList/',
+	url: '/showVList/'+cno+'/'+sort,
 	method: 'get',
 	dataType : 'json',
 	
@@ -52,28 +93,26 @@ success: function(data) {
 	
 	
 	var htmlContent ="";
-	$.each(data, function(index, item){
-		console.log("==========아이템:"+item.pfilename);
-		console.log("==========인코딩전:"+item.s_savepath);
-		var s_savePath = encodeURIComponent(item.s_savepath);
-		var savePath = encodeURIComponent(item.savepath);
+	
+
 		
 		 htmlContent ; 
-		/*  if(item.filetype == "Y"){ */
-			
-				console.log("==========인코딩후:"+savePath);
-			 htmlContent  +="<li><a href=/showcontents?filename="+item.pfilename+">"
-			          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
-			          +item.cname+"</a>";
-			        
-					
-		/*  }else{
-			 htmlContent +="<li>"+item.filename
-			 +"<a href=/download?filename="+savePath+"></li>"; 
-					 //파일네임에는 파라메터로 넘길수없는 데이터가 있어서 인코딩이 필요.
-		 } */
+		 
+		 var htmlContent ="";	
+     	$.each(data, function(index, item){
+     		
+     htmlContent +="<div class=\"episodes\" onclick=\"showWatchPage("+item.vno+")\">"
+          +"<img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"120\" height=\"67\">"
+          +"<div class=\"episodesText\">"
+          +"<div class=\"text1\"><p><br>"+item.vfilename+"<br><span class=\"text2\" >"+item.regdate+"</span>"
+          +"</p></div></div></div>";
+	})
 	
-	});
+	
+	$("#episodesBar").html(htmlContent);
+		 
+	
+
 	console.log($(".fileListView").html(htmlContent));
 	
 	$(".fileListView").html(htmlContent);
@@ -84,10 +123,17 @@ error : function() {
 	console.log("error"); 
 }
 
-});
+});//ajax
+}//showVList
 
+function  showWatchPage(vno){
+	var cno = $("#cno").val();
+	console.log(vno);
+	console.log(cno);
 
+	location.href="/Watch?vno="+vno+"&cno="+cno;
 }
+
 </script>
 
 
@@ -125,34 +171,40 @@ ${vvo }
         </header>
   </div>    
   <div id="contents"> 
-  <input type="text" value="${cvo.cno}">
+  <input type="text" id="cno" value="${cvo.cno}">
         <section id="List">
             
             <div class="buttons" id="buttons">
-            <button class="btn start">에피소드</button>
-            <button class="btn">리뷰</button>
+            <button class="btn start" id="episodeListBtn" >에피소드</button>
+            <button class="btn" id="reviewListBtn" >리뷰</button>
             <button class="btn">프로그램 소개</button>
             <button class="btn">공식이미지</button>
              </div>
              
              <!--에피소드 리스트 --> 
-            <div class="selectOreder">
-            <P class="result" >총 ~개의 에피소드</P>
-            <div class="selectOrderBtn">
-            <button type="button" class="active">첫회부터</button>
-            <button class="end" type="button" class="">최신회부터</button>
-            </div>
-            </div>
-           
-            
-             <c:forEach items="${vvo}" var="vvo">
-             <div class="episodes">
-            <img alt="thumbnail" class="thumbnail" src=/display?filename=${vvo.vfilename}-thumb.png width="120" height="67">
-            <div class="episodesText">
-            <div class="text1"><p>${cvo.cname}<br>${vvo.vfilename}<br><span class="text2" >2021/05/28</span></p></div>
-            </div>
-            </div>
-            </c:forEach>
+            <section id="episodeList">
+	            <div class="selectOreder">
+	            <P class="result" >총 ${vSize}개의 에피소드</P>
+	            <div class="selectOrderBtn">
+	            <button type="button" class="orderBtn orderStart" id="OrderByVno">첫회부터</button>
+	            <button type="button" class="orderBtn"  class="" id="OrderByDESC">최신회부터</button>
+	            </div>
+	            </div>
+	           
+	            <div id="episodesBar">
+	             <c:forEach items="${vvo}" var="vvo">
+	             <div class="episodes" onclick="showWatchPage(${vvo.vno})">
+	         
+	            <img alt="thumbnail" class="thumbnail" src=/display?filename=${vvo.vfilename}-thumb.png width="120" height="67">
+	            <div class="episodesText">
+	            <div class="text1"><p>${cvo.cname}<br>${vvo.vfilename}<br><span class="text2" >2021/05/28</span></p></div>
+	            </div>
+	             
+	            </div>  
+	            
+	            </c:forEach>
+	            </div>
+            </section>
         
            
            
@@ -160,6 +212,11 @@ ${vvo }
              
             </div> -->
             
+        </section>
+        
+        <section id="reviewBox">
+        <h2>${cvo.cname} 의 평점은?</h2>
+        <textarea rows="3" cols="40"></textarea>
         </section>
         
         
