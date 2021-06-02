@@ -5,6 +5,7 @@ import java.util.List;
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
+import jmp.spring.vo.ReviewVo;
 import jmp.spring.vo.VideoVo;
 
 public interface addContentsService {
@@ -17,6 +18,7 @@ public interface addContentsService {
 	public List<VideoVo> getAllVideo(int cno);
 	public List<VideoVo> getAllVideoD(int cno);
 	public VideoVo getOneVideo(int vno);
+
 	
 	
 	public int addcast_match(int cno, String cast, int castno); 

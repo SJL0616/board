@@ -96,6 +96,14 @@ select COUNT(*) from tbl_reply
 
 </select>
 
+<insert id="addReview">
+insert into contents_review (rno,content,writer,regdate,rating,cno,id) values(SEQ_REVIEW.nextval,#{content},#{writer},sysdate,#{rating},#{cno},#{id})
+</insert>
+
+<select id="getReview" resultType="jmp.spring.vo.ReviewVo">
+
+select * from CONTENTS_REVIEW
+</select>
 
 
 

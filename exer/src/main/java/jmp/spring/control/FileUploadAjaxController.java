@@ -30,13 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jmp.spring.service.AttachFileService;
 import jmp.spring.service.AttachFileServiceimpl;
-import jmp.spring.service.UserService;
+import jmp.spring.service.ReplyService;
 import jmp.spring.service.addContentsService;
 import jmp.spring.service.generateThumnail;
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
-import jmp.spring.vo.UserVo;
+import jmp.spring.vo.ReviewVo;
 import jmp.spring.vo.VideoVo;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -52,7 +52,9 @@ public class FileUploadAjaxController {
 	public addContentsService cservice;
 	
 	@Autowired
-	public UserService uservice;
+	public ReplyService rservice;
+	
+
 	
 	private static final String ROOT_DIR = "C:\\upload\\";
 
@@ -498,6 +500,25 @@ public class FileUploadAjaxController {
 		}
 			 return map;	
 	
+	}///동영상업로드 ㅡ끝
+	
+
+	@PostMapping("/reviewInsert") //배우 정보입력
+	public Map<String, Object>  addReview(@RequestBody ReviewVo rvo ) {
+		
+		log.info("/addContent===========rvo :" +  rvo);
+		int res =rservice.addReview(rvo);
+		List<ReviewVo> rlist= rservice.getReview();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(res>0) {
+			map.put("result", "success");
+		map.put("rlist", rlist);
+		
+		}
+		else {
+			map.put("result", "fail");}
+		return map;
 	}
 	
 	

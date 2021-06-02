@@ -13,6 +13,10 @@
  
 <script type="text/javascript">
 $(document).ready(function(){
+	//List 안의 메뉴BOX 보이기 설정
+	$(".reviewBox").hide();
+	
+	
 	$(".start").addClass('active')
     $(this).removeClass('start')
 	/* showAllList();	 */
@@ -42,7 +46,7 @@ $(document).ready(function(){
  $("#episodeListBtn").on("click", function () {
 	
 	var cno = $("#cno").val();
-	$("#reviewBox").hide();
+	$(".reviewBox").hide();
 	$("#episodeList").show();
 	
 	/* showVList(cno); */
@@ -52,7 +56,7 @@ $(document).ready(function(){
 $("#reviewListBtn").on("click", function () {
 	
  	var cno = $("#cno").val();
-	$("#reviewBox").show();
+	$(".reviewBox").show();
 	$("#episodeList").hide();
 
 
@@ -71,8 +75,16 @@ $("#reviewListBtn").on("click", function () {
              showVList(cno, sort);
 	            });            
 	
+	     var textInput = document.querySelector('.textInput');
+	     var lengthWblank = document.querySelector('.lengthWblank');
 
-	
+	     document.querySelector('.textInput').addEventListener("input",function() {
+	    	 console.log("==============" +textInput.value.length);
+	    	
+	     	//키보드로 입력할때 실행하는 이벤트.
+	     	 lengthWblank.innerHTML = textInput.value.length + "/ 300" ;
+
+	     });
 	
 });
 
@@ -80,7 +92,7 @@ $("#reviewListBtn").on("click", function () {
 
  
 
-	
+/* showWatchPage("+item.vno+")\" */
 function showVList(cno, sort) {//안씀
 
 $.ajax({
@@ -101,11 +113,20 @@ success: function(data) {
 		 var htmlContent ="";	
      	$.each(data, function(index, item){
      		
-     htmlContent +="<div class=\"episodes\" onclick=\"showWatchPage("+item.vno+")\">"
-          +"<img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"120\" height=\"67\">"
+     htmlContent +="<div class=\"episodes\">"
+         +"<a class=\"thumA\" href=\"/Watch?vno="+item.vno+"&cno="+cno+"\"><img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"120\" height=\"67\">"
+         +"<div class=\"episodesText\">"
+         +"<div class=\"text1\"><p><br>"+item.vfilename+"<br><span class=\"text2\" >"+item.regdate+"</span>"
+         +"</p></div></div></div></a>";
+     
+     
+     
+     
+   /*   +="<div class=\"episodes\" onclick=\">"
+          +"<a class=\"thumA\" href=\"/Watch?vno="+item.vno+"&cno="+cno+"\"><img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"120\" height=\"67\">"
           +"<div class=\"episodesText\">"
           +"<div class=\"text1\"><p><br>"+item.vfilename+"<br><span class=\"text2\" >"+item.regdate+"</span>"
-          +"</p></div></div></div>";
+          +"</p></div></div></div></a>"; */
 	})
 	
 	
@@ -133,6 +154,111 @@ function  showWatchPage(vno){
 
 	location.href="/Watch?vno="+vno+"&cno="+cno;
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+    //별점선택 이벤트 리스너
+    document.querySelector('.rating').addEventListener('click',function(e){
+    	console.log("===========e:",e);
+        var elem = e.target;
+        console.log("===========elem:",elem);
+        console.log("===========elem.value:",elem.value);
+       
+        $("#rating").val(elem.value);
+        
+        var items = document.querySelectorAll('.rate_radio');
+        
+        items.forEach(function(item, idx){
+        	console.log("===========idx:",idx);     
+        	
+            if(idx < (elem.value-0.5)){
+                item.checked = true;
+            }else{
+                item.checked = false;
+            }
+        });
+      
+    })
+});
+
+/* 리뷰 등록 ajax*/
+  function sendReview() {
+	
+	 
+		var reviewdate = {
+				cno :$("#cno").val(),
+				content :$("#content").val(),
+				writer : $("#userName").val(),
+				id : $("#userId").val(),
+				rating: $("#rating").val()
+		};
+		console.log("===================obj",reviewdate);
+		console.log("===================json",JSON.stringify(reviewdate));
+	 
+			
+			$.ajax({
+				url : '/reviewInsert',
+				method : 'post',
+				dataType :'json',
+				
+				//서버에게 보낼 때는 데이터형식 정의.
+				data :JSON.stringify(reviewdate),
+				contentType: 'application/json; charset=UTF-8',
+				
+				success: function(data, status) {
+					console.log(data);
+					console.log(data.rlist);
+					if(data.result == "success"){
+						alert("입력완료");
+					
+						
+						var htmlContent="";
+						$.each(data.rlist, function(index, item){
+							console.log("=====item");
+						     htmlContent +="<div class=\"oneReview\" >"+item.content+"</div>"
+						         /*  +"<img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"150\" height=\"84\">"
+						          +"<div class=\"episodesText\">"
+						          +"<div class=\"text1\"><p>"+item.vfilename+"<br><span class=\"text2\" >"+item.regdate+"</span>"
+						          +"</p></div></div></div></a>";
+						          length++; */
+							})
+						
+						/* $("#myModal").modal("hide");
+						$("#replypageNum").val(1); */
+						$("#showReview").html(htmlContent);
+						
+					}else{
+						alert("입력중 오류가 발생했습니다.");
+					}
+					
+					//모달창 닫기
+					
+					//jsp파일은 기다리지 않기 떄문에 메세지가 전해지면 
+					//닫히게 함.
+					
+					//리스트 조회하기
+				
+				
+				},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
+			});
+			
+		//insert
+	  
+	  
+}
+
+ 
+
+
+
+	
+
+
+
+
+
 
 </script>
 
@@ -193,14 +319,15 @@ ${vvo }
 	           
 	            <div id="episodesBar">
 	             <c:forEach items="${vvo}" var="vvo">
-	             <div class="episodes" onclick="showWatchPage(${vvo.vno})">
-	         
+	             <div class="episodes" >
+	             <a  class="thumA" href=/Watch?vno=${vvo.vno}&cno=${cvo.cno}>
+
 	            <img alt="thumbnail" class="thumbnail" src=/display?filename=${vvo.vfilename}-thumb.png width="120" height="67">
 	            <div class="episodesText">
 	            <div class="text1"><p>${cvo.cname}<br>${vvo.vfilename}<br><span class="text2" >2021/05/28</span></p></div>
 	            </div>
 	             
-	            </div>  
+	            </div></a> 
 	            
 	            </c:forEach>
 	            </div>
@@ -212,12 +339,65 @@ ${vvo }
              
             </div> -->
             
+               <section class="reviewBox">
+                 <form name="reviewform" class="reviewform" method="post" action="/save">
+				        
+				    <h2 class="title_star"> ${cvo.cname}의 별점과 리뷰를 남겨주세요.</h2>
+			        
+			       
+			        
+			            <div class="review_rating">
+				            
+				            <div class="rating">
+				                <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+				                 <input type="checkbox" name="rating" id="rating0.5" value="1" class="rate_radio half" title="0.5점" hidden="hidden">
+				                <label for="rating0.5"></label>
+				                <input type="checkbox" name="rating" id="rating1" value="2" class="rate_radio right" title="1점" hidden="hidden">
+				                <label for="rating1"></label>
+				                <input type="checkbox" name="rating" id="rating1.5" value="3" class="rate_radio half" title="1.5점" hidden="hidden">
+				                <label for="rating1.5"></label>
+				                <input type="checkbox" name="rating" id="rating2" value="4" class="rate_radio right" title="2점" hidden="hidden">
+				                <label for="rating2"></label>
+				                <input type="checkbox" name="rating" id="rating2.5" value="5" class="rate_radio half" title="2.5점" hidden="hidden">
+				                <label for="rating2.5"></label>
+				                <input type="checkbox" name="rating" id="rating3" value="6" class="rate_radio right" title="3점" hidden="hidden">
+				                <label for="rating3"></label>
+				                <input type="checkbox" name="rating" id="rating3.5" value="7" class="rate_radio half" title="3.5점" hidden="hidden">
+				                <label for="rating3.5"></label>
+				                <input type="checkbox" name="rating" id="rating4" value="8" class="rate_radio right" title="4점" hidden="hidden">
+				                <label for="rating4"></label>
+				                <input type="checkbox" name="rating" id="rating4.5" value="9" class="rate_radio half" title="4.5점" hidden="hidden">
+				                <label for="rating4.5"></label>
+				                <input type="checkbox" name="rating" id="rating5" value="10" class="rate_radio right" title="5점" hidden="hidden">
+				                <label for="rating5"></label>
+				                점수 기록<input type="text" id="rating">
+				                유저 닉네임<input type="text" id="userName">
+				                유저아이디<input type="text" id="userId">
+				               
+				            </div>
+				            <div class="warning_msg">( 별점을 선택해 주세요. )</div>
+				        </div>
+				        <div class="textBox">
+					        <textarea placeholder="솔직한 평가 또는 작품의 매력을 알려주세요 (스토리, 인물, OST 등)" id="content" class="textInput" maxlength="300"></textarea>
+					        <div class="reviewBtns">
+						        <span class="lengthWblank">0 자 / 300 Byte</span>
+						        <input id="SubmitBtn" class="reviewSubmitBtn" type="button"value="작성" onclick="sendReview()">
+				            </div>
+		 	             </div>
+				        </form>
+				        
+				        <div id="showReview">
+				        
+				        
+				        </div>
+			        
+			        
+		       </section>
+            
+            
         </section>
         
-        <section id="reviewBox">
-        <h2>${cvo.cname} 의 평점은?</h2>
-        <textarea rows="3" cols="40"></textarea>
-        </section>
+     
         
         
         
@@ -236,9 +416,8 @@ ${vvo }
 		            <div class="text">
 		                <h2>태그</h2>
 		                <p class="sharp">${cvo.tags}</p>
-		             
-		
-		            </div>
+		           
+		             </div>
 		    </div>
 		   
         </section>

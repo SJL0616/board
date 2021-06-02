@@ -4,6 +4,7 @@ import java.util.List;
 
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
+import jmp.spring.vo.ReviewVo;
 
 
 public interface ReplyService {
@@ -17,4 +18,9 @@ public interface ReplyService {
 
  public int getTotal(int bno);
 
+ 
+	
+	public int addReview(ReviewVo rvo);
+	public List<ReviewVo> getReview();
+ 
 }

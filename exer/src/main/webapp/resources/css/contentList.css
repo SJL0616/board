@@ -17,16 +17,24 @@ background-color: rgb(25, 25, 25);
 	height: 720px;
 	
 }
+#player video{/* VIDEO */
+	width: 1200px;
+	height: 720px;
+}
 header{ position: relative;
-    border: 2px solid white;
+   
       margin: 0 auto;
-    width: 1200px;
+    width: 1100px;
     height: 545px;
    
 }
+
+.thumbnail{
+
+}
 #thumbnail_group{
 position: absolute;
- left:20px;
+
  top: 100px;
 width:  800px;
 height: 400px;
@@ -40,7 +48,7 @@ float:left;
 }
 #Videoinfo{/* VIDEO */
 	
-	border: 2px solid white;
+/* 	border: 2px solid white; */
 }
 #info{
 
@@ -71,14 +79,14 @@ opacity: 0.4;
 
 }
 
-/*컨텐츠 영역*/
+/***************컨텐츠 영역*/
 #contents{
 
 color:rgb(170, 170, 170);
 
 /* border: 2px solid white;    */
 margin: 0 auto;
-width: 1200px;
+width: 1100px;
 height: 100%;
  
 }
@@ -92,19 +100,18 @@ padding-top: 20px;
 
 
 margin: 0 auto;
-   border: 2px solid white;
+ /*   border: 2px solid white;
 
-    border:1px solid rgb(37, 37, 37);
-    width: 650PX;
+    border:1px solid rgb(37, 37, 37); */
+    width: 720PX;
      overflow: hidden;
     margin-right: 15PX;
     float: left;
 }
 
-
 .buttons button{
 font-size:15px;
-padding: 2 15px;
+padding: 8 15px;
 color:rgb(87, 87, 87);
 background-color:  rgb(37, 37, 37); 
 border-style: none;
@@ -139,29 +146,46 @@ font-size: 13px;
 
 .episodes{
 padding: 15px 0;
-display: flex; 
-    justify-content: flex-start;
-    align-items: center;
+/* display: flex;  */
+ /*    justify-content: flex-start; */
+
     border-bottom: 1px solid rgb(57, 57, 57);
 }
+.thumA{
+	display:flex;
+	 justify-content: flex-start;
+	text-decoration: none;
+	    align-items: center;
+}
+
+
 .episodes img{
 padding: 0 15px 0px 0px;
-
+float: left;
 }
 .episodes .text1{
+	font-weight:bold;
 color:white;
 font-size: 15px;
 
 }
 .episodes .text2{
 color:rgb(170, 170, 170);
+padding-top:5px;
 font-size: 12px;
-
+line-height: 2;
+}
+.watchPageEpisodeBar{
+display: flex;
+flex-wrap: wrap;	
+}
+.watchEpisodes{
+	width: 50%;
+	padding: 30px 0;
 }
 
+/***************스토리 영역*/
 
-
-/*스토리영역*/
 
 .infocol .story, .cast, .tags{ 
 background-color: rgb(37, 37, 37);
@@ -182,3 +206,83 @@ overflow: hidden;
     font-weight: bold;
 
 }
+
+/*리뷰 영역*/
+.rating label{
+	    position: relative;
+    display: inline-block;
+    margin-left: -6px;
+    z-index: 10;
+    width: 30px;
+    height: 60px;
+    background-size: 30px 60px; 
+    cursor: pointer;
+}
+
+.rating .half + label{
+background-image: url('/resources/VoidLeftStar.png') ;
+background-repeat:no-repeat;
+
+	 background-color:  rgb(37, 37, 37);
+}
+.rating .right + label {
+    background-image: url('/resources/VoidRightStar.png');
+    background-repeat:no-repeat;
+    background-color:  rgb(37, 37, 37);
+}
+.rating .half:checked + label{
+	background-image: url('/resources/leftStar.png');
+    background-color: rgb(37, 37, 37); 
+	background-repeat:no-repeat;
+}
+.rating .right:checked + label {
+	background-image: url('/resources/rightStar.png');
+    background-color: rgb(37, 37, 37);
+    background-repeat:no-repeat;
+}
+.reviewBox{}
+.reviewBox textarea {
+	border: 0px;
+  
+    width: 90%;
+    margin: 20 10 20 40;
+    background-color: transparent;
+  /*   min-height: 26.6667vw; */
+      min-height: 50px;
+    outline: none;
+    resize: vertical;
+    line-height: 1.5;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    
+	
+}
+
+.textBox{
+	margin: 22px 0 0;
+
+	border-radius:8px;
+	background-color:rgb(51, 51, 51);
+	height: 120px;
+	width: 100%;
+}
+
+.reviewBtns{
+	width: 93%;
+	display: flex;
+	 justify-content:  space-between;
+	 margin: 0 auto;
+
+}
+.reviewBtns .reviewSubmitBtn{
+	font-size:17px;
+	  color: rgb(238, 65, 53);
+    font-weight: bold;
+   background-color: transparent;
+border-style: none;
+}
+
+
+
+
+

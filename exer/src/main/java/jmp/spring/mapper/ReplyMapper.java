@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
+import jmp.spring.vo.ReviewVo;
 
 public interface ReplyMapper {
 
@@ -18,4 +19,9 @@ public interface ReplyMapper {
 	public int getTotal(int bno);
 	public int updateReplyCnt(int bno); 
 	/* public int updateCNT(int bno); */
+	
+	
+	public int addReview(ReviewVo rvo);
+	public List<ReviewVo> getReview();
+	
 }

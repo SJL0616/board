@@ -76,6 +76,7 @@ public class FileUploadController {
 	public void WatchPage(int vno, int cno,Model model) {
 	VideoVo vvo= service.getOneVideo(vno);
 	ContentVo cvo= aservice.get(cno);
+	
 		
 		model.addAttribute("vvo", vvo);
 		model.addAttribute("cvo", cvo);

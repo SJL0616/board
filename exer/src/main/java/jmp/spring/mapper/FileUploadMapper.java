@@ -9,6 +9,7 @@ import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
+import jmp.spring.vo.ReviewVo;
 import jmp.spring.vo.VideoVo;
 
 public interface FileUploadMapper {
@@ -32,6 +33,9 @@ public interface FileUploadMapper {
 	public int getSeq();
 	public int insert(ContentVo vo);
 	public int updatePoster(ContentVo vo);//콘텐츠 포스터이미지 업로드
+	
+	public int addReview(ReviewVo rvo);//리뷰 업로드
+	public int getReview(ReviewVo rvo);
 	
 	
 	/*

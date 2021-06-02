@@ -11,6 +11,7 @@ import jdk.internal.org.jline.utils.Log;
 import jmp.spring.mapper.ReplyMapper;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
+import jmp.spring.vo.ReviewVo;
 import lombok.extern.log4j.Log4j;
 
 @Service
@@ -81,6 +82,15 @@ public class ReplyServiceimpl implements ReplyService {
 	}
 
 
-
+	@Override
+	public int addReview(ReviewVo rvo) {
+		// TODO Auto-generated method stub
+		return mapper.addReview(rvo);
+	}
+	@Override
+	public List<ReviewVo> getReview() {
+		// TODO Auto-generated method stub
+		return mapper.getReview();
+	}
 
 }
