@@ -508,10 +508,14 @@ public class FileUploadAjaxController {
 		
 		log.info("/addContent===========rvo :" +  rvo);
 		int res =rservice.addReview(rvo);
-		List<ReviewVo> rlist= rservice.getReview();
+		int rating=0;
+	
+		List<ReviewVo> rlist= rservice.getReview(rvo.getCno());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(res>0) {
+			rating =rservice.getReviewRating(rvo.getCno());
+			rservice.setContentRating(rating, rvo.getCno());
 			map.put("result", "success");
 		map.put("rlist", rlist);
 		
@@ -521,6 +525,21 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
+	@GetMapping("/getReviewList/{cno}")
+	public Map<String, Object> getReviewList(@PathVariable("cno") int cno){
+		List<ReviewVo> rlist= rservice.getReview(cno);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(rlist!=null) {
+			map.put("result", "success");
+		map.put("rlist", rlist);
+		
+		}
+		else {
+			map.put("result", "fail");}
+		return map;
+		
+	}
 	
 	
 	

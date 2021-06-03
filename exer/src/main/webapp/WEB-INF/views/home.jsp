@@ -10,6 +10,42 @@ body{
  background-repeat: no-repeat; 
 
 }
+
+#hz { 
+
+ border:1px solid red; 
+
+  display:inline-block;
+
+  width:25px; height:25px;
+
+  overflow:hidden;
+
+/*  position:relative;  */
+text-align: center;
+  
+  
+  
+  }
+#hz1 {left:0; visibility:visible}
+#hz2 { 
+
+position: relative; 
+
+}
+#hz3 { 
+
+position: relative; 
+
+}
+
+   
+
+/*  position:absolute;
+
+  left:-60%;
+
+  top:-60%; */
 </style>
 
 <head>
@@ -19,7 +55,15 @@ body{
 <h1>
 	Hello world!  
 </h1>
- <img src="C:\upload\onepiece_poster.png"  alt="backimg"  height="100%" width="100%" > 
+<div id="hz">
+<!--  <img id="hz1" src="resources/Star.png"  alt="backimg"  >  -->
+ <img id="hz2" src="resources/Star.png"  alt="backimg"  > 
+
+</div>
+<div id="hz">
+ <img id="hz3" src="resources/VoidStar.png"  alt="backimg"  > 
+</div>
+
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

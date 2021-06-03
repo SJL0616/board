@@ -22,6 +22,7 @@ public interface ReplyMapper {
 	
 	
 	public int addReview(ReviewVo rvo);
-	public List<ReviewVo> getReview();
-	
+	public List<ReviewVo> getReview(int cno);
+	public int getReviewRating(int cno);
+	public int setContentRating(@Param("rating") int rating, @Param("cno") int cno);
 }

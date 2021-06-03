@@ -13,6 +13,9 @@
  
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	showRList(cno);
+	
 	//List 안의 메뉴BOX 보이기 설정
 	$(".reviewBox").hide();
 	
@@ -213,18 +216,21 @@ document.addEventListener('DOMContentLoaded', function(){
 						
 						var htmlContent="";
 						$.each(data.rlist, function(index, item){
-							console.log("=====item");
-						     htmlContent +="<div class=\"oneReview\" >"+item.content+"</div>"
-						         /*  +"<img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"150\" height=\"84\">"
-						          +"<div class=\"episodesText\">"
-						          +"<div class=\"text1\"><p>"+item.vfilename+"<br><span class=\"text2\" >"+item.regdate+"</span>"
-						          +"</p></div></div></div></a>";
-						          length++; */
-							})
-						
-						/* $("#myModal").modal("hide");
-						$("#replypageNum").val(1); */
-						$("#showReview").html(htmlContent);
+							console.log("=====item",item);
+						     htmlContent +="<div class=\"showReview\"><div class=\"oneReview\" >"
+						     +"<div class=\"RProfileImg\"><img src=\"resources/profile_default.png\"></div>"
+						     +"<div class=\"RText\">"
+						     +"<div class=\"Rwriter\">"+item.writer+"</div>"
+						     +setStars(htmlContent,item.rating)
+						     +"<div class=\"Rcontent\">"+item.content+"</div>"
+						     +"<div class=\"RDate\">"+item.regdate+"</div></div></div></div>";
+						     
+						     
+						    	  $("#showReview").prepend(htmlContent);
+						     return false;
+							});
+					
+					
 						
 					}else{
 						alert("입력중 오류가 발생했습니다.");
@@ -250,11 +256,271 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 
  
+  function showRList(cno) {//안씀
+
+	  var cno =$("#cno").val();
+	  
+	  $.ajax({
+	  	url: '/getReviewList/'+cno,
+	  	method: 'get',
+	  	dataType : 'json',
+	  	
+	  	success: function(data, status){
+			console.log(data);
+			console.log(data.rlist);
+			if(data.result == "success"){
+				
+			
+				
+				var htmlContent="";
+				
+				$.each(data.rlist, function(index, item){
+				
+					console.log("=====item");
+				
+				     htmlContent+="<div class=\"showReview\"><div class=\"oneReview\" >"
+				     +"<div class=\"RProfileImg\"><img src=\"resources/profile_default.png\"></div>"
+				     +"<div class=\"RText\"><div class=\"Rwriter\">"+item.writer+"</div>"
+
+				     
+				     
+				     
+				     
+				      console.log("=====item.rating",item.rating);
+				     switch(item.rating)
+				     {
+				     case 1:
+				     htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+				     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+				     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
+				     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+				     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+				     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+				     break;
+				     
+				     case 2:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+					break;
+                     case 3:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    		 +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+							     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+					break;	     
+                     case 4:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	 +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+						     break;	     
+                     case 5:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+						     break;	     
+                     case 6:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+						     break;	     
+                     case 7:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+						     break;	     
+                     case 8:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+						     break;	     
+                     case 9:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+						     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  ></div>"
+						   
+						     break;	     
+                     case 10:
+				    	 
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+				    	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  ></div>" 
+				    	   
+						     break;	     
+						     
+				     } 
+				    
+				    	 
+				    	 /* if(item.rating/2==0){
+				         +"<img src=\"resources/rightStar.png\"></div>"	 
+				    	 }else{
+				    	 +"<img src=\"resources/leftStar.png\"></div>"}
+				     
+					 if(item.rating<voidStar){
+			    		 if(voidStar/2==0){
+					         +"<img src=\"resources/VoidRightStar.png\"><img src=\"resources/VoidLeftStar.png\"></div>"	 
+					    	 }else{
+					    	 +</div>"}
+			    		 
+			    	 }else{ */
+				    	 
+	 
+				
+				  /*    for(var i=1; i<item.rating; i++){
+				    	 
+				    	 
+				     }; */
+				    
+				  
+				    
+				     htmlContent+="<div class=\"Rcontent\">"+item.content+"</div><br>"
+						     +"<div class=\"RDate\">"+item.regdate+"</div></div></div></div>"; 
+						     
+			    		
+					})
+					console.log("=====htmlContent",htmlContent);
+				 $("#showReview").html(htmlContent);
+				
+				
+			}else{
+				$("#showReview").html("입력중 오류가 발생했습니다.");
+			}
+	  	},
+		error : function(xhr, status, error) {
+			console.log(error);
+		}
+
+	  });//ajax
+	  }//showVList
 
 
 
-	
 
+function setStars(htmlContent,rating){
+		  
+		  
+	switch(rating)
+    {
+    case 1:
+    htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+    +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+    +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
+    +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+    +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+    +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+    break;
+    
+    case 2:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+	break;
+    case 3:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   		 +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+			     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+	break;	     
+    case 4:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	 +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+		     break;	     
+    case 5:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+		     break;	     
+    case 6:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+		     break;	     
+    case 7:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+		     break;	     
+    case 8:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+		     break;	     
+    case 9:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
+		     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  ></div>"
+		   
+		     break;	     
+    case 10:
+   	 
+   	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	     +"<div class=\"stars\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  ></div>" 
+   	   
+		     break;	     
+		     
+    }
+	return htmlContent;
+}
 
 
 
@@ -371,11 +637,13 @@ ${vvo }
 				                <input type="checkbox" name="rating" id="rating5" value="10" class="rate_radio right" title="5점" hidden="hidden">
 				                <label for="rating5"></label>
 				                점수 기록<input type="text" id="rating">
-				                유저 닉네임<input type="text" id="userName">
-				                유저아이디<input type="text" id="userId">
+				                
 				               
 				            </div>
 				            <div class="warning_msg">( 별점을 선택해 주세요. )</div>
+				            <br>
+				            유저 닉네임<input type="text" id="userName">
+				                유저아이디<input type="text" id="userId">
 				        </div>
 				        <div class="textBox">
 					        <textarea placeholder="솔직한 평가 또는 작품의 매력을 알려주세요 (스토리, 인물, OST 등)" id="content" class="textInput" maxlength="300"></textarea>
@@ -385,10 +653,11 @@ ${vvo }
 				            </div>
 		 	             </div>
 				        </form>
+				        <div id="showReview" >
 				        
-				        <div id="showReview">
 				        
 				        
+				      
 				        </div>
 			        
 			        

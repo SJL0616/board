@@ -102,9 +102,20 @@ insert into contents_review (rno,content,writer,regdate,rating,cno,id) values(SE
 
 <select id="getReview" resultType="jmp.spring.vo.ReviewVo">
 
+select * from CONTENTS_REVIEW where cno = #{cno} ORDER BY RNO DESC
+</select>
+<select id="getReviewBy" resultType="jmp.spring.vo.ReviewVo">
+
 select * from CONTENTS_REVIEW
 </select>
 
+<select id="getReviewRating" resultType="int">
+SELECT ROUND(AVG(RATING)) FROM contents_review WHERE CNO=#{cno}
+</select>
+
+<update id="setContentRating">
+update t_contents set rating =#{rating} where cno = #{cno}
+</update>
 
 
 </mapper>

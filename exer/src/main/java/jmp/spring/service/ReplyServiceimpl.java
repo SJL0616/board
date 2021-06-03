@@ -88,9 +88,21 @@ public class ReplyServiceimpl implements ReplyService {
 		return mapper.addReview(rvo);
 	}
 	@Override
-	public List<ReviewVo> getReview() {
+	public List<ReviewVo> getReview(int cno) {
 		// TODO Auto-generated method stub
-		return mapper.getReview();
+		return mapper.getReview(cno);
+	}
+
+	@Override
+	public int setContentRating(int rating,int cno) {
+		// TODO Auto-generated method stub
+		return mapper.setContentRating(rating,cno);
+	}
+
+	@Override
+	public int getReviewRating(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.getReviewRating(cno);
 	}
 
 }

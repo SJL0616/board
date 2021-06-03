@@ -21,6 +21,7 @@ public interface ReplyService {
  
 	
 	public int addReview(ReviewVo rvo);
-	public List<ReviewVo> getReview();
- 
+	public List<ReviewVo> getReview(int cno);
+	public int getReviewRating(int cno);
+	public int setContentRating(int rating,int cno);
 }
