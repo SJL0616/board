@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body{
+	background-color: rgb(25, 25, 25);
+}
+
 #container{
 background-color: rgb(25, 25, 25);
 	 box-sizing: border-box;
@@ -68,7 +72,7 @@ list-style: none
 #poster{position:relative;
  background: linear-gradient(0deg,rgb(25, 25, 25), white);
 /*  background-image: url("/resources/StarCraft.png"); */
- background-size: contain;
+ background-size: cover;
 
 }
 #posterbox{
@@ -295,6 +299,23 @@ border-style: none;
 .RProfileImg img{
 	width: 32;
 }
+
+li#contentRate .voidOneStar {
+    width: 33;
+}
+/* li#contentRate img#Star {
+	width:10;
+}
+ */
+.main .halfStar{
+    width: 16;
+}
+.stars.main {
+    width: 170;
+    height: 35;
+}
+
+
 .stars{
 	margin-top: 5;
 	clear:both;

@@ -23,6 +23,7 @@ public class ContentVo {
 			private  String bc ; 
 			private  String agelimit ; 
 			private  String end ;
+			private  int rating ;
 			
 			private  String savepath;
 			private  String s_savepath;

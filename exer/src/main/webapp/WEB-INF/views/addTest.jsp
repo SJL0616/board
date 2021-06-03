@@ -13,7 +13,7 @@ function sendCastFile() {//캐스트 정보입력
 	
 	var formData = new FormData(document.addcastForm);
 	console.log("castname",formData.get("castname"));
-	console.log("cno",formData.get("cno"));
+	/* console.log("cno",formData.get("cno")); */
 	console.log("uploadFile",formData.get("uploadFile"));
 	
 
