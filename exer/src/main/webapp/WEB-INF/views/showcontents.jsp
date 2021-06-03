@@ -559,8 +559,8 @@ ${cvo }
 ${vvo }
 <div id="container">
    <div id="poster">
-   <div id="posterbox">
-    <img src=/display?filename=${cvo.pfilename } alt="backimg" id="posterImg"  height="100%" width="100%" >
+   <div id="posterbox" style="background-image: url('/display?filename=${cvo.pfilename }');">
+   <!--  <img src=/display?filename=${cvo.pfilename } alt="backimg" id="posterImg"  height="100%" width="100%" > -->
     </div> 
         <header>
         <div id="thumbnail_group">
@@ -571,9 +571,10 @@ ${vvo }
                    <li>${cvo.bc}/${cvo.agelimit }/${cvo.end }</li> 
                    <li id="li2"><h1>${cvo.cname}</h1></li> 
                    <br>
-                   <li>+장르</li> 
+                   <li>장르</li> 
+                   <li>평점 ${cvo.rating}</li> 
                    <li id="contentRate">+평점</li> 
-                   <li>+좋아요</li> 
+                   <li></li> 
                 </ul>
                </div>
          
