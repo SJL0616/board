@@ -90,7 +90,7 @@ $("#reviewListBtn").on("click", function () {
 	    	 console.log("==============" +textInput.value.length);
 	    	
 	     	//키보드로 입력할때 실행하는 이벤트.
-	     	 lengthWblank.innerHTML = textInput.value.length + "/ 300" ;
+	     	 lengthWblank.innerHTML = textInput.value.length + " 자 / 300 Byte" ;
 
 	     });
 	
@@ -449,7 +449,7 @@ function setStars(htmlContent,rating){
 	switch(rating)
     {
     case 1:
-    htmlContent+="<div class=\"stars"+ main+"\"><img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\" class="+halfStar+"  >" 
+    htmlContent+="<div class=\"stars "+ main+"\"><img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\" class="+halfStar+"  >" 
     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\" class="+halfStar+" >"
     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
@@ -459,7 +459,7 @@ function setStars(htmlContent,rating){
     
     case 2:
    	 
-   	 htmlContent+="<div class=\"stars"+ main+"\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	 htmlContent+="<div class=\"stars "+ main+"\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
 		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
 		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
 		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
@@ -467,7 +467,7 @@ function setStars(htmlContent,rating){
 	break;
     case 3:
    	 
-   	 htmlContent+="<div class=\"stars"+ main+"\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
+   	 htmlContent+="<div class=\"stars "+ main+"\"><img id=\"Star\" src=\"resources/OneStar.png\" class=\"voidOneStar\" alt=\"backimg\"  >" 
    		 +"<img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\" class="+halfStar+"  >" 
 			     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\" class="+halfStar+"  >"
 		     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
@@ -583,7 +583,7 @@ ${vvo }
         </header>
   </div>    
   <div id="contents"> 
-  <input type="text" id="cno" value="${cvo.cno}">
+  <input type="text" id="cno" value="${cvo.cno}" hidden="">
         <section id="List">
             
             <div class="buttons" id="buttons">
@@ -656,7 +656,7 @@ ${vvo }
 				                <label for="rating4.5"></label>
 				                <input type="checkbox" name="rating" id="rating5" value="10" class="rate_radio right" title="5점" hidden="hidden">
 				                <label for="rating5"></label>
-				                점수 기록<input type="text" id="rating">
+				                <input type="text" id="rating" hidden="">
 				                
 				               
 				            </div>

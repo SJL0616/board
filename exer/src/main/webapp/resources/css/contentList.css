@@ -75,13 +75,16 @@ list-style: none
 
 
 #poster{position:relative;
- background: linear-gradient(0deg,rgb(25, 25, 25), rgb(255, 255, 255,0.7));
+/*  background: linear-gradient(0deg,rgb(25, 25, 25), rgb(255, 255, 255,0.7)); */
 /*  background-image: url("/resources/StarCraft.png"); */
  background-size: cover;
 
 }
 #posterbox{
-opacity: 0.5;
+	   /*  box-shadow:inset 0 -350px 20px rgb(25 25 25 / 10%), inset 0 -310px 130px rgb(25 25 25 / 63%), inset 0 -180px 90px rgb(24 25 25 / 10%), inset 0 -90px 80px rgb(24 25 25 / 40%), inset 0 -41px 40px rgb(24 25 25 / 60%); */
+	    box-shadow:inset 0 -250px 150px rgb(25 25 25 / 90%), inset 0 -10px 10px rgb(25 25 25 / 90%);
+	
+/* opacity: 0.5; */
     width: 100%;
     position: absolute;
     
@@ -125,7 +128,7 @@ margin: 0 auto;
 
 .buttons button{
 font-size:15px;
-padding: 8 15px;
+padding: 3 15px;
 color:rgb(87, 87, 87);
 background-color:  rgb(37, 37, 37); 
 border-style: none;
@@ -315,14 +318,14 @@ border-style: none;
 }
 
 li#contentRate .voidOneStar {
-    width: 33;
+    width: 33px;
 }
 /* li#contentRate img#Star {
 	width:10;
 }
  */
 .main .halfStar{
-    width: 16;
+    width: 16px;
 }
 .stars.main {
     width: 170;

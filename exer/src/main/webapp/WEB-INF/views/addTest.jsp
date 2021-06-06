@@ -44,9 +44,9 @@ $.ajax({
 
 function sendMatchInfo(i) {//캐스트 match 정보입력
 	
-	 var strCastname = document.all.castname.value;
+/* 	 var strCastname = document.all.castname.value;
 		console.log("===================strCastname",strCastname);
-		
+		 */
 		//실험
 		var castname = document.getElementById(i).value;
 		console.log("===================castname ",castname );
@@ -79,7 +79,7 @@ function sendMatchInfo(i) {//캐스트 match 정보입력
 
 function ajaxContentsInsert() {
 		//javascript Object 만드는 방법
-		var strValue = document.all.cast.value;
+		var strValue = document.all.casts.value;
 		console.log("===================strValue",strValue);
 		 if (strValue != "") {
 			  var arrValue = strValue.split(",");
@@ -280,7 +280,7 @@ $.ajax({
 <!-- 번호<input type="text" id="cnum" ><br> -->
 작품이름<input type="text" id="cname" ><br>
 줄거리<textarea rows="4"  cols="30" id="story" ></textarea><br>
-출연진이름(,구분)<input type="text" id="cast" name="cast"><br>
+출연진이름(,구분)<input type="text" id="cast" name="casts"><br>
 태그<input type="text" id="tags" ><br>
 방송국<input type="text" id="bc" ><br>
 연령제한<input type="text" id="agelimit" ><br>
