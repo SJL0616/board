@@ -27,9 +27,9 @@ end
  from tbl_reply where rno= #{rno}
 </select>
 
-<select id="getList" resultType="jmp.spring.vo.ReplyVo">
+<select id="getList" resultType="jmp.spring.vo.ReviewVo">
 
-select row_num, rno, bno, reply, replyer, replydate, updatedate,
+<!-- select row_num, rno, bno, reply, replyer, replydate, updatedate,
 case
  when to_char(sysdate,'yyyymmdd') = to_char(updatedate,'yyyymmdd')
  then to_char(updatedate, 'hh.mi.ss')
@@ -44,9 +44,15 @@ row_number() over(order by a.rno  desc ) row_num, a.*
  from tbl_reply a where bno = #{bno} order by rno  desc 
 
  )
-where row_num >(#{cri.pageNum}-1) * #{cri.amount}  and row_num<![CDATA[ <= ]]>#{cri.pageNum} * #{cri.amount} 
+where row_num >(#{cri.pageNum}-1) * #{cri.amount}  and row_num<![CDATA[ <= ]]>#{cri.pageNum} * #{cri.amount}  -->
 
-
+select row_num, rno, content, writer, regdate, rating, id
+from (
+select
+ROW_NUMBER() over (order by a.rno desc) row_num, a.* from
+contents_review a where cno = #{cno} order by rno desc
+)
+where row_num >(#{cri.pageNum}-1) * #{cri.amount}  and row_num <![CDATA[ <= ]]>#{cri.pageNum} * #{cri.amount}
 
 
 <!--  select 
@@ -91,8 +97,8 @@ delete tbl_reply where rno=#{rno}
 
 
 <select id="getTotal" resultType="int">
-select COUNT(*) from tbl_reply
- where bno = #{bno}
+select COUNT(*) from contents_review
+ where cno = #{cno}
 
 </select>
 

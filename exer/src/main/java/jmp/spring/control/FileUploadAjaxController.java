@@ -36,6 +36,7 @@ import jmp.spring.service.generateThumnail;
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
+import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReviewVo;
 import jmp.spring.vo.VideoVo;
 import lombok.extern.log4j.Log4j;
@@ -510,14 +511,14 @@ public class FileUploadAjaxController {
 		int res =rservice.addReview(rvo);
 		int rating=0;
 	
-		List<ReviewVo> rlist= rservice.getReview(rvo.getCno());
+		/* List<ReviewVo> rlist= rservice.getReview(rvo.getCno()); */
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(res>0) {
-			rating =rservice.getReviewRating(rvo.getCno());
-			rservice.setContentRating(rating, rvo.getCno());
+			rating =rservice.getReviewRating(rvo.getCno());//¸®ºä ÆòÁ¡ Æò±Õ°ªÀ» °¡Á®¿È.
+			rservice.setContentRating(rating, rvo.getCno());//¸®ºä ÆòÁ¡À» ÄÁÅÙÃ÷ Æò±Õ¿¡ ÀÔ·Â.
 			map.put("result", "success");
-		map.put("rlist", rlist);
+			/* map.put("rlist", rlist); */
 		
 		}
 		else {
@@ -525,14 +526,20 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
-	@GetMapping("/getReviewList/{cno}")
-	public Map<String, Object> getReviewList(@PathVariable("cno") int cno){
-		List<ReviewVo> rlist= rservice.getReview(cno);
+	@GetMapping("/getReviewList/{cno}/{pageNum}")
+	public Map<String, Object> getReviewList(@PathVariable("cno") int cno,@PathVariable("pageNum") int pageNum ){
+		/* List<ReviewVo> rlist= rservice.getReview(cno); */
+		int total =rservice.getTotal(cno);
+		Criteria cri= new Criteria(pageNum, 10, total);
+		
+		 List<ReviewVo> rlist= rservice.getList(cno, cri);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rlist!=null) {
 			map.put("result", "success");
 		map.put("rlist", rlist);
+		map.put("cri", cri);
+		map.put("rCount", total);
 		
 		}
 		else {

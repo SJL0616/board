@@ -19,7 +19,7 @@ $(document).ready(function(){
 	var rating= ${cvo.rating};
    $("#contentRate").html(setStars(htmlContent,rating));	
 	
-	showRList(cno);
+	showRList();
 	
 	//List 안의 메뉴BOX 보이기 설정
 	$(".reviewBox").hide();
@@ -217,9 +217,9 @@ document.addEventListener('DOMContentLoaded', function(){
 					console.log(data.rlist);
 					if(data.result == "success"){
 						alert("입력완료");
-					
+						showReview(1);
 						
-						var htmlContent="";
+						/*var htmlContent="";  원래 그냥 만들어서 붙였으나 기존 페이징에 맞춰 출력.
 						var setRating="";
 						$.each(data.rlist, function(index, item){
 							console.log("=====item",item);
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						     
 						    	  $("#showReview").prepend(setRating);
 						     return false;
-							});
+							});*/
 					
 					
 						
@@ -263,12 +263,19 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 
  
-  function showRList(cno) {//안씀
+ function showReview(i) {//번호에 맞춰 리뷰 출력
+	 $("#pageNum").val(i);
+	 showRList();
+}
+ 
+
+  function showRList() {//안씀
 
 	  var cno =$("#cno").val();
+	  var pageNum =$("#pageNum").val();
 	  
 	  $.ajax({
-	  	url: '/getReviewList/'+cno,
+	  	url: '/getReviewList/'+cno+'/'+pageNum,
 	  	method: 'get',
 	  	dataType : 'json',
 	  	
@@ -277,10 +284,36 @@ document.addEventListener('DOMContentLoaded', function(){
 			console.log(data.rlist);
 			if(data.result == "success"){
 				
-			
+				$("#reviewListBtn").text("리뷰("+data.rCount+")");
+				
+				var PagingHtml="";
+				var PagingHtml2="";
+				var PagingHtml3="";
+	      		var j =0;//실제 마지막페이지가 lastPage와 같은 형우 1로 함. 
+	      		var x =0;//시작페이지 설정 로직에 필요한 변수
+				PagingHtml+="<li class=\"first\"><a href=\"#\" onclick=showReview("+data.cri.startPage+")>⟨</a></li>";
+				
+				PagingHtml3+="<li><a href=\"#\"onclick=showReview("+data.cri.lastPage+") class=\"last\">⟩ </a></li>"; 
+				console.log("=====cri"+data.cri.startPage);
+				
+				
+				if(data.cri.lastPage==data.cri.realLastPage){j=0;}else{j=1;}
+				if(data.cri.pageNum<=10){x=0;}else{x=1;}
+				
+				for(var i =(data.cri.startPage+x); i<=(data.cri.lastPage-j);i++){
+					if(i==data.cri.pageNum){
+						PagingHtml2+="<a href=\"#\" onclick=showReview("+i+")><li class=\"nowPage\">"+i+"</li></a>";	
+						}else{
+							PagingHtml2+="<a href=\"#\" onclick=showReview("+i+")><li>"+i+"</li></a>";	
+						}
+					}
+					
+
+				 PagingHtml= PagingHtml+PagingHtml2+PagingHtml3;
+				 $("#pagingUl").html(PagingHtml); 
 				
 				var htmlContent="";
-				
+			
 				$.each(data.rlist, function(index, item){
 				
 					console.log("=====item");
@@ -673,13 +706,20 @@ ${vvo }
 				            </div>
 		 	             </div>
 				        </form>
+				        
 				        <div id="showReview" >
-				        
-				        
-				        
-				      
 				        </div>
-			        
+				        
+				        <div id="pagingBox">
+				        <input type="text" id="pageNum" value="1" hidden="hidden">
+				        <ul class="pagination" id="pagingUl">
+				      <!--   <li class="first"><a href="#">⟨</a></li>
+	
+				        <li href="#" class="last">⟩</li> -->
+				        </ul>
+				        
+				        </div>
+			
 			        
 		       </section>
             

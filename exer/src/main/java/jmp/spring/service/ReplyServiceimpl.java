@@ -59,9 +59,9 @@ public class ReplyServiceimpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVo> getList(int bno,Criteria cri) {
+	public List<ReviewVo> getList(int cno,Criteria cri) {
 		// TODO Auto-generated method stub
-		return mapper.getList(bno,cri);
+		return mapper.getList(cno,cri);
 	}
 
 	@Override
@@ -76,9 +76,9 @@ public class ReplyServiceimpl implements ReplyService {
 	}
 
 	@Override
-	public int getTotal(int bno) {
+	public int getTotal(int cno) {
 		// TODO Auto-generated method stub
-		return mapper.getTotal(bno);
+		return mapper.getTotal(cno);
 	}
 
 
