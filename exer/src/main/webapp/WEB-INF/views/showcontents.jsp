@@ -266,9 +266,10 @@ document.addEventListener('DOMContentLoaded', function(){
   function showRList(cno) {//안씀
 
 	  var cno =$("#cno").val();
+	  var pageNum =$("#pageNum").val();
 	  
 	  $.ajax({
-	  	url: '/getReviewList/'+cno,
+	  	url: '/getReviewList/'+cno+'/'+pageNum,
 	  	method: 'get',
 	  	dataType : 'json',
 	  	
@@ -277,10 +278,43 @@ document.addEventListener('DOMContentLoaded', function(){
 			console.log(data.rlist);
 			if(data.result == "success"){
 				
-			
+				var PagingHtml="";
+				var PagingHtml2="";
+				var PagingHtml3="";
+	      			
+				PagingHtml+="<li class=\"first\"><a href="+data.cri.startPage+">⟨</a></li>";
+				
+				PagingHtml3+="<li href="+data.cri.lastPage+" class=\"last\">⟩</li>"; 
+				console.log("=====cri"+data.cri.startPage);
+				
+				for(var i =1; i<(data.cri.lastPage-1);i++){
+					
+				if(i==data.cri.pageNum){
+					PagingHtml2+="<a href="+i+" class=\"nowPage\"><li>"+i+"</li></a>";	
+					}else{
+						PagingHtml2+="<a href="+i+"><li>"+i+"</li></a>";	
+					}
+				}
+					
+				
+				
+				/* $.each(8, function(index, item){
+					
+					console.log("=====item"+item);
+					
+					
+					
+				/* 	 ;
+					
+					
+				
+
+					}); */
+				 PagingHtml= PagingHtml+PagingHtml2+PagingHtml3;
+				 $("#pagingUl").html(PagingHtml); 
 				
 				var htmlContent="";
-				
+			
 				$.each(data.rlist, function(index, item){
 				
 					console.log("=====item");
@@ -679,7 +713,16 @@ ${vvo }
 				        
 				      
 				        </div>
-			        
+				        <div id="pagingBox">
+				        <input type="text" id="pageNum" value="1">
+				        <ul class="pagination" id="pagingUl">
+				        <li class="first"><a href="#">⟨</a></li>
+				     
+				        <li href="#" class="last">⟩</li>
+				        </ul>
+				        
+				        </div>
+			
 			        
 		       </section>
             

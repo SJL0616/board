@@ -380,4 +380,28 @@ float: left;
 .Rcontent{
 	clear:both;
 }
+.pagination{
+	    color: rgb(121, 121, 121);
+	    font-size: 14px;
+    height: 25px;
+	display: flex;
+    list-style: none;
+    justify-content: flex-end;
+}
+.pagination a{
+	   color: rgb(121, 121, 121);
+	   padding: 0 8px;
+	   text-decoration: none;
+}
+a .nowPage{
+	color:white;
+	font-weight: bold;
+}
+	
+	
+
+
+
+
+
 

@@ -12,11 +12,11 @@ public interface ReplyMapper {
 
 	public int insert(ReplyVo vo);
 	public ReplyVo get(int bno);
-	public List<ReplyVo> getList(@Param("bno") int bno,@Param("cri")Criteria cri);
+	
 	public int update(ReplyVo vo);
 	public int delete(int rno);
 	public int remove(int rno);
-	public int getTotal(int bno);
+	
 	public int updateReplyCnt(int bno); 
 	/* public int updateCNT(int bno); */
 	
@@ -25,4 +25,7 @@ public interface ReplyMapper {
 	public List<ReviewVo> getReview(int cno);
 	public int getReviewRating(int cno);
 	public int setContentRating(@Param("rating") int rating, @Param("cno") int cno);
+	public List<ReviewVo> getList(@Param("cno") int cno,@Param("cri")Criteria cri);
+	public int getTotal(int cno);
+
 }

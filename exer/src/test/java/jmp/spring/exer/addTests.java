@@ -9,10 +9,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jmp.spring.mapper.FileUploadMapper;
+import jmp.spring.service.ReplyService;
 import jmp.spring.service.addContentsService;
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
+import jmp.spring.vo.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,13 +27,29 @@ public class addTests {
 	@Autowired
 	FileUploadMapper umapper;
 	
+	@Autowired
+	ReplyService rservice;
 	
 	@Test
+	public void getReviewList() {
+		Criteria cri =new Criteria(1,10,30);
+		int num = (60%10);
+		log.info("==================="+cri.getStartPage());
+		log.info("==================="+cri.getLastPage());
+		log.info("==================="+cri.getRealLastPage());
+		log.info(num);
+		/* log.info("==================="+((int)(Math.ceil(65/10)*10)+1) ); */
+		
+
+		rservice.getList(30, cri); 
+	}
+	
+	
 	public void getVideo() {
 		service.getAllVideo(20);
 		
 	}
-	@Test
+
 	public void getCastByname() {
 		umapper.getcastByName("±â¹«");
 		
