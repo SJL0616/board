@@ -112,7 +112,7 @@ height: 100%;
 #List{   background-color: rgb(37, 37, 37);
 text-align:left;
 padding-left: 20px;
-padding-right: 10px;
+padding-right: 20px;
 padding-top: 20px;
 
 
@@ -388,12 +388,21 @@ float: left;
     list-style: none;
     justify-content: flex-end;
 }
+
+.pagination li{
+    height: 25px;
+    margin-left: 3.5px;
+    margin-right: 3.5px;
+    padding: 0 8px;
+}
 .pagination a{
 	   color: rgb(121, 121, 121);
-	   padding: 0 8px;
+
 	   text-decoration: none;
+	   
 }
-a .nowPage{
+.nowPage{
+	background-color: rgb(51, 51, 51);
 	color:white;
 	font-weight: bold;
 }

@@ -511,14 +511,14 @@ public class FileUploadAjaxController {
 		int res =rservice.addReview(rvo);
 		int rating=0;
 	
-		List<ReviewVo> rlist= rservice.getReview(rvo.getCno());
+		/* List<ReviewVo> rlist= rservice.getReview(rvo.getCno()); */
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(res>0) {
-			rating =rservice.getReviewRating(rvo.getCno());
-			rservice.setContentRating(rating, rvo.getCno());
+			rating =rservice.getReviewRating(rvo.getCno());//¸®ºä ÆòÁ¡ Æò±Õ°ªÀ» °¡Á®¿È.
+			rservice.setContentRating(rating, rvo.getCno());//¸®ºä ÆòÁ¡À» ÄÁÅÙÃ÷ Æò±Õ¿¡ ÀÔ·Â.
 			map.put("result", "success");
-		map.put("rlist", rlist);
+			/* map.put("rlist", rlist); */
 		
 		}
 		else {
@@ -539,6 +539,7 @@ public class FileUploadAjaxController {
 			map.put("result", "success");
 		map.put("rlist", rlist);
 		map.put("cri", cri);
+		map.put("rCount", total);
 		
 		}
 		else {
