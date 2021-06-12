@@ -6,10 +6,12 @@ import lombok.Data;
 public class ReplyVo {
 
 	int rno;
-	int bno;
-	String reply;
-	String replyer;
-	String replydate;
+	int vno;
+	int re_rno;
+	String id;
+	String content;
+	String writer;
+	String regdate;
 	String updatedate;
 	
 }

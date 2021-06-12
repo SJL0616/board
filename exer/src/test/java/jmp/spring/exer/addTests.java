@@ -31,6 +31,13 @@ public class addTests {
 	ReplyService rservice;
 	
 	@Test
+	public void getReply() {
+		Criteria cri = new Criteria(1, 10, 20);
+		
+		rservice.get(11, cri);
+		
+	}
+	
 	public void getReviewList() {
 		Criteria cri =new Criteria(1,10,30);
 		int num = (60%10);

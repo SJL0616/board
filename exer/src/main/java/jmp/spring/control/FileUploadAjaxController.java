@@ -37,6 +37,7 @@ import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
+import jmp.spring.vo.ReplyVo;
 import jmp.spring.vo.ReviewVo;
 import jmp.spring.vo.VideoVo;
 import lombok.extern.log4j.Log4j;
@@ -504,7 +505,7 @@ public class FileUploadAjaxController {
 	}///동영상업로드 ㅡ끝
 	
 
-	@PostMapping("/reviewInsert") //배우 정보입력
+	@PostMapping("/reviewInsert") //리뷰 정보입력
 	public Map<String, Object>  addReview(@RequestBody ReviewVo rvo ) {
 		
 		log.info("/addContent===========rvo :" +  rvo);
@@ -548,6 +549,71 @@ public class FileUploadAjaxController {
 		
 	}
 	
+	@PostMapping("/replyInsert") //리뷰 정보입력
+	public Map<String, Object>  addReply(@RequestBody ReplyVo rvo ) {
+		
+		log.info("/addContent===========rvo :" +  rvo);
+		int res =rservice.insert(rvo);
+		log.info("/addContent===========rvo.getRe_rno() :" +  rvo.getRe_rno());
+		log.info( rvo.getRe_rno()>0);
+		
+		if(rvo.getRe_rno()>0) {
+			int rno =rservice.getSeq_Currval();
+			rservice.setRe_rno(rvo.getRe_rno(), rno);
+		}
 	
+		/* List<ReviewVo> rlist= rservice.getReview(rvo.getCno()); */
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(res>0) {
+			map.put("result", "success");
+			/* map.put("rlist", rlist); */
+		
+		}
+		else {
+			map.put("result", "fail");}
+		return map;
+	}
+
+	/* /{pageNum} */
+	@GetMapping("/getReplyList/{vno}/{pageNum}")
+	public Map<String, Object> getReplyList(@PathVariable("vno") int vno,@PathVariable("pageNum") int pageNum){
+		/* List<ReviewVo> rlist= rservice.getReview(cno); */
+		int total =rservice.getReplyTotal(vno);
+		 Criteria cri= new Criteria(pageNum, 10, total); 
+		
+		/* List<ReviewVo> rlist= rservice.getList(cno, cri); */
+		 List<ReplyVo> rlist= rservice.get(vno,cri);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(rlist!=null) {
+			map.put("result", "success");
+		map.put("rlist", rlist);
+			map.put("cri", cri); 
+		map.put("rCount", total);
+		
+		}
+		else {
+			map.put("result", "fail");}
+		return map;
+		
+	}
+	@GetMapping("/getRe_reply")
+	public Map<String, Object> getReplyList(){
+
+		 List<ReplyVo> rlist= rservice.getRe_reply();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(rlist!=null) {
+			map.put("result", "success");
+		map.put("rlist", rlist);
+
+		
+		}
+		else {
+			map.put("result", "fail");}
+		return map;
+		
+	}
 	
 }

@@ -9,25 +9,55 @@
 update tbl_board set replycnt = (select count(*) from tbl_reply where bno = #{bno}) where bno = #{bno}
 </update>
 
-<insert id="insert" >
-insert into tbl_reply values
-(seq_tbl_reply.nextval, #{bno}, #{reply}, #{replyer}, sysdate, sysdate)
+<insert id="insert" ><!-- 동영상 댓글입력 쿼리 -->
+insert into video_reply
+(rno, vno, id, content, writer, regdate) 
+values (seq_video_reply.nextval, #{vno}, #{id}, #{content}, #{writer}, sysdate)
 </insert>
 
 <select id="get" resultType="jmp.spring.vo.ReplyVo">
+
 select 
- rno, bno, reply, replyer, replydate, updatedate,
-case
- when to_char(sysdate,'yyyymmdd') = to_char(updatedate,'yyyymmdd')
- then to_char(updatedate, 'hh.mi.ss')
- else to_char(updatedate, 'yyyy/mm/dd')
-end
+ row_num, rno, content, writer, regdate, re_rno
 
+ from 
+ (
+ select ROW_NUMBER() OVER (order by rno desc) as row_num, a.* from video_reply a  where re_rno is null
+ 
+ )
+ where vno= #{vno} and row_num >(#{cri.pageNum}-1) * #{cri.amount}  and row_num <![CDATA[ <= ]]>#{cri.pageNum} * #{cri.amount} 
 
- from tbl_reply where rno= #{rno}
+<!-- 
+select 
+ rno, content, writer, regdate, re_rno
+
+ from video_reply where vno= #{vno} order by rno desc -->
+</select>
+<select id="getRe_reply" resultType="jmp.spring.vo.ReplyVo">
+select *from video_reply where re_rno is not null
+
 </select>
 
+
+<select id="getReplyTotal" resultType="int">
+select COUNT(*) from video_reply
+ where vno = #{vno}
+
+</select>
+
+<select id="getSeq_Currval" resultType="int">
+select seq_video_reply.currval from dual
+</select>
+
+<update id="setRe_rno">
+update video_reply set re_rno = #{re_rno} where rno= #{rno}
+
+</update>
+
+
+
 <select id="getList" resultType="jmp.spring.vo.ReviewVo">
+
 
 <!-- select row_num, rno, bno, reply, replyer, replydate, updatedate,
 case

@@ -10,8 +10,8 @@ import jmp.spring.vo.ReviewVo;
 
 public interface ReplyMapper {
 
-	public int insert(ReplyVo vo);
-	public ReplyVo get(int bno);
+	
+	
 	
 	public int update(ReplyVo vo);
 	public int delete(int rno);
@@ -28,4 +28,12 @@ public interface ReplyMapper {
 	public List<ReviewVo> getList(@Param("cno") int cno,@Param("cri")Criteria cri);
 	public int getTotal(int cno);
 
+	
+	public int setRe_rno(@Param("re_rno") int re_rno, @Param("rno") int rno);
+	public int getReplyTotal(int vno);
+	public int insert(ReplyVo vo);
+	public List<ReplyVo> get(@Param("vno") int vno, @Param("cri")Criteria cri);
+	public List<ReplyVo> getRe_reply();
+	public int getSeq_Currval();
+	
 }

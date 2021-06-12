@@ -262,7 +262,7 @@ background-repeat:no-repeat;
     background-repeat:no-repeat;
 }
 .reviewBox{}
-.reviewBox textarea {
+.textInput{
 	border: 0px;
   
     width: 90%;
@@ -310,7 +310,7 @@ border-style: none;
 }
 .oneReview{
 	display:flex;
-	line-height: 1.6;
+	line-height: 2;
 
 }
 .RProfileImg img{
@@ -406,7 +406,21 @@ float: left;
 	color:white;
 	font-weight: bold;
 }
-	
+.RDate button {
+	cursor: pointer;
+    color: #575757;
+    font-size: 13.5;
+    border: none;
+    background-color: transparent;
+}
+
+.re_reply {
+ 
+    margin: 20 0 0 0;
+}
+.re_replyIcon{
+	margin: 1px 13px 0px 20px;
+}	
 	
 
 
