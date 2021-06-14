@@ -34,14 +34,14 @@ select
  from video_reply where vno= #{vno} order by rno desc -->
 </select>
 <select id="getRe_reply" resultType="jmp.spring.vo.ReplyVo">
-select *from video_reply where re_rno is not null
+select *from video_reply where re_rno is not null order by rno asc
 
 </select>
 
 
 <select id="getReplyTotal" resultType="int">
 select COUNT(*) from video_reply
- where vno = #{vno}
+ where vno = #{vno} and re_rno is null
 
 </select>
 

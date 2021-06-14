@@ -32,7 +32,7 @@ public class addTests {
 	
 	@Test
 	public void getReply() {
-		Criteria cri = new Criteria(1, 10, 20);
+		Criteria cri = new Criteria(2, 10, 16);
 		
 		rservice.get(11, cri);
 		

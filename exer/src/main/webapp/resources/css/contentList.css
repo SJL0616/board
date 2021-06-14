@@ -304,9 +304,10 @@ border-style: none;
 }
 
 .showReview{
-	
-	padding: 25px 0 25px 20px;
+	font-size:14px;
+	padding: 25px 0 2px 20px;
 	border-top: 1px dashed rgb(57, 57, 57);
+	    margin-top: 23;
 }
 .oneReview{
 	display:flex;
@@ -420,9 +421,24 @@ float: left;
 }
 .re_replyIcon{
 	margin: 1px 13px 0px 20px;
+}
+/* 리플의 리플 writer @표시 */
+.mentionee{
+	color: white;
 }	
-	
+.Re_replyBtn, .reviewSubmitBtn{
+	cursor: pointer;
+}
+.TextBoxIcon {
+    margin: 17 15;
+}
+.replyTextBox{
+	width: 90%;
+}
 
+.textBox2{
+	margin-left: 43px;
+}
 
 
 

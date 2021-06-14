@@ -84,26 +84,34 @@ $("#reviewListBtn").on("click", function () {
 	     	 lengthWblank.innerHTML = textInput.value.length + " 자 / 300 Byte" ;
 
 	     });
-	    
-	     $(".Re_replyBtn").on("click",function(){
-	    
-	     });
+	  
 	
 	  
 
 });
 
 function setRe_rno(rno) {
+	$(".Re_replyBtn"+rno).addClass(".Btn"+rno); 
+	 
+	 var Btn=document.querySelector(".Re_replyBtn"+rno);
+	 Btn.setAttribute("onClick", "hideTextBox("+rno+")");
+	
+
+	
+	 
+	
 	
 	 console.log("==============Re_replyBtn activated======");
+	 var writer =$(".Rwriter"+rno).text();
+	 console.log("============== $(.Rwriter+item.rno).text()======",writer);
 
 	/* $("#re_rno").val(rno); */
 	//댓글-답글달기 BOX를 DIV에 삽입. + 인풋 텍스트에리어 rno추가로 fuction이 움직이게 설정.
 		var htmlContent="";
 	
-	htmlContent+="<div class=\"oneReview\" ><div class=\"re_replyIcon\"><img src=\"resources/icon_re_reply.png\"></div>"
-      +"<div class=\"textBox\">"
-      +"<textarea placeholder=\"댓글 내용을 입력해 주세요.\" id=\"content\" class=\"Re_textInput"+rno+" textInput\" maxlength=\"300\"></textarea>"
+	htmlContent+="<div class=\"oneReview \" ><div class=\"TextBoxIcon\"><img src=\"resources/icon_re_reply.png\"></div>"
+      +"<div class=\"textBox replyTextBox\">"
+      +"<textarea placeholder=\""+writer+"에게 쓸 댓글 내용을 입력해 주세요.\" id=\"content\" class=\"Re_textInput"+rno+" textInput\" maxlength=\"300\"></textarea>"
       +"<div class=\"reviewBtns\">"
 	  +"<span class=\"Re_lengthWblank"+rno+"\">0 자 / 300 Byte</span>"
 	  +"<input id=\"SubmitBtn\" class=\"reviewSubmitBtn\" type=\"button\"value=\"작성\" onclick=\"sendRe_reply("+rno+")\">"
@@ -126,15 +134,28 @@ function setRe_rno(rno) {
 
      }); 
      
-     
+   
    //+답글달기에서 보내기 누르면 RE_RNO값 조정.
      
 }
+function hideTextBox(rno) {
+	 console.log("==============hideTextBox activated======");
+	
+		  $(".re_replyBox"+rno).html("");
+		  var Btn=document.querySelector(".Re_replyBtn"+rno);
+			 Btn.setAttribute("onClick", "setRe_rno("+rno+")");
+		
+	 
+}
+
+
 
 function sendRe_reply(rno){
 	
 	 $("#re_rno").val(rno);
 	sendReply(rno);
+	
+	
 }
 
 /* onclick=\"showWatchPage("+item.vno+")\" */
@@ -230,6 +251,12 @@ function showVList(cno, sort) {//안씀
 
 
 
+function showReview(i) {//번호에 맞춰 리뷰 출력
+	 $("#pageNum").val(i);
+	 console.log("==============i",i);
+	 console.log("==============$(#pageNum).val()",$("#pageNum").val());
+	 showReply();
+}
 
 
 
@@ -280,7 +307,7 @@ function showReply() {//안씀
 			
 				console.log("=====item");
 				
-				 	
+				    $("#showReply").html("");
 						$.each(data.rlist, function(index, item){
 					
 							var htmlContent="";
@@ -293,11 +320,11 @@ function showReply() {//안씀
 						     htmlContent +="<div class=\"showReview\"><div class=\"oneReview\" >"
 						     +"<div class=\"RProfileImg\"><img src=\"resources/profile_default.png\"></div>"
 						     +"<div class=\"RText\">"
-						     +"<div class=\"Rwriter\">"+item.writer+"</div>"
+						     +"<div class=\"Rwriter"+item.rno+"\">"+item.writer+"</div>"
 
 						     +"<div class=\"Rcontent\">"+item.content+"</div>"
-						     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn\" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button></div></div></div>"
-						     +"<div class=\"re_replyBox"+item.rno+"\"></div>"
+						     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn"+item.rno+" \" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button></div></div></div>"
+						     +"<div class=\"re_replyBox"+item.rno+" TextBox1\"></div>"
 						     +"<div class=\"re_replyContent"+item.rno+"\"></div></div>";
 		
 						     console.log("=====htmlContent",htmlContent);
@@ -375,20 +402,22 @@ function showReply() {//안씀
 									
 									console.log("=====item",item);
 									console.log("==============item.re_rno",item.re_rno);
-									 var htmlContent="";//  원래 그냥 만들어서 붙였으나 기존 페이징에 맞춰 출력.
+									var writer =$(".Rwriter"+item.re_rno).text();
+									console.log("==============writer",writer);
+									var htmlContent="";//  원래 그냥 만들어서 붙였으나 기존 페이징에 맞춰 출력.
 									
 								     htmlContent +="<div class=\"oneReview re_reply\" ><div class=\"re_replyIcon \"><img src=\"resources/icon_re_reply.png\"></div>"
 								     +"<div class=\"RProfileImg\"><img src=\"resources/profile_default.png\"></div>"
 								     +"<div class=\"RText\">"
-								     +"<div class=\"Rwriter\">"+item.writer+"</div>"
+								     +"<div class=\"Rwriter"+item.rno+"\">"+item.writer+"</div>"
 
-								     +"<div class=\"Rcontent\">"+item.content+"</div>"
-								     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn\" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button></div></div></div>"
-								     +"<div class=\"re_replyBox"+item.rno+"\"></div>"
+								     +"<div class=\"Rcontent\"><span class=\"mentionee\">@"+writer+"</span><br>"+item.content+"</div>"
+								     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn"+item.rno+"\" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button></div></div></div>"
+								     +"<div class=\"re_replyBox"+item.rno+" TextBox2\"></div>"
 								     +"<div class=\"re_replyContent"+item.rno+"\"></div>";
 									
 								     console.log("=====htmlContent",htmlContent);
-									 $(".re_replyContent"+item.re_rno).html(htmlContent);
+									 $(".re_replyContent"+item.re_rno).append(htmlContent);
 	
 								 
 									});
