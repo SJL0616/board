@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class CastVo {
 int castno;
+int cno;
 String castname;
 String cast;
 
@@ -12,6 +13,7 @@ String profileUploadPath;
 String profileImgName;
 private  String savepath;
 private  String s_savepath;
+public CastVo() {};
 public CastVo(String castname, String profileUploadPath, String profileImgName) {
 	/* UUID uuid = UUID.randomUUID(); */
 			

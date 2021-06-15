@@ -20,6 +20,7 @@ public interface FileUploadMapper {
 	public int addcast(CastVo cvo); //ÄÜÅÙÃ÷ text¾÷·Îµå
 	public int addcast_match(@Param("cno") int cno,@Param("cast") String cast,@Param("castno") int castno); //ÄÜÅÙÃ÷ text¾÷·Îµå
 	public CastVo getcastByName(String castname);
+	public List<CastVo>getCastList(int cno);
 	
 	public int addVideo(VideoVo vvo);
 	public List<VideoVo> getAllVideo(int cno);

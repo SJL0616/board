@@ -63,6 +63,11 @@ public class addContentsServiceimpl implements addContentsService {
 		// TODO Auto-generated method stub
 		return mapper.getOneVideo(vno);
 	}
+	@Override
+	public List<CastVo> getCastList(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.getCastList(cno);
+	}
 
 
 }

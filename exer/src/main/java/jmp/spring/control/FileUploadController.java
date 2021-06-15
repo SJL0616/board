@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jmp.spring.service.AttachFileService;
 import jmp.spring.service.addContentsService;
+import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.VideoVo;
@@ -62,6 +63,7 @@ public class FileUploadController {
 		
 	ContentVo cvo= aservice.get(cno);
 	List<VideoVo> vvo= service.getAllVideo(cno);
+	List<CastVo> castVo = service.getCastList(cno);
 	
 	model.addAttribute("cvo", cvo);
 	
@@ -69,6 +71,7 @@ public class FileUploadController {
 	
 	model.addAttribute("vvo", vvo);
 	model.addAttribute("vSize", vSize);
+	model.addAttribute("castVo", castVo);
 
 		
 	}

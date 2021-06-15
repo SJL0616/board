@@ -23,7 +23,8 @@ $(document).ready(function(){
 	
 	//List 안의 메뉴BOX 보이기 설정
 	$(".reviewBox").hide();
-	
+	$(".castList").hide();
+	$(".mainImg").hide();
 	
 	$(".start").addClass('active')
     $(this).removeClass('start')
@@ -56,8 +57,9 @@ $(document).ready(function(){
 	var cno = $("#cno").val();
 	$(".reviewBox").hide();
 	$("#episodeList").show();
-	
+	$(".castList").hide();
 	/* showVList(cno); */
+	$(".mainImg").hide();
 
 })
 
@@ -66,9 +68,32 @@ $("#reviewListBtn").on("click", function () {
  	var cno = $("#cno").val();
 	$(".reviewBox").show();
 	$("#episodeList").hide();
+	$(".castList").hide();
+	$(".mainImg").hide();
+
+})
+$("#castListBtn").on("click", function () {
+	
+ 	var cno = $("#cno").val();
+	$(".reviewBox").hide();
+	$("#episodeList").hide();
+	$(".castList").show();
+	$(".mainImg").hide();
 
 
 })
+
+$("#showMainImg").on("click", function () {
+	
+ 	var cno = $("#cno").val();
+	$(".reviewBox").hide();
+	$("#episodeList").hide();
+	$(".castList").hide();
+	$(".mainImg").show();
+
+
+})
+
 	
           $("#OrderByVno").on("click", function () {
         	  var cno = $("#cno").val(); 
@@ -606,7 +631,11 @@ ${vvo }
                    <br>
                    <li>장르</li> 
                    <li>평점 ${cvo.rating}</li> 
-                   <li id="contentRate">+평점</li> 
+                   <div> <a >1회 이어보기</a>  </div>
+                   <li id="contentRate" class="rateBox">+평점
+                  
+                   </li> 
+                 
                    <li></li> 
                 </ul>
                </div>
@@ -622,8 +651,8 @@ ${vvo }
             <div class="buttons" id="buttons">
             <button class="btn start" id="episodeListBtn" >에피소드</button>
             <button class="btn" id="reviewListBtn" >리뷰</button>
-            <button class="btn">프로그램 소개</button>
-            <button class="btn">공식이미지</button>
+            <button class="btn" id="castListBtn">출연진 소개</button>
+            <button class="btn" id="showMainImg">공식이미지</button>
              </div>
              
              <!--에피소드 리스트 --> 
@@ -722,9 +751,45 @@ ${vvo }
 			
 			        
 		       </section>
+		       
+		       <section class="castList">
+		       
+		        <section id="episodeList" >
+	           <%--  <div class="selectOreder" style="padding: 10px 0 4 0;">
+	            <P class="result" >총 <span id="showLength"></span>{vSize}개의 에피소드</P>
+	            <div class="selectOrderBtn">
+	            <button type="button" class="orderBtn orderStart" id="OrderByVno"  style= "background-color: rgb(25, 25, 25)">첫회부터</button>
+	            <button type="button" class="orderBtn"  class="" id="OrderByDESC"  style= "background-color: rgb(25, 25, 25)">최신회부터</button>
+	            </div>
+	            </div> --%>
+		        <div id="episodesBar" class="CastBar">
+		             <c:forEach items="${castVo}" var="cvo">
+		             
+		              
+				        <div class="episodes actors">
+				         <a class="thumA" href="#"><img alt=\"thumbnail\" class="thumbnail actorImg" src=/display?filename=${cvo.profileImgName} width="120" height="170">
+				         <div class=\"episodesText\">
+				         <div class="text1">
+				         <p>${cvo.castname }<br><br><span class="text2" >${cvo.cast }</span></p>
+				         </div>
+				         </div>
+				         </div></a>
+				        
+		        
+		             </c:forEach>
+		        </div> 
+	          </section>
+         </section><!-- CastList 섹션끝 -->
+         
+          <section class="mainImg">
+          <div id="mainbox" style="background-image: url('/display?filename=${cvo.pfilename }')"></div>
+          </section>
+             
+		       
+		     
             
-            
-        </section>
+           
+        </section><!-- LIST 섹션끝 -->
         
      
         

@@ -23,6 +23,7 @@ public interface addContentsService {
 	
 	public int addcast_match(int cno, String cast, int castno); 
 	public CastVo getcastByName(String castname);
+	public List<CastVo>getCastList(int cno);//cno(작품 번호)로 cast목록 가져오는 maaper
 	
 	public List<ContentVo> getAllList();
 	

@@ -117,7 +117,7 @@ public class FileUploadAjaxController {
 			
 			for(MultipartFile multipartFile : uploadFile) {
 				
-				CastVo cvo= new CastVo(castname, ROOT_DIR+"CAST\\", multipartFile.getOriginalFilename());
+				CastVo cvo= new CastVo(castname, ROOT_DIR+"CAST\\", "cast_"+multipartFile.getOriginalFilename());
 				log.info("/addCast=========== SAVEPATH:" + cvo.getSavepath());
 				log.info("/addCast=========== SAVEPATH:" + cvo.getSavepath());
 				File saveFile = new File(cvo.getSavepath());
@@ -138,7 +138,7 @@ public class FileUploadAjaxController {
 					String thmnail = cvo.getS_savepath();
 					//썸네일 이미지 생성
 					Thumbnails.of(saveFile).size(200, 200).toFile(thmnail);
-				cvo.setProfileImgName(multipartFile.getOriginalFilename());
+				cvo.setProfileImgName("cast_"+multipartFile.getOriginalFilename());
 				
 				
 			}
@@ -292,6 +292,8 @@ public class FileUploadAjaxController {
 			 * }
 			 */
 		 file = new File(ROOT_DIR+"VIDEO\\"+filename);
+	}else if(filename.contains("cast")){
+		 file = new File(ROOT_DIR+"CAST\\"+"s_"+filename);
 	}else {
 		file = new File(ROOT_DIR + filename);}
 	
@@ -551,7 +553,7 @@ public class FileUploadAjaxController {
 	
 	@PostMapping("/replyInsert") //리뷰 정보입력
 	public Map<String, Object>  addReply(@RequestBody ReplyVo rvo ) {
-		
+	
 		log.info("/addContent===========rvo :" +  rvo);
 		int res =rservice.insert(rvo);
 		log.info("/addContent===========rvo.getRe_rno() :" +  rvo.getRe_rno());

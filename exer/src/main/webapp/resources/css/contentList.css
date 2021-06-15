@@ -439,8 +439,27 @@ float: left;
 .textBox2{
 	margin-left: 43px;
 }
+.CastBar{
+	padding: 15px 0 0 10;
+	    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.actors{
+	width: 50%;
+}
+.actorImg{
+	margin-right: 5px;
+	border-radius: 5px;
+}
 
-
-
-
+.mainImg #mainbox{
+	margin-top: 40px;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	background-position: center;
+    background-position-y: top;
+}
 

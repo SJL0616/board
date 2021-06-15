@@ -281,6 +281,7 @@ $.ajax({
 작품이름<input type="text" id="cname" ><br>
 줄거리<textarea rows="4"  cols="30" id="story" ></textarea><br>
 출연진이름(,구분)<input type="text" id="cast" name="casts"><br>
+<p>출연진 이름 띄어쓰기 주의.
 태그<input type="text" id="tags" ><br>
 방송국<input type="text" id="bc" ><br>
 연령제한<input type="text" id="agelimit" ><br>
