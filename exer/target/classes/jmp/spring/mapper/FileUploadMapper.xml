@@ -5,8 +5,8 @@
 
 
 <insert id="addcontents">
-insert into t_contents (cno,cname,story,cast,tags,bc,agelimit,end) values(
-SEQ_T_CONTENTS.nextval,#{cname},#{story},#{cast},#{tags},#{bc},#{agelimit},#{end})
+insert into t_contents (cno,cname,story,cast,tags,genre,bc,agelimit,end) values(
+SEQ_T_CONTENTS.nextval,#{cname},#{story},#{cast},#{tags},#{genre},#{bc},#{agelimit},#{end})
 </insert>
 
 <!-- 캐스트 관련 쿼리 -->

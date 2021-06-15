@@ -20,6 +20,7 @@ public class ContentVo {
 			private  String story ; 
 			private  String cast ; 
 			private  String tags ; 
+			private  String genre ; 
 			private  String bc ; 
 			private  String agelimit ; 
 			private  String end ;

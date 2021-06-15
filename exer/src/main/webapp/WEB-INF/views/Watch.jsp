@@ -45,8 +45,8 @@ $(document).ready(function() {
  $("#episodeListBtn").on("click", function () {
 	
 	var cno = $("#cno").val();
-	$("#reviewBox").hide();
-	$("#episodeList").show();
+	$("#reviewBox").fadeOut(500);
+	$("#episodeList").delay(500).fadeIn(500);
 	
 	/* showVList(cno); */
 
@@ -55,8 +55,8 @@ $(document).ready(function() {
 $("#reviewListBtn").on("click", function () {
 	
  	var cno = $("#cno").val();
-	$("#reviewBox").show();
-	$("#episodeList").hide();
+	$("#reviewBox").delay(500).fadeIn(500);
+	$("#episodeList").fadeOut(500);
 
 
 })

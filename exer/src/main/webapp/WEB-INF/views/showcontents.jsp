@@ -52,48 +52,49 @@ $(document).ready(function(){
 	});
 	
 
- $("#episodeListBtn").on("click", function () {
+ $("#episodeListBtn").on("click", function (event) {
 	
 	var cno = $("#cno").val();
-	$(".reviewBox").hide();
-	$("#episodeList").show();
-	$(".castList").hide();
-	/* showVList(cno); */
-	$(".mainImg").hide();
+	$(".reviewBox").fadeOut(500);
+	$(".castList").fadeOut(500);
+	$(".mainImg").fadeOut(500);
 
+	
+	fadeIn("#episodeList",event);
+	
 })
 
 $("#reviewListBtn").on("click", function () {
 	
  	var cno = $("#cno").val();
-	$(".reviewBox").show();
-	$("#episodeList").hide();
-	$(".castList").hide();
-	$(".mainImg").hide();
-
+	$("#episodeList").fadeOut(500);
+	$(".castList").fadeOut(500);
+	$(".mainImg").fadeOut(500);
+	
+	fadeIn(".reviewBox",event);
 })
 $("#castListBtn").on("click", function () {
 	
  	var cno = $("#cno").val();
-	$(".reviewBox").hide();
-	$("#episodeList").hide();
-	$(".castList").show();
-	$(".mainImg").hide();
+	$(".reviewBox").fadeOut(500);
+	$("#episodeList").fadeOut(500);
+	$(".mainImg").fadeOut(500);
 
-
+	fadeIn(".castList",event);
 })
 
 $("#showMainImg").on("click", function () {
 	
  	var cno = $("#cno").val();
-	$(".reviewBox").hide();
-	$("#episodeList").hide();
-	$(".castList").hide();
-	$(".mainImg").show();
+	$(".reviewBox").fadeOut(500);
+	$("#episodeList").fadeOut(500);
+	$(".castList").fadeOut(500);
 
-
+	fadeIn(".mainImg",event);
 })
-
+function fadeIn(name,event) {//800만큼 기다린 후에(.delay) animation 실행.
+	$(name).delay(500).fadeIn(500);
+}
 	
           $("#OrderByVno").on("click", function () {
         	  var cno = $("#cno").val(); 
@@ -629,9 +630,9 @@ ${vvo }
                    <li>${cvo.bc}/${cvo.agelimit }/${cvo.end }</li> 
                    <li id="li2"><h1>${cvo.cname}</h1></li> 
                    <br>
-                   <li>장르</li> 
+                   <li>${cvo.genre}</li> 
                    <li>평점 ${cvo.rating}</li> 
-                   <div> <a >1회 이어보기</a>  </div>
+                  
                    <li id="contentRate" class="rateBox">+평점
                   
                    </li> 
@@ -639,9 +640,18 @@ ${vvo }
                    <li></li> 
                 </ul>
                </div>
-         
+      
            
           </div>
+           <c:forEach items="${vvo}" var="vvo" begin="0" end="0" step="1" varStatus="status">
+                    <!-- 나중에는 forEach문 안쓰고 user테이블에 저장해둔 vno값을 user.vno로 불러오자. -->
+	             <a class="MainButton"  href=/Watch?vno=${vvo.vno}&cno=${cvo.cno} >
+                   <div class="watchButton"> 1화 보기  </div>
+                 </a> 
+                
+	            
+	       </c:forEach>
+          
         </header>
   </div>    
   <div id="contents"> 
@@ -666,13 +676,14 @@ ${vvo }
 	            </div>
 	           
 	            <div id="episodesBar">
-	             <c:forEach items="${vvo}" var="vvo">
+	             <c:forEach items="${vvo}" var="vvo" begin="0" step="1" varStatus="i">
+	             
 	             <div class="episodes" >
 	             <a  class="thumA" href=/Watch?vno=${vvo.vno}&cno=${cvo.cno}>
 
 	            <img alt="thumbnail" class="thumbnail" src=/display?filename=${vvo.vfilename}-thumb.png width="120" height="67">
 	            <div class="episodesText">
-	            <div class="text1"><p>${cvo.cname}<br>${vvo.vfilename}<br><span class="text2" >2021/05/28</span></p></div>
+	            <div class="text1"><p>${cvo.cname}<br><br><span class="text2" >2021/05/28</span></p></div>
 	            </div>
 	             
 	            </div></a> 
@@ -782,7 +793,11 @@ ${vvo }
          </section><!-- CastList 섹션끝 -->
          
           <section class="mainImg">
-          <div id="mainbox" style="background-image: url('/display?filename=${cvo.pfilename }')"></div>
+          <div id="mainbox" <%-- style="background-image: url('/display?filename=${cvo.pfilename }')" --%>>
+                <img alt="" src=/display?filename=${cvo.pfilename }>
+          </div>
+          
+          
           </section>
              
 		       

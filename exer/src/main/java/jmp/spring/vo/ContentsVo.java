@@ -9,6 +9,7 @@ public class ContentsVo {
  String story;
  String cast;
  String tags;
+ String genre;
  String bc;
  String agelimit;
  String end;

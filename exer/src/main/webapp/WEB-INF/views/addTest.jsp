@@ -103,6 +103,7 @@ function ajaxContentsInsert() {
 				story : $("#story").val(),
 				cast : $("#cast").val(),
 				tags : $("#tags").val(),
+				genre : $("#genre").val(),
 				bc : $("#bc").val(),
 				agelimit : $("#agelimit").val(),
 				end : $("#end").val()
@@ -283,6 +284,7 @@ $.ajax({
 출연진이름(,구분)<input type="text" id="cast" name="casts"><br>
 <p>출연진 이름 띄어쓰기 주의.
 태그<input type="text" id="tags" ><br>
+장르<input type="text" id="genre" ><br>
 방송국<input type="text" id="bc" ><br>
 연령제한<input type="text" id="agelimit" ><br>
 완결유무<input type="text" id="end" >
