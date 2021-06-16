@@ -478,6 +478,8 @@ float: left;
 	width: 50%;
 }
 .actorImg{
+	    position: relative;
+   /*  right: 15px; */
 	margin-right: 5px;
 	border-radius: 5px;
 }
@@ -492,4 +494,9 @@ margin-top: 40px;
     background-repeat: no-repeat;
 }
 
-
+.castImg {
+    margin: 0 15px 0 0;
+    width: 150px;
+    height: 170px;
+    overflow: hidden;
+}

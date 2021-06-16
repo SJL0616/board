@@ -440,6 +440,12 @@ function showReply() {//안씀
 			  });//ajax
 	}
 	
+	
+    
+
+     
+	  
+	  
 </script>
 
 
@@ -490,14 +496,29 @@ ${cvo }
   <input type="text" id="cno" value="${cvo.cno}">
         <section id="Videoinfo">
             <div id="tutle">
-           <h2 style="font-size: 32px; color: white; margin-bottom: 10px; margin-top:33px ">${vvo.vfilename }</h2>
-           <p style="font-size: 15px; margin-bottom: 25px">방송사 | 2000-00-00 | +20:20</p>
+            
+           <h2 class="vfilename" style="font-size: 32px; color: white; margin-bottom: 10px; margin-top:33px" ></h2>
+           <p style="font-size: 15px; margin-bottom: 25px;">방송사 | 2000-00-00 | +20:20</p>
            <p style="font-size: 14px">${vvo.story}</p>
      
            </div>  
-           <a href=/showcontents?cno=${cvo.cno}>
+           <script type="text/javascript">
+           //.mp4를 filename에서 떼어내기 위해,  indexOf로 "." 까지 길이를 구하고, 그 값(인덱스)을 subString 끝(end) 지점에 넣고 0(시작점)부터 떼어온 filename을 
+           //var name 변수에 넣어서 text+vno span 클래스에 넣음.
+            var vno= '${vvo.vno}';
+            var fileName= '${vvo.vfilename}';
+            var idx = fileName.indexOf('.'); 
+            console.log("============idx",idx);
+          var name = fileName.substring(0,idx);
+          console.log("============name",name);
+          console.log("============.text+vno",".text"+vno);
+         $(".vfilename").text(name);
+           
+           </script>
+        
+           <a href=/showcontents?cno=${cvo.cno} >
               <div id="thumbnail_group2" style="margin-top: 20px">
-	              <img src=/display?filename=s_${cvo.pfilename } alt="sns" class="sns" width="160" height="230"> 
+	              <img src=/display?filename=s_${cvo.pfilename } alt="sns" class="sns" width="160" height="230"></img> 
 	           
 	              <div id="info" style="height: 230;">
 		                <ul ><!-- 컨텐츠리스트 페이지 출력 메서드 -->

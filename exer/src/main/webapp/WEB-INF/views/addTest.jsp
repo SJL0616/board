@@ -86,6 +86,7 @@ function ajaxContentsInsert() {
 	            var strInput = "";
 	            var strBtn = "<input type=\"button\" value=\"보내기\" id=\"sendCastBtn\" onclick=\"sendCastFile()\" ><br/>";
 	            console.log("===================arrValue",arrValue);
+	            
 	            for (var i = 0; i < arrValue.length; i++){
 	            	strInput += "<form action=# method=\"get\" name="+i+" >"
 	                +"<input type=\"text\"  name=\"castname\" id="+i+" value="+arrValue[i] +" /><br/>"
@@ -281,7 +282,7 @@ $.ajax({
 <!-- 번호<input type="text" id="cnum" ><br> -->
 작품이름<input type="text" id="cname" ><br>
 줄거리<textarea rows="4"  cols="30" id="story" ></textarea><br>
-출연진이름(,구분)<input type="text" id="cast" name="casts"><br>
+출연진이름(,구분)<input type="text" id="casts" name="casts"><br>
 <p>출연진 이름 띄어쓰기 주의.
 태그<input type="text" id="tags" ><br>
 장르<input type="text" id="genre" ><br>

@@ -677,16 +677,33 @@ ${vvo }
 	           
 	            <div id="episodesBar">
 	             <c:forEach items="${vvo}" var="vvo" begin="0" step="1" varStatus="i">
-	             
+	             		             
+		         
+		             
 	             <div class="episodes" >
 	             <a  class="thumA" href=/Watch?vno=${vvo.vno}&cno=${cvo.cno}>
 
 	            <img alt="thumbnail" class="thumbnail" src=/display?filename=${vvo.vfilename}-thumb.png width="120" height="67">
 	            <div class="episodesText">
-	            <div class="text1"><p>${cvo.cname}<br><br><span class="text2" >2021/05/28</span></p></div>
+	            <div class="text1"><p>${cvo.cname}<br>
+	            <span class=text${vvo.vno} ></span><br>
+	            <span class="text2" >2021/05/28</span></p></div>
 	            </div>
 	             
 	            </div></a> 
+	                <script type="text/javascript">
+	                //.mp4를 filename에서 떼어내기 위해,  indexOf로 "." 까지 길이를 구하고, 그 값(인덱스)을 subString 끝(end) 지점에 넣고 0(시작점)부터 떼어온 filename을 
+	                //var name 변수에 넣어서 text+vno span 클래스에 넣음.
+		             var vno= '${vvo.vno}';
+		             var fileName= '${vvo.vfilename}';
+		             var idx = fileName.indexOf('.'); 
+		             console.log("============idx",idx);
+		           var name = fileName.substring(0,idx);
+		           console.log("============name",name);
+		           console.log("============.text+vno",".text"+vno);
+		          $(".text"+vno).text(name);
+
+		             </script>
 	            
 	            </c:forEach>
 	            </div>
@@ -775,13 +792,18 @@ ${vvo }
 	            </div> --%>
 		        <div id="episodesBar" class="CastBar">
 		             <c:forEach items="${castVo}" var="cvo">
-		             
+
 		              
 				        <div class="episodes actors">
-				         <a class="thumA" href="#"><img alt=\"thumbnail\" class="thumbnail actorImg" src=/display?filename=${cvo.profileImgName} width="120" height="170">
+				         <a class="thumA" href="#">
+				         <div class="castImg">
+				         <img alt=\"thumbnail\" class="thumbnail actorImg" src=/display?filename=${cvo.profileImgName} >
+				         </div>
 				         <div class=\"episodesText\">
 				         <div class="text1">
-				         <p>${cvo.castname }<br><br><span class="text2" >${cvo.cast }</span></p>
+				         <p>${cvo.castname }<br>
+				         <br>
+				         <span class="text2" >${cvo.cast }</span></p>
 				         </div>
 				         </div>
 				         </div></a>
