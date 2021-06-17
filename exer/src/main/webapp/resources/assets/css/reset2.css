@@ -1,0 +1,58 @@
+/* 占쎈연獄쏉옙 �룯�뜃由곤옙�넅 */
+/* body,div,ul,li,dl,dd,dt,ol,h1,h2,h3,h4,h5,h6,input,fieldset,legend,p,select,table,th,td,tr,textarea,button,form,figure,figcaption{margin:0; padding:0;}
+ */
+/* a 筌띻낱寃� �룯�뜃由곤옙�넅 */
+a { color: rgb(170, 170, 170); text-decoration: none;}
+a:hover {color: #2698cb;}
+
+/* 占쎈？占쎈뱜 �룯�뜃由곤옙�넅 */
+/* body, input, textarea, select, button, table {font-family:'Noto Sans KR', AppleSDGothicNeo-Regular,'Malgun Gothic','筌띾쵐占� �⑥쥓逾�',dotum,'占쎈즻占쏙옙',sans-serif; color: #222; font-size: 13px; line-height: 1.5;}
+ */
+/* 占쎈？占쎈뱜 占쎈뮞占쏙옙占쎌뵬 �룯�뜃由곤옙�넅 */
+em,address {font-style: normal;}
+
+/* �뇡遺얄뵺疫꿸퀬�깈 �룯�뜃由곤옙�넅 */
+ul,li,ol {list-style:none;}
+
+/* 占쎌젫筌륅옙 占쎄묶域뱄옙 �룯�뜃由곤옙�넅 */
+/* h1,h2,h3,h4,h5,h6 {font-size: 13px; font-weight: normal;} */
+
+/* 占쎈�믭옙紐®뵳占� �룯�뜃由곤옙�넅 */
+img,fieldset {border:0 none;}
+
+/* 甕곌쑵�뱣 �룯�뜃由곤옙�넅 */
+button {border: 0;}
+
+/* 獄쏆꼷�벓占쎌굨 */
+
+
+/* clearfix */
+.clearfix{
+	height: 80px;
+	display: flex;
+    justify-content: flex-start;
+    align-items: center;}
+.clearfix:before, .clearfix:after {display: block; content: '';line-height: 0;}
+.clearfix:after {clear: both;}
+
+/* IR 占쎌뒞�⑨옙 */
+.ir_pm {display:block; overflow:hidden; font-size:0; line-height:0; text-indent:-9999px;} /* 占쎌벥沃섎챷�뿳占쎈뮉 占쎌뵠沃섎챷占쏙옙�벥 占쏙옙筌ｏ옙 占쎈�볩옙�뮞占쎈뱜�몴占� 占쎌젫�⑤벏釉�占쎈뮉 野껋럩�뒭(Phark Method) */
+.ir_wa {display:block; overflow:hidden; position:relative; z-index:-1; width:100%; height: 100%;} /* 占쎌벥沃섎챷�뿳占쎈뮉 占쎌뵠沃섎챷占쏙옙�벥 占쏙옙筌ｏ옙 占쎈�볩옙�뮞占쎈뱜嚥∽옙 占쎌뵠沃섎챷占썲첎占� 占쎈씨占쎈선占쎈즲 占쏙옙筌ｏ옙 占쎈�볩옙�뮞占쎈뱜�몴占� 癰귣똻肉т틠�눊�э옙�쁽 占쎈막 占쎈르(WA IR) */
+.ir_so {overflow: hidden; position:absolute; width:0; height:0; line-height:0; text-indent:-9999px;} /* 占쏙옙筌ｏ옙 占쎈�볩옙�뮞占쎈뱜揶쏉옙 占쎈툡占쎈빒 占쎌젔域뱀눘苑�占쎌뱽 占쎌맄占쎈립 占쎈떜繹먲옙 占쎈�볩옙�뮞占쎈뱜�몴占� 占쎌젫�⑤벏釉� 占쎈르 */
+
+/* 占쎈툡占쎌뵠�굜占� 占쎌뵠沃섎챷占� 筌ㅼ뮇�읅占쎌넅 占쎌삂占쎈씜 */
+.icon {background-image: url(../img/icon.png);}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 1.5dppx){
+            .icon {background-image: url(../img/icon@2.png); background-size: 500px;}
+       }
+
+.searchBtn{
+	font-size: 15px;
+	    position: relative;
+    right: -350px;
+    color: white;
+    opacity: 0.7;
+}

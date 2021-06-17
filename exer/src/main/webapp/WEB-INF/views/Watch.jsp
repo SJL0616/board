@@ -456,9 +456,9 @@ function showReply() {//안씀
 	<title>Home</title>
 </head>
 <body>
-
-${vvo }
-${cvo }
+ <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>  
+<%-- ${vvo }
+${cvo } --%>
 <div id="container">
   
   
@@ -655,12 +655,11 @@ ${cvo }
 
    </div> 
     </div>
-        <footer>
-            <p>ⓒLee Sang-Jun 2021</p>
 
-        </footer>
  
 
+    <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>  
+            <p>ⓒLee Sang-Jun 2021</p>
 
 </body>
 <footer></footer>

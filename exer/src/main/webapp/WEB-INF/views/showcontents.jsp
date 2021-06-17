@@ -13,7 +13,7 @@
  
 <script type="text/javascript">
 $(document).ready(function(){
-	
+	 
 	//시작후 별 출력
 	var htmlContent= "";
 	var rating= ${cvo.rating};
@@ -28,6 +28,9 @@ $(document).ready(function(){
 	
 	$(".start").addClass('active')
     $(this).removeClass('start')
+    
+    $(".showBtn").addClass('active')
+    
 	/* showAllList();	 */
 	
 	$(".btn").on("click", function (){
@@ -291,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function(){
  
  function showReview(i) {//번호에 맞춰 리뷰 출력
 	 $("#pageNum").val(i);
-	 showRList();
+	 showRList(); 
 }
  
 
@@ -614,14 +617,16 @@ function setStars(htmlContent,rating){
 	<title>Home</title>
 </head>
 <body>
-${cvo }
-${vvo }
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> 
+<%-- ${cvo }
+${vvo } --%>
 <div id="container">
+<%-- --%>
    <div id="poster">
    <div id="posterbox" style="background-image: url('/display?filename=${cvo.pfilename }');">
    <!--  <img src=/display?filename=${cvo.pfilename } alt="backimg" id="posterImg"  height="100%" width="100%" > -->
     </div> 
-        <header>
+        <header id="contentHeader">
         <div id="thumbnail_group">
            <img src=/display?filename=s_${cvo.pfilename } alt="sns" class="sns" width="235" height="350"> 
            
@@ -854,12 +859,13 @@ ${vvo }
         </section>
    
    </div> 
-        <footer>
+   
+    </div>
+  
+     <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> 
             <p>ⓒLee Sang-Jun 2021</p>
 
-        </footer>
-    </div>
-
+     
 
 </body>
 <footer></footer>

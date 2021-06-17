@@ -94,11 +94,14 @@ public class FileUploadAjaxController {
 	
 
 	@GetMapping("/getAllFileList/")
-	public java.util.List<ContentVo> getalllist(){
+	public Map<String, Object>  getalllist(){
 	List<ContentVo> list=	cservice.getAllList();
+	int length =list.size();
 
-		
-		return list;
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("list", list);
+	map.put("length", length);
+		return map;
 	}
 	
 	@PostMapping("/addCast") //배우 정보입력
@@ -619,7 +622,7 @@ public class FileUploadAjaxController {
 	}
 	
 
-	@GetMapping("/getImgList/{type}")
+	@GetMapping("/getImgList/{type}")//index 화면 
 	public Map<String, Object> getImgList(@PathVariable("type") String type){
 
 		 List<ContentVo> clist= cservice.getIndexList(type);
@@ -628,6 +631,7 @@ public class FileUploadAjaxController {
 		if(clist!=null) {
 			map.put("result", "success");
 		map.put("clist", clist);
+		map.put("type", type);
 
 		
 		}

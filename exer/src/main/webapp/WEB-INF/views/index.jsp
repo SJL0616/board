@@ -50,6 +50,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
    <script type="text/javascript">
   $(document).ready(function(){
 	getImgList(1);
+	
+	  $(".homeBtn").addClass('active')
 })
 
    
@@ -67,7 +69,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 </head>
 
 <body>
-    <header id="header">
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> 
+  <!--   <header id="header">
         <div class="container">
             <div class="row">
                 <div class="header clearfix">
@@ -98,7 +101,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 
         </div>
 
-    </header>
+    </header> -->
     <!-- //header-->
 
     <section id="banner">
@@ -247,7 +250,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                         </div>
                         <!-- //chart_cont1-->
                         <div class="swiper-container2">
-                            <div class="chart_cont2 swiper-wrapper">
+                            <div class="chart_cont2 swiper-wrapper popularList">
                                 <div class="swiper-slide">
                                     <div class="poster">
                                         <figure>
@@ -325,7 +328,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                         </div>
                         <!-- //chart_cont2-->
                         <div class="swiper-container2">
-                            <div class="chart_cont3 swiper-wrapper">
+                            <div class="chart_cont3 swiper-wrapper recList">
                                 <div class="swiper-slide">
                                     <div class="poster">
                                         <figure>
@@ -566,17 +569,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             },
         });
 
-        // nav 탭 메뉴
-        const navBtn = $(".nav > ul > li ")
-
-        navBtn.click(function (e) {
-            e.preventDefault();
-            // 사용자가 클릭한 버튼 확인해서 변수로 담아줌.
-            const target = $(this);
-            const index = target.index();
-            navBtn.removeClass("active");
-            target.addClass("active");
-        })
+ 
 
         //드라마차트 탭 메뉴
         const movBtn = $(".movie_title > ul > li");

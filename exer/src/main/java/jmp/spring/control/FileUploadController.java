@@ -53,6 +53,12 @@ public class FileUploadController {
 	public void addContent(ContentsVo contents) {
 		
 	}
+	
+	@GetMapping("/header")
+	public void showheader() {
+		
+	
+	}
 	@GetMapping("/index")
 	public void showIndex() {
 		

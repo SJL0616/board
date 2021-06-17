@@ -105,10 +105,10 @@ where cname= #{cname}
 <choose>
 <when test="type=='rec'">
 
-select cname,pfilename,agelimit from t_contents where rec is not null  order by cno desc  
+select cno, cname,pfilename,agelimit from t_contents where rec is not null  order by cno desc  
 </when>
 <otherwise>
-select row_num,cname,pfilename,agelimit from
+select row_num,cno,cname,pfilename,agelimit from
 (
 select  ROW_NUMBER() 
 <if test="type== 'recent'">
@@ -117,7 +117,7 @@ over(order by cno desc)
 <if test="type== 'popular'">
 over(order by rating asc) 
 </if>
-row_num, cname,pfilename,agelimit from t_contents 
+row_num,cno,cname,pfilename,agelimit from t_contents 
 )where rownum BETWEEN 1 and 5
 
 </otherwise>
