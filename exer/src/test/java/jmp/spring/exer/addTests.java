@@ -31,6 +31,15 @@ public class addTests {
 	ReplyService rservice;
 	
 	@Test
+	public void getContents() {
+		ContentVo cvo = new ContentVo();
+		cvo.setType("popular");
+		
+		umapper.getIndexList(cvo.getType());
+		
+	}
+	
+	
 	public void getReply() {
 		Criteria cri = new Criteria(2, 10, 16);
 		

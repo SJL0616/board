@@ -68,6 +68,11 @@ public class addContentsServiceimpl implements addContentsService {
 		// TODO Auto-generated method stub
 		return mapper.getCastList(cno);
 	}
+	@Override	  // 메인페이지 이미지+ 정보 출력 쿼리
+	public List<ContentVo> getIndexList(String type) {
+		// TODO Auto-generated method stub
+		return mapper.getIndexList(type);
+	}
 
 
 }

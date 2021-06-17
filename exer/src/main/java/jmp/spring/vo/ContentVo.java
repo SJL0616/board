@@ -26,8 +26,12 @@ public class ContentVo {
 			private  String end ;
 			private  int rating ;
 			
+			private  String type;
+			
 			private  String savepath;
 			private  String s_savepath;
+			
+			public ContentVo() {};
 			
 			public ContentVo(String cname, String uploadpath, String filename) {
 		/* UUID uuid = UUID.randomUUID(); */

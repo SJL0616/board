@@ -53,7 +53,11 @@ public class FileUploadController {
 	public void addContent(ContentsVo contents) {
 		
 	}
+	@GetMapping("/index")
+	public void showIndex() {
+		
 	
+	}
 	@GetMapping("/contentsList")
 	public void showcontentsList() {
 		

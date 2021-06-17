@@ -44,6 +44,7 @@ public interface FileUploadMapper {
 	 * attachno);
 	 */
 	 
-	public ContentVo get(int cno);
+	public ContentVo get(int cno); //show contents 파일 보여주기
+	public List<ContentVo> getIndexList(String type);  // 메인페이지 이미지+ 정보 출력 쿼리
 	public ContentVo getBycname (String cname);
 }

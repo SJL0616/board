@@ -618,4 +618,24 @@ public class FileUploadAjaxController {
 		
 	}
 	
+
+	@GetMapping("/getImgList/{type}")
+	public Map<String, Object> getImgList(@PathVariable("type") String type){
+
+		 List<ContentVo> clist= cservice.getIndexList(type);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(clist!=null) {
+			map.put("result", "success");
+		map.put("clist", clist);
+
+		
+		}
+		else {
+			map.put("result", "fail");}
+		return map;
+		
+	}
+	
+	
 }
