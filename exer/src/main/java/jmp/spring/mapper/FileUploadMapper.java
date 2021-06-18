@@ -27,7 +27,9 @@ public interface FileUploadMapper {
 	public List<VideoVo> getAllVideoD(int cno);
 	public VideoVo getOneVideo(int vno);
 	
-	public List<ContentVo> getAllList();
+	public List<ContentVo> getAllList();//컨텐츠리스트 출력
+	public List<ContentVo> getFilteredList(ContentVo cvo);//필터된 리스트 출력
+	
 	
 	public List<ContentVo> getList(int attachno);
 	

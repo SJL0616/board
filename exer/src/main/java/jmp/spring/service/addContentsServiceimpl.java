@@ -73,6 +73,11 @@ public class addContentsServiceimpl implements addContentsService {
 		// TODO Auto-generated method stub
 		return mapper.getIndexList(type);
 	}
+	@Override
+	public List<ContentVo> getFilteredList(ContentVo cvo) {
+		// TODO Auto-generated method stub
+		return mapper.getFilteredList(cvo);
+	}
 
 
 }

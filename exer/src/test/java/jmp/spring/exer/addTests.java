@@ -31,6 +31,19 @@ public class addTests {
 	ReplyService rservice;
 	
 	@Test
+	public void getfilteredList() {
+		ContentVo cvo = new ContentVo();
+		String[] tagArray = null;
+		String[] genreArray = {"¾×¼Ç" };
+		
+		cvo.setTagArray(tagArray);
+        cvo.setGenreArray(genreArray);		
+		
+       umapper.getFilteredList(cvo);
+        
+	}
+	
+	
 	public void getContents() {
 		ContentVo cvo = new ContentVo();
 		cvo.setType("popular");

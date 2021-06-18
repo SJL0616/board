@@ -104,6 +104,36 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
+	@GetMapping("/getSelectedList/{selectedG}/{selectedT}")
+	public Map<String, Object>  getselectedlist(@PathVariable("selectedG") String[] selectedG,
+			@PathVariable("selectedT") String[]  selectedT){
+		log.info("/addCast===========  selectedG :" +  selectedG);
+		log.info("/addCast=========== selectedT :" + selectedT);
+		if(selectedT[0]=="0") {//첫번째 배열 요소가 0이면 null로 설정.
+			selectedT=null;
+		}
+		if(selectedG[0]=="0") {
+			selectedG=null;
+		}
+		String[] genreArray= selectedG;
+		String[] tagArray= selectedT;
+		
+		ContentVo cvo = new ContentVo();
+		cvo.setTagArray(tagArray);
+		cvo.setGenreArray(genreArray);
+		
+	List<ContentVo> list=	cservice.getFilteredList(cvo);
+	int length =list.size();
+
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("list", list);
+	map.put("length", length);
+		return map;
+	}
+	
+	
+	
+	
 	@PostMapping("/addCast") //배우 정보입력
 	public Map<String, Object>  addcast(MultipartFile[] uploadFile,
 			 String castname, String cast ) {

@@ -9,11 +9,130 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
  
 <script type="text/javascript">
 $(document).ready(function(){
+	
 
-		showAllList();	
+		 showAllList(); 
 
 
+		$(document).on("change",function(){
+			
+		});
+		
+		
+		//필터 value를 통해서 작품리스트 가져오기.
+		 document.querySelector('.Filters').addEventListener('click',function(e){ //checkbox의 name 
+    	console.log("===========e:",e);
+        var elem = e.target;
+        console.log("===========elem:",elem);
+        console.log("===========elem.value:",elem.value);
+       if(elem.value!=null){
+        
+        var items = document.querySelectorAll('.genrecheckBox');
+      
+        var selectedG =[];
+       items.forEach(function(item, idx){
+        	console.log("===========idx:",idx);     
+        	
+            if(item.checked){
+            	console.log("==========item.value:",item.value);  
+            	
+             selectedG.push(item.value);
+            }else{
+              
+            }
+        }); 
+       
+       console.log("========== selectedG:", selectedG);  
+
+       //태그 필터 배열에 저장
+       items = document.querySelectorAll('.tagcheckBox');
+     
+       var selectedT =[];
+      items.forEach(function(item, idx){
+       	console.log("===========idx:",idx);     
+       	
+           if(item.checked){
+           	console.log("==========item.value:",item.value);  
+            selectedT.push(item.value);
+           }else{
+             
+           }
+       }); 
+      console.log("========== selectedT:", selectedT);  
+      if(selectedG[0]==null){// 아무것도 selected 가 안 됬을 경우 0을 추가해서 넘김.
+    	  selectedG.push("0");
+      }
+      if(selectedT[0]==null){
+    	  selectedT.push("0");
+      }
+      console.log("selectedG[0]==0 && selectedT[0]==0",selectedG[0]=="0" && selectedT[0]=="0");
+       if(selectedG[0]=="0" && selectedT[0]=="0"){
+    	   showAllList();
+       }else{
+    	   getSelectedList(selectedG,selectedT);
+       }
+       //필터링된 데이터 호출
+       }//elem.value가  null이 아니면
+		 });//끝
+		
+		
+		$(".filterFormat").on("click",function(){// 필터 포멧 버튼
+			
+			
+			var items = document.querySelectorAll('.checkBox');
+
+	       items.forEach(function(item, idx){
+	        	console.log("===========idx:",idx);     
+	        	
+	        	item.checked= false;
+	         
+	        }); 
+	       showAllList();	
+		});
+		
+		
 });
+
+//필터를 db에 전달해서 해당하는 자료 선출
+function getSelectedList(selectedG,selectedT){
+	   console.log("==========selectedT selectedG:", selectedT,selectedG); 
+	   
+	$.ajax({
+		
+		url: '/getSelectedList/'+selectedG+'/'+selectedT,
+		method: 'get',
+		dataType : 'json',
+		
+	success: function(data) {
+		console.log("callBack result :",data);
+		
+		var length = data.length;
+		$(".contentN").text(length);
+		var htmlContent ="";
+		$.each(data.list, function(index, item){
+			console.log("==========아이템:"+item.pfilename);
+
+		 htmlContent +="<li><a href=/showcontents?cno="+item.cno+">"
+          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
+          +"<div class=\"showend\">"+item.end+"</div>"
+          +"<div class=\"showcname\">"+item.cname+"</div></a>";
+				        
+		
+		
+		});
+
+		$(".fileListView").html(htmlContent);
+
+	},
+	error : function() {
+		console.log("error"); 
+	}
+	
+	});
+	
+	
+}
+
 
 function showAllList() {
 
@@ -30,32 +149,19 @@ function showAllList() {
 		var htmlContent ="";
 		$.each(data.list, function(index, item){
 			console.log("==========아이템:"+item.pfilename);
-			console.log("==========인코딩전:"+item.s_savepath);
-			var s_savePath = encodeURIComponent(item.s_savepath);
-			var savePath = encodeURIComponent(item.savepath);
-			
-			 htmlContent ; 
-			/*  if(item.filetype == "Y"){ */
+
 				
-					console.log("==========인코딩후:"+savePath);
+				
 				 htmlContent  +="<li><a href=/showcontents?cno="+item.cno+">"
 				          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
 				          +"<div class=\"showend\">"+item.end+"</div>"
 				          +"<div class=\"showcname\">"+item.cname+"</div></a>";
-				        
-						
-			/*  }else{
-				 htmlContent +="<li>"+item.filename
-				 +"<a href=/download?filename="+savePath+"></li>"; 
-						 //파일네임에는 파라메터로 넘길수없는 데이터가 있어서 인코딩이 필요.
-			 } */
+				      
 		
 		});
-		console.log($(".fileListView").html(htmlContent));
 		
 		$(".fileListView").html(htmlContent);
-/* 		var file ="<img alt='immage' src='C:\upload\'"+data.savepath+">";
-		$("#text2").html(file);  */
+
 	},
 	error : function() {
 		console.log("error"); 
@@ -139,6 +245,68 @@ height: 100%;
     border-bottom: 1px solid rgb(57, 57, 57);
 }
 
+.genreFileters{
+padding: 3px 0 30px 0px;
+    border-bottom: 1px solid rgb(57, 57, 57);
+}
+.checkbox{
+ padding: 15px 0;
+}
+.Filters ul {
+    padding-left: 5px;
+}
+.Filters li {
+    margin-bottom: 10px;
+}
+
+.genreFileters label,.tagFileters label{/* 라벨 범위 설정  */
+/* position: relative;
+  display: inline-block;
+    margin-left: -6px;
+    z-index: 10;
+    width: 16px;
+    height: 16px;
+    background-size: 30px 60px; 
+    cursor: pointer; */
+    
+    /* position: relative;  */
+    display: inline-block;
+    /* margin-left: -6px; */
+    /* z-index: 10; */
+    width: 16px;
+    height: 16px;
+    /* background-size: 30px 60px; */
+    cursor: pointer;
+    
+}
+
+.genreFileters label span, .tagFileters label span{
+    line-height: 1;
+    position: relative;
+    display: block;
+    left: 20px;
+    width: 60px;
+}
+
+
+input[type="checkbox"] + label{
+border:1px solid rgb(57, 57, 57);
+
+}
+ input[type="checkbox"]:checked + label{
+ background-size: cover;
+	background-image: url('/resources/icon_fcheck_on.png');
+	background-repeat:no-repeat;
+	
+	 background-color:  rgb(37, 37, 37);
+}
+.filterFormat{
+ cursor: pointer;
+    background-color: transparent;
+    border: 1px solid;
+    color: rgb(170, 170, 170);
+    border-radius: 3px;
+}
 </style>
 <head>
 	<title>Home</title>
@@ -150,9 +318,53 @@ height: 100%;
 
 <div id="contents">
     <section class="filterList">
- <div class="titlebar"><h1>필터</h1><button type="button">초기화</button></div>
+ <div class="titlebar"><h1>필터</h1><button type="button" class="filterFormat">초기화</button>
+   <!--  <div class="test">
+    <input type="checkbox" name="rating" id="rating0.5" value="1" class="rate_radio half" title="0.5점" hidden="hidden">
+				                <label for="rating0.5"></label>
+				               </div>  -->
+ </div>
+    <div class="Filters">
+    
+    <div class="genreFileters">
+    <h4>장르</h4>
+    <ul>
+    <li>
+    <input type="checkbox" value="액션" name="tagFilters" class="genrecheckBox checkBox" id="actionG"  hidden="hidden">
+       <label for="actionG"><span>액션</span> </label>
+    </li>
+    <li>
+     <input type="checkbox" value="일상" name="tagFilters"  class="genrecheckBox checkBox" id="ordinaryG"  hidden="hidden">
+    <label for="ordinaryG" ><span>일상</span></label>
+    </li>
+    <li>
+    <input type="checkbox" value="모험" name="tagFilters"  class="genrecheckBox checkBox" id="adventureG"  hidden="hidden">
+    <label for="adventureG" ><span>모험</span></label>
+    </li>
+    </ul>
+    </div>
+    
+    <div class="tagFileters">
+    <h4>태그</h4>
+    <ul>
+     <li>
+     <input type="checkbox" value="활극" name="tagF" class="tagcheckBox checkBox" id="comicT"  hidden="hidden">
+    <label for="comicT" ><span>활극</span></label>
+      </li>
+      <li>
+     <input type="checkbox" value="드라마" name="tagF"  class="tagcheckBox checkBox" id="dramaT"  hidden="hidden">
+    <label for="dramaT" ><span>드라마</span></label>
+     </li>
+     <li>
+    <input type="checkbox" value="애니" name="tagF"  class="tagcheckBox checkBox" id="aniT"  hidden="hidden">
+    <label for="aniT" ><span>애니</span></label>
+    </li>
+    </ul>
+    </div>
     
     
+    </div>
+ 
     </section>
 
 
@@ -163,13 +375,13 @@ height: 100%;
 	  
 	  <div class="selectBox">
 	  <select id="selectOrder">
-	  <option>최신순</option>
-	  <option>방영일순</option>
-	  <option>인기순</option>
-	  <option>가나다순</option>
+	  <option value="">최신순</option>
+	  <option value="">방영일순</option>
+	  <option value="">인기순</option>
+	  <option value="">가나다순</option>
 	  </select>
-	  
 	  </div>
+	  
 	</div>
 	
 	
@@ -189,22 +401,6 @@ height: 100%;
 
 
 </div>
-<!--   <div >
-                            <table width="100%" class="table table-striped table-bordered table-hover" >
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>제목</th>
-                                        <th>작성자</th>
-                                        <th>작성시간</th>
-                                        <th>수정시간</th>
-                                      
-                                    </tr>
-                                    <tr>
-                                    
-                                    </tr>
-                                    </thead>
-                                    </table>
-                                    </div> -->
+
 </body>
 </html>

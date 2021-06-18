@@ -26,7 +26,7 @@ public interface addContentsService {
 	public List<CastVo>getCastList(int cno);//cno(작품 번호)로 cast목록 가져오는 maaper
 	public List<ContentVo> getIndexList(String type);  // 메인페이지 이미지+ 정보 출력 쿼리
 	public List<ContentVo> getAllList();
-	
+	public List<ContentVo> getFilteredList(ContentVo cvo);//필터된 리스트 출력
 	
 	
 }
