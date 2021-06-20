@@ -64,6 +64,10 @@ public class FileUploadController {
 		
 	
 	}
+	@GetMapping("/search")
+	public void showsearchPage() {
+		
+	}
 	@GetMapping("/contentsList")
 	public void showcontentsList() {
 		
