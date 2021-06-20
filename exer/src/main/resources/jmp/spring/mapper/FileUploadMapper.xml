@@ -63,25 +63,64 @@ where attachno= #{attachno}
 
 <!--컨텐츠 리스트페이지 기본 출력  -->
 <select id="getAllList" resultType="jmp.spring.vo.ContentVo">
-SELECT * FROM T_CONTENTS ORDER BY CNO
+SELECT * FROM T_CONTENTS ORDER BY CNO DESC
 </select>
 
 <!--컨텐츠 리스트페이지 필터 출력  -->
 <select id="getFilteredList" resultType="jmp.spring.vo.ContentVo">
-SELECT * FROM T_CONTENTS WHERE
 
-   <if test="tagArray !=null">
-      <foreach collection="tagArray" item="tags" index="index" separator="or">
-         tags like '%' ||#{tags} ||'%'
-      </foreach>
-   </if>
-  <if test="genreArray !=null">
-    <if test="tagArray !=null">  or</if>
-      <foreach collection="genreArray" item="genre" index="index" separator="or">
-         genre like '%' ||#{genre} ||'%'
-      </foreach>
-   </if>
-   ORDER BY CNO
+<choose>
+   <when test="type=='popular'">
+    select *from
+   (
+		select  ROW_NUMBER() 
+
+		over(order by rating asc) 
+		
+		row_num,c.* from t_contents c
+	)
+
+    <if test="tagArray !=null">
+    	WHERE
+	      <foreach collection="tagArray" item="tags" index="index" separator="or">
+	         tags like '%' ||#{tags} ||'%'
+	      </foreach>
+	   </if>
+	  <if test="genreArray !=null">
+	    <if test="tagArray !=null">  or</if>
+	     <if test="tagArray ==null">where </if>
+	      <foreach collection="genreArray" item="genre" index="index" separator="or">
+	         genre like '%' ||#{genre} ||'%'
+	      </foreach>
+	   </if>
+   </when>
+   <otherwise>
+    SELECT * FROM T_CONTENTS
+
+	   <if test="tagArray !=null">
+	    WHERE
+	      <foreach collection="tagArray" item="tags" index="index" separator="or">
+	         tags like '%' ||#{tags} ||'%'
+	      </foreach>
+	   </if>
+	  <if test="genreArray !=null">
+	    <if test="tagArray !=null">  or</if> 
+	    <if test="tagArray ==null">where </if>
+	      <foreach collection="genreArray" item="genre" index="index" separator="or">
+	         genre like '%' ||#{genre} ||'%'
+	      </foreach>
+	   </if>
+	    <if test="type =='recent'">
+	       ORDER BY CNO DESC
+	    </if>
+	     <if test="type =='date'">
+	       ORDER BY SHOWDATE DESC
+	    </if>
+	    <if test="type =='abc'">
+	       ORDER BY CNAME
+	    </if>
+   </otherwise>
+</choose>
 </select>
 
 

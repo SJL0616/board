@@ -34,11 +34,11 @@ public class addTests {
 	public void getfilteredList() {
 		ContentVo cvo = new ContentVo();
 		String[] tagArray = null;
-		String[] genreArray = {"¾×¼Ç" };
+		String[] genreArray =null;
 		
 		cvo.setTagArray(tagArray);
         cvo.setGenreArray(genreArray);		
-		
+        cvo.setType("abc");
        umapper.getFilteredList(cvo);
         
 	}

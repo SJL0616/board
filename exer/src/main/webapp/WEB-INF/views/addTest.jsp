@@ -290,7 +290,7 @@ $.ajax({
 연령제한<input type="text" id="agelimit" ><br>
 완결유무<input type="text" id="end" >
 <button type="button" id="addcontents"  onclick="ajaxContentsInsert()">입력</button>
-
+<!-- rec 컬럼과 showdate 추가필요.  -->
 <div id="insDiv">
 
  </div>

@@ -9,13 +9,29 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
  
 <script type="text/javascript">
 $(document).ready(function(){
-	
 
-		 showAllList(); 
+	/* 	 showAllList();  */
+	var order =$("#selectOrder").val();
+	$("#orderVal").val(order);
+		filtering();
+console.log("===========정렬 :", $("#selectOrder").val());
 
 
-		$(document).on("change",function(){
-			
+		$(document).on("change",function(){// 정렬 select 버튼이 바뀌면 inputvar에 입력.
+			if($("#selectOrder").val()=="recent"){
+				console.log("===========정렬 : 최신순");
+				$("#orderVal").val("recent");
+			}else if($("#selectOrder").val()=="date"){
+				console.log("===========정렬 : 방영 날짜순");
+				$("#orderVal").val("date");
+			}else if($("#selectOrder").val()=="popular"){
+				console.log("===========정렬 : 인기순");
+				$("#orderVal").val("popular");
+			}else if($("#selectOrder").val()=="abc"){
+				console.log("===========정렬 : 가나다순");
+				$("#orderVal").val("abc");
+			}
+			filtering();
 		});
 		
 		
@@ -26,54 +42,11 @@ $(document).ready(function(){
         console.log("===========elem:",elem);
         console.log("===========elem.value:",elem.value);
        if(elem.value!=null){
-        
-        var items = document.querySelectorAll('.genrecheckBox');
-      
-        var selectedG =[];
-       items.forEach(function(item, idx){
-        	console.log("===========idx:",idx);     
-        	
-            if(item.checked){
-            	console.log("==========item.value:",item.value);  
-            	
-             selectedG.push(item.value);
-            }else{
-              
-            }
-        }); 
+    	
+    	filtering();
        
-       console.log("========== selectedG:", selectedG);  
-
-       //태그 필터 배열에 저장
-       items = document.querySelectorAll('.tagcheckBox');
-     
-       var selectedT =[];
-      items.forEach(function(item, idx){
-       	console.log("===========idx:",idx);     
-       	
-           if(item.checked){
-           	console.log("==========item.value:",item.value);  
-            selectedT.push(item.value);
-           }else{
-             
-           }
-       }); 
-      console.log("========== selectedT:", selectedT);  
-      if(selectedG[0]==null){// 아무것도 selected 가 안 됬을 경우 0을 추가해서 넘김.
-    	  selectedG.push("0");
-      }
-      if(selectedT[0]==null){
-    	  selectedT.push("0");
-      }
-      console.log("selectedG[0]==0 && selectedT[0]==0",selectedG[0]=="0" && selectedT[0]=="0");
-       if(selectedG[0]=="0" && selectedT[0]=="0"){
-    	   showAllList();
-       }else{
-    	   getSelectedList(selectedG,selectedT);
-       }
-       //필터링된 데이터 호출
        }//elem.value가  null이 아니면
-		 });//끝
+   });//끝
 		
 		
 		$(".filterFormat").on("click",function(){// 필터 포멧 버튼
@@ -93,13 +66,67 @@ $(document).ready(function(){
 		
 });
 
+function filtering(){ //checkbox를 돌아서 checked 된 box의 value를 배열에 담아 넘김.
+	
+	 var items = document.querySelectorAll('.genrecheckBox');
+     
+     var selectedG =[];
+    items.forEach(function(item, idx){
+     	console.log("===========idx:",idx);     
+     	
+         if(item.checked){
+         	console.log("==========item.value:",item.value);  
+         	
+          selectedG.push(item.value);
+         }else{
+           
+         }
+     }); 
+    
+    console.log("========== selectedG:", selectedG);  
+
+    //태그 필터 배열에 저장
+    items = document.querySelectorAll('.tagcheckBox');
+  
+    var selectedT =[];
+   items.forEach(function(item, idx){
+    	console.log("===========idx:",idx);     
+    	
+        if(item.checked){
+        	console.log("==========item.value:",item.value);  
+         selectedT.push(item.value);
+        }else{
+          
+        }
+    }); 
+   console.log("========== selectedT:", selectedT);  
+   if(selectedG[0]==null){// 아무것도 selected 가 안 됬을 경우 0을 추가해서 넘김.
+ 	  selectedG.push("0");
+   }
+   if(selectedT[0]==null){
+ 	  selectedT.push("0");
+   }
+   getSelectedList(selectedG,selectedT);
+   /* console.log("selectedG[0]==0 && selectedT[0]==0",selectedG[0]=="0" && selectedT[0]=="0") */
+ /*    if(selectedG[0]=="0" && selectedT[0]=="0"){
+ 	   showAllList();
+    }else{ }*/
+ 	 
+    
+    //필터링된 데이터 호출
+    
+}
+
+
+
 //필터를 db에 전달해서 해당하는 자료 선출
 function getSelectedList(selectedG,selectedT){
 	   console.log("==========selectedT selectedG:", selectedT,selectedG); 
-	   
+	   var type= $("#orderVal").val();
+	   console.log("==========type:", type); 
 	$.ajax({
 		
-		url: '/getSelectedList/'+selectedG+'/'+selectedT,
+		url: '/getSelectedList/'+selectedG+'/'+selectedT+'/'+type,
 		method: 'get',
 		dataType : 'json',
 		
@@ -375,11 +402,12 @@ border:1px solid rgb(57, 57, 57);
 	  
 	  <div class="selectBox">
 	  <select id="selectOrder">
-	  <option value="">최신순</option>
-	  <option value="">방영일순</option>
-	  <option value="">인기순</option>
-	  <option value="">가나다순</option>
+	  <option value="recent" selected="selected">최신순</option>
+	  <option value="date">방영일순</option>
+	  <option value="popular">인기순</option>
+	  <option value="abc">가나다순</option>
 	  </select>
+	  <input type="text" id="orderVal">
 	  </div>
 	  
 	</div>

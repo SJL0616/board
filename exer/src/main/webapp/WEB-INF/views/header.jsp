@@ -48,12 +48,12 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         
    <script src="/resources/assets/js/html5shiv.min.js"></script>
    <script type="text/javascript">
-  $(document).ready(function(){
+/*   $(document).ready(function(){
 	getImgList(1);
 	
 	
 	
-})
+}) */
 
    
    </script>

@@ -104,15 +104,18 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
-	@GetMapping("/getSelectedList/{selectedG}/{selectedT}")
+	@GetMapping("/getSelectedList/{selectedG}/{selectedT}/{type}")
 	public Map<String, Object>  getselectedlist(@PathVariable("selectedG") String[] selectedG,
-			@PathVariable("selectedT") String[]  selectedT){
+			@PathVariable("selectedT") String[]  selectedT,
+			@PathVariable("type") String type){
 		log.info("/addCast===========  selectedG :" +  selectedG);
 		log.info("/addCast=========== selectedT :" + selectedT);
-		if(selectedT[0]=="0") {//첫번째 배열 요소가 0이면 null로 설정.
+		log.info("/addCast=========== Type :" + type);
+		
+		if(selectedT[0].equals("0")) {//첫번째 배열 요소가 0이면 null로 설정.
 			selectedT=null;
 		}
-		if(selectedG[0]=="0") {
+		if(selectedG[0].equals("0")) {
 			selectedG=null;
 		}
 		String[] genreArray= selectedG;
@@ -121,6 +124,7 @@ public class FileUploadAjaxController {
 		ContentVo cvo = new ContentVo();
 		cvo.setTagArray(tagArray);
 		cvo.setGenreArray(genreArray);
+		cvo.setType(type);
 		
 	List<ContentVo> list=	cservice.getFilteredList(cvo);
 	int length =list.size();
