@@ -31,6 +31,16 @@ public class addTests {
 	ReplyService rservice;
 	
 	@Test
+	public void getsearch() {
+		
+		String word= "Áø";
+		
+		/* umapper.getSearchedCListByCast(word); */
+		umapper.getSearchedCListByCname(word);
+		
+	}
+	
+	
 	public void getfilteredList() {
 		ContentVo cvo = new ContentVo();
 		String[] tagArray = null;

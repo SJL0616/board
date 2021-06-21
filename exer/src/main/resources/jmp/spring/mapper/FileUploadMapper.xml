@@ -157,6 +157,7 @@ select * from t_contents
 where cname= #{cname}
 </select>
 
+<!-- index 화면에서 최신,인기,추천 컨텐츠 가져오기 -->
 <select id="getIndexList" resultType="jmp.spring.vo.ContentVo"  >
 
 <choose>
@@ -183,6 +184,29 @@ row_num,cno,cname,pfilename,agelimit from t_contents
 </select>
 
 
+<!-- Search 화면에서 입력값을 컨텐츠 이름에서 찾아서 가져오기 -->
+<select id="getSearchedCListByCname" resultType="jmp.spring.vo.ContentVo"  >
+
+select cno,cname,pfilename,end from t_contents where cname like '%' ||#{word} ||'%' 
+
+</select>
+<!-- Search 화면에서 입력값을 cast테이블에서 이름으로 배우 정보 찾아서 가져오기 -->
+
+<!-- Search 화면에서 컨텐츠 정보를 cast 이름에서 찾아서 가져오기 -->
+<select id="getCastListByName" resultType="jmp.spring.vo.CastVo"  >
+
+select * from t_cast where castname like '%' ||#{word} ||'%' 
+
+</select>
+<select id="getSearchedCListByCast" resultType="jmp.spring.vo.ContentVo">
+select c.*
+from cast_match m  inner join t_contents c on m.cno=c.cno
+inner join t_cast k on  k.castno=m.castno
+
+ where k.castname like '%' ||#{word} ||'%' 
+
+
+</select>
 
 
 

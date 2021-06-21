@@ -675,5 +675,74 @@ public class FileUploadAjaxController {
 		
 	}
 	
+	//엔터를 누르기 전에 입력값으로 가져오기.
+	
+	@GetMapping("/getSearchedList/{word}")
+	public Map<String, Object>  getselectedlist(@PathVariable("word") String word){
+
+		log.info("/getSearchedList=========== word :" + word);
+		
+		List<ContentVo> list=cservice.getSearchedCListByCname(word);
+		List<CastVo> castlist=cservice.getCastListByName(word);
+		
+		/*
+		 * if(selectedT[0].equals("0")) {//첫번째 배열 요소가 0이면 null로 설정. selectedT=null; }
+		 * if(selectedG[0].equals("0")) { selectedG=null; }
+		 */
+	
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		
+		 if(list.size()!=0 || castlist.size() !=0){
+			 
+			  map.put("result","success"); 
+			  map.put("contentlist",list); 
+			  map.put("castlist", castlist);
+		 }else {
+			 map.put("result","error"); 
+			 map.put("word",word);
+		 }
+		return map;
+	}
+	
+	@GetMapping("/searchList/{word}")
+	public Map<String, Object>  searchlist(@PathVariable("word") String word){
+
+		log.info("/searchList=========== word :" + word);
+		
+		List<ContentVo> list=cservice.getSearchedCListByCname(word);
+		 List<ContentVo> clist= null;
+			log.info("/searchList=========== word.contains(\"배우\"):" +word.contains("배우"));
+		 
+		if(word.contains("배우")) {// 배우_ 를 붙인 word만 배우 이름으로 contentsList를 검색가능.
+		int idx=word.indexOf("_");
+		String str= word.substring(idx+1);
+		  clist=cservice.getSearchedCListByCast(str); 
+		}
+		
+		List<CastVo> castlist=cservice.getCastListByName(word);
+		
+		/*
+		 * if(selectedT[0].equals("0")) {//첫번째 배열 요소가 0이면 null로 설정. selectedT=null; }
+		 * if(selectedG[0].equals("0")) { selectedG=null; }
+		 */
+	
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		
+		 if(list.size()!=0 || castlist.size() !=0 || clist.size() !=0  ){
+			 
+			  map.put("result","success"); 
+			  map.put("contentlist",list); 
+			map.put("contentlist2", clist); 
+			  map.put("castlist", castlist);
+		 }else {
+			 map.put("result","error"); 
+			 map.put("word",word);
+		 }
+		return map;
+	}
+	
+	
 	
 }

@@ -28,5 +28,8 @@ public interface addContentsService {
 	public List<ContentVo> getAllList();
 	public List<ContentVo> getFilteredList(ContentVo cvo);//필터된 리스트 출력
 	
+	public List<ContentVo> getSearchedCListByCast(String word);  // 배우 이름으로 컨텐츠 정보 출력(검색페이지)
+	public List<CastVo> getCastListByName(String word);  // 배우 정보 배우 이름으로 가져오기
+	public List<ContentVo> getSearchedCListByCname(String word);  // 배우 정보 배우 이름으로 가져오기
 	
 }

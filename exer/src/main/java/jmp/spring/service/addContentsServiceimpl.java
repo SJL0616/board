@@ -78,6 +78,21 @@ public class addContentsServiceimpl implements addContentsService {
 		// TODO Auto-generated method stub
 		return mapper.getFilteredList(cvo);
 	}
+	@Override
+	public List<ContentVo> getSearchedCListByCast(String word) {
+		// TODO Auto-generated method stub
+		return mapper.getSearchedCListByCast(word);
+	}
+	@Override
+	public List<CastVo> getCastListByName(String word) {
+		// TODO Auto-generated method stub
+		return mapper.getCastListByName(word);
+	}
+	@Override
+	public List<ContentVo> getSearchedCListByCname(String word) {
+		// TODO Auto-generated method stub
+		return mapper.getSearchedCListByCname(word);
+	}
 
 
 }
