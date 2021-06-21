@@ -12,8 +12,17 @@ $(document).ready(function(){
 	
 	//input에서 키를 누를 경우
 	$("#textInput").keyup(function(key){
-	
 
+		$(".showtextBox").html("<div class=\"textBox\"></div>");
+		 $(".font1").html("");
+		 $(".font2").html("");
+		 $(".fileListView").html("");
+		 $(".castListView").html("");
+		 $(".redWordBox2").html("");
+		 $(".redWordBox2").addClass("x");
+		 $(".x").removeClass("redWordBox2");
+		 
+		 
 		var word =$("#textInput").val();
 		console.log("========입력값:", word);
 		 getSearchedList(word);
@@ -21,6 +30,7 @@ $(document).ready(function(){
 		if(key.keyCode==13){
 			console.log("========e: 엔터키 눌림");
 			SearchList(word);
+
 		}
 	
 		
@@ -95,11 +105,15 @@ function getSearchedList(word){
 		});
 		
 		 $(".textBox").html(htmlContent);
+
 		 
 		}else{
 			
-			var htmlContent =data.word+"에 대한 검색 결과가 없습니다.";
+			var htmlContent ="";
+			htmlContent+="<div class=\"redWordBox\"><div><img src=/resources/icon_information_warning.png></div>"
+				+"<div><span class=\"redWord\">'"+data.word+"'</span>에 대한 검색 결과가 없습니다.</div></div>";
 			$(".textBox").html(htmlContent);
+
 		}
 
 	},
@@ -133,12 +147,12 @@ function SearchList(word){
 			 $(".font2").html("");
 			 $(".fileListView").html("");
 			 $(".castListView").html("");
-			 $(".textBox").html("");
+
 			
 
 			var htmlContent ="";
-			
-		if(data.contentlist.length!=null || data.contentlist2.length!=null  ){
+
+		if(data.contentlist.length!=0 || data.contentlist2!=null ){
 			//컨텐츠 리스트가 길이 0이 아닌 경우
 				console.log("=====================contentlist: 존재함");
 			
@@ -206,10 +220,11 @@ function SearchList(word){
 		
 		 $(".fileListView").html(htmlContent);
 		 $(".font1").prepend("<div class=\"contentsFont\"><h2>콘텐츠</h2></div>");
+		 $(".showtextBox").html("");
 		}//컨텐츠 리스트가 있을시 
 		
 		
-		
+		console.log("data.castlist.length!=0",data.castlist.length!=0);
 		 if(data.castlist.length!=0){//출연진 리스트가 존재할시
 				console.log("=====================castlist: 존재함");
 		 var htmlContent2 = "";
@@ -240,18 +255,36 @@ function SearchList(word){
 			
 			 $(".castListView").html(htmlContent2);
 			 $(".font2").prepend("<div class=\"contentsFont\"><h2>출연진</h2></div>");
+			 $(".showtextBox").html("");
 		 }//출연진 리스트가 존재할시 끝
 		 
 		 
 		}else{
-			
+			$(".showtextBox").html("");
+			var htmlContent ="";
+			htmlContent+="<div class=\"redWordBox\"><div><img src=/resources/icon_information_warning.png></div>"
+				+"<div><span class=\"redWord\">'"+word+"'</span>에 대한 검색 결과가 없습니다.</div></div>";
+			$(".fileListView").html(htmlContent);
+/* 			
 			var htmlContent =data.word+"에 대한 검색 결과가 없습니다.";
-			$(".fileListView").html(htmlContent2);
+			$(".fileListView").html(htmlContent2); */
 		}
 
 	},
 	error : function() {
-		console.log("error"); 
+		console.log("error");
+		 $(".font1").html("");
+		 $(".font2").html("");
+		 $(".fileListView").html("");
+		 $(".castListView").html("");
+		 $(".showtextBox").html("");
+		 $(".x").addClass("redWordBox2");
+		 $(".redWordBox2").removeClass("x");
+		 var htmlContent ="";
+			htmlContent+="<div class=\"redWordBox\"><div><img src=/resources/icon_information_warning.png></div>"
+				+"<div><span class=\"redWord\">'"+word+"'</span>에 대한 검색 결과가 없습니다.</div></div>";
+			$(".redWordBox2").html(htmlContent);
+		
 	}
 	
 	});
@@ -278,7 +311,7 @@ height: 100%;
 
 }
 .searchBar{
-height: 700px;
+/* height: 100%; */
     width: 100%;
     /* max-width: 724px; */
     margin: 0px auto;
@@ -291,8 +324,11 @@ height: 700px;
     flex-direction: row;
 }
 .searchForm{
-display:flex;
-background-color: rgb(11, 11, 11);
+
+    display: flex;
+    background-color: rgb(11, 11, 11);
+    align-items: center;
+    flex-direction: column;
 }
 .searchForm input{
 font-size: 1.8em;
@@ -317,15 +353,19 @@ border-bottom: 1px solid rgb(255, 255, 255)}
     width: 100%;
 }
 .searchBar .textBox{
-width: 724px;
+    width: 500px;
+    height: 100px;
     /* transform: translateX(-50%); */
     background-color: rgb(37, 37, 37);
     border-radius: 10px;
-    padding: 100px;
+    padding: 80px;
+    margin-top: 10px;
+    margin-left: -60;
+    margin-bottom: 50px;
 }
 .redWord{
 font-weight: bold;
-color: red;
+ color: rgb(238, 65, 53);
 }
 .fileListView{
     display: flex;
@@ -349,7 +389,30 @@ margin-left: 55px;
     color: white;
       font-weight: bold;
     }
+    .searchInputBox{
+    margin-left: -50;
+     height: 60px;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    }
+.redWordBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    .redWordBox img{
+   margin-bottom: 15; 
+    }
     
+    .redWordBox2{
+        height: 70%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: flex-end;
+   justify-content: space-around;
+    }
 </style>
 <head>
 	<title>Home</title>
@@ -365,23 +428,27 @@ margin-left: 55px;
 
 	<section class="searchBar">
 	  <div class="searchForm">
-	  <div class="searchIcon">
-	  <img alt="" src="/resources/icon_search.png">
-	  </div>
-	  <div>
-	  <input type="text" placeholder="검색어를 입력해주세요." id="textInput">
-	  <div class="textBox"></div>
-	  </div>
-	  
-	  
-	  
+		
+		  
+		  <div class="searchInputBox">
+		     <div class="searchIcon">
+		      <img alt="" src="/resources/icon_search.png">
+		     </div>
+		      
+			 <input type="text" placeholder="검색어를 입력해주세요." id="textInput">
+		  </div> 
+		  
+		  <div class="showtextBox">
+		      <div class="textBox"></div>
+		  </div>
+		 
 	  </div>
 
 
 	</section>
 	<section class="showResult">
 
-	
+	<div class="redWordBox2"></div>
 	<div class="fontbox">
 	<div class="font1"></div>
 	 <ul class="fileListView">
