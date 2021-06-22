@@ -196,15 +196,16 @@ function showVList(cno, sort) {//안씀
 	}//showVList
 	
 	function sendReply(rno) {
-		
+		console.log("========rno :",rno);
 		var replydate= null;
+		console.log("========rno==null :",rno==null);
 		if(rno==null){ 
 		 replydate = {
 				vno :$("#vno").val(),
 				content :$("#content").val(),
 				writer : $("#userName").val(),
 				id : $("#userId").val(),
-				re_rno : $("#re_rno").val(),
+				re_rno : 0,
 		};
 		}else{
 			 replydate = {

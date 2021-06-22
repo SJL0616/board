@@ -375,6 +375,7 @@ border-bottom: 1px solid rgb(255, 255, 255)}
     width: 100%;
 }
 .searchBar .textBox{
+    list-style: none;
     width: 500px;
     height: 100px;
     /* transform: translateX(-50%); */
@@ -385,6 +386,11 @@ border-bottom: 1px solid rgb(255, 255, 255)}
     margin-left: -60;
     margin-bottom: 50px;
 }
+.searchBar .textBox li{
+font-size:17px;
+ margin: 15px;
+}
+
 .redWord{
 font-weight: bold;
  color: rgb(238, 65, 53);
@@ -494,6 +500,10 @@ color:rgb(170, 170, 170);
     margin-left: -60;
     margin-bottom: 50px;
 }
+
+img.logoImg {
+    /* margin-left: 15px;
+    }
 </style>
 <head>
 	<title>도라마 코리아</title>

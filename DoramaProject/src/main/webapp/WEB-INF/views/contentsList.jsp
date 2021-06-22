@@ -36,7 +36,7 @@ console.log("===========정렬 :", $("#selectOrder").val());
 		
 		
 		//필터 value를 통해서 작품리스트 가져오기.
-		 document.querySelector('.Filters').addEventListener('click',function(e){ //checkbox의 name 
+		document.querySelector('.Filters').addEventListener('click',function(e){ //checkbox의 name 
     	console.log("===========e:",e);
         var elem = e.target;
         console.log("===========elem:",elem);
@@ -334,6 +334,9 @@ border:1px solid rgb(57, 57, 57);
     color: rgb(170, 170, 170);
     border-radius: 3px;
 }
+img.logoImg {
+    /* margin-left: 15px;
+    }
 </style>
 <head>
 	<title>Home</title>
@@ -345,48 +348,46 @@ border:1px solid rgb(57, 57, 57);
 
 <div id="contents">
     <section class="filterList">
- <div class="titlebar"><h1>필터</h1><button type="button" class="filterFormat">초기화</button>
-   <!--  <div class="test">
-    <input type="checkbox" name="rating" id="rating0.5" value="1" class="rate_radio half" title="0.5점" hidden="hidden">
-				                <label for="rating0.5"></label>
-				               </div>  -->
- </div>
+    
+	<div class="titlebar"><h1>필터</h1><button type="button" class="filterFormat">초기화</button>
+	
+	</div>
     <div class="Filters">
     
     <div class="genreFileters">
     <h4>장르</h4>
-    <ul>
-    <li>
-    <input type="checkbox" value="액션" name="tagFilters" class="genrecheckBox checkBox" id="actionG"  hidden="hidden">
-       <label for="actionG"><span>액션</span> </label>
-    </li>
-    <li>
-     <input type="checkbox" value="일상" name="tagFilters"  class="genrecheckBox checkBox" id="ordinaryG"  hidden="hidden">
-    <label for="ordinaryG" ><span>일상</span></label>
-    </li>
-    <li>
-    <input type="checkbox" value="모험" name="tagFilters"  class="genrecheckBox checkBox" id="adventureG"  hidden="hidden">
-    <label for="adventureG" ><span>모험</span></label>
-    </li>
-    </ul>
+	    <ul>
+		    <li>
+		       <input type="checkbox" value="액션" name="tagFilters" class="genrecheckBox checkBox" id="actionG"  hidden="hidden">
+		       <label for="actionG"><span>액션</span> </label>
+		    </li>
+		    <li>
+			     <input type="checkbox" value="일상" name="tagFilters"  class="genrecheckBox checkBox" id="ordinaryG"  hidden="hidden">
+			     <label for="ordinaryG" ><span>일상</span></label>
+		    </li>
+		    <li>
+			     <input type="checkbox" value="모험" name="tagFilters"  class="genrecheckBox checkBox" id="adventureG"  hidden="hidden">
+			     <label for="adventureG" ><span>모험</span></label>
+		    </li>
+	    </ul>
     </div>
     
     <div class="tagFileters">
     <h4>태그</h4>
-    <ul>
-     <li>
-     <input type="checkbox" value="활극" name="tagF" class="tagcheckBox checkBox" id="comicT"  hidden="hidden">
-    <label for="comicT" ><span>활극</span></label>
-      </li>
-      <li>
-     <input type="checkbox" value="드라마" name="tagF"  class="tagcheckBox checkBox" id="dramaT"  hidden="hidden">
-    <label for="dramaT" ><span>드라마</span></label>
-     </li>
-     <li>
-    <input type="checkbox" value="애니" name="tagF"  class="tagcheckBox checkBox" id="aniT"  hidden="hidden">
-    <label for="aniT" ><span>애니</span></label>
-    </li>
-    </ul>
+	    <ul>
+		     <li>
+			     <input type="checkbox" value="활극" name="tagF" class="tagcheckBox checkBox" id="comicT"  hidden="hidden">
+			     <label for="comicT" ><span>활극</span></label>
+		      </li>
+		      <li>
+			     <input type="checkbox" value="드라마" name="tagF"  class="tagcheckBox checkBox" id="dramaT"  hidden="hidden">
+			     <label for="dramaT" ><span>드라마</span></label>
+		     </li>
+		     <li>
+				 <input type="checkbox" value="애니" name="tagF"  class="tagcheckBox checkBox" id="aniT"  hidden="hidden">
+				 <label for="aniT" ><span>애니</span></label>
+		    </li>
+	    </ul>
     </div>
     
     
@@ -401,25 +402,20 @@ border:1px solid rgb(57, 57, 57);
 	  <div class="ShowCnum">총<span class="contentN"></span> 개의 작품이 있습니다.</div>
 	  
 	  <div class="selectBox">
-	  <select id="selectOrder">
-	  <option value="recent" selected="selected">최신순</option>
-	  <option value="date">방영일순</option>
-	  <option value="popular">인기순</option>
-	  <option value="abc">가나다순</option>
-	  </select>
+		  <select id="selectOrder">
+			  <option value="recent" selected="selected">최신순</option>
+			  <option value="date">방영일순</option>
+			  <option value="popular">인기순</option>
+			  <option value="abc">가나다순</option>
+		  </select>
 	  <input type="text" id="orderVal">
 	  </div>
 	  
 	</div>
-	
-	
-	
+
 	<div>
 	 <ul class="fileListView">
-	 
-	 
 	 </ul>
-	
 	</div>
 	</section>
 
