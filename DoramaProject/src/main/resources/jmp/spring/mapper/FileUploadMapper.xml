@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmp.spring.mapper.FileUploadMapper">
+
+
+<insert id="addcontents">
+insert into t_contents (cno,cname,story,cast,tags,genre,bc,agelimit,end) values(
+SEQ_T_CONTENTS.nextval,#{cname},#{story},#{cast},#{tags},#{genre},#{bc},#{agelimit},#{end})
+</insert>
+
+<!-- 캐스트 관련 쿼리 -->
+<insert id="addcast">
+insert into t_cast(castno, castname,profileUploadPath,profileImgName) values(SEQ_T_CAST.nextval, #{castname},#{profileUploadPath},#{profileImgName})
+</insert>
+
+<insert id="addcast_match">
+insert into cast_match(cno,cast,castno)  values(#{cno},#{cast},#{castno}) 
+</insert>
+
+
+<!--  cno(작품 번호)로 cast목록 가져오는 inner join 쿼리-->
+<select id="getCastList" resultType="jmp.spring.vo.CastVo">
+select m.*,c.*
+from cast_match m  inner join t_cast c on m.castno=c.castno
+ where m.cno = #{cno}
+</select>
+
+
+<select id="getcastByName" resultType="jmp.spring.vo.CastVo">
+select * from  t_cast where castname= #{castname}
+</select>
+<!--               -->
+
+
+<!-- 동영상 쿼리 -->
+<insert id="addVideo">
+insert into t_video(vno,vuploadpath,vfilename, regdate,story,cno) values(
+SEQ_T_VIDEO.nextval,#{vuploadpath},#{vfilename},#{ regdate},#{story},#{cno})
+</insert>
+
+<select id="getAllVideo" resultType="jmp.spring.vo.VideoVo">
+select * from t_video where cno= #{cno}
+</select>
+
+<select id="getAllVideoD" resultType="jmp.spring.vo.VideoVo">
+select * from t_video where cno= #{cno} ORDER BY VNO DESC
+</select>
+
+<select id="getOneVideo" resultType="jmp.spring.vo.VideoVo">
+select * from t_video where vno= #{vno}
+</select>
+
+<!-- 끝 -->
+
+<select id="getList" resultType="jmp.spring.vo.ContentVo">
+select attachNo, uuid, uploadPath, fileName, fileType, 
+uploadPath || uuid ||'_' || fileName as savePath,
+uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach
+where attachno= #{attachno}
+</select>
+
+
+<!--컨텐츠 리스트페이지 기본 출력  -->
+<select id="getAllList" resultType="jmp.spring.vo.ContentVo">
+SELECT * FROM T_CONTENTS ORDER BY CNO DESC
+</select>
+
+<!--컨텐츠 리스트페이지 필터 출력  -->
+<select id="getFilteredList" resultType="jmp.spring.vo.ContentVo">
+
+<choose>
+   <when test="type=='popular'">
+    select *from
+   (
+		select  ROW_NUMBER() 
+
+		over(order by rating asc) 
+		
+		row_num,c.* from t_contents c
+	)
+
+    <if test="tagArray !=null">
+    	WHERE
+	      <foreach collection="tagArray" item="tags" index="index" separator="or">
+	         tags like '%' ||#{tags} ||'%'
+	      </foreach>
+	   </if>
+	  <if test="genreArray !=null">
+	    <if test="tagArray !=null">  or</if>
+	     <if test="tagArray ==null">where </if>
+	      <foreach collection="genreArray" item="genre" index="index" separator="or">
+	         genre like '%' ||#{genre} ||'%'
+	      </foreach>
+	   </if>
+   </when>
+   <otherwise>
+    SELECT * FROM T_CONTENTS
+
+	   <if test="tagArray !=null">
+	    WHERE
+	      <foreach collection="tagArray" item="tags" index="index" separator="or">
+	         tags like '%' ||#{tags} ||'%'
+	      </foreach>
+	   </if>
+	  <if test="genreArray !=null">
+	    <if test="tagArray !=null">  or</if> 
+	    <if test="tagArray ==null">where </if>
+	      <foreach collection="genreArray" item="genre" index="index" separator="or">
+	         genre like '%' ||#{genre} ||'%'
+	      </foreach>
+	   </if>
+	    <if test="type =='recent'">
+	       ORDER BY CNO DESC
+	    </if>
+	     <if test="type =='date'">
+	       ORDER BY SHOWDATE DESC
+	    </if>
+	    <if test="type =='abc'">
+	       ORDER BY CNAME
+	    </if>
+   </otherwise>
+</choose>
+</select>
+
+
+
+<select id="getSeq" resultType="int">
+select seq_attach.nextval from dual
+</select>
+
+<insert id="insert">
+insert into tbl_attach values (#{attachno}, #{uuid}, #{uploadpath}, #{filename}, #{filetype}, sysdate)
+</insert>
+
+<update id="updatePoster">
+
+update t_contents set puploadpath = #{puploadpath}, pfilename = #{pfilename} where cname = #{cname}
+</update>
+
+
+<delete id="delete">
+delete tbl_attach where attachno= #{attachno} and uuid = #{uuid} 
+
+</delete>
+
+<select id="get" resultType="jmp.spring.vo.ContentVo" >
+select * from t_contents
+<!-- uploadPath || uuid ||'_' || fileName as savePath,
+uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach -->
+where cno= #{cno}
+</select>
+
+<select id="getBycname" resultType="jmp.spring.vo.ContentVo" >
+select * from t_contents
+
+where cname= #{cname}
+</select>
+
+<!-- index 화면에서 최신,인기,추천 컨텐츠 가져오기 -->
+<select id="getIndexList" resultType="jmp.spring.vo.ContentVo"  >
+
+<choose>
+<when test="type=='rec'">
+
+select cno, cname,pfilename,agelimit from t_contents where rec is not null  order by cno desc  
+</when>
+<otherwise>
+select row_num,cno,cname,pfilename,agelimit from
+(
+select  ROW_NUMBER() 
+<if test="type== 'recent'">
+over(order by cno desc) 
+</if>
+<if test="type== 'popular'">
+over(order by rating asc) 
+</if>
+row_num,cno,cname,pfilename,agelimit from t_contents 
+)where rownum BETWEEN 1 and 5
+
+</otherwise>
+</choose>
+
+</select>
+
+
+<!-- Search 화면에서 입력값을 컨텐츠 이름에서 찾아서 가져오기 -->
+<select id="getSearchedCListByCname" resultType="jmp.spring.vo.ContentVo"  >
+
+select cno,cname,pfilename,end from t_contents where cname like '%' ||#{word} ||'%' 
+
+</select>
+<!-- Search 화면에서 입력값을 cast테이블에서 이름으로 배우 정보 찾아서 가져오기 -->
+
+<!-- Search 화면에서 컨텐츠 정보를 cast 이름에서 찾아서 가져오기 -->
+<select id="getCastListByName" resultType="jmp.spring.vo.CastVo"  >
+
+select * from t_cast where castname like '%' ||#{word} ||'%' 
+
+</select>
+<select id="getSearchedCListByCast" resultType="jmp.spring.vo.ContentVo">
+select c.*
+from cast_match m  inner join t_contents c on m.cno=c.cno
+inner join t_cast k on  k.castno=m.castno
+
+ where k.castname like '%' ||#{word} ||'%' 
+
+
+</select>
+
+
+
+</mapper>

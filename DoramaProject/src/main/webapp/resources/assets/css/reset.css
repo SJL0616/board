@@ -1,0 +1,46 @@
+/* �뿬諛� 珥덇린�솕 */
+body,div,ul,li,dl,dd,dt,ol,h1,h2,h3,h4,h5,h6,input,fieldset,legend,p,select,table,th,td,tr,textarea,button,form,figure,figcaption{margin:0; padding:0;}
+
+/* a 留곹겕 珥덇린�솕 */
+a {color: #222; text-decoration: none;}
+a:hover {color: #2698cb;}
+
+/* �룿�듃 珥덇린�솕 */
+body, input, textarea, select, button, table {font-family:'Noto Sans KR', AppleSDGothicNeo-Regular,'Malgun Gothic','留묒� 怨좊뵓',dotum,'�룍��',sans-serif; color: #222; font-size: 13px; line-height: 1.5;}
+
+/* �룿�듃 �뒪���씪 珥덇린�솕 */
+em,address {font-style: normal;}
+
+/* 釉붾┸湲고샇 珥덇린�솕 */
+ul,li,ol {list-style:none;}
+
+/* �젣紐� �깭洹� 珥덇린�솕 */
+h1,h2,h3,h4,h5,h6 {font-size: 13px; font-weight: normal;}
+
+/* �뀒�몢由� 珥덇린�솕 */
+img,fieldset {border:0 none;}
+
+/* 踰꾪듉 珥덇린�솕 */
+button {border: 0;}
+
+/* 諛섏쓳�삎 */
+.movie_chart video,img {width: 100%;}
+
+/* clearfix */
+.clearfix{*zoom:1;}
+.clearfix:before, .clearfix:after {display: block; content: '';line-height: 0;}
+.clearfix:after {clear: both;}
+
+/* IR �슚怨� */
+.ir_pm {display:block; overflow:hidden; font-size:0; line-height:0; text-indent:-9999px;} /* �쓽誘몄엳�뒗 �씠誘몄��쓽 ��泥� �뀓�뒪�듃瑜� �젣怨듯븯�뒗 寃쎌슦(Phark Method) */
+.ir_wa {display:block; overflow:hidden; position:relative; z-index:-1; width:100%; height: 100%;} /* �쓽誘몄엳�뒗 �씠誘몄��쓽 ��泥� �뀓�뒪�듃濡� �씠誘몄�媛� �뾾�뼱�룄 ��泥� �뀓�뒪�듃瑜� 蹂댁뿬二쇨퀬�옄 �븷 �븣(WA IR) */
+.ir_so {overflow: hidden; position:absolute; width:0; height:0; line-height:0; text-indent:-9999px;} /* ��泥� �뀓�뒪�듃媛� �븘�땶 �젒洹쇱꽦�쓣 �쐞�븳 �닲源� �뀓�뒪�듃瑜� �젣怨듯븷 �븣 */
+
+/* �븘�씠肄� �씠誘몄� 理쒖쟻�솕 �옉�뾽 */
+.icon {background-image: url(../img/icon.png);}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 1.5dppx){
+            .icon {background-image: url(../img/icon@2.png); background-size: 500px;}
+       }

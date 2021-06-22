@@ -1,0 +1,234 @@
+
+#poster{
+	 background-image: url("‪‪/resources/StarCraft_Remastered.png");
+	 display: inline;
+}
+
+#container{
+	
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+
+header{
+    
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background:url("../images/top-view-person-writing-laptop-with-copy-space.jpg") no-repeat;
+    background-size: cover;
+    
+    border: 2px solid rgb(53, 53, 53);
+}
+.bar{
+  position:fixed;
+}
+
+nav ul { transition-property: tran;
+   
+    list-style: none;
+    text-align: right;
+   
+}
+ul li{ line-height: 50px;
+    font-size: 1.1em;
+  
+}
+a{ 
+
+    text-decoration: none;
+    color:black;
+    margin-right: 15px;
+    padding: 3px 8px;
+    border: 2px solid rgb(192, 192, 192);
+    border-radius: 10px;
+}
+@keyframes up{
+    to{
+        transform: translatey(-10px);
+    }
+}
+a:hover{    animation-name: up;
+    animation-duration: 2s;
+ 
+   background-color: rgb(53, 53, 53);
+   color:rgb(192, 192, 192) ;
+}
+a:active{
+ 
+    color:rgb(55, 232, 255) ;
+}
+nav .sns{
+    position: absolute;
+    width: 100px;
+    right: 15px;
+    bottom: 10px;
+}
+
+#toon{ border-radius: 400px;
+    width: 200px;
+   border: 3px solid rgba(85, 85, 85, 0.3);
+   
+ 
+}
+nav p{
+    text-align: center;
+  
+  
+}
+p span{
+    font-weight: bold;
+}
+
+section{background-color: rgb(53, 53, 53);
+    border:1px solid rgb(53, 53, 53);
+    width: 430px;
+    padding: 15px 3%;
+    margin-bottom: 5px;
+    
+    overflow: hidden;
+}
+#profile,#contact{ background-color: rgb(53, 53, 53);
+    
+    color: rgb(195, 192, 192);
+    }
+#skills{background-color: rgb(161, 161, 161);
+    
+}
+#contact{
+    margin-bottom: 0;
+}
+
+
+#profile h2,#contact h2{
+    color: rgb(228, 228, 228);
+    text-shadow: 5px 5px 2px #000;
+}
+#skills h2{
+    text-shadow: 4px 4px 2px rgb(204, 204, 204);
+}
+
+p{
+ line-height: 20px;
+
+}
+ #myphoto{
+  width:200px;
+  margin-top: 30px;
+  margin-right: 5%;
+  border: 1px solid honeydew;
+    float: left;
+}
+
+ #myphoto2{ border: 1px solid rgb(189, 189, 189);
+    width:400px;
+    margin-top: 30px;
+
+    margin-left: 5%;
+   float: right;
+   
+}
+#skills .text{
+text-align: left;
+}
+
+#myphoto3{ 
+    border: 1px solid rgb(80, 80, 80);
+    margin-top: 30px;
+ width: 400px;
+ float: left;
+margin-right: 5%;
+}
+
+footer{
+    margin-top: 0;
+    text-align: center;
+    border: 2px solid rgb(53, 53, 53);
+}
+
+img{
+    display: none;
+}
+.sns{
+    display: block;
+}
+@media screen and (min-width:768px){
+    header{
+        height: 350px;
+    }
+    
+    
+#toon{
+    width: 250px;
+    display: block;
+    
+}
+#toons{position: absolute;
+    top: 10%;
+    left: 42%;
+    text-align: center;
+
+}
+
+#profile, #skills{
+        width: 50%;
+        float: left;
+        height: 200px;
+        box-sizing: border-box;
+         margin-top: 0.4%;
+       
+    }
+   
+    #contact{margin-right: 5%;
+        clear: both;
+        width: 94%;
+     
+    }
+
+}
+
+@media screen and (min-width:1000px){
+    #container{
+        width: 1000px;
+        margin: 0 auto;
+        
+    }
+    
+nav ul li{
+  font-size: 1.3em;
+line-height: 60px;
+   
+}
+    #toon{
+        width: 280px;
+       
+        
+    }
+    header{height: 400px;}
+    
+    #profile, #skills {
+        width: 100%;
+        height: 350px;
+        padding: 10px 5%;
+    }
+    section{
+        overflow: hidden;
+    }
+    #contact{
+        clear: both;
+        width: 94%;
+        height: 350px;
+    }
+    #skills .text{
+        text-align: right;
+    }
+
+   img{
+       display: block;
+   }
+
+}

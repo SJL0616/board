@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmp.spring.mapper.UserMapper">
+
+<select id="getTotal" resultType="int">
+	select count(*) from users
+		where 1=1
+</select>
+
+<update id="updateRole">
+update users_role set role_id=#{role_id} where id=#{id}
+</update>
+
+<select id="getList" resultType="jmp.spring.vo.User">
+		select * from
+(select rownum rn, users.*,role_id
+    from users , users_role
+    where users.id=users_role.id
+    )
+    where rn between #{pageNo}*#{amount}-9 and #{pageNo}*#{amount}
+</select>
+
+<select id="login" resultType="jmp.spring.vo.User">
+select * from users where id=#{id}
+</select>
+
+<insert id="registerMember">
+	insert into users(id,pwd,enabled,name,email) values(#{id},#{pwd},1,#{name},#{email})
+</insert>
+
+<insert id="insertRole">
+	insert into users_role(id,role_id) values(#{id},'ROLE_USER')
+</insert>
+
+<update id="updateSessionkey">
+		update users 
+		set sessionkey= #{sessionkey}
+		    , sessionlimit = sysdate + 7 
+		where id = #{id}
+</update>
+
+	<select id="checkId" resultType="jmp.spring.vo.User">
+		select * from users where id = #{id}
+	</select>
+
+
+<select id="loginSessionkey" resultType="jmp.spring.vo.User">
+		select * 
+		from users
+		where sessionkey=#{sessionkey}
+				and sessionlimit > sysdate
+</select>
+
+<select id="getRole" resultType="String">
+		select role_id from users_role where id=#{id}
+</select>
+
+<select id="idSearch" resultType="jmp.spring.vo.User">
+	select * from users where name=#{name} and email=#{email}
+</select>
+
+<select id="pwdSearch" resultType="jmp.spring.vo.User">
+	select * from users where id=#{id} and email=#{email}
+</select>
+
+<update id="updatePwd">
+	update users set pwd=#{pwd} where id=#{id} and email=#{email}
+</update>
+
+<update id="updateMember">
+	update users set name=#{name}, email=#{email} where id=#{id}
+</update>
+</mapper>

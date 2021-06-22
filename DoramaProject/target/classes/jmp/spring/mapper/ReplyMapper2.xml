@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="jmp.spring.mapper.ReplyMapper2">
+	
+	
+	<insert id="writeReply"> 
+	insert into board_reply(rno, bno, reply, replyer,replydate,updatedate) values
+		(board_reply_seq.nextval, #{bno}, #{reply}, #{replyer}, sysdate, sysdate)
+	</insert>
+	
+	<select id="readReply" resultType="jmp.spring.vo.ReplyVo">
+		select 
+			rno,reply , replyer, replydate
+		from board_reply where bno = #{bno}
+	</select>
+
+	
+	<delete id="delete">
+	delete board_reply where rno=#{rno}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
