@@ -9,6 +9,11 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
  
 <script type="text/javascript">
 $(document).ready(function(){
+	var castname =$("#castname").val();
+	if( castname!=0){
+		castname= "배우_"+castname;
+		SearchList(castname);
+	}
 	
 	//input에서 키를 누를 경우
 	$("#textInput").keyup(function(key){
@@ -163,6 +168,7 @@ function getSearchedList(word2){
 //검색창에 엔터를 쳐서 검색어를 입력하거나, 자동완성 box의 글을 선택시 필터를 db에 전달해서 아래 text로 해당하는 자료 이름 출력
 function SearchList(word){
 	console.log("=====================SearchList  시작:");
+	$("#castname").val("");
 	$(".textBox").html("");
 	$(".showtextBox").html("");
 	console.log("========textBox 제거됨:");
@@ -514,6 +520,7 @@ img.logoImg {
 <div id="container">
 
 <div id="contents">
+<input type="text" id="castname" value="${cvo.castname}" hidden="hidden">
   
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%-- <%@ page session="false" %> --%>
 <html>
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -560,8 +560,8 @@ ${cvo } --%>
              </section><!--끝 에피소드리스트 끝 -->
               <section id="reviewBox"><!--시작 댓글 리스트 시작 -->
               <input type="text" id="re_rno" value="0">
-                        유저 닉네임<input type="text" id="userName">
-                        유저아이디<input type="text" id="userId">
+                        유저 닉네임<input type="text" id="userName" value="${sessionScope.user.name}">
+                        유저아이디<input type="text" id="userId" value="${sessionScope.user.id}">
                          <div class="textBox">
 					        <textarea placeholder="댓글 내용을 입력해 주세요." id="content" class="textInput" maxlength="300"></textarea>
 					        <div class="reviewBtns">

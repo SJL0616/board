@@ -68,7 +68,7 @@ public class addContentsServiceimpl implements addContentsService {
 		// TODO Auto-generated method stub
 		return mapper.getCastList(cno);
 	}
-	@Override	  // ¸ÞÀÎÆäÀÌÁö ÀÌ¹ÌÁö+ Á¤º¸ Ãâ·Â Äõ¸®
+	@Override	  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½+ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<ContentVo> getIndexList(String type) {
 		// TODO Auto-generated method stub
 		return mapper.getIndexList(type);
@@ -92,6 +92,31 @@ public class addContentsServiceimpl implements addContentsService {
 	public List<ContentVo> getSearchedCListByCname(String word) {
 		// TODO Auto-generated method stub
 		return mapper.getSearchedCListByCname(word);
+	}
+	@Override
+	public int notRec(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.notRec(cno);
+	}
+	@Override
+	public int Rec(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.Rec(cno);
+	}
+	@Override
+	public int notshow(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.notshow(cno);
+	}
+	@Override
+	public int show(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.show(cno);
+	}
+	@Override
+	public List<ContentVo> getTureAllList() {
+		// TODO Auto-generated method stub
+		return mapper.getTureAllList();
 	}
 
 

@@ -167,7 +167,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                             <li class="active" onclick="getImgList(1)"><a href="#">최신</a></li>
                             <li><a href="#" onclick="getImgList(2)">인기</a></li>
                             <li><a href="#" onclick="getImgList(3)">추천</a></li>
-                            <li><a href="#">장르</a></li>
+                            <li><a href="#" onclick="getImgList(4)">장르별 인기</a></li>
                         </ul>
                     </div>
                     <div class="movie_chart">
@@ -406,7 +406,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                         </div>
                         <!-- //chart_cont3-->
                         <div class="swiper-container2">
-                            <div class="chart_cont4 swiper-wrapper">
+                            <div class="chart_cont4 swiper-wrapper genreList">
                                 <div class="swiper-slide">
                                     <div class="poster">
                                         <figure>

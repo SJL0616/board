@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jmp.spring.service.BoardService;
+import jmp.spring.service.ReplyService;
 import jmp.spring.service.ReplyService2;
 import jmp.spring.vo.BoardVo;
 import jmp.spring.vo.Criteria;
@@ -36,7 +37,7 @@ public class BoardController {
 		
 		int res = service.delete(vo.getBno());
 		String resMsg = "";
-		// �궘�젣 �꽦怨� -> 由ъ뒪�듃
+		// 삭제 성공 -> 리스트
 		if(res>0) {
 			resMsg = vo.getBno()+"번 게시물이 삭제되었습니다.";
 			rttr.addFlashAttribute("resMsg", resMsg);
@@ -47,7 +48,7 @@ public class BoardController {
 			return "redirect:/board/list";
 		} else {
 		// �궘�젣 �떎�뙣 -> �긽�꽭�솕硫�
-			resMsg = "寃뚯떆湲� �궘�젣 泥섎━�뿉 �떎�뙣 �뻽�뒿�땲�떎.";
+			resMsg = "게시글 삭제 처리에 실패 했습니다.";
 			rttr.addFlashAttribute("resMsg", resMsg);
 			rttr.addAttribute("bno", vo.getBno());
 			rttr.addAttribute("pageNo",cri.getPageNo());
@@ -69,10 +70,10 @@ public class BoardController {
 		if(res>0) {
 			resMsg = "게시글이 수정되었습니다.";
 		} else {
-			resMsg = "�닔�젙 �옉�뾽 �떎�뙣 �뻽�뒿�땲�떎. 愿�由ъ옄�뿉寃� 臾몄쓽�빐二쇱꽭�슂.";
+			resMsg = "수정 작업 실패 했습니다. 관리자에게 문의해주세요.";
 		}
 		
-		// �긽�꽭�솕硫� �씠�룞�떆 �븘�슂�븳 �뙆�씪硫뷀꽣瑜� �꽭�똿
+		// 상세화면 이동시 필요한 파라메터를 세팅
 		rttr.addAttribute("bno", vo.getBno());
 		rttr.addAttribute("pageNo",cri.getPageNo());
 		rttr.addAttribute("type",cri.getType());
@@ -102,18 +103,18 @@ public class BoardController {
 	@GetMapping("/board/edit")
 	public String edit(Criteria cri, BoardVo vo,Model model) {
 		log.info("============"+vo.getBno());
-		// �긽�꽭�젙蹂� 議고쉶
+		// 상세정보 조회
 		vo = service.get(vo.getBno());
 		log.info("============"+vo.getBno());
-		//紐⑤뜽�뿉 �떞�븘�꽌 �솕硫댁뿉 �쟾�떖
+		//모델에 담아서 화면에 전달
 		model.addAttribute("vo", vo);
 		log.info("============"+vo);
-		//由ы꽩�씠 �뾾�쑝誘�濡� /board/get(URL)濡� �럹�씠吏� �뿰寃�
+		//리턴이 없으므로 /board/get(URL)로 페이지 연결
 		
 		return "/board/edit";
 	}
 	
-	//1. �벑濡앺럹�씠吏�濡� �씠�룞
+	//1. 등록페이지로 이동
 	@GetMapping("/board/register")
 	public String insert() {
 		return "/board/register";
@@ -152,5 +153,19 @@ public class BoardController {
 		
 		return "/board/list";
 	}
+	
+	
+	@PostMapping("/replyWrite")
+	public String replyWrite(ReplyVo vo, RedirectAttributes rttr) {
+		
+		replyService.writeReply(vo);
+		
+		rttr.addAttribute("bno", vo.getBno());
+		
+		
+		return "redirect:/board/get";
+	
+	}
+	
 	
 }

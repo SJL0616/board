@@ -15,10 +15,10 @@ import jmp.spring.vo.VideoVo;
 public interface FileUploadMapper {
 
 	
-	public int addcontents(ContentsVo cvo); //ÄÜÅÙÃ÷ text¾÷·Îµå
+	public int addcontents(ContentsVo cvo); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ textï¿½ï¿½ï¿½Îµï¿½
 	
-	public int addcast(CastVo cvo); //ÄÜÅÙÃ÷ text¾÷·Îµå
-	public int addcast_match(@Param("cno") int cno,@Param("cast") String cast,@Param("castno") int castno); //ÄÜÅÙÃ÷ text¾÷·Îµå
+	public int addcast(CastVo cvo); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ textï¿½ï¿½ï¿½Îµï¿½
+	public int addcast_match(@Param("cno") int cno,@Param("cast") String cast,@Param("castno") int castno); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ textï¿½ï¿½ï¿½Îµï¿½
 	public CastVo getcastByName(String castname);
 	public List<CastVo>getCastList(int cno);
 	
@@ -27,17 +27,18 @@ public interface FileUploadMapper {
 	public List<VideoVo> getAllVideoD(int cno);
 	public VideoVo getOneVideo(int vno);
 	
-	public List<ContentVo> getAllList();//ÄÁÅÙÃ÷¸®½ºÆ® Ãâ·Â
-	public List<ContentVo> getFilteredList(ContentVo cvo);//ÇÊÅÍµÈ ¸®½ºÆ® Ãâ·Â
+	public List<ContentVo> getAllList();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
+	public List<ContentVo> getTureAllList();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
+	public List<ContentVo> getFilteredList(ContentVo cvo);//ï¿½ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
 	
 	
 	public List<ContentVo> getList(int attachno);
 	
 	public int getSeq();
 	public int insert(ContentVo vo);
-	public int updatePoster(ContentVo vo);//ÄÜÅÙÃ÷ Æ÷½ºÅÍÀÌ¹ÌÁö ¾÷·Îµå
+	public int updatePoster(ContentVo vo);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 	
-	public int addReview(ReviewVo rvo);//¸®ºä ¾÷·Îµå
+	public int addReview(ReviewVo rvo);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 	public int getReview(ReviewVo rvo);
 	
 	
@@ -46,13 +47,17 @@ public interface FileUploadMapper {
 	 * attachno);
 	 */
 	 
-	public ContentVo get(int cno); //show contents ÆÄÀÏ º¸¿©ÁÖ±â
-	public List<ContentVo> getIndexList(String type);  // ¸ÞÀÎÆäÀÌÁö ÀÌ¹ÌÁö+ Á¤º¸ Ãâ·Â Äõ¸®
+	public ContentVo get(int cno); //show contents ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+	public int notRec(int cno); //
+	public int Rec(int cno); //
+	public int notshow(int cno); //
+	public int show(int cno); //
+	public List<ContentVo> getIndexList(String type);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½+ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public ContentVo getBycname (String cname);
 	
 	
-	public List<ContentVo> getSearchedCListByCast(String word);  // ¹è¿ì ÀÌ¸§À¸·Î ÄÁÅÙÃ÷ Á¤º¸ Ãâ·Â(°Ë»öÆäÀÌÁö)
-	public List<CastVo> getCastListByName(String word);  // ¹è¿ì Á¤º¸ ¹è¿ì ÀÌ¸§À¸·Î °¡Á®¿À±â
-	public List<ContentVo> getSearchedCListByCname(String word);  // ¹è¿ì Á¤º¸ ¹è¿ì ÀÌ¸§À¸·Î °¡Á®¿À±â
+	public List<ContentVo> getSearchedCListByCast(String word);  // ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	public List<CastVo> getCastListByName(String word);  // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public List<ContentVo> getSearchedCListByCname(String word);  // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 }

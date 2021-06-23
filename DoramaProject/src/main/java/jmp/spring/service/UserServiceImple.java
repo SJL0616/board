@@ -1,5 +1,7 @@
 package jmp.spring.service;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.stereotype.Service;
 import jmp.spring.mapper.UserMapper;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.User;
+import lombok.extern.log4j.Log4j;
 
 @Service
+@Log4j
 public class UserServiceImple implements UserService{
 
 	@Autowired
@@ -21,6 +25,9 @@ public class UserServiceImple implements UserService{
 	public User login(User user) {
 		
 		User res = checkPwd(user);
+		log.info("=============="+user.getPwd());
+		log.info("=============="+res);
+		
 		//id를 통해서 user객체를 반환받고 비밀번호가 일치하면
 		if(res !=null) {
 			List<String> role = mapper.getRole(user.getId());
@@ -37,12 +44,13 @@ public class UserServiceImple implements UserService{
 	 */
 	public User checkPwd(User user) {
 		User res = mapper.login(user);
+		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		System.out.println("=======================user"+user);
 		System.out.println("=======================res"+res);
 		if(res != null) {
-			
 			//id를 통해서 user객체를 반환받고 비밀번호가 일치하면
+			log.info("==============비번 일치확인:"+encoder.matches(user.getPwd(),res.getPwd()));
 			if(encoder.matches(user.getPwd(), res.getPwd())) {
 				return res;
 			}

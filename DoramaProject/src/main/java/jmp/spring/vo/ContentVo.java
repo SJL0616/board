@@ -8,13 +8,13 @@ import lombok.Data;
 public class ContentVo {
 	
 	/*
-	 * //Ã·ºÎÆÄÀÏ ¹øÈ£ private int attachno; //Áßº¹Ã³¸®¸¦ À§ÇÑ ·¥´ý°ª uuid private String uuid; //
+	 * //Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ private int attachno; //ï¿½ßºï¿½Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uuid private String uuid; //
 	 */			private  String puploadpath;
 			private  String pfilename; 
-			private  String cname; //contents ÀÌ¸§
+			private  String cname; //contents ï¿½Ì¸ï¿½
 			private  String filetype; 
 			private  String regdate ;
-			
+			 String showdate;
 			private  int cno; 
 			
 			private  String story ; 
@@ -31,6 +31,8 @@ public class ContentVo {
 			private  String agelimit ; 
 			private  String end ;
 			private  int rating ;
+			private  int rec ;
+			private  int notshow ;
 			
 			private  String type;
 			

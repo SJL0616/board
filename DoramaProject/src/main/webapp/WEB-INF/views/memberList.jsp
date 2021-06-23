@@ -17,6 +17,24 @@
 	top :10em;
 	left: 50em;
 	}
+	
+	.contentList{
+	border-collapse: collapse;
+	width: 100%;
+	}
+	.contentList tr,td{
+	border: 1px solid black;
+	
+	}
+	.contentList td:nth-child(2) {
+    width: 250px;
+}
+.notRecBtn{
+color: red;
+}
+#ShowBtn{
+color: blue;
+}
 </style>
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -24,7 +42,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		showTrueList();
 		
 	});
 	function page(page){
@@ -62,12 +80,150 @@
 			return false;
 		}
 	}
+	
+	function showTrueList() {
+
+		$.ajax({
+			url: '/getTureAllList/',
+			method: 'get',
+			dataType : 'json',
+			
+		success: function(data) {
+			console.log("callBack result :",data);
+			
+			var length = data.length;
+			$(".contentN").text(length);
+			var htmlContent ="";
+			$("#contentList").html("<tr><td>번호</td><td>컨텐츠 이름</td><td>추천</td><td>숨기기</td></tr>");
+			$.each(data.list, function(index, item){
+				console.log("==========아이템:"+item.pfilename);
+
+					
+					
+					 htmlContent  +="<tr>"
+						 +"<td>"+item.cno+"</td>"
+						 +"<td>"+item.cname+"</td>";
+						 
+						 if(item.rec==1){
+							 htmlContent  +="<td><button  type=\"button\" onclick=\"notRec("+item.cno+")\" class=\"notRecBtn\" value=\"추천 풀기\"/>추천 풀기</td>";
+						 }else{
+							 htmlContent  +="<td><button type=\"button\"  onclick=\"Rec("+item.cno+")\" class=\"RecBtn\" value=\"추천 하기\"/>추천 하기</td>";
+						 }
+						 
+						 if(item.notshow==1){
+							 htmlContent  +="<td><button id=\"ShowBtn\"  onclick=\"show("+item.cno+")\" value=\"숨기기\"/>보이기</td></tr>";
+						 }else{
+							 htmlContent  +="<td><button id=\"notShowBtn\" onclick=\"notShow("+item.cno+")\" value=\"숨기기\"/>숨기기</td></tr>";
+						 }
+						 
+	
+			
+			});
+			
+			$("#contentList").append(htmlContent);
+
+		},
+		error : function() {
+			console.log("error"); 
+		}
+		
+		});
+		
+
+	}
+	
+	function notRec(cno) {
+		
+		$.ajax({
+			url: '/notRec/'+cno,
+			method: 'get',
+			dataType : 'json',
+			
+		success: function(data) {
+			console.log("callBack result :",data);
+			
+			showTrueList();
+
+
+		},
+		error : function() {
+			console.log("error"); 
+		}
+		
+		});
+		
+	}
+	function Rec(cno) {
+		
+		$.ajax({
+			url: '/Rec/'+cno,
+			method: 'get',
+			dataType : 'json',
+			
+		success: function(data) {
+			console.log("callBack result :",data);
+			
+			showTrueList();
+
+
+		},
+		error : function() {
+			console.log("error"); 
+		}
+		
+		});
+		
+	}
+function notShow(cno) {
+		
+		$.ajax({
+			url: '/notShow/'+cno,
+			method: 'get',
+			dataType : 'json',
+			
+		success: function(data) {
+			console.log("callBack result :",data);
+			
+			showTrueList();
+
+
+		},
+		error : function() {
+			console.log("error"); 
+		}
+		
+		});
+		
+	}
+	function show(cno) {
+		
+		$.ajax({
+			url: '/show/'+cno,
+			method: 'get',
+			dataType : 'json',
+			
+		success: function(data) {
+			console.log("callBack result :",data);
+			
+			showTrueList();
+
+
+		},
+		error : function() {
+			console.log("error"); 
+		}
+		
+		});
+		
+	}
 </script>
 <body>
 <div id="box">
 <form method="get" action="/logout">
 <button type=submit>로그아웃</button><br>
-<a href="/index">홈으로</a>
+<a href="/index"><button type="button">홈으로</button></a>
+<a href="/addTest"><button type="button">배우,작품등록</button></a>
+
 <h1>멤버 LIST</h1>
 </form>
 
@@ -134,6 +290,21 @@ ${Msg }
 							  
 							</nav>
 </form>
+
+<div>
+<table id="contentList" class="contentList">
+<tr>
+<td>번호</td>
+<td>컨텐츠 이름</td>
+<td>추천</td>
+<td>숨기기</td>
+</tr>
+
+
+</table>
+
+</div>
+
 </div>
 
 </body>

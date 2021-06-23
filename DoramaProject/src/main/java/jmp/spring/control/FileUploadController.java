@@ -70,6 +70,14 @@ public class FileUploadController {
 	public void showsearchPage() {
 		
 	}
+	@GetMapping("/search2")
+	public String showsearchPage2(String castname, Model model) {
+		
+		CastVo cvo= new CastVo();
+		cvo.setCastname(castname);
+		model.addAttribute("cvo", cvo);
+		return "/search";
+	}
 	@GetMapping("/contentsList")
 	public void showcontentsList() {
 		

@@ -113,11 +113,13 @@ public class UserController {
 	@PostMapping("/pwdSearch")
 	public String pwdSearch(User user, Model model) {
 		User res = service.pwdSearch(user);
+		log.info(user.getEmail());
+		log.info(user.getId());
 		if(res!=null) {
 			String pwd = UUID.randomUUID().toString().substring(0,7);
 			res.setPwd(pwd);
-			 service.updatePwd(res);
-			ms.changePwd(pwd);
+			 service.updatePwd(res);//uuid화시킨 패스워드 업데이트 db에 업데이트.
+			ms.changePwd2(pwd,user.getEmail());
 			model.addAttribute("idMsg", "메일로 비밀번호를 발송 했습니다.");
 			return "/login2";
 		}

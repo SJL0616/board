@@ -80,7 +80,9 @@ height: 400px;
 #thumbnail_group2 img {/* VIDEO */
 	float:left; 
 }
-
+.storyText{
+line-height: 1.5;	
+}
 
 header img{  
 float:left; 
@@ -118,7 +120,7 @@ list-style: none
 #posterbox{
 	   /*  box-shadow:inset 0 -350px 20px rgb(25 25 25 / 10%), inset 0 -310px 130px rgb(25 25 25 / 63%), inset 0 -180px 90px rgb(24 25 25 / 10%), inset 0 -90px 80px rgb(24 25 25 / 40%), inset 0 -41px 40px rgb(24 25 25 / 60%); */
 	    box-shadow:inset 0 -250px 150px rgb(25 25 25 / 90%), inset 0 -10px 10px rgb(25 25 25 / 90%);
-	
+	background-position: 0 40%;
 /* opacity: 0.5; */
     width: 100%;
     position: absolute;

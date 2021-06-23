@@ -23,13 +23,18 @@ public interface addContentsService {
 	
 	public int addcast_match(int cno, String cast, int castno); 
 	public CastVo getcastByName(String castname);
-	public List<CastVo>getCastList(int cno);//cno(ÀÛÇ° ¹øÈ£)·Î cast¸ñ·Ï °¡Á®¿À´Â maaper
-	public List<ContentVo> getIndexList(String type);  // ¸ÞÀÎÆäÀÌÁö ÀÌ¹ÌÁö+ Á¤º¸ Ãâ·Â Äõ¸®
+	public List<CastVo>getCastList(int cno);//cno(ï¿½ï¿½Ç° ï¿½ï¿½È£)ï¿½ï¿½ castï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ maaper
+	public List<ContentVo> getIndexList(String type);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½+ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<ContentVo> getAllList();
-	public List<ContentVo> getFilteredList(ContentVo cvo);//ÇÊÅÍµÈ ¸®½ºÆ® Ãâ·Â
+	public List<ContentVo> getTureAllList();
+	public List<ContentVo> getFilteredList(ContentVo cvo);//ï¿½ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
 	
-	public List<ContentVo> getSearchedCListByCast(String word);  // ¹è¿ì ÀÌ¸§À¸·Î ÄÁÅÙÃ÷ Á¤º¸ Ãâ·Â(°Ë»öÆäÀÌÁö)
-	public List<CastVo> getCastListByName(String word);  // ¹è¿ì Á¤º¸ ¹è¿ì ÀÌ¸§À¸·Î °¡Á®¿À±â
-	public List<ContentVo> getSearchedCListByCname(String word);  // ¹è¿ì Á¤º¸ ¹è¿ì ÀÌ¸§À¸·Î °¡Á®¿À±â
+	public List<ContentVo> getSearchedCListByCast(String word);  // ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	public List<CastVo> getCastListByName(String word);  // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public List<ContentVo> getSearchedCListByCname(String word);  // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public int notRec(int cno); //
+	public int Rec(int cno); //
+	public int notshow(int cno); //
+	public int show(int cno); //
 	
 }

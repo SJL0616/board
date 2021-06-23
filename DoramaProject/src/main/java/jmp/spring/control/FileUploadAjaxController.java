@@ -103,6 +103,18 @@ public class FileUploadAjaxController {
 	map.put("length", length);
 		return map;
 	}
+	@GetMapping("/getTureAllList/")
+	public Map<String, Object> getTureAllList(){
+	List<ContentVo> list=	cservice.getTureAllList();
+	int length =list.size();
+
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("list", list);
+	map.put("length", length);
+		return map;
+	}
+	
+
 	
 	@GetMapping("/getSelectedList/{selectedG}/{selectedT}/{type}")
 	public Map<String, Object>  getselectedlist(@PathVariable("selectedG") String[] selectedG,
@@ -112,7 +124,7 @@ public class FileUploadAjaxController {
 		log.info("/addCast=========== selectedT :" + selectedT);
 		log.info("/addCast=========== Type :" + type);
 		
-		if(selectedT[0].equals("0")) {//Ã¹¹øÂ° ¹è¿­ ¿ä¼Ò°¡ 0ÀÌ¸é null·Î ¼³Á¤.
+		if(selectedT[0].equals("0")) {//ì²«ë²ˆì§¸ ë°°ì—´ ìš”ì†Œê°€ 0ì´ë©´ nullë¡œ ì„¤ì •.
 			selectedT=null;
 		}
 		if(selectedG[0].equals("0")) {
@@ -138,7 +150,7 @@ public class FileUploadAjaxController {
 	
 	
 	
-	@PostMapping("/addCast") //¹è¿ì Á¤º¸ÀÔ·Â
+	@PostMapping("/addCast") //ë°°ìš° ì •ë³´ì…ë ¥
 	public Map<String, Object>  addcast(MultipartFile[] uploadFile,
 			 String castname, String cast ) {
 		log.info("/addCast===========uploadFile :" + uploadFile);
@@ -163,17 +175,17 @@ public class FileUploadAjaxController {
 				
 				multipartFile.transferTo(saveFile);
 				
-				//È®ÀåÀÚ¸¦ ÀÌ¿ëÇÏ¿©  MimeType¸¦ °áÁ¤ÇÕ´Ï´Ù.
-				//¸¶ÀÓÅ¸ÀÔÀ» È®ÀÎÇÏÁö ¸øÇÏ¸é nullÀ» È®ÀÎÇÕ´Ï´Ù.
+				//í™•ì¥ìë¥¼ ì´ìš©í•˜ì—¬  MimeTypeë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
+				//ë§ˆì„íƒ€ì…ì„ í™•ì¸í•˜ì§€ ëª»í•˜ë©´ nullì„ í™•ì¸í•©ë‹ˆë‹¤.
 				String contentType = Files.probeContentType(saveFile.toPath());
 				log.info("=============contentType :"+contentType );
-				//ÀÌ¹ÌÁö ÆÄÀÏÀÎ °æ¿ì ½æ³×ÀÏÀ» »ı¼ºÇØÁİ´Ï´Ù.
+				//ì´ë¯¸ì§€ íŒŒì¼ì¸ ê²½ìš° ì¸ë„¤ì¼ì„ ìƒì„±í•´ì¤ë‹ˆë‹¤.
 				if(contentType.startsWith("image")&& contentType!=null) {
-					//½æ³×ÀÏÀ» »ı¼ºÇÒ °æ·Î¸¦ ÁöÁ¤
+					//ì¸ë„¤ì¼ì„ ìƒì„±í•  ê²½ë¡œë¥¼ ì§€ì •
 			/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
 					String thmnail = ROOT_DIR+vo.getS_savepath();*/
 					String thmnail = cvo.getS_savepath();
-					//½æ³×ÀÏ ÀÌ¹ÌÁö »ı¼º
+					//ì¸ë„¤ì¼ ì´ë¯¸ì§€ ìƒì„±
 					Thumbnails.of(saveFile).size(200, 200).toFile(thmnail);
 				cvo.setProfileImgName("cast_"+multipartFile.getOriginalFilename());
 				
@@ -227,7 +239,7 @@ public class FileUploadAjaxController {
 		
 		CastVo castvo =cservice.getcastByName(castname);
 		if(castvo==null) {
-			map.put("result", "¹è¿ì Á¤º¸¸¦ µî·ÏÇÏ¼¼¿ä ");
+			map.put("result", "ë°°ìš° ì •ë³´ë¥¼ ë“±ë¡í•˜ì„¸ìš” ");
 			return map;
 		}
 			
@@ -277,18 +289,18 @@ public class FileUploadAjaxController {
 		
 		return res>0?"success":"error";
 	}*/
-	//file °æ·Î : urlPath + uuid + _ + ÆÄÀÏÀÌ¸§
+	//file ê²½ë¡œ : urlPath + uuid + _ + íŒŒì¼ì´ë¦„
 	@GetMapping("/download")
 	public ResponseEntity<byte[]> downloafFile (String filename) {
 		log.info("/display===========filename :" + filename);
 		File file = new File(ROOT_DIR+ filename);
 		
 		if(file.exists()) {
-			//ÆÄÀÏÀ» ResponseEnity¿¡ ´ã¾Æ¼­ ¹İÈ¯
+			//íŒŒì¼ì„ ResponseEnityì— ë‹´ì•„ì„œ ë°˜í™˜
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
-			try {// \"" <- ""¸¦ ¹®ÀÚÃ³·³ ¾²°í½ÍÀ» ¶§ ¾²´Â °Å.
-				//ÄÁÅÙÃ÷ÀÇ ºÎ°¡¼³¸í.
+			try {// \"" <- ""ë¥¼ ë¬¸ìì²˜ëŸ¼ ì“°ê³ ì‹¶ì„ ë•Œ ì“°ëŠ” ê±°.
+				//ì»¨í…ì¸ ì˜ ë¶€ê°€ì„¤ëª….
 				headers.add("Content-Disposition", "attachment;filename=\""+ new String(filename.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 			
 					return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file),
@@ -314,8 +326,8 @@ public class FileUploadAjaxController {
 		
 	}
 	
-	//ÀÌ¹ÌÁö ÆÄÀÏ °æ·Î¸¦ ¹Ş¾Æ¼­ ÀÌ¹ÌÁö¸¦ ¹İÈ¯
-	//ÀÌ¹ÌÁö ÆÄÀÏ ¹İÈ¯ÇÕ´Ï´Ù.
+	//ì´ë¯¸ì§€ íŒŒì¼ ê²½ë¡œë¥¼ ë°›ì•„ì„œ ì´ë¯¸ì§€ë¥¼ ë°˜í™˜
+	//ì´ë¯¸ì§€ íŒŒì¼ ë°˜í™˜í•©ë‹ˆë‹¤.
 	@GetMapping("/display")
 	public  ResponseEntity<byte[]> displayFile(String filename) {
 		log.info("/display=================fileName:"+ filename);
@@ -336,12 +348,12 @@ public class FileUploadAjaxController {
 	
 		HttpHeaders headers = new HttpHeaders();
 				
-		//ÆÄÀÏÀÌ ÀÖ´ÂÁö È®ÀÎ
+		//íŒŒì¼ì´ ìˆëŠ”ì§€ í™•ì¸
 		if(file.exists()) {
 			try {
-				//header¿¡ content-typeÀ» ÁöÁ¤: imgÆÄÀÏÀÇ °æ·Î¸¦ ³Ö¾î mymeÅ¸ÀÔÀ» ¾Ë ¼ö ÀÖ½¿.
+				//headerì— content-typeì„ ì§€ì •: imgíŒŒì¼ì˜ ê²½ë¡œë¥¼ ë„£ì–´ mymeíƒ€ì…ì„ ì•Œ ìˆ˜ ìˆìŠ´.
 				headers.add("Content-Type", Files.probeContentType(file.toPath()));
-				//responseEntity ÆÄÀÏÀÇ ¹ÙÀÌÆ® Á¤º¸, Çì´õ, °á°úÄÚµå°ªÀ» ³Ö¾îÁÜ.
+				//responseEntity íŒŒì¼ì˜ ë°”ì´íŠ¸ ì •ë³´, í—¤ë”, ê²°ê³¼ì½”ë“œê°’ì„ ë„£ì–´ì¤Œ.
 				return new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
 				
 				
@@ -350,7 +362,7 @@ public class FileUploadAjaxController {
 			
 			}
 		}else {
-			log.info("/½ÇÆĞ :display=================fileName:"+ filename);
+			log.info("/ì‹¤íŒ¨ :display=================fileName:"+ filename);
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	
@@ -369,7 +381,7 @@ public class FileUploadAjaxController {
 		
 		Map<String, Object> map =new HashMap<String, Object>();
 		int res=0;
-		//½Å±Ô»ı¼º ÆÄÀÏÀÇ °æ¿ì attachNo¸¦ °¡Á®¿È.
+		//ì‹ ê·œìƒì„± íŒŒì¼ì˜ ê²½ìš° attachNoë¥¼ ê°€ì ¸ì˜´.
 		/*f(attachno== 0) {
 			attachno= service.getSeq();
 		}*/
@@ -380,8 +392,8 @@ public class FileUploadAjaxController {
 			ContentVo vo= new ContentVo(cname, uploadpath, multipartFile.getOriginalFilename());
 			
 			
-			//Áßº¹¹æÁö¸¦ À§ÇØ UUID¸¦ »ı¼ºÇØ¼­ ÆÄÀÏ¸í ¾Õ¿¡ ºÙ¿©ÁØ´Ù.
-			//uuid: ½Äº°ÀÚ Ç¥ÁØÀ¸·Î uuid Ç¥ÁØ¿¡ µû¶ó 36°³ ¹®ÀÚ (8-4-4-4-12)¸¦ »ı¼º
+			//ì¤‘ë³µë°©ì§€ë¥¼ ìœ„í•´ UUIDë¥¼ ìƒì„±í•´ì„œ íŒŒì¼ëª… ì•ì— ë¶™ì—¬ì¤€ë‹¤.
+			//uuid: ì‹ë³„ì í‘œì¤€ìœ¼ë¡œ uuid í‘œì¤€ì— ë”°ë¼ 36ê°œ ë¬¸ì (8-4-4-4-12)ë¥¼ ìƒì„±
 			 UUID uuid = UUID.randomUUID(); 
 			
 			
@@ -399,17 +411,17 @@ public class FileUploadAjaxController {
 				
 						multipartFile.transferTo(saveFile);
 						
-						//È®ÀåÀÚ¸¦ ÀÌ¿ëÇÏ¿©  MimeType¸¦ °áÁ¤ÇÕ´Ï´Ù.
-						//¸¶ÀÓÅ¸ÀÔÀ» È®ÀÎÇÏÁö ¸øÇÏ¸é nullÀ» È®ÀÎÇÕ´Ï´Ù.
+						//í™•ì¥ìë¥¼ ì´ìš©í•˜ì—¬  MimeTypeë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
+						//ë§ˆì„íƒ€ì…ì„ í™•ì¸í•˜ì§€ ëª»í•˜ë©´ nullì„ í™•ì¸í•©ë‹ˆë‹¤.
 						String contentType = Files.probeContentType(saveFile.toPath());
 						log.info("=============contentType :"+contentType );
-						//ÀÌ¹ÌÁö ÆÄÀÏÀÎ °æ¿ì ½æ³×ÀÏÀ» »ı¼ºÇØÁİ´Ï´Ù.
+						//ì´ë¯¸ì§€ íŒŒì¼ì¸ ê²½ìš° ì¸ë„¤ì¼ì„ ìƒì„±í•´ì¤ë‹ˆë‹¤.
 						if(contentType.startsWith("image")&& contentType!=null) {
-							//½æ³×ÀÏÀ» »ı¼ºÇÒ °æ·Î¸¦ ÁöÁ¤
+							//ì¸ë„¤ì¼ì„ ìƒì„±í•  ê²½ë¡œë¥¼ ì§€ì •
 					/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
 							String thmnail = ROOT_DIR+vo.getS_savepath();*/
 							String thmnail = vo.getS_savepath();
-							//½æ³×ÀÏ ÀÌ¹ÌÁö »ı¼º
+							//ì¸ë„¤ì¼ ì´ë¯¸ì§€ ìƒì„±
 							Thumbnails.of(saveFile).size(500, 200).toFile(thmnail);
 						}
 				/*
@@ -438,33 +450,33 @@ public class FileUploadAjaxController {
 			log.info("====================");
 		}
 		
-		//ATTATCNO¿¡ ÇØ´çÇÏ´Â ÆÄÀÏ¸®½ºÆ®À» Á¶È¸ÇÏ¿© ÆÄÀÏ ¸®½ºÆ®¸¦ Á¶È¸ÇÏ¿© È­¸é¿¡ Ãâ·Â
+		//ATTATCNOì— í•´ë‹¹í•˜ëŠ” íŒŒì¼ë¦¬ìŠ¤íŠ¸ì„ ì¡°íšŒí•˜ì—¬ íŒŒì¼ ë¦¬ìŠ¤íŠ¸ë¥¼ ì¡°íšŒí•˜ì—¬ í™”ë©´ì— ì¶œë ¥
 		/*
 		 * java.util.List<AttachFileVo> list= service.getList(attachno); return list;
 		 */
 		map.put("cname", cname+"");
-		map.put("result", res+"°Ç ÀúÀåµÇ¾ú½À´Ï´Ù");
+		map.put("result", res+"ê±´ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤");
 		return map;
 	}
 	
-	// Áßº¹ ¹æÁö¿ë ¾÷·Îµå ³¯Â¥¸¦ ¾÷·Îµå °æ·Î·Î ÁöÁ¤.
-	//ÁöÁ¤µÈ °æ·Î¿¡ Æú´õ°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é Æú´õ¸¦ »ı¼ºÇÔ. 
+	// ì¤‘ë³µ ë°©ì§€ìš© ì—…ë¡œë“œ ë‚ ì§œë¥¼ ì—…ë¡œë“œ ê²½ë¡œë¡œ ì§€ì •.
+	//ì§€ì •ëœ ê²½ë¡œì— í´ë”ê°€ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ í´ë”ë¥¼ ìƒì„±í•¨. 
 	private String getFolder() {
 		String uploadPath = "";
 		
-		//¿À´Ã ³¯Â¥¸¦ yyyy-mm-dd Æ÷¸Ë¿¡ ¸Â°Ô String ÇüÅÂ·Î °¡Áö°í ¿É´Ï´Ù.
+		//ì˜¤ëŠ˜ ë‚ ì§œë¥¼ yyyy-mm-dd í¬ë§·ì— ë§ê²Œ String í˜•íƒœë¡œ ê°€ì§€ê³  ì˜µë‹ˆë‹¤.
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		//³â-¿ù-³¯Â¥ ¼øÀÇ String »ı¼º
+		//ë…„-ì›”-ë‚ ì§œ ìˆœì˜ String ìƒì„±
 		String str = sdf.format(new Date());
 		
-		//file.sepearator : ÇÃ·§Æû¿¡¼­ »ç¿ëÇÏ´Â ±¸ºĞÀÚ¸¦ ¸®ÅÏ - ¸¦ /·Î ¹Ù²ãÁÜ.(¿î¿µÃ¼Á¦¿¡ ¶§¶ó¼­ \)
+		//file.sepearator : í”Œë«í¼ì—ì„œ ì‚¬ìš©í•˜ëŠ” êµ¬ë¶„ìë¥¼ ë¦¬í„´ - ë¥¼ /ë¡œ ë°”ê¿”ì¤Œ.(ìš´ì˜ì²´ì œì— ë•Œë¼ì„œ \)
 		uploadPath = str.replace("-", File.separator) + File.separator;
 		
 		
 		
 		 File saveFile = new File( ROOT_DIR+uploadPath); log.info(saveFile);
 		 
-		//µğ·ºÅä¸® »ı¼º.
+		//ë””ë ‰í† ë¦¬ ìƒì„±.
 		 if(!saveFile.exists()) { saveFile.mkdirs(); }
 		 
 		
@@ -474,7 +486,7 @@ public class FileUploadAjaxController {
 	@Autowired
 	generateThumnail gt;
 	
-	@PostMapping("/VfileUploadAjax") //¹è¿ì Á¤º¸ÀÔ·Â
+	@PostMapping("/VfileUploadAjax") //ë°°ìš° ì •ë³´ì…ë ¥
 	public Map<String, Object>  addcast(MultipartFile[] uploadFile,
 			 String story, String regdate,int cno ) {
 		log.info("/addCast===========uploadFile :" + uploadFile);
@@ -499,19 +511,19 @@ public class FileUploadAjaxController {
 					
 				
 				multipartFile.transferTo(saveFile);
-				gt.generate(saveFile);//½æ³×ÀÏ »ı¼º
+				gt.generate(saveFile);//ì¸ë„¤ì¼ ìƒì„±
 				
-				//È®ÀåÀÚ¸¦ ÀÌ¿ëÇÏ¿©  MimeType¸¦ °áÁ¤ÇÕ´Ï´Ù.
-				//¸¶ÀÓÅ¸ÀÔÀ» È®ÀÎÇÏÁö ¸øÇÏ¸é nullÀ» È®ÀÎÇÕ´Ï´Ù.
+				//í™•ì¥ìë¥¼ ì´ìš©í•˜ì—¬  MimeTypeë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
+				//ë§ˆì„íƒ€ì…ì„ í™•ì¸í•˜ì§€ ëª»í•˜ë©´ nullì„ í™•ì¸í•©ë‹ˆë‹¤.
 				String contentType = Files.probeContentType(saveFile.toPath());
 				log.info("=============contentType :"+contentType );
-				//ÀÌ¹ÌÁö ÆÄÀÏÀÎ °æ¿ì ½æ³×ÀÏÀ» »ı¼ºÇØÁİ´Ï´Ù.
+				//ì´ë¯¸ì§€ íŒŒì¼ì¸ ê²½ìš° ì¸ë„¤ì¼ì„ ìƒì„±í•´ì¤ë‹ˆë‹¤.
 				
-					//½æ³×ÀÏÀ» »ı¼ºÇÒ °æ·Î¸¦ ÁöÁ¤
+					//ì¸ë„¤ì¼ì„ ìƒì„±í•  ê²½ë¡œë¥¼ ì§€ì •
 			/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
 					String thmnail = ROOT_DIR+vo.getS_savepath();*/
 				/*
-				 * String thmnail = vvo.getS_savepath(); //½æ³×ÀÏ ÀÌ¹ÌÁö »ı¼º
+				 * String thmnail = vvo.getS_savepath(); //ì¸ë„¤ì¼ ì´ë¯¸ì§€ ìƒì„±
 				 * Thumbnails.of(saveFile).size(200, 200).toFile(thmnail);
 				 */
 				
@@ -541,10 +553,10 @@ public class FileUploadAjaxController {
 		}
 			 return map;	
 	
-	}///µ¿¿µ»ó¾÷·Îµå ¤Ñ³¡
+	}///ë™ì˜ìƒì—…ë¡œë“œ ã…¡ë
 	
 
-	@PostMapping("/reviewInsert") //¸®ºä Á¤º¸ÀÔ·Â
+	@PostMapping("/reviewInsert") //ë¦¬ë·° ì •ë³´ì…ë ¥
 	public Map<String, Object>  addReview(@RequestBody ReviewVo rvo ) {
 		
 		log.info("/addContent===========rvo :" +  rvo);
@@ -555,8 +567,8 @@ public class FileUploadAjaxController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(res>0) {
-			rating =rservice.getReviewRating(rvo.getCno());//¸®ºä ÆòÁ¡ Æò±Õ°ªÀ» °¡Á®¿È.
-			rservice.setContentRating(rating, rvo.getCno());//¸®ºä ÆòÁ¡À» ÄÁÅÙÃ÷ Æò±Õ¿¡ ÀÔ·Â.
+			rating =rservice.getReviewRating(rvo.getCno());//ë¦¬ë·° í‰ì  í‰ê· ê°’ì„ ê°€ì ¸ì˜´.
+			rservice.setContentRating(rating, rvo.getCno());//ë¦¬ë·° í‰ì ì„ ì»¨í…ì¸  í‰ê· ì— ì…ë ¥.
 			map.put("result", "success");
 			/* map.put("rlist", rlist); */
 		
@@ -588,7 +600,7 @@ public class FileUploadAjaxController {
 		
 	}
 	
-	@PostMapping("/replyInsert") //¸®ºä Á¤º¸ÀÔ·Â
+	@PostMapping("/replyInsert") //ë¦¬ë·° ì •ë³´ì…ë ¥
 	public Map<String, Object>  addReply(@RequestBody ReplyVo rvo ) {
 	
 		log.info("/addContent===========rvo :" +  rvo);
@@ -656,7 +668,7 @@ public class FileUploadAjaxController {
 	}
 	
 
-	@GetMapping("/getImgList/{type}")//index È­¸é 
+	@GetMapping("/getImgList/{type}")//index í™”ë©´ 
 	public Map<String, Object> getImgList(@PathVariable("type") String type){
 
 		 List<ContentVo> clist= cservice.getIndexList(type);
@@ -675,7 +687,7 @@ public class FileUploadAjaxController {
 		
 	}
 	
-	//¿£ÅÍ¸¦ ´©¸£±â Àü¿¡ ÀÔ·Â°ªÀ¸·Î °¡Á®¿À±â.
+	//ì—”í„°ë¥¼ ëˆ„ë¥´ê¸° ì „ì— ì…ë ¥ê°’ìœ¼ë¡œ ê°€ì ¸ì˜¤ê¸°.
 	
 	@GetMapping("/getSearchedList/{word2}")
 	public Map<String, Object>  getselectedlist(@PathVariable("word2") String word2){
@@ -686,7 +698,7 @@ public class FileUploadAjaxController {
 		List<CastVo> castlist=cservice.getCastListByName(word2);
 		
 		/*
-		 * if(selectedT[0].equals("0")) {//Ã¹¹øÂ° ¹è¿­ ¿ä¼Ò°¡ 0ÀÌ¸é null·Î ¼³Á¤. selectedT=null; }
+		 * if(selectedT[0].equals("0")) {//ì²«ë²ˆì§¸ ë°°ì—´ ìš”ì†Œê°€ 0ì´ë©´ nullë¡œ ì„¤ì •. selectedT=null; }
 		 * if(selectedG[0].equals("0")) { selectedG=null; }
 		 */
 	
@@ -712,9 +724,9 @@ public class FileUploadAjaxController {
 		
 		List<ContentVo> list=cservice.getSearchedCListByCname(word);
 		 List<ContentVo> clist= null;
-			log.info("/searchList=========== word.contains(\"¹è¿ì\"):" +word.contains("¹è¿ì"));
+			log.info("/searchList=========== word.contains(\"ë°°ìš°\"):" +word.contains("ë°°ìš°"));
 		 
-		if(word.contains("¹è¿ì")) {// ¹è¿ì_ ¸¦ ºÙÀÎ word¸¸ ¹è¿ì ÀÌ¸§À¸·Î contentsList¸¦ °Ë»ö°¡´É.
+		if(word.contains("ë°°ìš°")) {// ë°°ìš°_ ë¥¼ ë¶™ì¸ wordë§Œ ë°°ìš° ì´ë¦„ìœ¼ë¡œ contentsListë¥¼ ê²€ìƒ‰ê°€ëŠ¥.
 		int idx=word.indexOf("_");
 		String str= word.substring(idx+1);
 		  clist=cservice.getSearchedCListByCast(str); 
@@ -723,7 +735,7 @@ public class FileUploadAjaxController {
 		List<CastVo> castlist=cservice.getCastListByName(word);
 		
 		/*
-		 * if(selectedT[0].equals("0")) {//Ã¹¹øÂ° ¹è¿­ ¿ä¼Ò°¡ 0ÀÌ¸é null·Î ¼³Á¤. selectedT=null; }
+		 * if(selectedT[0].equals("0")) {//ì²«ë²ˆì§¸ ë°°ì—´ ìš”ì†Œê°€ 0ì´ë©´ nullë¡œ ì„¤ì •. selectedT=null; }
 		 * if(selectedG[0].equals("0")) { selectedG=null; }
 		 */
 	
@@ -752,6 +764,61 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
+	@GetMapping("/notRec/{cno}")
+	public Map<String, Object>  notRecContents(@PathVariable("cno") int cno){
+
+		log.info("/notRec=========== cno :" + cno);
+		
+		int res= cservice.notRec(cno);
+
+
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		 
+		  map.put("result", res);
+
+		return map;
+	}
 	
+	@GetMapping("/Rec/{cno}")
+	public Map<String, Object> RecContents(@PathVariable("cno") int cno){
+
+		log.info("/Rec=========== cno :" + cno);
+		int res=cservice.Rec(cno);
+
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  map.put("result", res);
+		return map;
+	}
+	@GetMapping("/notShow/{cno}")
+	public Map<String, Object>  notshowContents(@PathVariable("cno") int cno){
+
+		log.info("/notshow=========== cno :" + cno);
+		
+		int res= cservice.notshow(cno);
+
+
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		 
+		  map.put("result", res);
+
+		return map;
+	}
+	
+	@GetMapping("/show/{cno}")
+	public Map<String, Object> showContents(@PathVariable("cno") int cno){
+
+		log.info("/show=========== cno :" + cno);
+		int res=cservice.show(cno);
+
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  map.put("result", res);
+		return map;
+	}
 	
 }
+	
+	

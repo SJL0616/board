@@ -1,16 +1,17 @@
 /**
  * 리플 Ajax 
  */
-function getAjaxList(){
+function getAjaxList(bno,rno){
 	
 	$.ajax({
-		url : '/reply/list/' + $("#bno").val()+'/'+$("#replyPageNo").val(),
+		url : '/reply/list/' + $("#bno").val(),
 		method : 'get',
 		dataType : 'json',
 		
 		success :function(data, status, xhr){
 			console.log("data", data);
-			debugger;
+		/*	debugger;*/
+			$(".replyList").html("");
 			var htmlContent="";
 
 			// 리스트에 데이터가 0건 이면 
@@ -26,10 +27,23 @@ function getAjaxList(){
 
 			// 리스트 보여주기
 			} else {
-				
+				var sessionid = $("#sessionId").val();
 				$.each(data.list, function(index, item){
 					
-					htmlContent += 
+					var replyer= item.replyer; 
+					htmlContent +="<li>"
+					        +"<p>"
+					        +"작성자 :"+item.replyer+"<br />"
+					        +"작성 날짜 :+"+item.replydate
+					        +"</p>"
+					        +"<p>"+item.reply+"</p>";
+					
+					        if(replyer==sessionid){
+					        	htmlContent +="<button type=\"button\"  onclick=\"deleteBtn("+item.rno+")\" class=\"deleteBtn\" >삭제</button>";
+					        };
+					        htmlContent += "</li>";
+				
+					/*	
 						"<li onclick=replyDetail('" + item.rno + "') class='left clearfix' data-rno=''>"
 						+"<div>"
 						+	"<div class='header'><strong class='primary-font'>["+ item.rno +"] "+ item.replyer +"</strong>" 
@@ -37,12 +51,12 @@ function getAjaxList(){
 						+	"</div>"
 						+		"<p>"+ item.reply +"</p>"
 						+	"</div>"
-						+"</li>";
+						+"</li>";*/
 					
 				});
 				
 				// 리스트 생성
-				$(".chat").html(htmlContent);
+				$(".replyList").html(htmlContent);
 				
 				// 페이지 생성
 				replyPage(data.pageNavi);
@@ -166,17 +180,19 @@ function updateAjax(){
  * 댓글 삭제
  * @returns
  */
-function deleteAjax(){
+function deleteAjax(n){
 	console.log("deleteAjax 시작");
+	var rno= n;
+	console.log("===========rno",rno);
 	$.ajax({
-		url : '/reply/delete/'+$("#rno").val() ,
+		url : '/reply/delete/'+rno/*$("#rno").val()*/ ,
 		method : 'get',
 		dataType : 'json',
 			
 		success :function(data){
 			console.log(data);
 			// 리플 리스트 조회
-			getAjaxList();
+			getAjaxList(n);
 		},
 			
 		error : function(error){

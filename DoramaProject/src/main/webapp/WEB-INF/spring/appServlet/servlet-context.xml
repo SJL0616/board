@@ -39,6 +39,10 @@
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/showcontents"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
 			<mapping path="/memberList"/>
 			<beans:ref bean="authInterceptor2"/>
 		</interceptor>

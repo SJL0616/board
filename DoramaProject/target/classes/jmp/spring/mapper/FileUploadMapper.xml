@@ -5,8 +5,8 @@
 
 
 <insert id="addcontents">
-insert into t_contents (cno,cname,story,cast,tags,genre,bc,agelimit,end) values(
-SEQ_T_CONTENTS.nextval,#{cname},#{story},#{cast},#{tags},#{genre},#{bc},#{agelimit},#{end})
+insert into t_contents (cno,cname,story,cast,tags,genre,bc,agelimit,end,showdate) values(
+SEQ_T_CONTENTS.nextval,#{cname},#{story},#{cast},#{tags},#{genre},#{bc},#{agelimit},#{end},#{showdate})
 </insert>
 
 <!-- 캐스트 관련 쿼리 -->
@@ -60,11 +60,16 @@ uploadPath ||'s_' || uuid ||'_' || fileName as s_savePath from tbl_attach
 where attachno= #{attachno}
 </select>
 
+<select id="getTureAllList" resultType="jmp.spring.vo.ContentVo">
+SELECT * FROM T_CONTENTS  ORDER BY CNO DESC
+</select>
 
 <!--컨텐츠 리스트페이지 기본 출력  -->
 <select id="getAllList" resultType="jmp.spring.vo.ContentVo">
-SELECT * FROM T_CONTENTS ORDER BY CNO DESC
+SELECT * FROM T_CONTENTS where notshow is null ORDER BY CNO DESC
 </select>
+
+
 
 <!--컨텐츠 리스트페이지 필터 출력  -->
 <select id="getFilteredList" resultType="jmp.spring.vo.ContentVo">
@@ -78,34 +83,34 @@ SELECT * FROM T_CONTENTS ORDER BY CNO DESC
 		over(order by rating asc) 
 		
 		row_num,c.* from t_contents c
-	)
+	) WHERE notshow is null
 
     <if test="tagArray !=null">
-    	WHERE
+    	and
 	      <foreach collection="tagArray" item="tags" index="index" separator="or">
 	         tags like '%' ||#{tags} ||'%'
 	      </foreach>
 	   </if>
 	  <if test="genreArray !=null">
 	    <if test="tagArray !=null">  or</if>
-	     <if test="tagArray ==null">where </if>
+	     <if test="tagArray ==null">and </if>
 	      <foreach collection="genreArray" item="genre" index="index" separator="or">
 	         genre like '%' ||#{genre} ||'%'
 	      </foreach>
 	   </if>
    </when>
    <otherwise>
-    SELECT * FROM T_CONTENTS
+    SELECT * FROM T_CONTENTS where notshow is null
 
 	   <if test="tagArray !=null">
-	    WHERE
+	    and
 	      <foreach collection="tagArray" item="tags" index="index" separator="or">
 	         tags like '%' ||#{tags} ||'%'
 	      </foreach>
 	   </if>
 	  <if test="genreArray !=null">
 	    <if test="tagArray !=null">  or</if> 
-	    <if test="tagArray ==null">where </if>
+	    <if test="tagArray ==null">and </if>
 	      <foreach collection="genreArray" item="genre" index="index" separator="or">
 	         genre like '%' ||#{genre} ||'%'
 	      </foreach>
@@ -163,10 +168,17 @@ where cname= #{cname}
 <choose>
 <when test="type=='rec'">
 
-select cno, cname,pfilename,agelimit from t_contents where rec is not null  order by cno desc  
+select cno, cname,pfilename,agelimit from t_contents where rec is not null and notshow is null  order by cno desc  
+</when>
+<when test="type=='genre'">
+select rank,cname,pfilename,agelimit,genre from
+(
+select ROW_NUMBER() over(PARTITION BY genre order by rating) rank,cname,pfilename,agelimit,genre from t_contents where notshow is null 
+)
+where rank=1
 </when>
 <otherwise>
-select row_num,cno,cname,pfilename,agelimit from
+select row_num,cno,cname,pfilename,agelimit,notshow from
 (
 select  ROW_NUMBER() 
 <if test="type== 'recent'">
@@ -175,8 +187,8 @@ over(order by cno desc)
 <if test="type== 'popular'">
 over(order by rating asc) 
 </if>
-row_num,cno,cname,pfilename,agelimit from t_contents 
-)where rownum BETWEEN 1 and 5
+row_num,cno,cname,pfilename,agelimit,notshow from t_contents 
+)where notshow is null and rownum BETWEEN 1 and 5
 
 </otherwise>
 </choose>
@@ -187,7 +199,7 @@ row_num,cno,cname,pfilename,agelimit from t_contents
 <!-- Search 화면에서 입력값을 컨텐츠 이름에서 찾아서 가져오기 -->
 <select id="getSearchedCListByCname" resultType="jmp.spring.vo.ContentVo"  >
 
-select cno,cname,pfilename,end from t_contents where cname like '%' ||#{word} ||'%' 
+select cno,cname,pfilename,end from t_contents where cname like '%' ||#{word} ||'%' and notshow is null
 
 </select>
 <!-- Search 화면에서 입력값을 cast테이블에서 이름으로 배우 정보 찾아서 가져오기 -->
@@ -203,11 +215,25 @@ select c.*
 from cast_match m  inner join t_contents c on m.cno=c.cno
 inner join t_cast k on  k.castno=m.castno
 
- where k.castname like '%' ||#{word} ||'%' 
+ where k.castname like '%' ||#{word} ||'%' and notshow is null
 
 
 </select>
 
+<update id="notRec">
+update t_contents set rec =null where cno = #{cno}
 
+</update>
+<update id="Rec">
+update t_contents set rec =1 where cno = #{cno}
 
+</update>
+<update id="notshow">
+update t_contents set notshow =1 where cno = #{cno}
+
+</update>
+<update id="show">
+update t_contents set notshow =null where cno = #{cno}
+
+</update>
 </mapper>

@@ -226,15 +226,15 @@ width: 200px;
 
 .fileListView {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+   flex-wrap: wrap;
+    justify-content: flex-start;
 }
 .fileListView li{
 
 overflow: hidden;
     width: 170px;
     width: 170;
-    padding: 0 0 80px 0;
+    padding: 0 30px 80px 0;
 }
 .fileListView li img{
 height: 100%;
@@ -369,6 +369,18 @@ img.logoImg {
 			     <input type="checkbox" value="모험" name="tagFilters"  class="genrecheckBox checkBox" id="adventureG"  hidden="hidden">
 			     <label for="adventureG" ><span>모험</span></label>
 		    </li>
+		     <li>
+			     <input type="checkbox" value="스릴러" name="tagFilters"  class="genrecheckBox checkBox" id="invastG"  hidden="hidden">
+			     <label for="invastG" ><span>스릴러</span></label>
+		    </li>
+		      <li>
+				 <input type="checkbox" value="미식" name="tagFilters"  class="genrecheckBox checkBox" id="gurumeG"  hidden="hidden">
+				 <label for="gurumeG" ><span>미식</span></label>
+		    </li>
+		    <li>
+				 <input type="checkbox" value="코미디" name="tagFilters"  class="genrecheckBox checkBox" id="comicG"  hidden="hidden">
+				 <label for="comicG" ><span>코미디</span></label>
+		    </li>
 	    </ul>
     </div>
     
@@ -386,6 +398,22 @@ img.logoImg {
 		     <li>
 				 <input type="checkbox" value="애니" name="tagF"  class="tagcheckBox checkBox" id="aniT"  hidden="hidden">
 				 <label for="aniT" ><span>애니</span></label>
+		    </li>
+		    <li>
+				 <input type="checkbox" value="복수" name="tagF"  class="tagcheckBox checkBox" id="revengeT"  hidden="hidden">
+				 <label for="revengeT" ><span>복수</span></label>
+		    </li>
+		    <li>
+				 <input type="checkbox" value="먹방" name="tagF"  class="tagcheckBox checkBox" id="mukbangT"  hidden="hidden">
+				 <label for="mukbangT" ><span>먹방</span></label>
+		    </li>
+		    <li>
+				 <input type="checkbox" value="범죄" name="tagF"  class="tagcheckBox checkBox" id="tsumiT"  hidden="hidden">
+				 <label for="tsumiT" ><span>범죄</span></label>
+		    </li>
+		    <li>
+				 <input type="checkbox" value="학원" name="tagF"  class="tagcheckBox checkBox" id="schoolT"  hidden="hidden">
+				 <label for="schoolT" ><span>학원</span></label>
 		    </li>
 	    </ul>
     </div>

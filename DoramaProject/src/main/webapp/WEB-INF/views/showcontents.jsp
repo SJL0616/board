@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%-- <%@ page session="false" %> --%>
 <html>
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -757,8 +757,8 @@ ${vvo } --%>
 				            </div>
 				            <div class="warning_msg">( 별점을 선택해 주세요. )</div>
 				            <br>
-				            유저 닉네임<input type="text" id="userName">
-				                유저아이디<input type="text" id="userId">
+				            유저 닉네임<input type="text" id="userName" value="${sessionScope.user.name}">
+				                유저아이디<input type="text" id="userId" value="${sessionScope.user.id}">
 				        </div>
 				        <div class="textBox">
 					        <textarea placeholder="솔직한 평가 또는 작품의 매력을 알려주세요 (스토리, 인물, OST 등)" id="content" class="textInput" maxlength="300"></textarea>
@@ -800,19 +800,20 @@ ${vvo } --%>
 
 		              
 				        <div class="episodes actors">
-				         <a class="thumA" href="#">
-				         <div class="castImg">
-				         <img alt=\"thumbnail\" class="thumbnail actorImg" src=/display?filename=${cvo.profileImgName} >
-				         </div>
-				         <div class=\"episodesText\">
-				         <div class="text1">
-				         <p>${cvo.castname }<br>
-				         <br>
-				         <span class="text2" >${cvo.cast }</span></p>
-				         </div>
-				         </div>
-				         </div></a>
-				        
+					         <a class="thumA" href="/search2?castname=${cvo.castname}">
+						         <div class="castImg">
+						         <img alt=\"thumbnail\" class="thumbnail actorImg" src="/display?filename=${cvo.profileImgName}" >
+						         </div>
+						         <div class=\"episodesText\">
+						         <div class="text1">
+						         <p>${cvo.castname }<br>
+						         <br>
+						         <span class="text2" >${cvo.cast }</span></p>
+						         </div>
+						         </div>
+					         </div>
+					         </a>
+					        
 		        
 		             </c:forEach>
 		        </div> 
@@ -842,7 +843,7 @@ ${vvo } --%>
         <section class="infocol">
             <div class="story">
                <h2>줄거리</h2>
-                <P>${cvo.story}</P> 
+                <P class="storyText">${cvo.story}</P> 
             </div>
             <div class="cast">
                 <h2>제작정보</h2>

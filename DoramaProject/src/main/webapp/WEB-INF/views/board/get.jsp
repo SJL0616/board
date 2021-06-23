@@ -122,8 +122,8 @@ function detailBtn(url){
 function replyInsertBtn(){
 	document.reinsertForm.submit();
 }
-function deleteBtn(){
-	document.reinsertForm.submit();
+function deleteBtn(n){
+	deleteAjax(n);
 }
 
 
@@ -173,7 +173,7 @@ function deleteBtn(){
                
                <form action="/replyWrite" method="post" name="reinsertForm">
 				<div class="reply_insert">
-				<input type=hidden name=bno value=${vo.bno}>
+				<input type=hidden name=bno id="bno" value=${vo.bno}>
 				<div class="re_wr">
 				 <input class="reply_witer" readonly="readonly" id="replyer" name="replyer" value=${sessionScope.user.id } />
 				  </div>
@@ -189,6 +189,7 @@ function deleteBtn(){
 			  
 				<!-- 댓글 -->
 				<div id="reply">
+				<input type="text" id="sessionId" value="${sessionScope.user.id}" hidden="hidden">
 				  <ol class="replyList">
 				    <c:forEach items="${replyList}" var="replyList">
 				      <li>
@@ -199,7 +200,7 @@ function deleteBtn(){
 				
 				        <p>${replyList.reply}</p>
 				        <c:if test="${replyList.replyer eq sessionScope.user.id}">
-				        <button type="button"  onclick="deleteBtn()" class="deleteBtn" >삭제</button>
+				        <button type="button"  onclick="deleteBtn(${replyList.rno})" class="deleteBtn" >삭제</button>
 				        </c:if>
 				      </li>
 				    </c:forEach>   

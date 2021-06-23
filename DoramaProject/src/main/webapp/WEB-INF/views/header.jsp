@@ -46,7 +46,7 @@
 										<li><a class="name " href="/board/list">커뮤니티</a></li>
 										<li><a class="name " href="#">광고/제휴</a></li>
 										
-										<li><c:if test="${sessionScope.user.role[0] eq 'ROLE_ADMIN'}"><a class="name " href="memberList">회원관리</a></c:if></li>
+										<li><c:if test="${sessionScope.user.role[0] eq 'ROLE_ADMIN'}"><a class="name " href="memberList">회원,작품관리</a></c:if></li>
 									</ul>
 								</nav>
 							</div>
