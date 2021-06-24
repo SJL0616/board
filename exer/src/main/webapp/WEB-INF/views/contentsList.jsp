@@ -407,7 +407,7 @@ border:1px solid rgb(57, 57, 57);
 	  <option value="popular">인기순</option>
 	  <option value="abc">가나다순</option>
 	  </select>
-	  <input type="text" id="orderVal">
+	  <input type="text" id="orderVal" hidden="hidden"/>
 	  </div>
 	  
 	</div>

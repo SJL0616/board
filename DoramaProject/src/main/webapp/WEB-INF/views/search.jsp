@@ -92,6 +92,7 @@ function getSearchedList(word2){
 			console.log("==========아이템:"+item.pfilename);
 			console.log("==========아이템:"+item.castname);
 		var name= item.cname;
+	        name= name.replaceAll(' ', '+'); 
 		 htmlContent +="<li><a href=\"#\" onClick=SearchList('"+name+"')>"
           +"<div class=\"showcname\"><span class=\"contentSpan\">[콘텐츠]</span>";
           console.log("============word.length",word2.length);
@@ -178,7 +179,7 @@ function SearchList(word){
 	
 
 	   console.log("==========word:", word); 
-	word= word.replace('+', ' '); // +를 제거
+	word= word.replaceAll('+', ' '); // +를 제거
 	$.ajax({
 		
 		url: '/searchList/'+word,
@@ -383,11 +384,11 @@ border-bottom: 1px solid rgb(255, 255, 255)}
 .searchBar .textBox{
     list-style: none;
     width: 500px;
-    height: 100px;
+ /*    height: 100px; */
     /* transform: translateX(-50%); */
     background-color: rgb(37, 37, 37);
     border-radius: 10px;
-    padding: 80px;
+   padding: 40px 80px;
     margin-top: 10px;
     margin-left: -60;
     margin-bottom: 50px;
@@ -476,6 +477,7 @@ margin-left: 55px;
     min-width: 200px;
     text-align: center;
     margin-left:20px;
+        MARGIN-BOTTOM: 20PX;
     width: 200px;
 }
   .castListView{

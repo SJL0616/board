@@ -84,9 +84,11 @@ function getSearchedList(word2){
 		$.each(data.contentlist, function(index, item){
 			
 			
-			console.log("==========아이템:"+item.pfilename);
-			console.log("==========아이템:"+item.castname);
+			console.log("==========아이템:"+item.cname);
+			
 		var name= item.cname;
+		   name= name.replace(' ', '+'); 
+			console.log("==========name:"+name);
 		 htmlContent +="<li><a href=\"#\" onClick=SearchList('"+name+"')>"
           +"<div class=\"showcname\"><span class=\"contentSpan\">[콘텐츠]</span>";
           console.log("============word.length",word2.length);
@@ -376,11 +378,11 @@ border-bottom: 1px solid rgb(255, 255, 255)}
 }
 .searchBar .textBox{
     width: 500px;
-    height: 100px;
+    /* height: 100px; */
+    padding: 40px 80px;
     /* transform: translateX(-50%); */
     background-color: rgb(37, 37, 37);
     border-radius: 10px;
-    padding: 80px;
     margin-top: 10px;
     margin-left: -60;
     margin-bottom: 50px;

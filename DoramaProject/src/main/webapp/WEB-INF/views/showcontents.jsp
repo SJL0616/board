@@ -699,14 +699,15 @@ ${vvo } --%>
 	                <script type="text/javascript">
 	                //.mp4를 filename에서 떼어내기 위해,  indexOf로 "." 까지 길이를 구하고, 그 값(인덱스)을 subString 끝(end) 지점에 넣고 0(시작점)부터 떼어온 filename을 
 	                //var name 변수에 넣어서 text+vno span 클래스에 넣음.
-		             var vno= '${vvo.vno}';
-		             var fileName= '${vvo.vfilename}';
-		             var idx = fileName.indexOf('.'); 
-		             console.log("============idx",idx);
-		           var name = fileName.substring(0,idx);
-		           console.log("============name",name);
-		           console.log("============.text+vno",".text"+vno);
-		          $(".text"+vno).text(name);
+	                   var vno= '${vvo.vno}';
+			            var fileName= '${vvo.vfilename}';
+
+			          var name1 = fileName.replaceAll("_"," ");
+			          var name2 = name1.replaceAll(".mp4"," ");
+			          console.log("============name",name2);
+			          console.log("============.text+vno",".text"+vno);
+
+		          $(".text"+vno).text(name2);
 
 		             </script>
 	            
@@ -757,8 +758,8 @@ ${vvo } --%>
 				            </div>
 				            <div class="warning_msg">( 별점을 선택해 주세요. )</div>
 				            <br>
-				            유저 닉네임<input type="text" id="userName" value="${sessionScope.user.name}">
-				                유저아이디<input type="text" id="userId" value="${sessionScope.user.id}">
+				           <input type="text" id="userName" value="${sessionScope.user.name}" hidden="hiiden">
+				                <input type="text" id="userId" value="${sessionScope.user.id}" hidden="hiiden">
 				        </div>
 				        <div class="textBox">
 					        <textarea placeholder="솔직한 평가 또는 작품의 매력을 알려주세요 (스토리, 인물, OST 등)" id="content" class="textInput" maxlength="300"></textarea>
@@ -802,7 +803,8 @@ ${vvo } --%>
 				        <div class="episodes actors">
 					         <a class="thumA" href="/search2?castname=${cvo.castname}">
 						         <div class="castImg">
-						         <img alt=\"thumbnail\" class="thumbnail actorImg" src="/display?filename=${cvo.profileImgName}" >
+						       
+						         <img alt=\"thumbnail\" class="thumbnail actorImg" src="/display?filename=${cvo.profileImgName}">
 						         </div>
 						         <div class=\"episodesText\">
 						         <div class="text1">

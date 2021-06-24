@@ -42,7 +42,7 @@
 .header .nav ul li {float: left; width: 103px; text-align: center; border-right: 1px solid rgb(57, 57, 57);}
 .header .nav ul li {display: inline-block; padding:19px 10px; font-size: 15px; font-weight: 700; color: #fff;} 
 .header .nav ul li.active {color:#EE4135;} 
-
+a.search img {height: 18px;width: 20px;margin-top: 3px;margin-right: 5px;}
 
 
 /* 배너 영역*/
@@ -100,6 +100,8 @@
 .movie_chart > div > div > div .poster img {display: block;}
 .movie_chart > div > div > div .poster .rank {position: absolute; top: 17px; left:0; width: 50px; height: 50px; font-size: 22px;
    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); line-height: 50px; background-color: #EE4135; text-align: center;}
+   .movie_chart > div > div > div .poster .rank2{ position: absolute; top: 17px; left:0;  height: 50px; font-size: 22px;
+   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); line-height: 50px; background-color: #EE4135; text-align: center; color: #fff; padding: 0px 4px} 
 .movie_chart > div > div > div .poster .rank strong {color:#fff;}
 
 

@@ -10,6 +10,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 <script type="text/javascript">
 $(document).ready(function(){
 
+	 $(".contentListNav").addClass('active');
 	/* 	 showAllList();  */
 	var order =$("#selectOrder").val();
 	$("#orderVal").val(order);
@@ -233,7 +234,7 @@ width: 200px;
 
 overflow: hidden;
     width: 170px;
-    width: 170;
+    height: 250px;
     padding: 0 30px 80px 0;
 }
 .fileListView li img{
@@ -436,7 +437,7 @@ img.logoImg {
 			  <option value="popular">인기순</option>
 			  <option value="abc">가나다순</option>
 		  </select>
-	  <input type="text" id="orderVal">
+	  <input type="text" id="orderVal" hidden="hidden">
 	  </div>
 	  
 	</div>

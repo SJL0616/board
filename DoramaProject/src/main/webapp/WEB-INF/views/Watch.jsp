@@ -172,11 +172,13 @@ function showVList(cno, sort) {//안씀
 			 console.log("callBack length :",length);
 			 var htmlContent ="";	
 	     	$.each(data, function(index, item){
+	     		  var name = item.vfilename.replace(".mp4"," ");
+	     		  var vname = name.replaceAll("_"," ");
 	     		
 	     htmlContent +="<div class=\"episodes watchEpisodes\" >"
 	          +"<a class=\"thumA\" href=\"/Watch?vno="+item.vno+"&cno="+cno+"\"><img alt=\"thumbnail\" class=\"thumbnail\" src=/display?filename="+item.vfilename+"-thumb.png width=\"150\" height=\"84\">"
 	          +"<div class=\"episodesText\">"
-	          +"<div class=\"text1\"><p>"+item.vfilename+"<br><span class=\"text2\" >"+item.regdate+"</span>"
+	          +"<div class=\"text1\"><p>"+vname+"<br><span class=\"text2\" >"+item.regdate+"</span>"
 	          +"</p></div></div></div></a>";
 	          length++;
 		})
@@ -493,13 +495,13 @@ ${cvo } --%>
    
   <div id="contents"> 
 
-  <input type="text" id="vno" value="${vvo.vno}">
-  <input type="text" id="cno" value="${cvo.cno}">
+  <input type="text" id="vno" value="${vvo.vno}" hidden="hiiden">
+  <input type="text" id="cno" value="${cvo.cno}" hidden="hiiden">
         <section id="Videoinfo">
             <div id="tutle">
             
            <h2 class="vfilename" style="font-size: 32px; color: white; margin-bottom: 10px; margin-top:33px" ></h2>
-           <p style="font-size: 15px; margin-bottom: 25px;">방송사 | 2000-00-00 | +20:20</p>
+           <p style="font-size: 15px; margin-bottom: 25px;">${cvo.bc} | ${vvo.regdate} | +20:20</p>
            <p style="font-size: 14px">${vvo.story}</p>
      
            </div>  
@@ -510,10 +512,11 @@ ${cvo } --%>
             var fileName= '${vvo.vfilename}';
             var idx = fileName.indexOf('.'); 
             console.log("============idx",idx);
-          var name = fileName.substring(0,idx);
-          console.log("============name",name);
+          var name1 = fileName.replaceAll("_"," ");
+          var name2 = name1.replaceAll(".mp4"," ");
+          console.log("============name",name2);
           console.log("============.text+vno",".text"+vno);
-         $(".vfilename").text(name);
+         $(".vfilename").text(name2);
            
            </script>
         
@@ -527,7 +530,7 @@ ${cvo } --%>
 		                   <li style="font-size: 12px; color:rgb(87, 87, 87) ">/${cvo.agelimit }/${cvo.end }</li> 
 		                   <br>
 		                   <li style="font-size: 12px; color:rgb(170, 170, 170) ">방송사  ${cvo.bc}</li> 
-		                   <li style="font-size: 12px; color:rgb(170, 170, 170) ">출시   </li> 
+		                   <li style="font-size: 12px; color:rgb(170, 170, 170) ">출시  ${cvo.showdate} </li> 
 		                </ul>
 	              </div>
              </div>
@@ -559,9 +562,9 @@ ${cvo } --%>
         
              </section><!--끝 에피소드리스트 끝 -->
               <section id="reviewBox"><!--시작 댓글 리스트 시작 -->
-              <input type="text" id="re_rno" value="0">
-                        유저 닉네임<input type="text" id="userName" value="${sessionScope.user.name}">
-                        유저아이디<input type="text" id="userId" value="${sessionScope.user.id}">
+              <input type="text" id="re_rno" value="0" hidden="hiiden">
+                        <input type="text" id="userName" value="${sessionScope.user.name}" hidden="hiiden">
+                     <input type="text" id="userId" value="${sessionScope.user.id}" hidden="hiiden">
                          <div class="textBox">
 					        <textarea placeholder="댓글 내용을 입력해 주세요." id="content" class="textInput" maxlength="300"></textarea>
 					        <div class="reviewBtns">

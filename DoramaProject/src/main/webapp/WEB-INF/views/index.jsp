@@ -51,11 +51,33 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   $(document).ready(function(){
 	getImgList(1);
 	
-	  $(".homeBtn").addClass('active')
+	  $(".homeNav").addClass('active');
+	  $("#__next").hide();
+  $(".showNav").on("click", function (event) {
+			$("#__next").slideDown();
+			$(".showNav").addClass("notShow");
+			$(".notShow").removeClass("showNav");
+
+		}) 
+		/* 	$(".showNav").addClass("notShow");
+			$(".notShow").removeClass("showNav"); */
+			
+	  $(".topHeader").mouseover(function () {
+		  $("#__next").slideDown();
+	})
+
+	
+	 $(".notShow").on("click", function (event) {
+		 $("#__next").slideUp();
+		 
+	 });
+	
+	  
 })
 
    
    </script>
+
 
     <!-- HTLM5shiv ie6~8 -->
     <!--[if lt IE 9]> 
@@ -111,7 +133,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                 <div class="row">
                     <div class="bm_left">
                         <ul>
-                            <li class="total"><a href="#"><i class="fa fa-bars" aria-hidden="true"></i>전체메뉴</a></li>
+                            <li class="total"><a href="#" class="showNav"><i class="fa fa-bars" aria-hidden="true"></i>전체메뉴</a></li>
                         </ul>
                     </div>
                     <div class="bm_right">
