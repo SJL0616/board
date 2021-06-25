@@ -18,7 +18,7 @@ values (seq_video_reply.nextval, #{vno}, #{id}, #{content}, #{writer}, sysdate)
 <select id="get" resultType="jmp.spring.vo.ReplyVo">
 
 select 
- row_num, rno, content, writer, regdate, re_rno
+ row_num, rno, content, writer, regdate, re_rno,id
 
  from 
  (
@@ -122,7 +122,7 @@ update tbl_reply set reply= #{reply}, replyer= #{replyer}, updatedate= sysdate w
 </update>
 
 <delete id="remove">
-delete tbl_reply where rno=#{rno}
+delete   video_reply where rno=#{rno}
 </delete>
 
 

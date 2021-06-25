@@ -12,9 +12,9 @@ import jmp.spring.vo.ReviewVo;
 public interface ReplyService {
 	
 
-	/*
-	 * public int remove(int rno);
-	 * 
+	
+	 public int remove(int rno);
+	 /* * 
 	 * public int update(ReplyVo vo); public int delete(int rno);
 	 */
 

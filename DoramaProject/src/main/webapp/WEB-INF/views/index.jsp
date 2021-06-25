@@ -18,7 +18,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     <link rel="stylesheet" href="/resources/assets/css/reset.css">
     <link rel="stylesheet" href="/resources/assets/css/style.css">
     <link rel="stylesheet" href="/resources/assets/css/swiper.css">
-    <link rel="stylesheet" href="/resources/assets/css/font-awesome.css">
+   <!--  <link rel="stylesheet" href="/resources/assets/css/font-awesome.css"> -->
 
     <!-- 파비콘 -->
     <link rel="shortcut icon" href="/resources/assets/icons/favicon.png">
@@ -49,14 +49,18 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
    <script src="/resources/assets/js/html5shiv.min.js"></script>
    <script type="text/javascript">
   $(document).ready(function(){
+    getBigImgList();
 	getImgList(1);
-	
+ 
 	  $(".homeNav").addClass('active');
 	  $("#__next").hide();
+      $(".notShowNav").hide();
+	  
+	  
   $(".showNav").on("click", function (event) {
 			$("#__next").slideDown();
-			$(".showNav").addClass("notShow");
-			$(".notShow").removeClass("showNav");
+			$(this).hide();
+			$(".notShowNav").show();
 
 		}) 
 		/* 	$(".showNav").addClass("notShow");
@@ -64,11 +68,16 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			
 	  $(".topHeader").mouseover(function () {
 		  $("#__next").slideDown();
+		  
+		  $(".showNav").hide();
+		  $(".notShowNav").show();
 	})
 
 	
-	 $(".notShow").on("click", function (event) {
+	 $(".notShowNav").on("click", function (event) {
 		 $("#__next").slideUp();
+			$(this).hide();
+			$(".showNav").show();
 		 
 	 });
 	
@@ -132,9 +141,11 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             <div class="container">
                 <div class="row">
                     <div class="bm_left">
-                        <ul>
-                            <li class="total"><a href="#" class="showNav"><i class="fa fa-bars" aria-hidden="true"></i>전체메뉴</a></li>
-                        </ul>
+                       
+                       <!--    <li class="total"> --><a href="#" class="total showNav"><i class="fa fa-bars" aria-hidden="true"></i>전체메뉴</a>
+                      
+                      <!--    <li class="total">  --><a href="#" class="total notShowNav"><i class="fa fa-bars" aria-hidden="true"></i>전체메뉴</a>
+                      
                     </div>
                     <div class="bm_right">
                         <ul>
@@ -146,8 +157,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         </div>
         <div class="slider">
             <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide ss1">
+                <div class="swiper-wrapper bigImgList">
+                     <div class="swiper-slide ss1">  style="background-image: url('/display?filename=의엄딸스.jpg');" 
                         <div class="container">
                             <div class="row">
 
@@ -162,6 +173,13 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                         </div>
                     </div>
                     <div class="swiper-slide ss3">
+                        <div class="container">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                        <div class="swiper-slide ss4">
                         <div class="container">
                             <div class="row">
 

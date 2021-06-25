@@ -54,8 +54,8 @@ a.search img {height: 18px;width: 20px;margin-top: 3px;margin-right: 5px;}
 .banner_menu .bm_left ul:first-child {padding-top: 7px;}
 .banner_menu .bm_left ul li {position: relative; display: inline; margin-right: 30px;}
 .banner_menu .bm_left ul li.total {margin-right: 20px;}
-.banner_menu .bm_left ul li.total a{font-size: 14px; padding: 3px 10px; display: inline-block; border: 1px solid #fff; transition: all 0.3s;}
-.banner_menu .bm_left ul li.total a:hover{background: #fff; border-color: #000; color: #000;}
+.banner_menu .bm_left a{font-size: 14px; padding: 3px 10px; display: inline-block; border: 1px solid #fff; transition: all 0.3s;}
+.banner_menu .bm_left a:hover{background: #fff; border-color: #000; color: #000;}
 .banner_menu .bm_right {float: right; overflow: hidden;}
 .banner_menu .bm_right ul {float:left;}
 .banner_menu .bm_right ul:first-child {padding-top: 7px;}
@@ -64,14 +64,34 @@ a.search img {height: 18px;width: 20px;margin-top: 3px;margin-right: 5px;}
 .banner_menu .bm_right li.white {margin-right: 10px;}
 .banner_menu .bm_right li.white a {width: 80px; background-color: #fff; color: #3a0e6a; padding: 7px 30px 9px 30px; display: inline-block; border: 1px solid #fff;}
 .banner_menu .bm_right li.purple {margin-right: 0;} 
-.banner_menu .bm_right li.purple a {width: 80px; background: rgb(25, 25, 25); color: #fff; padding: 7px 30px 9px 30px; display: inline-block; border: 1px solid #fff;}
+.banner_menu .bm_right li.purple a {width: 80px; background: rgb(25, 25, 25); color: #fff; padding: 7px 30px 9px 30px; display: inline-block; border: 1px solid #fff; transition: all 0.3s; }
+.banner_menu .bm_right li.purple a:hover {background: #fff; border-color: #000; color: #000; } 
 .banner_menu li.line:after {content: ''; width: 1px; height: 14px; background: #fff; position: absolute; right: -18px; top: 2px;}
 
 /* 슬라이드 */
 .slider {width: 100%; height: 700px;}
-.slider .ss1 {background: url(../img/swiper02.png) no-repeat center center; background-size: cover;}
-.slider .ss2 {background: url(../img/swiper01.png) no-repeat center center; background-size: cover;}
-.slider .ss3 {background: url(../img/swiper03.png) no-repeat center center; background-size: cover;}
+.swiper-slide{
+background-position: 0 40%;
+}
+.swiper-slide .container{
+    background: linear-gradient(
+0deg
+, rgba(0, 0, 0, 0.8) 0px, rgba(0, 0, 0, 0) 50%);
+    z-index: 10;
+    width: 100%;
+    height: 100%;}
+.swiper-slide .container .spanText{
+    position: relative;
+    bottom: -630px;
+    left: 250px;
+    font-size: 24px;
+    color: white;
+    opacity: 0.7;}
+    
+    
+.slider .sspro {background: url(../img/swiper02.png) no-repeat center center; background-size: cover;}
+/* .slider .ss2 {background: url(../img/swiper01.png) no-repeat center center; background-size: cover;}
+.slider .ss3 {background: url(../img/swiper03.png) no-repeat center center; background-size: cover;} */ */
 
 /*슬라이드 글자 */
 .slider .swiper-slide {} 
@@ -82,17 +102,30 @@ a.search img {height: 18px;width: 20px;margin-top: 3px;margin-right: 5px;}
 
 /* 무비 */
 .movie {padding: 100px 0;}
-.movie_title {margin-bottom: 60px;}
+.movie_title {/* margin-bottom: 60px; */}
 .movie_title ul{  overflow: hidden;
-    width: 100%;
-    margin: auto;
+/*     width: 100%;
+    margin: auto; */
     /* text-align: center; */
-    margin: 0 0 0 190px;}
+    margin: 0 0 0 100px;}
 /*margin-right: -1; 보더 겹치는거 해결에 효과적*/
-.movie_title li{float: left; width: 210px; text-align: center; border: 1px solid #c4c4c4; margin-right: -1px;}
+.movie_title li{
+	
+    box-shadow: 5px 18px 25px 3px rgb(0 0 0 / 90%);
+    margin: 15px;
+    margin-bottom: 40px;
+    float: left;
+    width: 210px;
+    text-align: center;
+    border: 1px solid #1b1919;
+    border-radius: 15px;
+    margin-right: 15px;
+    
+/*  border: 1px solid #c4c4c4; */ margin-right: 15px;
+	}
 .movie_title li a {display: block; padding: 15px 0; font-size: 18px; color: #fff; font-weight: 700;}
-.movie_title li.active a {background: #EE4135; color: #fff;}
-
+.movie_title li.active a {background: #EE4135; color: #fff; border-radius: 15px;}
+.movie_title li a:hover {box-shadow: inset 0px 0px 0px 6px rgba(238, 65, 53, 0.9); transition: all 0.3s;  border-radius: 15px;}
 .movie_chart {overflow: hidden; height:  592px;}
 .movie_chart > div > div > div { float: left; width: 292px; height: 592px; margin-right: 18px;}
 .movie_chart > div > div > div:last-child {margin-right: 0;}

@@ -6,7 +6,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
- 
+       
+    <title>도라마 코리아</title>
+
+	
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -340,9 +343,12 @@ img.logoImg {
     }
 </style>
 <head>
+
+	
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> 
 	<title>Home</title>
 </head>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include> 
+
 <body>
 
 <div id="container">

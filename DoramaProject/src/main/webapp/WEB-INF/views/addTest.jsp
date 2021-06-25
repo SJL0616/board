@@ -153,12 +153,21 @@ function ajaxContentsInsert() {
 };
 
 
-function sendFile() {
+function sendFile(n) {
 	
-
+if(n==1){
+	var formData = new FormData(document.fileUploadForm2);	
+}else{
 	var formData = new FormData(document.fileUploadForm);
+}
 
+
+
+	formData.set('type', n);
+
+	
 	console.log("cname",formData.get("cname"));
+	console.log("formData",formData);
 
 	
 	
@@ -383,11 +392,25 @@ table{
 <td><input type="file" name="uploadFile" id="uploadFileElement"></td>
 </tr>
 <tr>
-<td>  <input type="button" value="보내기" id="sendBtn" onclick="sendFile()" ></td>
+<td>  <input type="button" value="보내기" id="sendBtn" onclick="sendFile(0)" ></td>
 </tr>
 </table>
 </form>
 
+<h4>  작품 가로형 포스터 업로드 </h4>
+<form action="addContentsPhoto2" method="post" name="fileUploadForm2" enctype="multipart/form-data">
+<table>
+<tr>
+<td><input type="text" name="cname" id="showcname" ></td>
+</tr>
+<tr>
+<td><input type="file" name="uploadFile" id="uploadFileElement"></td>
+</tr>
+<tr>
+<td>  <input type="button" value="보내기" id="sendBtn" onclick="sendFile(1)" ></td>
+</tr>
+</table>
+</form>
 
 
 

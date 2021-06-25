@@ -11,6 +11,7 @@ public class ContentVo {
 	 * //÷������ ��ȣ private int attachno; //�ߺ�ó���� ���� ������ uuid private String uuid; //
 	 */			private  String puploadpath;
 			private  String pfilename; 
+			private  String pfilename2; 
 			private  String cname; //contents �̸�
 			private  String filetype; 
 			private  String regdate ;

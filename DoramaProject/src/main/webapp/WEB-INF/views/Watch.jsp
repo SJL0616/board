@@ -97,10 +97,6 @@ function setRe_rno(rno) {
 	 Btn.setAttribute("onClick", "hideTextBox("+rno+")");
 	
 
-	
-	 
-	
-	
 	 console.log("==============Re_replyBtn activated======");
 	 var writer =$(".Rwriter"+rno).text();
 	 console.log("============== $(.Rwriter+item.rno).text()======",writer);
@@ -157,6 +153,12 @@ function sendRe_reply(rno){
 	
 	
 }
+function deleteReplyBtn(rno){
+	deleteReply(rno);
+
+}
+
+
 
 /* onclick=\"showWatchPage("+item.vno+")\" */
 function showVList(cno, sort) {//안씀
@@ -267,7 +269,8 @@ function showReply() {//안씀
 
 	  var vno =$("#vno").val();
 	 var pageNum =$("#pageNum").val();
-	  
+	 var sessionid = $("#userId").val();  
+	 console.log("==============sessionid",sessionid);
 	  $.ajax({
 	  	url: '/getReplyList/'+vno +'/'+pageNum, 
 	  	method: 'get',
@@ -326,7 +329,12 @@ function showReply() {//안씀
 						     +"<div class=\"Rwriter"+item.rno+"\">"+item.writer+"</div>"
 
 						     +"<div class=\"Rcontent\">"+item.content+"</div>"
-						     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn"+item.rno+" \" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button></div></div></div>"
+						     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn"+item.rno+" \" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button>";
+						     console.log("==============item.id==sessionid",item.id==sessionid);
+					        if(item.id==sessionid){
+					        	htmlContent +="<button type=\"button\"  onclick=\"deleteReplyBtn("+item.rno+")\" class=\"deleteBtn"+item.rno+"\" >삭제</button>";
+					        };
+					        htmlContent +="</div></div></div>"
 						     +"<div class=\"re_replyBox"+item.rno+" TextBox1\"></div>"
 						     +"<div class=\"re_replyContent"+item.rno+"\"></div></div>";
 		
@@ -355,6 +363,7 @@ function showReply() {//안씀
 	  
 	  
 	  function showRe_reply() {
+		  var sessionid = $("#userId").val();  
 		  
 		  $.ajax({
 			  	url: '/getRe_reply/', 
@@ -415,7 +424,13 @@ function showReply() {//안씀
 								     +"<div class=\"Rwriter"+item.rno+"\">"+item.writer+"</div>"
 
 								     +"<div class=\"Rcontent\"><span class=\"mentionee\">@"+writer+"</span><br>"+item.content+"</div>"
-								     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn"+item.rno+"\" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button></div></div></div>"
+								     +"<div class=\"RDate\">"+item.regdate+"<button class=\"Re_replyBtn"+item.rno+"\" onclick=\"setRe_rno("+item.rno+")\">댓글쓰기</button>";
+								     
+								     if(item.id==sessionid){
+								        	htmlContent +="<button type=\"button\"  onclick=\"deleteReplyBtn("+item.rno+")\" class=\"deleteBtn"+item.rno+"\" >삭제</button>";
+								        };
+								     
+								        htmlContent +="</div></div></div>" 	
 								     +"<div class=\"re_replyBox"+item.rno+" TextBox2\"></div>"
 								     +"<div class=\"re_replyContent"+item.rno+"\"></div>";
 									
@@ -444,8 +459,30 @@ function showReply() {//안씀
 	}
 	
 	
-    
+	 
+	  
+	  function  deleteReply(rno){
+		  
+		  $.ajax({
+			  	url: '/deleteReply/'+rno, 
+			  	method: 'get',
+			  	dataType : 'json',
+			  	
+			  	success: function(data, status){
+					console.log(data);
+					if(data.result=='1'){
+						console.log("===========",rno+"댓글 삭제완료");
+						alert("삭제 완료");
+						showReply();
+					}
+					
+			  	},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
 
+			  });//ajax
+	}
      
 	  
 	  

@@ -623,12 +623,20 @@ ${vvo } --%>
 <div id="container">
 <%-- --%>
    <div id="poster">
-   <div id="posterbox" style="background-image: url('/display?filename=${cvo.pfilename }');">
+	   <c:choose>
+		   <c:when test='${cvo.pfilename2 !=null }' >
+		    <div id="posterbox" style="background-image: url('/display?filename=${cvo.pfilename2 }');">   </div> 
+		   </c:when>
+		   
+		   <c:otherwise>
+		    <div id="posterbox" style="background-image: url('/display?filename=${cvo.pfilename }');">   </div> 
+		   </c:otherwise>
+	   </c:choose>
    <!--  <img src=/display?filename=${cvo.pfilename } alt="backimg" id="posterImg"  height="100%" width="100%" > -->
-    </div> 
+            <div class="posterFilter"></div>
         <header id="contentHeader">
         <div id="thumbnail_group">
-           <img src=/display?filename=s_${cvo.pfilename } alt="sns" class="sns" width="235" height="350"> 
+           <img src=/display?filename=${cvo.pfilename } alt="sns" class="sns" width="235" height="350"> 
            
                 <div id="info">
                 <ul>

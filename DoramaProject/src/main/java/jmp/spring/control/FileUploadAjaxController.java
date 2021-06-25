@@ -377,20 +377,24 @@ public class FileUploadAjaxController {
 	}
 	
 	@PostMapping("/fileUploadAjax")
-	public Map<String, Object> fileUpload(MultipartFile[] uploadFile, String cname){
+	public Map<String, Object> fileUpload(MultipartFile[] uploadFile, String cname,int type){
 		
 		Map<String, Object> map =new HashMap<String, Object>();
 		int res=0;
-		//신규생성 파일의 경우 attachNo를 가져옴.
-		/*f(attachno== 0) {
-			attachno= service.getSeq();
-		}*/
 		
+		
+
 		for(MultipartFile multipartFile : uploadFile) {
 			String uploadpath =ROOT_DIR;
 			/* String uploadpath = getFolder(); */
-			ContentVo vo= new ContentVo(cname, uploadpath, multipartFile.getOriginalFilename());
 			
+
+				
+		    ContentVo vo= new ContentVo(cname, uploadpath, multipartFile.getOriginalFilename());
+
+
+			
+		
 			
 			//중복방지를 위해 UUID를 생성해서 파일명 앞에 붙여준다.
 			//uuid: 식별자 표준으로 uuid 표준에 따라 36개 문자 (8-4-4-4-12)를 생성
@@ -416,7 +420,7 @@ public class FileUploadAjaxController {
 						String contentType = Files.probeContentType(saveFile.toPath());
 						log.info("=============contentType :"+contentType );
 						//이미지 파일인 경우 썸네일을 생성해줍니다.
-						if(contentType.startsWith("image")&& contentType!=null) {
+						if(contentType.startsWith("image")&& contentType!=null&&type!=1) {
 							//썸네일을 생성할 경로를 지정
 					/* String thmnail = ROOT_DIR+uploadPath+"s_" +uploadFileName; 
 							String thmnail = ROOT_DIR+vo.getS_savepath();*/
@@ -430,10 +434,16 @@ public class FileUploadAjaxController {
 				 */
 				/* vo.setFiletype(contentType.startsWith("image")?"Y":"N"); */
 				/* vo.setUploadpath(uploadpath); */
-					
-					if(service.updatePoster(vo)>0) {
-						res++;
+					if(type!=1) {
+						if(service.updatePoster(vo)>0) {
+							res++;
+						}
+					}else {
+						if(service.updatePoster2(vo)>0) {
+							res++;
+						}
 					}
+					
 					} catch (IllegalStateException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -812,6 +822,18 @@ public class FileUploadAjaxController {
 
 		log.info("/show=========== cno :" + cno);
 		int res=cservice.show(cno);
+
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  map.put("result", res);
+		return map;
+	}
+	
+	@GetMapping("/deleteReply/{rno}")
+	public Map<String, Object> deleteReply(@PathVariable("rno") int rno){
+
+		log.info("/deleteReply=========== rno :" + rno);
+		int res=rservice.remove(rno);
 
 		  
 		  Map<String, Object> map = new HashMap<String, Object>();

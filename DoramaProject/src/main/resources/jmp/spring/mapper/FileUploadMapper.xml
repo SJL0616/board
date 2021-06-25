@@ -142,6 +142,10 @@ insert into tbl_attach values (#{attachno}, #{uuid}, #{uploadpath}, #{filename},
 
 update t_contents set puploadpath = #{puploadpath}, pfilename = #{pfilename} where cname = #{cname}
 </update>
+<update id="updatePoster2">
+
+update t_contents set pfilename2 = #{pfilename} where cname = #{cname}
+</update>
 
 
 <delete id="delete">
@@ -168,7 +172,7 @@ where cname= #{cname}
 <choose>
 <when test="type=='rec'">
 
-select cno, cname,pfilename,agelimit from t_contents where rec is not null and notshow is null  order by cno desc  
+select cno, cname,pfilename,pfilename2,agelimit from t_contents where rec is not null and notshow is null  order by cno desc  
 </when>
 <when test="type=='genre'">
 select rank,cname,pfilename,agelimit,genre from

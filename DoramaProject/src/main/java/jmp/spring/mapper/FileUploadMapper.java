@@ -37,6 +37,7 @@ public interface FileUploadMapper {
 	public int getSeq();
 	public int insert(ContentVo vo);
 	public int updatePoster(ContentVo vo);//������ �������̹��� ���ε�
+	public int updatePoster2(ContentVo vo);//������ �������̹��� ���ε�
 	
 	public int addReview(ReviewVo rvo);//���� ���ε�
 	public int getReview(ReviewVo rvo);

@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="/resources/css/login.css">
 <meta charSet="utf-8" />
-<meta name="viewport"
+ <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta name="description"
 	content="합법적인 일본드라마 및 일본 방송콘텐츠의 광고기반 무료 OTT서비스 / 일본방송콘텐츠 관련 국내 최다 판권보유" />
@@ -15,13 +15,18 @@
 <meta property="og:site_name" content="도라마코리아" />
 <meta property="og:image"
 	content="https://dorama.kr/images/meta_image.jpeg" />
-<meta property="og:description"
-	content="합법적인 일본드라마 및 일본 방송콘텐츠의 광고기반 무료 OTT서비스 / 일본방송콘텐츠 관련 국내 최다 판권보유" />
+
+	<link rel="shortcut icon" href="/resources/assets/icons/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/resources/assets/icons/favicon_72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="96x96" href="/resources/assets/icons/favicon_96.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/resources/assets/icons/favicon_144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="192x192" href="/resources/assets/icons/favicon_192.png" />
+	
 	<script type="text/javascript">
 	  $(document).ready(function() {
-		  console.lg("클릭 대기");
+		  console.log("클릭 대기");
 		$(".name").on("click", function(){
-			console.lg("클릭");
+			console.log("클릭");
 			$(".active").removeClass("active");
 			$(this).addClass("active");
 			

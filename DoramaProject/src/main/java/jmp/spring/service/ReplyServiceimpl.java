@@ -124,4 +124,11 @@ public class ReplyServiceimpl implements ReplyService {
 		return mapper.getRe_reply();
 	}
 
+
+	@Override
+	public int remove(int rno) {
+		// TODO Auto-generated method stub
+		return mapper.remove(rno);
+	}
+
 }

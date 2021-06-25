@@ -43,6 +43,10 @@
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/Watch"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
 			<mapping path="/memberList"/>
 			<beans:ref bean="authInterceptor2"/>
 		</interceptor>

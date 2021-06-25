@@ -13,6 +13,7 @@ public interface AttachFileService {
 	public int getSeq();
 	public int insert(ContentVo vo);
 	public int updatePoster(ContentVo vo);
+	public int updatePoster2(ContentVo vo);
 	
 	/* public int delete(String uuid, int attachno); */
 	public ContentVo get(int cno);
