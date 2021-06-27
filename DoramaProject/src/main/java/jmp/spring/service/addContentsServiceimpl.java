@@ -10,6 +10,7 @@ import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.ReviewVo;
+import jmp.spring.vo.User;
 import jmp.spring.vo.VideoVo;
 @Service
 public class addContentsServiceimpl implements addContentsService {
@@ -117,6 +118,26 @@ public class addContentsServiceimpl implements addContentsService {
 	public List<ContentVo> getTureAllList() {
 		// TODO Auto-generated method stub
 		return mapper.getTureAllList();
+	}
+	@Override
+	public int saveMatch(int cno, String id, int vno) {
+		// TODO Auto-generated method stub
+		return mapper.saveMatch(cno, id, vno);
+	}
+	@Override
+	public int insertMatch(int cno, String id, int vno) {
+		// TODO Auto-generated method stub
+		return mapper.insertMatch(cno, id, vno);
+	}
+	@Override
+	public User getMatch(int cno, String id) {
+		// TODO Auto-generated method stub
+		return mapper.getMatch(cno, id);
+	}
+	@Override
+	public List<ContentVo> getVMatchList(String id) {
+		// TODO Auto-generated method stub
+		return mapper.getVMatchList(id);
 	}
 
 

@@ -158,7 +158,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         <div class="slider">
             <div class="swiper-container">
                 <div class="swiper-wrapper bigImgList">
-                     <div class="swiper-slide ss1">  style="background-image: url('/display?filename=의엄딸스.jpg');" 
+                     <div class="swiper-slide ss1">  
                         <div class="container">
                             <div class="row">
 
@@ -186,6 +186,14 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                             </div>
                         </div>
                     </div>
+                    <div class="swiper-slide ss5">
+                        <div class="container">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                  
                 </div>
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
@@ -601,7 +609,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             //     invert: true,
             // },
             keyboard: {
-                enabled: true,
+                enabled: false,
                 onlyInViewport: false,
             },
             autoplay: {
@@ -624,6 +632,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             // 사용자가 클릭한 버튼 확인해서 변수로 담아줌.
             const target = $(this);
             const index = target.index();
+            console.log("============index",index);
             movBtn.removeClass("active");
             target.addClass("active");
             movCont.css("display", "none");

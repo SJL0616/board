@@ -39,6 +39,7 @@ import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
 import jmp.spring.vo.ReviewVo;
+import jmp.spring.vo.User;
 import jmp.spring.vo.VideoVo;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -841,6 +842,60 @@ public class FileUploadAjaxController {
 		return map;
 	}
 	
+	@PostMapping("/SaveVMatch") //배우 정보입력
+	public Map<String, Object>  SaveVMatch(
+		@RequestBody User user) {
+		//매치 테이블이 있는지 확인
+		User uList = cservice.getMatch(user.getCno(), user.getId());
+		log.info("==========user Match 유무"+uList!=null);
+		int res;
+		if(uList!=null) {
+			res= cservice.saveMatch(user.getCno(), user.getId(), user.getVno());
+		}else {
+			res= cservice.insertMatch(user.getCno(),user.getId(), user.getVno());
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", res);
+		return map;
+
+	}
+	
+	@GetMapping("/getVMatch/{id}")
+	public Map<String, Object> getVMatch(@PathVariable("id") String id){
+
+		log.info("/getVMatch=========== activatied:");
+		List<ContentVo> list = cservice.getVMatchList(id);
+
+		  
+		  Map<String, Object> map = new HashMap<String, Object>();
+		  map.put("list", list);
+		return map;
+	}
+	
+	@PostMapping("/getMatch") //배우 정보입력
+	public Map<String, Object>  getMatch(
+		@RequestBody User user) {
+		//매치 테이블이 있는지 확인
+		User uList = cservice.getMatch(user.getCno(), user.getId());
+		log.info("==========user Match 유무"+uList!=null);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		
+
+		if(uList!=null) {
+			
+			map.put("ulist", uList);
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+
+		return map;
+
+	}
 }
 	
 	

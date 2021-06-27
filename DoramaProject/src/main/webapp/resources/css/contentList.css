@@ -40,9 +40,9 @@ background-color: rgb(25, 25, 25);
    
 }
 a.MainButton {
-    position: relative;
+/*     position: relative;
     left: 78%;
-    top: 100px;
+    top: 100px; */
     text-decoration: none;
 }
 
@@ -65,7 +65,13 @@ a.MainButton {
     align-items: center;
     font-weight: bold;
 }
-
+.watchButtonBox{
+	
+	    position: relative;
+    left: 78%;
+    top: 100px;
+	
+}
 .thumbnail{
 
 }

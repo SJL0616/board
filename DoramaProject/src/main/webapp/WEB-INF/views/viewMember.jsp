@@ -4,6 +4,79 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+	var id = '${sessionScope.user.id }';
+	getVMatch(id);
+	
+	
+	
+});
+
+function  getVMatch(id){
+	  
+	  $.ajax({
+		  	url: '/getVMatch/'+id, 
+		  	method: 'get',
+		  	dataType : 'json',
+		  	
+		  	success: function(data, status){
+				console.log(data);
+
+				var length = data.length;
+				$(".contentN").text(length);
+				var htmlContent ="";
+				var htmlContent2 ="<span class=\"span\">전체 시청내역</span>";
+				
+				$.each(data.list, function(index, item){
+					console.log("==========아이템:"+item.pfilename);
+
+					var	vfilename= item.vfilename;
+					vfilename= vfilename.replace(".mp4"," ");
+						
+						 htmlContent  +="<li><a href=/Watch?vno="+item.vno+"&cno="+item.cno+">"
+						          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
+						          +"<div class=\"showend\">"+item.cname+"</div>"
+						          +"<div class=\"showcname\">"+vfilename+"</div></a>";
+						      
+				
+				});
+				
+				$(".fileListView").html(htmlContent);
+				$(".MatchList").prepend(htmlContent2);
+				
+		  	},
+			error : function(xhr, status, error) {
+				console.log(error);
+			}
+
+		  });//ajax
+}
+
+</script>
+<style>
+.MatchList{
+    margin: 0 auto;
+    width: 100%;
+}
+.MatchList .span{
+    color: white;
+    font-weight: bold;
+    font-size: 1.8em;
+}
+.fileListView{
+    display: flex;
+    /* width: 500px; */
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    }
+ .fileListView li{   
+        text-align: center;
+            margin-right: 30px;
+        }
+</style>
+
 <jsp:include page="header.jsp"></jsp:include>
 			<div
 				class="Common__Container-sc-1immaas-1 Default__ContentsContainer-vh5sai-1 dkajRY jjMRbX">
@@ -53,6 +126,10 @@
 								</form>
 						</div>
 					</div>
+					
+					<div class="MatchList"><ul  class="fileListView"></ul></div>
 				</div>
 			</div>
+			
+		
 <jsp:include page="footer.jsp"></jsp:include>			

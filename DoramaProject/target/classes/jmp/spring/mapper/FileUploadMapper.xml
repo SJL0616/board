@@ -240,4 +240,29 @@ update t_contents set notshow =1 where cno = #{cno}
 update t_contents set notshow =null where cno = #{cno}
 
 </update>
+
+<update id="saveMatch">
+update user_match set vno =#{vno} where cno =#{cno} and id= #{id}
+
+</update>
+<insert id="insertMatch">
+insert into user_match (cno,vno,id) values(#{cno},#{vno},#{id} )
+
+</insert>
+<select id="getMatch" resultType="jmp.spring.vo.User">
+select * from user_match where cno =#{cno} and id =#{id}
+</select>
+
+
+
+<select id="getVMatchList" resultType="jmp.spring.vo.ContentVo">
+select c.cname,c.cno, c.pfilename,v.vfileName,v.vno from
+
+t_contents c inner join user_match m on c.cno = m.cno
+inner join t_video v on  v.vno=m.vno
+where m.id=#{id}
+
+</select>
+
+
 </mapper>

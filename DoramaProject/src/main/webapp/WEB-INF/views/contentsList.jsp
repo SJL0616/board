@@ -144,9 +144,14 @@ function getSelectedList(selectedG,selectedT){
 			console.log("==========아이템:"+item.pfilename);
 
 		 htmlContent +="<li><a href=/showcontents?cno="+item.cno+">"
-          +"<img src=/display?filename=s_"+item.pfilename+"><br>"
-          +"<div class=\"showend\">"+item.end+"</div>"
-          +"<div class=\"showcname\">"+item.cname+"</div></a>";
+          +"<img src=/display?filename=s_"+item.pfilename+"><br>";
+          if(item.end=="현지방영중"){
+        	  htmlContent +="<div class=\"showRedend\">"+item.end+"</div>";
+          }else{
+        	  htmlContent +="<div class=\"showend\">"+item.end+"</div>";
+          }
+    
+          htmlContent +="<div class=\"showcname\">"+item.cname+"</div></a>";
 				        
 		
 		
@@ -218,6 +223,15 @@ margin: 0 auto;
 width: 1100px;
 height: 100%;
 
+}
+.contentN{
+font-weight: bold;
+    color: rgb(238, 65, 53);
+   font-size: 1.3em;
+}
+.showRedend{
+margin-top: 12px;
+color: rgb(238, 65, 53);
 }
 .filterList{
 width: 200px;
@@ -434,7 +448,7 @@ img.logoImg {
 
 	<section id="contentsList">
 	<div class="fontBox">
-	  <div class="ShowCnum">총<span class="contentN"></span> 개의 작품이 있습니다.</div>
+	  <div class="ShowCnum">총 <span class="contentN"></span>개의 작품이 있습니다.</div>
 	  
 	  <div class="selectBox">
 		  <select id="selectOrder">

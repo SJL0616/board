@@ -41,6 +41,11 @@ public class FileUploadController {
 	public void showPage() {
 		
 	}
+	@GetMapping("/exer/swiperTest")
+	public String show() {
+		return "/swiperTest";
+	}
+	
 	@GetMapping("/board/fileupload2")
 	public void showPage2() {
 		

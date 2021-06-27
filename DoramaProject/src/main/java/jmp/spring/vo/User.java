@@ -7,6 +7,8 @@ import lombok.Data;
 
 @Data
 public class User {
+	int cno;
+	int vno;
 	String id;
 	String pwd;
 	String name;
@@ -22,6 +24,14 @@ public class User {
 	String sessionkey;
 	// �ڵ��α����� ��ȿ�Ⱓ
 	Date sessionlimit;
+
+	public User () {};
+	/*
+	 * public User (int cno , String id,int vno) { this.cno=cno; this.vno=vno;
+	 * this.id=id;
+	 * 
+	 * };
+	 */
 	
 	/**
 	 * ������ �ִ��� üũ �մϴ�.

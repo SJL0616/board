@@ -9,6 +9,7 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	 SaveVno();
 	showReply();
 	$("#reviewBox").hide();
 	
@@ -484,7 +485,39 @@ function showReply() {//안씀
 			  });//ajax
 	}
      
+  function  SaveVno(){
+		  
+
+	  var data = {
+				cno :$("#cno").val(),
+				vno : $("#vno").val(),
+				id : $("#userId").val()
+				
+		};
+	  console.log("========data",data);
 	  
+		  $.ajax({
+			  	url: '/SaveVMatch', 
+			  	method: 'post',
+			  	dataType : 'json',
+			  	data :JSON.stringify(data),
+			  	contentType: 'application/json; charset=UTF-8',
+			  	
+			  	success: function(data, status){
+					console.log(data);
+					if(data.result=='1'){
+						console.log("===========vno 등록완료");
+					
+					}
+					
+			  	},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
+
+			  });//ajax
+	}
+     
 	  
 </script>
 

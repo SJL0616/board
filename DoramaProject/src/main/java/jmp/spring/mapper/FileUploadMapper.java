@@ -10,6 +10,7 @@ import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
 import jmp.spring.vo.ReviewVo;
+import jmp.spring.vo.User;
 import jmp.spring.vo.VideoVo;
 
 public interface FileUploadMapper {
@@ -19,6 +20,12 @@ public interface FileUploadMapper {
 	
 	public int addcast(CastVo cvo); //������ text���ε�
 	public int addcast_match(@Param("cno") int cno,@Param("cast") String cast,@Param("castno") int castno); //������ text���ε�
+	
+	public int saveMatch(@Param("cno") int cno,@Param("id") String id,@Param("vno") int vno); //������ text���ε�
+	public int insertMatch(@Param("cno") int cno,@Param("id") String id,@Param("vno") int vno); //������ text���ε�
+	public User getMatch(@Param("cno") int cno,@Param("id") String id); //������ text���ε�
+	public List<ContentVo> getVMatchList(String id);
+	
 	public CastVo getcastByName(String castname);
 	public List<CastVo>getCastList(int cno);
 	

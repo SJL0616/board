@@ -15,6 +15,7 @@ import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.Criteria;
+import jmp.spring.vo.User;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,9 +32,24 @@ public class addTests {
 	ReplyService rservice;
 	
 	@Test
+	public void Vmatch() {
+		service.getVMatchList("simon5");
+		
+	}
+	
+	public void getMatch() {
+		User user = new User();
+		
+		user.setId("simon5");
+		user.setCno(24);
+		
+		umapper.getMatch(user.getCno(), user.getId());
+		
+	}
+	
 	public void getsearch() {
 		
-		String word= "Áø";
+		String word= "ï¿½ï¿½";
 		
 		/* umapper.getSearchedCListByCast(word); */
 		umapper.getSearchedCListByCname(word);
@@ -90,13 +106,13 @@ public class addTests {
 	}
 
 	public void getCastByname() {
-		umapper.getcastByName("±â¹«");
+		umapper.getcastByName("ï¿½â¹«");
 		
 	}
 	
 	/*
 	 * public void addcast(){ CastVo castvo= new CastVo(); castvo.setCastno(1);
-	 * castvo.setCast("Á¶¿¬"); service.addcast_match(2, castvo.getCast(),
+	 * castvo.setCast("ï¿½ï¿½ï¿½ï¿½"); service.addcast_match(2, castvo.getCast(),
 	 * castvo.getCastno()); }
 	 */
 	
@@ -110,13 +126,13 @@ public class addTests {
 	
 	public void insert() {
 		ContentsVo cvo = new ContentsVo();
-		cvo.setCname("ÁÒÁÒÀÇ±â¹¦ÇÑ¸ðÇè");
-		cvo.setStory("ÁÒÁÒÀÇ¸ðÇè");
-		cvo.setCast("ÁÒÁÒ,½ºÇÇµå¿þ°Ç");
-		cvo.setTags("¾×¼Ç,È°±Ø");
+		cvo.setCname("ï¿½ï¿½ï¿½ï¿½ï¿½Ç±â¹¦ï¿½Ñ¸ï¿½ï¿½ï¿½");
+		cvo.setStory("ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½");
+		cvo.setCast("ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½");
+		cvo.setTags("ï¿½×¼ï¿½,È°ï¿½ï¿½");
 		cvo.setBc("TBS");
-		cvo.setAgelimit("15¼¼ÀÌ¿ë°¡");
-		cvo.setEnd("¹Ì¿Ï");
+		cvo.setAgelimit("15ï¿½ï¿½ï¿½Ì¿ë°¡");
+		cvo.setEnd("ï¿½Ì¿ï¿½");
 		
 	service.addcontents(cvo);
 		

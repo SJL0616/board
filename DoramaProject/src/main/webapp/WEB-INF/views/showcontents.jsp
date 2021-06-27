@@ -13,6 +13,8 @@
  
 <script type="text/javascript">
 $(document).ready(function(){
+	var id = '${sessionScope.user.id }';
+ 	getMatch(id); 
 	 
 	//시작후 별 출력
 	var htmlContent= "";
@@ -358,6 +360,15 @@ document.addEventListener('DOMContentLoaded', function(){
 				      console.log("=====item.rating",item.rating);
 				     switch(item.rating)
 				     {
+				     case 0:
+				    	 htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\" class=\"voidOneStar\" >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"   class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  >"
+						     +"<img id=\"Star\" src=\"resources/VoidOneStar.png\"  alt=\"backimg\"  class=\"voidOneStar\"  ></div>"
+
+				     break;
+
 				     case 1:
 				     htmlContent+="<div class=\"stars\"><img id=\"Star\" src=\"resources/leftStar.png\"  alt=\"backimg\"  >" 
 				     +"<img id=\"Star\" src=\"resources/VoidRightStar.png\"  alt=\"backimg\"  >"
@@ -449,25 +460,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				     } 
 				    
 				    	 
-				    	 /* if(item.rating/2==0){
-				         +"<img src=\"resources/rightStar.png\"></div>"	 
-				    	 }else{
-				    	 +"<img src=\"resources/leftStar.png\"></div>"}
-				     
-					 if(item.rating<voidStar){
-			    		 if(voidStar/2==0){
-					         +"<img src=\"resources/VoidRightStar.png\"><img src=\"resources/VoidLeftStar.png\"></div>"	 
-					    	 }else{
-					    	 +</div>"}
-			    		 
-			    	 }else{ */
 				    	 
-	 
-				
-				  /*    for(var i=1; i<item.rating; i++){
-				    	 
-				    	 
-				     }; */
 				    
 				  
 				    
@@ -602,6 +595,50 @@ function setStars(htmlContent,rating){
 	console.log(" setStars 메서드 끝 =====htmlContent",htmlContent);
 	return htmlContent;
 }
+	  
+function  getMatch(id){
+	
+		  
+
+		  var data = {
+					cno :$("#cno").val(),
+					id : $("#userId").val()
+					
+			};
+		  console.log("========data",data);
+		  
+			  $.ajax({
+				  	url: '/getMatch', 
+				  	method: 'post',
+				  	dataType : 'json',
+				  	data :JSON.stringify(data),
+				  	contentType: 'application/json; charset=UTF-8',
+				  	
+				  	success: function(data, status){
+						console.log(data);
+						if(data.result=='success'){
+							
+							var name= $(".text"+data.ulist.vno).text();
+							var idx= name.indexOf("화");
+							name= name.substring(idx-1);
+							var htmlContent = "";
+							 htmlContent +="<a class=\"MainButton\"  href=/Watch?vno="+data.ulist.vno+"&cno="+data.ulist.cno+">"
+				                   +"<div class=\"watchButton\">"+name+"이어 보기</div>"
+				                   +"</a>";
+							$(".watchButtonBox").html(htmlContent);
+						}else{
+							console.log("error");
+						}
+						
+				  	},
+					error : function(xhr, status, error) {
+						console.log("error");
+					}
+
+				  });//ajax
+	
+	     
+}
 
 
 
@@ -656,6 +693,7 @@ ${vvo } --%>
       
            
           </div>
+          <div class="watchButtonBox">
            <c:forEach items="${vvo}" var="vvo" begin="0" end="0" step="1" varStatus="status">
                     <!-- 나중에는 forEach문 안쓰고 user테이블에 저장해둔 vno값을 user.vno로 불러오자. -->
 	             <a class="MainButton"  href=/Watch?vno=${vvo.vno}&cno=${cvo.cno} >
@@ -664,7 +702,7 @@ ${vvo } --%>
                 
 	            
 	       </c:forEach>
-          
+          </div>
         </header>
   </div>    
   <div id="contents"> 

@@ -226,7 +226,7 @@ data-styled.g60[id="Default__ContentsContainer-vh5sai-1"]{content:"jjMRbX,"}/*!s
 @media (min-width:768px){.jEyUzR{padding-bottom :35px;}}/*!sc*/
 @media (min-width:768px){.jEyUzR{padding-left :30px;}}/*!sc*/
 @media (min-width:768px){.jEyUzR{padding-right :30px;}}/*!sc*/
-@media (min-width:768px){.jEyUzR{display:inline-block;}}/*!sc*/
+@media (min-width:768px){.jEyUzR{display:inline-block;     width: 100%;}}/*!sc*/
 .jEyUzR .logo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}/*!sc*/
 .jEyUzR .links{margin-top : 8vw;}/*!sc*/
 @media (min-width:768px){.jEyUzR .links{margin-top :30px;}}/*!sc*/

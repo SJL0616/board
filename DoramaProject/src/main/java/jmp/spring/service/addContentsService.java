@@ -2,10 +2,13 @@ package jmp.spring.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import jmp.spring.vo.CastVo;
 import jmp.spring.vo.ContentVo;
 import jmp.spring.vo.ContentsVo;
 import jmp.spring.vo.ReviewVo;
+import jmp.spring.vo.User;
 import jmp.spring.vo.VideoVo;
 
 public interface addContentsService {
@@ -36,5 +39,11 @@ public interface addContentsService {
 	public int Rec(int cno); //
 	public int notshow(int cno); //
 	public int show(int cno); //
+	
+	public int saveMatch(@Param("cno") int cno,@Param("id") String id,@Param("vno") int vno); //������ text���ε�
+	public int insertMatch(@Param("cno") int cno,@Param("id") String id,@Param("vno") int vno); //������ text���ε�
+	public User getMatch(@Param("cno") int cno,@Param("id") String id); //������ text���ε�
+	public List<ContentVo> getVMatchList(String id);
+	
 	
 }

@@ -294,8 +294,14 @@ function SearchList(word){
 				+"있습니다.</div></div>";
 
 		$(".x").html(resultHtml);
+		
+		 $(".redWordBox2").addClass("redWordBox3");//상세보기창 검색시
+		
 		$(".redWordBox3").html(resultHtml);
-		 $(".x").addClass("redWordBox3");
+		 $(".x").addClass("redWordBox3");//일반 검색창 검색시
+		 
+		 
+		 $(".redWordBox3").removeClass("redWordBox2");
 		 $(".redWordBox3").removeClass("x");
 
 
@@ -574,6 +580,6 @@ img.logoImg {
 </div>
 
 </div>
-
+     <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include> 
 </body>
 </html>
