@@ -80,7 +80,7 @@ SELECT * FROM T_CONTENTS where notshow is null ORDER BY CNO DESC
    (
 		select  ROW_NUMBER() 
 
-		over(order by rating asc) 
+		over(order by rating desc) 
 		
 		row_num,c.* from t_contents c
 	) WHERE notshow is null
@@ -189,7 +189,7 @@ select  ROW_NUMBER()
 over(order by cno desc) 
 </if>
 <if test="type== 'popular'">
-over(order by rating asc) 
+over(order by rating desc) 
 </if>
 row_num,cno,cname,pfilename,agelimit,notshow from t_contents 
 )where notshow is null and rownum BETWEEN 1 and 5

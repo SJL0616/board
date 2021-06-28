@@ -145,7 +145,7 @@ function getSelectedList(selectedG,selectedT){
 
 		 htmlContent +="<li><a href=/showcontents?cno="+item.cno+">"
           +"<img src=/display?filename=s_"+item.pfilename+"><br>";
-          if(item.end=="현지방영중"){
+          if(item.end=="현지 방영중"){
         	  htmlContent +="<div class=\"showRedend\">"+item.end+"</div>";
           }else{
         	  htmlContent +="<div class=\"showend\">"+item.end+"</div>";
