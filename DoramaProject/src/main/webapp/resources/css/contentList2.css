@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+body{
+	background-color: rgb(25, 25, 25);
+}
+#contents{
+
+color:rgb(170, 170, 170);
+
+/* border: 2px solid white;    */
+margin: 0 auto;
+width: 1100px;
+height: 100%;
+
+}
+.contentN{
+font-weight: bold;
+    color: rgb(238, 65, 53);
+   font-size: 1.3em;
+}
+.showRedend{
+margin-top: 12px;
+color: rgb(238, 65, 53);
+}
+.filterList{
+width: 200px;
+    background-color: rgb(37, 37, 37);
+    padding: 40px 20px;
+    height: 100%;
+    /* width: 400px; */
+    float: left;
+}
+
+.fileListView {
+    display: flex;
+   flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.fileListView li{
+
+overflow: hidden;
+    width: 170px;
+    height: 250px;
+    padding: 0 30px 80px 0;
+}
+.fileListView li img{
+height: 100%;
+    width: 100%;
+}
+.fontBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0 10px 40px;
+}
+.fontBox .ShowCnum{
+ color: white;
+}
+
+.fontBox select#selectOrder {
+    color: rgb(170, 170, 170);
+    background-color: transparent;
+    border: transparent;
+}
+.showend{
+    margin-top: 12px;
+    font-size: 14px;
+}
+.showcname{
+    margin-top: 3px;
+    font-weight: bold;
+
+}
+.titlebar {
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(57, 57, 57);
+}
+
+.genreFileters{
+padding: 3px 0 30px 0px;
+    border-bottom: 1px solid rgb(57, 57, 57);
+}
+.checkbox{
+ padding: 15px 0;
+}
+.Filters ul {
+    padding-left: 5px;
+}
+.Filters li {
+    margin-bottom: 10px;
+}
+
+.genreFileters label,.tagFileters label{/* 라벨 범위 설정  */
+/* position: relative;
+  display: inline-block;
+    margin-left: -6px;
+    z-index: 10;
+    width: 16px;
+    height: 16px;
+    background-size: 30px 60px; 
+    cursor: pointer; */
+    
+    /* position: relative;  */
+    display: inline-block;
+    /* margin-left: -6px; */
+    /* z-index: 10; */
+    width: 16px;
+    height: 16px;
+    /* background-size: 30px 60px; */
+    cursor: pointer;
+    
+}
+
+.genreFileters label span, .tagFileters label span{
+    line-height: 1;
+    position: relative;
+    display: block;
+    left: 20px;
+    width: 60px;
+}
+
+
+input[type="checkbox"] + label{
+border:1px solid rgb(57, 57, 57);
+
+}
+ input[type="checkbox"]:checked + label{
+ background-size: cover;
+	background-image: url('/resources/icon_fcheck_on.png');
+	background-repeat:no-repeat;
+	
+	 background-color:  rgb(37, 37, 37);
+}
+.filterFormat{
+ cursor: pointer;
+    background-color: transparent;
+    border: 1px solid;
+    color: rgb(170, 170, 170);
+    border-radius: 3px;
+}
+img.logoImg {
+    /* margin-left: 15px;
+    }

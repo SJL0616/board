@@ -67,17 +67,7 @@
 		select * from t_board where bno=#{bno}
 	</select>
 	
-	<update id="update">
-		update t_board
-		set title=#{title}, content=#{content}, writer=#{writer}, category=#{category}
-		where bno=#{bno}
-	
-	</update>
-	
-	<delete id="delete" parameterType="int">
-		delete from t_board where bno=#{bno}
-	</delete>
-	
+
 
 </mapper>
 
